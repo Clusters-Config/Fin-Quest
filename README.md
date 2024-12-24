@@ -11,6 +11,9 @@
      ```
      cd Fin-Quest
      ```
+     ```
+     cd frontend
+     ```
 
 2. **Backend (Node.js/Express.js):**
    - Install dependencies:
