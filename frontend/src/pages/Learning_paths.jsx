@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Learning_path = () => {
+const Learning_paths = () => {
   return (
     <>
     <div>
@@ -47,4 +47,4 @@ const Learning_path = () => {
   )
 }
 
-export default Learning_path;
+export default Learning_paths;

@@ -1,11 +1,11 @@
 import React from 'react'
 import './App.css'
-import Learning_path from "c:/Users/StarWorld/clone/Fin-Quest/frontend/src/pages/Learning_path"
+import Learning_paths from "./pages/Learning_paths"
 const App = () => {
   return (
     <>
     <div>
-      <Learning_path/>
+      <Learning_paths/>
     </div>
     </>
   )
