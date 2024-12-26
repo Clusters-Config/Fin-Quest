@@ -1,19 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React from 'react'
 import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import Learning_path from "c:/Users/StarWorld/clone/Fin-Quest/frontend/src/pages/Learning_path"
+const App = () => {
   return (
     <>
-       <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-     
+    <div>
+      <Learning_path/>
+    </div>
     </>
   )
 }
 
-export default App
+export default App;
