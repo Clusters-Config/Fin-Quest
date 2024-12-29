@@ -34,7 +34,7 @@ body{
   }
   
   .animate-float-slow {
-    animation: float-slow 6s ease-in-out infinite;
+    animation: float-slow 1s ease-in-out infinite;
   }
   
   .animate-float-fast {

@@ -59,7 +59,7 @@ function Homepage() {
   return (
       <div className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden">
           {/* Background Animation */}
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-300 via-indigo-400 to-purple-500 animate-gradient-x opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-300 via-indigo-400 to-purple-500 animate-gradient-x opacity-20"></div>
 
           {/* Floating Decorations */}
           <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400 rounded-full filter blur-xl opacity-70 animate-float" />
@@ -67,12 +67,14 @@ function Homepage() {
           <div className="absolute bottom-20 left-1/4 w-28 h-28 bg-pink-500 rounded-full filter blur-md opacity-60 animate-float-fast" />
 
           <div className="relative text-center space-y-8">
-              <h1 className="text-5xl font-extrabold text-black animate-pulse drop-shadow-md">
+              <h1 className="text-6xl font-extrabold text-black animate-pulse drop-shadow-md">
                   Welcome to FinQuest!
               </h1>
-              <p className="text-lg text-gray-100 leading-relaxed max-w-lg mx-auto">
+              <p className="text-lg text-red-500 leading-relaxed max-w-lg mx-auto">
+                <b>
                   Embark on your journey to financial literacy through interactive paths
                   and AI-driven insights.
+                </b>
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
