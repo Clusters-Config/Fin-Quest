@@ -14,11 +14,11 @@
      ```
      cd frontend
      ```
-
+     
 2. **Backend (Node.js/Express.js):**
    - Install dependencies:
      ```
-     npm install
+     npm install 
      ```
      - **express:** Web framework.
      - **mongoose:** MongoDB object modeling.
@@ -27,6 +27,7 @@
      - **dotenv:** Load environment variables.
      - **jsonwebtoken:** For authentication (JWT).
      - **bcryptjs:** For password hashing.
+     - **node** For the runtime
 
 3. **Frontend (React):**
    - Create React app: 
@@ -198,3 +199,4 @@
 - **Frontend:** Build the React app (`npm run build` in the client directory) and deploy the static files to a platform like Netlify, Vercel, or AWS S3.
 
 This detailed breakdown should give you a solid foundation for building your talent matching and training platform. Remember to break down the project into smaller, manageable tasks and test your code thoroughly throughout the development process.
+
