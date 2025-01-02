@@ -7,7 +7,7 @@ import './App.css'
 // import Game from './pages/Game'
 import Homepage from './pages/Homepage'
 // import Login from './pages/Login-signup'
-// import Simulations from './pages/Simulations'
+import Simulations from './pages/Simulations'
 
 const App = () => {
   return (
@@ -19,8 +19,8 @@ const App = () => {
       <Facilitators/>
       <Game/> */}
       <Homepage/>
-      {/* <Login/>
-      <Simulations/> */}
+      {/*<Login/>*/}
+      <Simulations/>
     </div>
     </>
   )
