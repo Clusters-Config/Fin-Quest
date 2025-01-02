@@ -17,7 +17,7 @@ const App = () => {
       <Ai_Driven/>
       <Communitys/>
       <Facilitators/>
-      <Game/> */}
+      <Game/> 
       <Homepage/>
       {/*<Login/>*/}
       <Simulations/>
