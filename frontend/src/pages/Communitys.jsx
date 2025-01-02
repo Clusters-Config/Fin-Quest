@@ -1,7 +1,7 @@
 function Communitys(){
     return(
         <div>
-            <h1>Communitys</h1>
+            <h1>Community is leading Finquest</h1>
         </div>
     );
 }
