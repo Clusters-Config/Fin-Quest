@@ -15,12 +15,10 @@
      cd frontend
      ```
 
-
-
 2. **Backend (Node.js/Express.js):**
    - Install dependencies:
      ```
-     npm install
+     npm install 
      ```
      - **express:** Web framework.
      - **mongoose:** MongoDB object modeling.
@@ -29,6 +27,7 @@
      - **dotenv:** Load environment variables.
      - **jsonwebtoken:** For authentication (JWT).
      - **bcryptjs:** For password hashing.
+     - **node** For the runtime
 
 3. **Frontend (React):**
    - Create React app: 
