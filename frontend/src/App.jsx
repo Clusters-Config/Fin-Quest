@@ -5,22 +5,26 @@ import './App.css'
 // import Communitys from './pages/Communitys'
 // import Facilitators from './pages/Facilitators'
 // import Game from './pages/Game'
-import Homepage from './pages/Homepage'
-// import Login from './pages/Login-signup'
-import Simulations from './pages/Simulations'
+// import Homepage from './pages/Homepage'
+import Login from './pages/Login-signup'
+// import Simulations from './pages/Simulations'
+import Learning_path2 from "./pages/Learning_path2"
+
 
 const App = () => {
   return (
     <>
     <div>
-      {/* <Learning_paths/>
-      <Ai_Driven/>
+       {/* <Learning_path2/> */}
+       
+      {/* <Ai_Driven/>
       <Communitys/>
       <Facilitators/>
       <Game/> 
-      <Homepage/>
-      {/*<Login/>*/}
-      <Simulations/>
+      <Homepage/> */}
+
+      <Login/>
+      {/* <Simulations/> */}
     </div>
     </>
   )

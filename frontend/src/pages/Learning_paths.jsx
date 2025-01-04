@@ -1,4 +1,5 @@
 import React from 'react';
+import Learning_path2 from './LEarning_path2';
 
 const Learning_paths = () => {
   return (
@@ -127,8 +128,13 @@ const Learning_paths = () => {
           </div>
         </div>
       </div>
+      <div>
+        <Learning_path2/>
+      </div>
     </>
   );
+
+
 };
 
 export default Learning_paths;
