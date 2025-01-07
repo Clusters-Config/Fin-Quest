@@ -1,5 +1,5 @@
 import React from 'react';
-import Learning_path2 from './LEarning_path2';
+import Learning_path2 from './Learning_path2';
 
 const Learning_paths = () => {
   return (

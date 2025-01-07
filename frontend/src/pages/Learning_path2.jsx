@@ -104,10 +104,10 @@ const Learning_path2 = () => {
   }
 
   return (
-    <div className="min-h-screen bg-blue-50 p-6">
+    <div className="min-h-screen  p-6">
       <section className="mb-8">
         <h2 className="text-xl font-bold text-blue-700 mb-4">Interactive Quizzes</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid sm:grid-cols-1 grid-cols-3 gap-4">
           <div
             className="p-4 bg-white border border-gray-300 rounded-lg shadow-sm"
             onClick={() => handleQuizStart("budgetBasics")}
@@ -155,7 +155,7 @@ const Learning_path2 = () => {
       {/* Recommended Resources Section */}
       <section>
         <h2 className="text-xl font-bold text-blue-700 mb-4">Recommended Resources</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-1 gap-4">
           {/* Resource 1 */}
           <div className="p-4 bg-white border border-gray-300 rounded-lg shadow-sm">
             <h3 className="text-lg font-semibold text-gray-800 mb-2">Book: The Richest Man in Babylon</h3>

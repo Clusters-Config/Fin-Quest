@@ -6,16 +6,16 @@ import './App.css'
 // import Facilitators from './pages/Facilitators'
 // import Game from './pages/Game'
 // import Homepage from './pages/Homepage'
-import Login from './pages/Login-signup'
+// import Login from './pages/Login-signup'
 // import Simulations from './pages/Simulations'
-import Learning_path2 from "./pages/Learning_path2"
+import Learning_paths from "./pages/Learning_paths"
 
 
 const App = () => {
   return (
     <>
     <div>
-       {/* <Learning_path2/> */}
+       <Learning_paths/>
        
       {/* <Ai_Driven/>
       <Communitys/>
@@ -23,7 +23,7 @@ const App = () => {
       <Game/> 
       <Homepage/> */}
 
-      <Login/>
+      {/* <Login/> */}
       {/* <Simulations/> */}
     </div>
     </>
