@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 function Login_signup() {
   const [isLogin, setIsLogin] = useState(true);
