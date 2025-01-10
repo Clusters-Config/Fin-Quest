@@ -9,10 +9,10 @@ const App = () => {
     <>
     <div>
        {/* <Learning_paths/> */}
-       {/* <Homepage/> */}
+       <Homepage/>
        {/* <Game/> */}
        {/* <Login/> */}
-       <Simulations/>
+       {/* <Simulations/> */}
     </div>
     </>
   )
