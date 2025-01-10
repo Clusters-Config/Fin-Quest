@@ -1,5 +1,6 @@
 import './App.css'
 import Learning_paths from "./pages/Learning_paths"
+import Homepage from './pages/Homepage'
 
 
 
@@ -8,6 +9,7 @@ const App = () => {
     <>
     <div>
        <Learning_paths/>
+       {/* <Homepage/> */}
     </div>
     </>
   )
