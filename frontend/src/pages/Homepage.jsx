@@ -1,55 +1,69 @@
 function Homepage() {
-    return (
-        <div className="bg-gradient-to-b from-gray-100 to-gray-300 min-h-screen flex flex-col justify-center items-center">
-          <div className="text-center space-y-8">
-            <h1 className="text-5xl font-extrabold text-blue-800 animate-pulse">
-              Welcome to FinQuest!
-            </h1>
-            <p className="text-lg text-gray-700 leading-relaxed max-w-lg mx-auto">
-              Embark on your journey to financial literacy through interactive paths
-              and AI-driven insights.
-            </p>
-    
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <a
-                href="personalized-path.html"
-                className="card-hover block bg-green-500 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-green-600 transform hover:scale-105 transition-all duration-300 text-center"
-              >
-                Personalized Learning Path
-              </a>
-              <a
-                href="gamification.html"
-                className="card-hover block bg-yellow-500 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-yellow-600 transform hover:scale-105 transition-all duration-300 text-center"
-              >
-                Gamification Adventure
-              </a>
-              <a
-                href="simulation.html"
-                className="card-hover block bg-blue-500 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-blue-600 transform hover:scale-105 transition-all duration-300 text-center"
-              >
-                Real World Simulation
-              </a>
-              <a
-                href="ai-insights.html"
-                className="card-hover block bg-purple-500 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-purple-600 transform hover:scale-105 transition-all duration-300 text-center"
-              >
-                AI-Driven Insights
-              </a>
-              <a
-                href="social-engagement.html"
-                className="card-hover block bg-red-500 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-red-600 transform hover:scale-105 transition-all duration-300 text-center"
-              >
-                Community Engagement
-              </a>
-              <a
-                href="facilitator.html"
-                className="card-hover block bg-indigo-500 text-white py-4 px-8 rounded-lg shadow-lg hover:bg-indigo-600 transform hover:scale-105 transition-all duration-300 text-center"
-              >
-                Facilitator
-              </a>
-            </div>
-          </div>
+  return (
+    <div className="bg-gradient-to-b from-[#457B9D] to-[#A8DADC] min-h-screen flex flex-col justify-between">
+      {/* Navigation Bar */}
+      <nav className="bg-[#FFFFFF] shadow-lg px-6 py-4 flex justify-between items-center">
+        <div className="text-[#1D3557] text-2xl font-bold">FinQuest</div>
+        <ul className="flex space-x-4">
+          <li>
+            <a
+              href="#"
+              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300"
+            >
+              Home
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300"
+            >
+              Features
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Hero Section */}
+      <header className="text-center py-20 space-y-6">
+        <h1 className="text-5xl font-bold text-[#1D3557]">
+          Welcome to FinQuest!
+        </h1>
+        <p className="text-lg text-[#1D1616] leading-relaxed max-w-3xl mx-auto">
+          Embark on your journey to financial literacy through interactive
+          paths and AI-driven insights.
+        </p>
+        <button className="bg-[#457B9D] text-white px-6 py-3 rounded-lg shadow-lg hover:bg-[#74C2E1] transition duration-300">
+          Get Started
+        </button>
+      </header>
+
+
+      {/* Footer */}
+      <footer className="bg-[#F1FAEE] text-[#1D3557] py-4 text-center">
+        <div className="flex justify-center space-x-6">
+          {/* <a href="#" className="hover:opacity-80 transition duration-300">
+            <i className="fab fa-facebook-f"></i> Facebook
+          </a>
+          <a href="#" className="hover:opacity-80 transition duration-300">
+            <i className="fab fa-twitter"></i> Twitter
+          </a>
+          <a href="#" className="hover:opacity-80 transition duration-300">
+            <i className="fab fa-linkedin-in"></i> LinkedIn
+          </a> */}
         </div>
-      );
+        <p className="mt-4">&copy; 2025 FinQuest. All Rights Reserved.</p>
+      </footer>
+    </div>
+  );
 }
+
 export default Homepage;
