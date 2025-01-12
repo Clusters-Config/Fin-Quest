@@ -1,21 +1,28 @@
-import './App.css'
-import Learning_paths from "./pages/Learning_paths"
-import Homepage from './pages/Homepage'
-import Game from "./pages/Game"
-import Login from "./pages/Login-signup"
-import Simulations from './pages/Simulations'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import Learning_paths from './pages/Learning_paths';
+import Game from './pages/Game';
+import Login from './pages/Login-signup';
+import Simulations from './pages/Simulations';
+import Features from './pages/Features';
+
 const App = () => {
   return (
-    <>
-    <div>
-       {/* <Learning_paths/> */}
-       <Homepage/>
-       {/* <Game/> */}
-       {/* <Login/> */}
-       {/* <Simulations/> */}
-    </div>
-    </>
-  )
-}
+    <Router>
+      <div>
+        {/* Define the routes */}
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/learning_paths" element={<Learning_paths />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/simulations" element={<Simulations />} />
+        </Routes>
+      </div>
+    </Router>
+  );
+};
 
 export default App;
