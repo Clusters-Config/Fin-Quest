@@ -1,71 +1,54 @@
 import React, { useState } from "react";
 
 const Communitys = () => {
-  // Search Bar -Hook
   const [searchQuery, setSearchQuery] = useState("");
-  // Side bar - Hook
   const [selectedRole, setSelectedRole] = useState("All");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPerson, setSelectedPerson] = useState(null);
+  const [connections, setConnections] = useState(new Set()); // To track connected users
 
-  // Sample Data 
   const networkData = [
-    { 
-      id: 1, 
-      name: "Veeresh", 
-      domain: "Financial Analyst", 
-      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-    },
-    { 
-      id: 2, 
-      name: "Sabari", 
-      domain: "Investment Banker", 
-      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-    },
-    { 
-      id: 3, 
-      name: "Dinesh", 
-      domain: "Risk Manager", 
-      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-    },
-    { 
-      id: 4, 
-      name: "Atharv", 
-      domain: "Financial Software Developer", 
-      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-    },
-    { 
-      id: 5, 
-      name: "Arvind", 
-      domain: "Quantitative Analyst", 
-      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-    },
-    { 
-      id: 6, 
-      name: "Gokulnath", 
-      domain: "Investment Banker", 
-      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-    },
-    { 
-      id: 7, 
-      name: "Sanjaay", 
-      domain: "Accountant", 
-      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-    },
+    { id: 1, name: "Veeresh", domain: "Financial Analyst", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
+    { id: 2, name: "Sabari", domain: "Investment Banker", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
+    { id: 3, name: "Dinesh", domain: "Risk Manager", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
+    { id: 4, name: "Atharv", domain: "Financial Software Developer", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
+    { id: 5, name: "Arvind", domain: "Quantitative Analyst", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
+    { id: 6, name: "Gokulnath", domain: "Investment Banker", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
+    { id: 7, name: "Sanjaay", domain: "Accountant", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
   ];
 
-  // Remove duplicates based on name and domain
   const uniqueNetworkData = Array.from(
     new Set(networkData.map((item) => JSON.stringify(item)))
   ).map((item) => JSON.parse(item));
 
-  // Extract unique roles for the sidebar
   const roles = ["All", ...new Set(uniqueNetworkData.map((person) => person.domain))];
 
-  // Filter data based on the search query and selected role
   const filteredData = uniqueNetworkData.filter((person) => {
     const matchesRole = selectedRole === "All" || person.domain === selectedRole;
     const matchesSearch = person.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesRole && matchesSearch;
   });
+
+  const openModal = (person) => {
+    setSelectedPerson(person);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedPerson(null);
+  };
+
+  const handleConnect = (person) => {
+    if (connections.has(person.id)) {
+      alert(`${person.name} is already connected.`);
+      return;
+    }
+
+    setConnections((prev) => new Set(prev.add(person.id)));
+    alert(`You are now connected with ${person.name}`);
+    // Additional logic can be added here, such as API calls to save connection status.
+  };
 
   return (
     <div className="flex h-screen">
@@ -99,7 +82,6 @@ const Communitys = () => {
             className="border border-gray-300 rounded-md px-4 py-2 w-80 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-        <br />
 
         {/* Facilitator Cards */}
         <div className="flex flex-wrap gap-5 justify-center">
@@ -119,11 +101,21 @@ const Communitys = () => {
                 <h3 className="text-xl font-bold text-gray-800 mb-2">{person.name}</h3>
                 <p className="text-sm text-gray-600 mb-4">{person.domain}</p>
                 <div className="flex gap-2 justify-center">
-                  <button className="bg-blue-500 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-700 transition-colors">
+                  <button
+                    onClick={() => openModal(person)}
+                    className="bg-blue-500 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-700 transition-colors"
+                  >
                     Message
                   </button>
-                  <button className="bg-green-500 text-white py-2 px-4 rounded-md text-sm hover:bg-green-700 transition-colors">
-                    Connect
+                  <button
+                    onClick={() => handleConnect(person)}
+                    className={`py-2 px-4 rounded-md text-sm transition-colors ${
+                      connections.has(person.id)
+                        ? "bg-gray-400 text-gray-800 cursor-not-allowed"
+                        : "bg-green-500 text-white hover:bg-green-700"
+                    }`}
+                  >
+                    {connections.has(person.id) ? "Connected" : "Connect"}
                   </button>
                 </div>
               </div>
@@ -133,6 +125,36 @@ const Communitys = () => {
           )}
         </div>
       </div>
+
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-5 rounded-lg shadow-lg w-96">
+            <h2 className="text-xl font-bold mb-4">Message {selectedPerson?.name}</h2>
+            <textarea
+              placeholder="Type your message here..."
+              className="w-full h-32 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+            ></textarea>
+            <div className="flex justify-end gap-2 mt-4">
+              <button
+                onClick={closeModal}
+                className="bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => {
+                  alert(`Message sent to ${selectedPerson?.name}`);
+                  closeModal();
+                }}
+                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
