@@ -67,10 +67,10 @@ function FeaturesPage() {
           Community Engagement
         </Link>
         <Link
-          to="/Facilitator"
+          to="/Facilitators"
           className="block bg-[#A8DADC] text-[#1D3557] py-4 px-8 rounded-lg shadow-lg hover:bg-[#74C2E1] hover:scale-105 transform transition duration-300 text-center"
         >
-          Facilitator
+          Facilitators
         </Link>
       </section>
 
