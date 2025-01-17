@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 
 const Facilitators = () => {
+  // Search Bar -Hook
   const [searchQuery, setSearchQuery] = useState("");
+  // Side bar - Hook
   const [selectedRole, setSelectedRole] = useState("All");
 
+  // Sample Data 
   const networkData = [
     { 
       id: 1, 
@@ -39,6 +42,12 @@ const Facilitators = () => {
       id: 6, 
       name: "Gokulnath", 
       domain: "Investment Banker", 
+      image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
+    },
+    { 
+      id: 7, 
+      name: "Sanjaay", 
+      domain: "Accountant", 
       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
     },
   ];
@@ -90,6 +99,7 @@ const Facilitators = () => {
             className="border border-gray-300 rounded-md px-4 py-2 w-80 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
+        <br />
 
         {/* Facilitator Cards */}
         <div className="flex flex-wrap gap-5 justify-center">
