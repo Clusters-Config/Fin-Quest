@@ -7,6 +7,7 @@ const Communitys = () => {
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [connections, setConnections] = useState(new Set()); // To track connected users
 
+  // Sample Data - For Demon purpose
   const networkData = [
     { id: 1, name: "Veeresh", domain: "Financial Analyst", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
     { id: 2, name: "Sabari", domain: "Investment Banker", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
