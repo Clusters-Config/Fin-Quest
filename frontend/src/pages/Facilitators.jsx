@@ -1,140 +1,95 @@
-// import React, { useState } from "react";
+import React from "react";
 
-// const Facilitators = () => {
-//   // Search Bar -Hook
-//   const [searchQuery, setSearchQuery] = useState("");
-//   // Side bar - Hook
-//   const [selectedRole, setSelectedRole] = useState("All");
+const Facilitator = () => {
+  const services = [
+    {
+      title: "How to Withdraw Money from a Bank",
+      instructions: [
+        "Visit your nearest bank branch.",
+        "Fill out the withdrawal slip with accurate details.",
+        "Submit the slip to the cashier along with your passbook/ID.",
+        "Wait for the cashier to process your request.",
+        "Collect your money and receipt from the cashier.",
+      ],
+      video: "https://www.youtube.com/embed/example1", // Replace with actual video link
+    },
+    {
+      title: "How to Deposit Money in a Bank",
+      instructions: [
+        "Visit the bank and collect a deposit slip.",
+        "Fill in the required details such as account number and amount.",
+        "Submit the slip along with the money to the cashier.",
+        "Wait for the cashier to process your deposit.",
+        "Collect the receipt as proof of deposit.",
+      ],
+      video: "https://www.youtube.com/embed/example2", // Replace with actual video link
+    },
+    {
+      title: "How to Check Account Balance",
+      instructions: [
+        "Visit the ATM of your bank.",
+        "Insert your debit/ATM card into the machine.",
+        "Enter your PIN and choose 'Balance Inquiry' from the menu.",
+        "Wait for the machine to display your account balance.",
+        "Take back your card after the transaction.",
+      ],
+      video: "https://www.youtube.com/embed/example3", // Replace with actual video link
+    },
+  ];
 
-//   // Sample Data 
-//   const networkData = [
-//     { 
-//       id: 1, 
-//       name: "Veeresh", 
-//       domain: "Financial Analyst", 
-//       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-//     },
-//     { 
-//       id: 2, 
-//       name: "Sabari", 
-//       domain: "Investment Banker", 
-//       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-//     },
-//     { 
-//       id: 3, 
-//       name: "Dinesh", 
-//       domain: "Risk Manager", 
-//       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-//     },
-//     { 
-//       id: 4, 
-//       name: "Atharv", 
-//       domain: "Financial Software Developer", 
-//       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-//     },
-//     { 
-//       id: 5, 
-//       name: "Arvind", 
-//       domain: "Quantitative Analyst", 
-//       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-//     },
-//     { 
-//       id: 6, 
-//       name: "Gokulnath", 
-//       domain: "Investment Banker", 
-//       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-//     },
-//     { 
-//       id: 7, 
-//       name: "Sanjaay", 
-//       domain: "Accountant", 
-//       image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" 
-//     },
-//   ];
+  return (
+    <div className="bg-gradient-to-b from-[#F1FAEE] to-[#A8DADC] min-h-screen">
+      {/* Header */}
+      <header className="bg-[#1D3557] text-white py-6 text-center">
+        <h1 className="text-3xl font-bold">Facilitator Services</h1>
+        <p className="mt-2">Your Guide to Essential Financial Tasks</p>
+      </header>
 
-//   // Remove duplicates based on name and domain
-//   const uniqueNetworkData = Array.from(
-//     new Set(networkData.map((item) => JSON.stringify(item)))
-//   ).map((item) => JSON.parse(item));
+      {/* Services Section */}
+      <section className="mt-8 max-w-7xl mx-auto px-6">
+        <h2 className="text-2xl font-semibold text-[#1D3557] mb-6 text-center">
+          Services & Instructions
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300"
+            >
+              <h3 className="text-xl font-semibold text-[#1D3557] mb-4">
+                {service.title}
+              </h3>
+              <ol className="list-decimal list-inside text-[#457B9D] space-y-2">
+                {service.instructions.map((step, i) => (
+                  <li key={i}>{step}</li>
+                ))}
+              </ol>
+              <div className="mt-4">
+                <iframe
+                  className="w-full h-48 rounded-lg"
+                  src={service.video}
+                  title={`Video for ${service.title}`} // Fixed string interpolation
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-//   // Extract unique roles for the sidebar
-//   const roles = ["All", ...new Set(uniqueNetworkData.map((person) => person.domain))];
+      {/* Contact Section */}
+      <section className="bg-[#457B9D] text-white py-8 mt-10 text-center">
+        <h3 className="text-2xl font-semibold">Need More Assistance?</h3>
+        <p className="mt-2">
+          Our facilitator is available for live guidance. Contact us now!
+        </p>
+        <button className="mt-4 px-6 py-2 bg-[#F1FAEE] text-[#1D3557] rounded-md shadow-md hover:bg-[#A8DADC] transition duration-300">
+          Contact Facilitator
+        </button>
+      </section>
+    </div>
+  );
+};
 
-//   // Filter data based on the search query and selected role
-//   const filteredData = uniqueNetworkData.filter((person) => {
-//     const matchesRole = selectedRole === "All" || person.domain === selectedRole;
-//     const matchesSearch = person.name.toLowerCase().includes(searchQuery.toLowerCase());
-//     return matchesRole && matchesSearch;
-//   });
-
-//   return (
-//     <div className="flex h-screen">
-//       {/* Sidebar */}
-//       <div className="w-64 bg-gray-200 p-5">
-//         <h2 className="text-xl font-bold mb-5">Roles</h2>
-//         <ul className="space-y-2">
-//           {roles.map((role) => (
-//             <li
-//               key={role}
-//               className={`cursor-pointer p-2 rounded-md ${
-//                 selectedRole === role ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-800"
-//               } hover:bg-blue-400 hover:text-white transition-colors`}
-//               onClick={() => setSelectedRole(role)}
-//             >
-//               {role}
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-
-//       {/* Main Content */}
-//       <div className="flex-grow p-5">
-//         {/* Search Bar */}
-//         <div className="flex justify-center mb-5">
-//           <input
-//             type="text"
-//             value={searchQuery}
-//             onChange={(e) => setSearchQuery(e.target.value)}
-//             placeholder="Search by name..."
-//             className="border border-gray-300 rounded-md px-4 py-2 w-80 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-//           />
-//         </div>
-//         <br />
-
-//         {/* Facilitator Cards */}
-//         <div className="flex flex-wrap gap-5 justify-center">
-//           {filteredData.length > 0 ? (
-//             filteredData.map((person) => (
-//               <div
-//                 key={person.id}
-//                 className="bg-gray-100 border border-gray-300 rounded-lg p-5 w-64 text-center shadow-sm transition-transform transform hover:translate-y-1 hover:shadow-lg"
-//               >
-//                 <div className="flex justify-center mb-4">
-//                   <img
-//                     src={person.image}
-//                     alt={`${person.name}'s profile`}
-//                     className="rounded-full w-24 h-24 object-cover"
-//                   />
-//                 </div>
-//                 <h3 className="text-xl font-bold text-gray-800 mb-2">{person.name}</h3>
-//                 <p className="text-sm text-gray-600 mb-4">{person.domain}</p>
-//                 <div className="flex gap-2 justify-center">
-//                   <button className="bg-blue-500 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-700 transition-colors">
-//                     Message
-//                   </button>
-//                   <button className="bg-green-500 text-white py-2 px-4 rounded-md text-sm hover:bg-green-700 transition-colors">
-//                     Connect
-//                   </button>
-//                 </div>
-//               </div>
-//             ))
-//           ) : (
-//             <p className="text-gray-500 text-center">No results found</p>
-//           )}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Facilitators;
+export default Facilitator;
