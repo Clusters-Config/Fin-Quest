@@ -5,6 +5,7 @@ const Communitys = () => {
   const [selectedRole, setSelectedRole] = useState("All");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
+  const [isConnectDialogOpen, setIsConnectDialogOpen] = useState(false);
   const [connections, setConnections] = useState(new Set());
   const [financialUpdates, setFinancialUpdates] = useState([]);
   const [newUpdate, setNewUpdate] = useState("");
@@ -19,7 +20,6 @@ const Communitys = () => {
     { id: 7, name: "Sanjaay", domain: "Accountant", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
     { id: 8, name: "Prakash", domain: "Accountant", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
     { id: 9, name: "Chagan", domain: "Risk Manager", image: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png" },
-
   ];
 
   const uniqueNetworkData = Array.from(
@@ -60,7 +60,13 @@ const Communitys = () => {
     }
 
     setConnections((prev) => new Set(prev.add(person.id)));
-    alert(`You are now connected with ${person.name}`);
+    setSelectedPerson(person);
+    setIsConnectDialogOpen(true);
+  };
+
+  const closeConnectDialog = () => {
+    setIsConnectDialogOpen(false);
+    setSelectedPerson(null);
   };
 
   const addFinancialUpdate = () => {
@@ -113,7 +119,7 @@ const Communitys = () => {
                     key={person.id}
                     className="bg-gray-100 border border-gray-300 rounded-lg p-5 w-64 text-center shadow-sm transition-transform transform hover:translate-y-1 hover:shadow-lg"
                   >
-                    <div className="flex justify-center mb-4 animate-none">
+                    <div className="flex justify-center mb-4">
                       <img
                         src={person.image}
                         alt={`${person.name}'s profile`}
@@ -204,6 +210,22 @@ const Communitys = () => {
                   Send
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {isConnectDialogOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-5 rounded-lg shadow-lg w-80">
+              <h2 className="text-lg font-bold mb-4">Connection Established</h2>
+              <p className="mb-4">You are now connected with <b>{selectedPerson?.name}</b>!</p>
+              <p className="mb-4">Role: {selectedPerson?.domain}</p>
+              <button
+                onClick={closeConnectDialog}
+                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors w-full"
+              >
+                Close
+              </button>
             </div>
           </div>
         )}
