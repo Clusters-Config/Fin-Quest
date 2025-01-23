@@ -7,8 +7,8 @@ import Simulations from './pages/Simulations';
 import Features from './pages/Features';
 import Facilitators from './pages/Facilitators';
 import Communitys from './pages/Communitys';
-import Ai_Driven from './pages/Ai-Driven';
-
+// import Ai_Driven from './components/Ai-Driven';
+import Chat from './pages/Chat';
 const App = () => {
   return (
     <Router>
@@ -22,8 +22,9 @@ const App = () => {
           <Route path="/game" element={<Game />} />
           <Route path="/simulations" element={<Simulations />} />
           <Route path="/facilitators" element={<Facilitators />} />
-          <Route path="/Communitys" element={<Communitys />} />
-          <Route path="/Ai-Driven" element={<Ai_Driven />} />
+          <Route path="/communitys" element={<Communitys />} />
+          {/* <Route path="/Ai-Driven" element={<Ai_Driven />} /> */}
+          <Route path='/chat' element={<Chat/>}/>
         </Routes>
       </div>
     </Router>

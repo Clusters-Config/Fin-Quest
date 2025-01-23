@@ -1,16 +1,13 @@
-import ChatbotIcon from "./ChatbotIcon";
+import Chatboticon from "./ChatbotIcon"
 
-const ChatMessage = ({ chat }) => {
+const ChatMessage = ({chat}) => {
   return (
-    <div className={`flex gap-2 items-center ${chat.role === "model" ? "flex-col" : "flex-col-reverse"}`}>
-      {chat.role === "model" && <ChatbotIcon />}
-      <p className={`p-[12px_16px] max-w-[75%] text-base whitespace-pre-line break-words ${
-        chat.role === "model" 
-          ? "bg-[#679BB8] text-white rounded-[13px_13px_13px_3px]" 
-          : "bg-[#679BB8] text-black rounded-[13px_13px_3px_13px]"}`}>
-        {chat.text}
-      </p>
+    
+    <div className={`message ${chat.role === "model" ? 'bot' : 'user'}-message`}>
+      {chat.role === "model" && <Chatboticon />}
+      <p className="message-text">{chat.text}</p>
     </div>
+    
   );
 };
 
