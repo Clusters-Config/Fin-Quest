@@ -1,0 +1,209 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// Simple Savings Calculator Component
+const SavingsCalculator = () => {
+  const [goal, setGoal] = useState("");
+  const [monthlySaving, setMonthlySaving] = useState("");
+  const [months, setMonths] = useState(null);
+
+  const calculateTime = () => {
+    if (goal && monthlySaving) {
+      const monthsRequired = goal / monthlySaving;
+      setMonths(monthsRequired);
+    }
+  };
+
+  return (
+    <div className="mb-8">
+      <h3 className="text-2xl font-semibold text-[#457B9D]">Savings Calculator</h3>
+      <div className="mt-4">
+        <label className="text-gray-700">Enter your savings goal: $</label>
+        <input
+          type="number"
+          value={goal}
+          onChange={(e) => setGoal(e.target.value)}
+          className="border-2 border-gray-300 p-2 rounded-lg w-full mt-2"
+        />
+      </div>
+      <div className="mt-4">
+        <label className="text-gray-700">How much can you save per month? $</label>
+        <input
+          type="number"
+          value={monthlySaving}
+          onChange={(e) => setMonthlySaving(e.target.value)}
+          className="border-2 border-gray-300 p-2 rounded-lg w-full mt-2"
+        />
+      </div>
+      <button
+        onClick={calculateTime}
+        className="mt-4 bg-[#457B9D] hover:bg-[#A8DADC] text-white px-6 py-2 rounded-lg font-bold"
+      >
+        Calculate Time
+      </button>
+      {months && (
+        <div className="mt-4 text-lg text-gray-700">
+          You will reach your goal in approximately {Math.ceil(months)} months.
+        </div>
+      )}
+    </div>
+  );
+};
+
+const SavingEssentials = () => {
+  const navigate = useNavigate();
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [savingProgress, setSavingProgress] = useState(20); // Percentage progress for demonstration
+
+  const handleQuizRedirect = () => {
+    navigate("/quiz1"); // Replace "/quiz" with the route of your Quiz page
+  };
+
+  const handleDownloadTracker = () => {
+    const link = document.createElement("a");
+    link.href = "/path-to-your-pdf/savings-tracker.pdf"; // Link to a downloadable tracker PDF
+    link.download = "savings-tracker.pdf";
+    link.click();
+  };
+
+  return (
+    <div className="p-6 bg-gradient-to-r from-[#457B9D] to-[#9ACBD0] min-h-screen">
+      {/* Page Title */}
+      <h1 className="text-4xl font-extrabold text-[#1D3557] text-center my-6">
+        Essential Savings for Students
+      </h1>
+
+      {/* Content Section */}
+      <div className="bg-white p-8 rounded-lg shadow-2xl max-w-5xl mx-auto">
+
+        {/* Introduction */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">
+            Why is Saving Important for Students?
+          </h2>
+          <p className="text-gray-700 mt-3">
+            Saving money as a student can help you build financial discipline,
+            prepare for future expenses, and reach your goals, whether it’s buying
+            your first car, going on a school trip, or saving for college.
+            Learning how to save now will set you up for a more financially
+            secure future!
+          </p>
+        </section>
+
+        {/* Understanding the Basics of Saving */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">Understanding the Basics of Saving</h2>
+          <p className="text-gray-700 mt-3">
+            Saving money means putting aside some of the money you earn or receive
+            so that you can use it later. Think of it like a savings jar: you add
+            coins to it little by little, and over time, you end up with a good
+            amount of money. But why should you save?
+          </p>
+          <ul className="list-disc list-inside mt-3 text-gray-700">
+            <li>Be ready for emergencies like a lost wallet or an unexpected expense.</li>
+            <li>Work towards buying something you really want, like a laptop or a bike.</li>
+            <li>Save for larger goals like going to college or traveling.</li>
+          </ul>
+        </section>
+
+        {/* Savings Calculator */}
+        <SavingsCalculator />
+
+        {/* How to Start Saving */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">How to Start Saving</h2>
+          <p className="text-gray-700 mt-3">
+            Starting small is the key! You don’t need a lot of money to begin saving.
+            Even saving a little bit every month will build up over time. Here are some
+            steps you can follow to start your savings journey:
+          </p>
+          <ol className="list-decimal list-inside mt-3 text-gray-700">
+            <li>Create a budget to track how much you’re spending versus how much you’re saving.</li>
+            <li>Set specific goals, like saving $10 per week for a month, or saving for a particular item.</li>
+            <li>Put your money into a safe place, such as a savings account or a piggy bank, so you don’t spend it right away.</li>
+            <li>Review your progress and adjust your goals if needed!</li>
+          </ol>
+        </section>
+
+        {/* Budgeting for Students */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">Budgeting: The Secret to Saving</h2>
+          <p className="text-gray-700 mt-3">
+            Budgeting is like planning out how to use your money wisely. It helps you know exactly how much you can save
+            and how much you can spend. Here are some tips:
+          </p>
+          <ul className="list-disc list-inside mt-3 text-gray-700">
+            <li>Track all your income and expenses, like allowances, gifts, or part-time job earnings.</li>
+            <li>Separate your money into categories: savings, spending, and entertainment.</li>
+            <li>Review your spending to see where you can cut back, like spending less on snacks or going out with friends.</li>
+          </ul>
+        </section>
+
+        {/* Saving for Big Goals */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">Saving for Big Goals</h2>
+          <p className="text-gray-700 mt-3">
+            As a student, you might have some big goals—like saving for a school trip, new tech gadgets, or your college tuition. 
+            Setting a goal helps you stay focused and motivated. Here’s how you can do it:
+          </p>
+          <ul className="list-disc list-inside mt-3 text-gray-700">
+            <li>Choose a goal that’s important to you and figure out how much you need to save.</li>
+            <li>Break your goal into smaller steps—like saving $20 a month for a new phone.</li>
+            <li>Stay consistent. Even small, regular savings can add up to a big amount!</li>
+          </ul>
+        </section>
+
+        {/* Fun Facts about Saving */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">Fun Facts About Saving!</h2>
+          <p className="text-gray-700 mt-3">
+            Here are some fun facts that might make saving even more exciting:
+          </p>
+          <ul className="list-disc list-inside mt-3 text-gray-700">
+            <li>The first banknotes were used in China over 1,000 years ago!</li>
+            <li>Saving just $5 a week can add up to over $250 in a year.</li>
+            <li>Did you know? The first piggy banks were made from clay in the 1800s.</li>
+          </ul>
+        </section>
+
+        {/* Visual Guides
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">Visual Guides</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
+            <img
+              src="https://via.placeholder.com/300x200"
+              alt="Saving goals chart"
+              className="rounded-lg shadow-md"
+            />
+            <img
+              src="https://via.placeholder.com/300x200"
+              alt="Budgeting for students"
+              className="rounded-lg shadow-md"
+            />
+          </div>
+        </section> */}
+
+        {/* Key Takeaways */}
+        <section className="mb-8">
+          <h2 className="text-3xl font-semibold text-[#457B9D]">Key Takeaways</h2>
+          <p className="text-gray-700 mt-3">
+            Remember, saving is all about creating a habit. Start with small steps, keep track of your goals, and over time,
+            you’ll build up enough money for your needs and dreams. The earlier you start, the better!
+          </p>
+        </section>
+
+        {/* Quiz Button */}
+        <div className="text-center mt-8">
+          <button
+            onClick={handleQuizRedirect}
+            className="bg-[#457B9D] hover:bg-[#A8DADC] text-white px-6 py-3 rounded-lg font-bold text-xl"
+          >
+            Take the Quiz!
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SavingEssentials;

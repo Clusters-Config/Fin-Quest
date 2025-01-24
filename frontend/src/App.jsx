@@ -9,6 +9,8 @@ import Facilitators from './pages/Facilitators';
 import Communitys from './pages/Communitys';
 // import Ai_Driven from './components/Ai-Driven';
 import Chat from './pages/Chat';
+import Saving_Essentials from'./learn_path_components/Saving_Essentials';
+import Quiz1 from './learn_path_components/Quiz1';
 const App = () => {
   return (
     <Router>
@@ -25,6 +27,8 @@ const App = () => {
           <Route path="/communitys" element={<Communitys />} />
           {/* <Route path="/Ai-Driven" element={<Ai_Driven />} /> */}
           <Route path='/chat' element={<Chat/>}/>
+          <Route path="/Saving_Essentials" element={< Saving_Essentials />} />
+          <Route path="/Quiz1" element={< Quiz1 />} />
         </Routes>
       </div>
     </Router>
