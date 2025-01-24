@@ -1,4 +1,4 @@
-# Fin-Quest
+# Fin-Quest - Finance Based
 
 ## I. Project Setup and Structure
 

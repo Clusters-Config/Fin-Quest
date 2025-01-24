@@ -55,7 +55,7 @@ function FeaturesPage() {
           Real World Simulation
         </Link>
         <Link
-          to="/ AI-Driven"
+          to="/Chat"
           className="block bg-[#1D3557] text-white py-4 px-8 rounded-lg shadow-lg hover:bg-[#74C2E1] hover:scale-105 transform transition duration-300 text-center"
         >
           AI-Driven Insights
