@@ -7,10 +7,18 @@ import Simulations from './pages/Simulations';
 import Features from './pages/Features';
 import Facilitators from './pages/Facilitators';
 import Communitys from './pages/Communitys';
-// import Ai_Driven from './components/Ai-Driven';
 import Chat from './pages/Chat';
-import Saving_Essentials from'./learn_path_components/Saving_Essentials';
-import Quiz1 from './learn_path_components/Quiz1';
+
+// Learning path components
+import Saving_Essentials from './learn_path_components/Saving_Essentials';
+import Budgeting_Basics from './learn_path_components/Budgeting_Basics';
+import SimpleVsCompoundInterest from './learn_path_components/SimpleVsCompoundInterest';
+import LoanImpacts from './learn_path_components/LoanImpacts';
+import MutualFundEssentials from './learn_path_components/MutualFundEssentials';
+import StockMarketBasics from './learn_path_components/StockMarketBasics';
+import QuizApp from './learn_path_components/QuizApp';
+import ResultPage from './learn_path_components/ResultPage';
+
 const App = () => {
   return (
     <Router>
@@ -25,10 +33,16 @@ const App = () => {
           <Route path="/simulations" element={<Simulations />} />
           <Route path="/facilitators" element={<Facilitators />} />
           <Route path="/communitys" element={<Communitys />} />
-          {/* <Route path="/Ai-Driven" element={<Ai_Driven />} /> */}
-          <Route path='/chat' element={<Chat/>}/>
-          <Route path="/Saving_Essentials" element={< Saving_Essentials />} />
-          <Route path="/Quiz1" element={< Quiz1 />} />
+          <Route path='/chat' element={<Chat />} />
+          <Route path="/Saving_Essentials" element={<Saving_Essentials />} />
+          <Route path="/Budgeting_Basics" element={<Budgeting_Basics />} />
+          <Route path="/SimpleVsCompoundInterest" element={<SimpleVsCompoundInterest />} />
+          <Route path="/LoanImpacts" element={<LoanImpacts />} />
+          <Route path="/MutualFundEssentials" element={<MutualFundEssentials />} />
+          <Route path="/StockMarketBasics" element={<StockMarketBasics />} />
+          <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}
+          <Route path="/result" element={<ResultPage />} />
+
         </Routes>
       </div>
     </Router>

@@ -56,7 +56,7 @@ const SavingEssentials = () => {
   const [savingProgress, setSavingProgress] = useState(20); // Percentage progress for demonstration
 
   const handleQuizRedirect = () => {
-    navigate("/quiz1"); // Replace "/quiz" with the route of your Quiz page
+    navigate("/QuizApp/Saving_Essentials"); // Replace "/quiz" with the route of your Quiz page
   };
 
   const handleDownloadTracker = () => {

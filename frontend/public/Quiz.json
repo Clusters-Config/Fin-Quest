@@ -1,0 +1,575 @@
+{
+    "Saving_Essentials":
+     
+     [
+        {
+            "question": "What is the first step in effective saving?",
+            "options": ["Investing in stocks", "Creating a budget", "Taking loans", "Buying assets"],
+            "answer": "Creating a budget"
+          },
+          {
+            "question": "Why is it important to build an emergency fund?",
+            "options": [
+              "For buying a car",
+              "To handle unexpected expenses",
+              "To invest in real estate",
+              "To earn extra interest"
+            ],
+            "answer": "To handle unexpected expenses"
+          },
+          {
+            "question": "Which of these is NOT a benefit of saving?",
+            "options": [
+              "Financial security",
+              "Freedom from debt",
+              "Achieving goals",
+              "Spending without limits"
+            ],
+            "answer": "Spending without limits"
+          },
+          {
+            "question": "What percentage of income is commonly suggested for savings?",
+            "options": ["10%", "50%", "70%", "30%"],
+            "answer": "10%"
+          },
+          {
+            "question": "Which tool helps track expenses effectively?",
+            "options": ["Budget planner", "Credit card", "Mortgage", "Car loan"],
+            "answer": "Budget planner"
+          },
+          {
+            "question": "What is the recommended type of account for emergency funds?",
+            "options": ["Savings account", "Current account", "Fixed deposit", "Joint account"],
+            "answer": "Savings account"
+          },
+          {
+            "question": "Which of these is a common savings goal?",
+            "options": [
+              "Paying monthly bills",
+              "Building an emergency fund",
+              "Taking frequent vacations",
+              "Spending on luxuries"
+            ],
+            "answer": "Building an emergency fund"
+          },
+          {
+            "question": "Why is consistency important in saving?",
+            "options": [
+              "It leads to rapid wealth",
+              "It ensures regular progress",
+              "It avoids tax penalties",
+              "It enables frequent spending"
+            ],
+            "answer": "It ensures regular progress"
+          },
+          {
+            "question": "What is compound interest?",
+            "options": [
+              "Interest earned on savings",
+              "Interest earned on principal and previous interest",
+              "A type of tax",
+              "Penalty for delayed payments"
+            ],
+            "answer": "Interest earned on principal and previous interest"
+          },
+          {
+            "question": "Which of these is a smart saving strategy?",
+            "options": [
+              "Spending all bonuses",
+              "Saving a portion of every paycheck",
+              "Only saving when convenient",
+              "Taking loans to save"
+            ],
+            "answer": "Saving a portion of every paycheck"
+          }
+     ],
+
+   
+    "Budgeting_Basics":
+     
+     [
+          {
+              "question": "What is the first step in creating a budget?",
+              "options": ["Track spending", "Write down income", "Borrow money", "Spend wisely"],
+              "answer": "Write down income"
+            },
+            {
+              "question": "Why is it important to save money?",
+              "options": ["To buy unnecessary items", "To prepare for future needs", "To avoid spending", "To lend to others"],
+              "answer": "To prepare for future needs"
+            },
+            {
+              "question": "Which of these is a 'need' in budgeting?",
+              "options": ["Snacks", "Books", "Video games", "Toys"],
+              "answer": "Books"
+            },
+            {
+              "question": "What is the 50/30/20 rule in budgeting?",
+              "options": [
+                "50% for needs, 30% for wants, 20% for savings",
+                "30% for needs, 50% for savings, 20% for wants",
+                "20% for savings, 50% for needs, 30% for travel",
+                "30% for expenses, 50% for savings, 20% for charity"
+              ],
+              "answer": "50% for needs, 30% for wants, 20% for savings"
+            },
+            {
+              "question": "What is a zero-based budget?",
+              "options": [
+                "A budget where all income is allocated to specific expenses",
+                "A budget that doesn't include savings",
+                "A budget where you spend as much as you earn",
+                "A budget that ignores fixed costs"
+              ],
+              "answer": "A budget where all income is allocated to specific expenses"
+            },
+            {
+              "question": "What does the term 'emergency fund' refer to?",
+              "options": [
+                "Money saved for a vacation",
+                "Money set aside for unexpected expenses",
+                "Money borrowed from a bank",
+                "Money spent on luxury items"
+              ],
+              "answer": "Money set aside for unexpected expenses"
+            },
+            {
+              "question": "What is the purpose of setting financial goals?",
+              "options": [
+                "To track spending habits",
+                "To motivate savings and budgeting",
+                "To buy more expensive items",
+                "To ensure you never spend money"
+              ],
+              "answer": "To motivate savings and budgeting"
+            },
+            {
+              "question": "Which of these is an example of a 'want' in budgeting?",
+              "options": ["Lunch", "Books", "New phone", "Transportation"],
+              "answer": "New phone"
+            },
+            {
+              "question": "What does the term 'fixed expenses' mean?",
+              "options": [
+                "Expenses that vary from month to month",
+                "Expenses that remain the same every month",
+                "Expenses that are voluntary",
+                "Expenses that depend on income"
+              ],
+              "answer": "Expenses that remain the same every month"
+            },
+            {
+              "question": "Which is the best way to track your spending?",
+              "options": [
+                "By keeping receipts only",
+                "By using a budgeting app or a spreadsheet",
+                "By guessing each month",
+                "By asking others about their expenses"
+              ],
+              "answer": "By using a budgeting app or a spreadsheet"
+            }
+      ],
+    "SimpleVsCompoundInterest":
+     
+     [
+          {
+              "question": "What is the formula for Simple Interest?",
+              "options": [
+                "P × R × T",
+                "P × (1 + R/n)^(n × T)",
+                "(P × R × T) + P",
+                "P × R"
+              ],
+              "answer": "P × R × T"
+            },
+            {
+              "question": "What does Compound Interest include?",
+              "options": [
+                "Interest earned on the initial principal only",
+                "Interest earned on the principal and accumulated interest",
+                "Only interest on the principal for the first year",
+                "Interest earned after subtracting taxes"
+              ],
+              "answer": "Interest earned on the principal and accumulated interest"
+            },
+            {
+              "question": "What is the effect of compounding frequency on Compound Interest?",
+              "options": [
+                "The more frequently the interest is compounded, the more interest is earned",
+                "The more frequently the interest is compounded, the less interest is earned",
+                "Compounding frequency doesn’t affect the interest",
+                "Compounding frequency only affects the principal"
+              ],
+              "answer": "The more frequently the interest is compounded, the more interest is earned"
+            },
+            {
+              "question": "If you invest $1,000 at 5% interest annually for 3 years, what is the total interest using Simple Interest?",
+              "options": [
+                "$150",
+                "$157.63",
+                "$500",
+                "$120"
+              ],
+              "answer": "$150"
+            },
+            {
+              "question": "Which of the following is the correct Compound Interest formula?",
+              "options": [
+                "P × R × T",
+                "P × (1 + R/n)^(n × T) - P",
+                "(P × R × T) + P",
+                "P × (1 + R)^(T)"
+              ],
+              "answer": "P × (1 + R/n)^(n × T) - P"
+            },
+            {
+              "question": "If you invest $1,000 at 5% interest annually for 3 years, what is the total interest using Compound Interest?",
+              "options": [
+                "$150",
+                "$157.63",
+                "$200",
+                "$120"
+              ],
+              "answer": "$157.63"
+            },
+            {
+              "question": "What does 'P' represent in both Simple and Compound Interest formulas?",
+              "options": ["Principal amount", "Rate of interest", "Time period", "Interest amount"],
+              "answer": "Principal amount"
+            },
+            {
+              "question": "Which of these is a benefit of Compound Interest?",
+              "options": [
+                "It only works for long-term investments",
+                "It can lead to exponential growth of your investment",
+                "It works better for short-term investments",
+                "It is simpler than Simple Interest"
+              ],
+              "answer": "It can lead to exponential growth of your investment"
+            },
+            {
+              "question": "What is a disadvantage of Simple Interest?",
+              "options": [
+                "It does not allow interest to compound",
+                "It increases exponentially",
+                "It is more complex than Compound Interest",
+                "It provides no returns"
+              ],
+              "answer": "It does not allow interest to compound"
+            },
+            {
+              "question": "Which investment is better for long-term savings: Simple Interest or Compound Interest?",
+              "options": [
+                "Simple Interest",
+                "Compound Interest",
+                "Both are equal",
+                "Neither"
+              ],
+              "answer": "Compound Interest"
+            }
+      ],
+    "LoanImpacts":
+     
+      [
+          {
+              "question": "What is the most common impact of high-interest loans?",
+              "options": [
+                "Increased debt burden",
+                "Improved credit score",
+                "Instant wealth accumulation",
+                "No financial impact"
+              ],
+              "answer": "Increased debt burden"
+            },
+            {
+              "question": "What does the term 'APR' stand for in loans?",
+              "options": [
+                "Annual Percentage Rate",
+                "Annual Payment Rate",
+                "Automatic Payment Rate",
+                "Asset Payment Return"
+              ],
+              "answer": "Annual Percentage Rate"
+            },
+            {
+              "question": "What happens when you miss a loan payment?",
+              "options": [
+                "Nothing happens",
+                "You may incur late fees and damage your credit score",
+                "Your loan is automatically forgiven",
+                "You receive a refund"
+              ],
+              "answer": "You may incur late fees and damage your credit score"
+            },
+            {
+              "question": "What is a secured loan?",
+              "options": [
+                "A loan with no interest",
+                "A loan backed by an asset like a house or car",
+                "A loan that is automatically forgiven",
+                "A loan for buying stock"
+              ],
+              "answer": "A loan backed by an asset like a house or car"
+            },
+            {
+              "question": "What is the risk of taking out payday loans?",
+              "options": [
+                "Low interest rates",
+                "High interest rates and a short repayment period",
+                "Long repayment period",
+                "Guaranteed approval"
+              ],
+              "answer": "High interest rates and a short repayment period"
+            },
+            {
+              "question": "Why is it important to consider the loan term when borrowing?",
+              "options": [
+                "It affects your repayment schedule and total interest paid",
+                "It determines how much the loan will increase your credit score",
+                "It tells you how much interest you will earn",
+                "It does not affect anything"
+              ],
+              "answer": "It affects your repayment schedule and total interest paid"
+            },
+            {
+              "question": "What is the effect of defaulting on a loan?",
+              "options": [
+                "It can lead to legal consequences and damage your credit",
+                "You receive a larger loan offer",
+                "Your interest rate is reduced",
+                "Your loan is forgiven immediately"
+              ],
+              "answer": "It can lead to legal consequences and damage your credit"
+            },
+            {
+              "question": "What does refinancing a loan mean?",
+              "options": [
+                "Increasing the loan amount",
+                "Changing the interest rate and terms of the loan",
+                "Paying the loan early",
+                "Getting a second loan from another lender"
+              ],
+              "answer": "Changing the interest rate and terms of the loan"
+            },
+            {
+              "question": "Which type of loan generally has the lowest interest rate?",
+              "options": [
+                "Personal loan",
+                "Credit card loan",
+                "Mortgage loan",
+                "Payday loan"
+              ],
+              "answer": "Mortgage loan"
+            },
+            {
+              "question": "Why is it important to understand loan terms before borrowing?",
+              "options": [
+                "It helps you avoid taking on more debt than you can handle",
+                "It allows you to skip payments",
+                "It guarantees that you won’t need to repay",
+                "It will improve your credit score immediately"
+              ],
+              "answer": "It helps you avoid taking on more debt than you can handle"
+            }
+      ],
+
+    "MutualFundEssentials":
+      [
+          {
+              "question": "What is a mutual fund?",
+              "options": [
+                "A company that sells stocks",
+                "A pool of money collected from investors to invest in various securities",
+                "A type of bond",
+                "A type of real estate investment"
+              ],
+              "answer": "A pool of money collected from investors to invest in various securities"
+            },
+            {
+              "question": "Which of the following is NOT a benefit of investing in mutual funds?",
+              "options": [
+                "Diversification",
+                "Professional management",
+                "Low fees",
+                "Access to various markets and sectors"
+              ],
+              "answer": "Low fees"
+            },
+            {
+              "question": "What type of mutual fund invests in stocks?",
+              "options": ["Bond funds", "Equity funds", "Money market funds", "Index funds"],
+              "answer": "Equity funds"
+            },
+            {
+              "question": "What is a bond fund?",
+              "options": [
+                "A fund that only invests in stocks",
+                "A fund that invests in bonds and debt instruments",
+                "A fund that invests in real estate",
+                "A fund that invests in foreign currencies"
+              ],
+              "answer": "A fund that invests in bonds and debt instruments"
+            },
+            {
+              "question": "What does NAV stand for in mutual funds?",
+              "options": ["Net Asset Value", "National Asset Value", "New Active Venture", "None of the above"],
+              "answer": "Net Asset Value"
+            },
+            {
+              "question": "What is the primary risk associated with investing in mutual funds?",
+              "options": [
+                "Currency risk",
+                "Market risk",
+                "Liquidity risk",
+                "Interest rate risk"
+              ],
+              "answer": "Market risk"
+            },
+            {
+              "question": "What is a mutual fund’s expense ratio?",
+              "options": [
+                "The cost of investing in the fund",
+                "The fund manager’s salary",
+                "The fee paid to the broker",
+                "The total taxes paid by the fund"
+              ],
+              "answer": "The cost of investing in the fund"
+            },
+            {
+              "question": "Which of the following is the best way to minimize risk in mutual funds?",
+              "options": [
+                "Investing in one fund",
+                "Investing in a diverse range of funds",
+                "Only investing in high-risk funds",
+                "Investing only in bond funds"
+              ],
+              "answer": "Investing in a diverse range of funds"
+            },
+            {
+              "question": "How are mutual fund returns typically distributed?",
+              "options": [
+                "Through dividends and capital gains",
+                "Only through dividends",
+                "Only through capital gains",
+                "They don’t offer returns"
+              ],
+              "answer": "Through dividends and capital gains"
+            },
+            {
+              "question": "Which type of mutual fund invests in a mix of both stocks and bonds?",
+              "options": [
+                "Balanced fund",
+                "Equity fund",
+                "Bond fund",
+                "Money market fund"
+              ],
+              "answer": "Balanced fund"
+            }
+      ],
+
+
+    "StockMarketBasics":
+     
+     [
+          {
+              "question": "What is a stock?",
+              "options": [
+                "A bond issued by a company",
+                "A share of ownership in a company",
+                "A type of savings account",
+                "A form of currency"
+              ],
+              "answer": "A share of ownership in a company"
+            },
+            {
+              "question": "What does the stock market represent?",
+              "options": [
+                "A place to buy and sell stocks and bonds",
+                "A government institution for saving",
+                "A type of loan offered to companies",
+                "A platform for trading real estate"
+              ],
+              "answer": "A place to buy and sell stocks and bonds"
+            },
+            {
+              "question": "What is a dividend?",
+              "options": [
+                "The amount a company owes its creditors",
+                "The interest earned on stocks",
+                "A payment made to shareholders from company profits",
+                "The price of a stock in the market"
+              ],
+              "answer": "A payment made to shareholders from company profits"
+            },
+            {
+              "question": "What is a bull market?",
+              "options": [
+                "A market where stock prices are rising",
+                "A market where stock prices are falling",
+                "A market with low trading volume",
+                "A market limited to certain industries"
+              ],
+              "answer": "A market where stock prices are rising"
+            },
+            {
+              "question": "What is a bear market?",
+              "options": [
+                "A market where stock prices are rising",
+                "A market where stock prices are falling",
+                "A market where only bonds are traded",
+                "A market with high volatility"
+              ],
+              "answer": "A market where stock prices are falling"
+            },
+            {
+              "question": "What is the role of a stockbroker?",
+              "options": [
+                "To advise companies on financial matters",
+                "To facilitate the buying and selling of stocks for investors",
+                "To manage a company's funds",
+                "To regulate the stock market"
+              ],
+              "answer": "To facilitate the buying and selling of stocks for investors"
+            },
+            {
+              "question": "What is the S&P 500?",
+              "options": [
+                "A measure of a company's profitability",
+                "An index of the top 500 companies listed on U.S. stock exchanges",
+                "A type of bond",
+                "A measure of inflation"
+              ],
+              "answer": "An index of the top 500 companies listed on U.S. stock exchanges"
+            },
+            {
+              "question": "What does IPO stand for?",
+              "options": [
+                "Internal Public Offering",
+                "Initial Public Offering",
+                "Individual Portfolio Offering",
+                "Initial Private Offering"
+              ],
+              "answer": "Initial Public Offering"
+            },
+            {
+              "question": "What is a stock portfolio?",
+              "options": [
+                "A collection of different stocks owned by an individual or institution",
+                "A type of government bond",
+                "A list of financial institutions",
+                "A place to store physical stock certificates"
+              ],
+              "answer": "A collection of different stocks owned by an individual or institution"
+            },
+            {
+              "question": "What does 'buying on margin' mean?",
+              "options": [
+                "Purchasing stocks using borrowed funds",
+                "Buying stocks in large quantities",
+                "Buying stocks without paying any interest",
+                "Selling stocks without owning them"
+              ],
+              "answer": "Purchasing stocks using borrowed funds"
+            }
+      ]
+    }
