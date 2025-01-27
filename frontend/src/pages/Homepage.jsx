@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa"; // Import profile icon
 
 function Homepage() {
   return (
@@ -30,6 +31,15 @@ function Homepage() {
             >
               Login
             </Link>
+          </li>
+          <li>
+            {/* Profile Icon */}
+            <Link
+              to="/components/ProfilePage"
+              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300">
+              <FaUserCircle size={24} /> {/* Profile icon */}
+            </Link>
+
           </li>
         </ul>
       </nav>
