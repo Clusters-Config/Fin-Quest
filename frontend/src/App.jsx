@@ -46,7 +46,6 @@ const App = () => {
           <Route path="/result" element={<ResultPage />} />
           <Route path="/Group1Budgeting" element={<Group1Budgeting />} />
           <Route path="/components/ProfilePage" element={<ProfilePage />} />
-
         </Routes>
       </div>
     </Router>

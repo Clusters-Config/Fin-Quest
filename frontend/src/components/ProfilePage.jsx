@@ -56,6 +56,7 @@ function ProfilePage() {
           />
         </div>
 
+
         {/* Form Section */}
         <div className="space-y-6">
           {/* First Name */}
@@ -70,6 +71,7 @@ function ProfilePage() {
               />
             </div>
           </div>
+
 
           {/* Last Name */}
           <div className="flex items-center">
