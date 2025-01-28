@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 
 const Communitys = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,14 +33,24 @@ const Communitys = () => {
     const matchesSearch = person.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesRole && matchesSearch;
   });
-
+  const api = "pub_66696cd93cb944d498af66a299cc4fbf91308";
   useEffect(() => {
-    const sampleUpdates = [
-      "Stock markets hit a new high today!",
-      "Federal Reserve announces interest rate cuts.",
-      "Top 5 investment strategies for 2025.",
-    ];
-    setFinancialUpdates(sampleUpdates);
+    const fetchFinancialUpdates = async () => {
+      try {
+        const response = await fetch(`https://newsdata.io/api/1/latest?apikey=${api}`); // Replace with a valid financial news API
+
+        const data = await response.json();
+        const result = data.results;
+        console.log(data);
+        const updates = result.map((item) => item.title); // Assuming API returns a list of news objects with a `title` field
+        setFinancialUpdates(updates);
+      } catch (error) {
+        console.error("Error fetching financial updates:", error);
+        setFinancialUpdates(["Unable to fetch news at the moment."]);
+      }
+    };
+
+    fetchFinancialUpdates();
   }, []);
 
   const openModal = (person) => {
