@@ -18,6 +18,8 @@ import MutualFundEssentials from './learn_path_components/MutualFundEssentials';
 import StockMarketBasics from './learn_path_components/StockMarketBasics';
 import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
+import Group1Budgeting from "./learn_path_components/Group1Budgeting";  
+import ProfilePage  from "./components/ProfilePage";
 
 const App = () => {
   return (
@@ -42,7 +44,8 @@ const App = () => {
           <Route path="/StockMarketBasics" element={<StockMarketBasics />} />
           <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}
           <Route path="/result" element={<ResultPage />} />
-
+          <Route path="/Group1Budgeting" element={<Group1Budgeting />} />
+          <Route path="/components/ProfilePage" element={<ProfilePage />} />
         </Routes>
       </div>
     </Router>

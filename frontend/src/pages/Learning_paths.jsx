@@ -40,6 +40,29 @@ const Learning_paths = () => {
     },
   ];
 
+  // Peer-to-Peer Collaboration section
+  const [discussion, setDiscussion] = useState("");
+  const [discussions, setDiscussions] = useState([]);
+  const [studyGroups, setStudyGroups] = useState([]);
+
+  const handlePostDiscussion = () => {
+    if (discussion.trim()) {
+      setDiscussions([...discussions, discussion]);
+      setDiscussion("");
+    }
+  };
+
+  const handleJoinGroup = (groupRoute) => {
+    // Navigate to the group page
+    navigate(groupRoute);
+  };
+
+  const sampleGroups = [
+    { name: "Group 1: Budgeting Basics", route: "/Group1Budgeting" },
+    { name: "Group 2: Investment", route: "/group2-investment" },
+    { name: "Group 3: Interest Rates", route: "/group3-interest-rates" },
+  ];
+
   return (
     <div className="px-4 sm:px-6 lg:px-10">
       {/* Header Section */}
@@ -76,9 +99,7 @@ const Learning_paths = () => {
                 onClick={() => handleToggle(section.id)}
               >
                 <div
-                  className={`w-9 h-9 ${
-                    openSection === section.id ? "bg-blue-600" : "bg-gray-600"
-                  } rounded-full mx-6`}
+                  className={`w-9 h-9 ${openSection === section.id ? "bg-blue-600" : "bg-gray-600"} rounded-full mx-6`}
                 >
                   <h1 className="py-1 text-white text-center">{section.id}</h1>
                 </div>
@@ -103,6 +124,55 @@ const Learning_paths = () => {
               )}
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Peer-to-Peer Learning Section */}
+      <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-blue-900 font-bold">Peer-to-Peer Learning & Collaboration</h1>
+      <div className="bg-white w-full max-w-6xl mx-auto rounded-xl mt-6 pb-6 shadow-md">
+        <div className="border border-gray-300 rounded-lg mt-4 p-4">
+          {/* Study Groups Section */}
+          <h2 className="text-lg font-bold">Join a Study Group</h2>
+          <div className="mt-4 space-y-4">
+            {sampleGroups.map((group, index) => (
+              <button
+                key={index}
+                className="bg-blue-800 text-white px-4 py-2 rounded-md w-full"
+                onClick={() => handleJoinGroup(group.route)}
+              >
+                {group.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Discussion Section */}
+          <div className="mt-8">
+            <h2 className="text-lg font-bold">Discussion Board</h2>
+            <textarea
+              className="w-full p-2 border border-gray-300 rounded-md mt-4"
+              rows="4"
+              placeholder="Post your thoughts or questions here..."
+              value={discussion}
+              onChange={(e) => setDiscussion(e.target.value)}
+            />
+            <button
+              onClick={handlePostDiscussion}
+              className="bg-green-600 text-white px-4 py-2 rounded-md mt-4"
+            >
+              Post Discussion
+            </button>
+
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold text-blue-800">Comments</h3>
+              <div className="mt-4">
+                {discussions.map((comment, idx) => (
+                  <p key={idx} className="text-sm text-gray-700">
+                    * {comment}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

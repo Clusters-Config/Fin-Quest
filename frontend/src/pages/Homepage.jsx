@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa"; // Import profile icon
 
 function Homepage() {
   return (
     <div className="bg-gradient-to-b from-[#457B9D] to-[#A8DADC] min-h-screen flex flex-col justify-between">
+      
       {/* Navigation Bar */}
       <nav className="bg-[#FFFFFF] shadow-lg px-6 py-4 flex justify-between items-center">
         <div className="text-[#1D3557] text-2xl font-bold">FinQuest</div>
@@ -30,6 +32,15 @@ function Homepage() {
             >
               Login
             </Link>
+          </li>
+          <li>
+            {/* Profile Icon */}
+            <Link
+              to="/components/ProfilePage"
+              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300">
+              <FaUserCircle size={24} /> {/* Profile icon */}
+            </Link>
+
           </li>
         </ul>
       </nav>
