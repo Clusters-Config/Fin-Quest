@@ -58,9 +58,9 @@ const Learning_paths = () => {
   };
 
   const sampleGroups = [
-    { name: "Group 1: Budgeting Basics", route: "/Group1Budgeting" },
-    { name: "Group 2: Investment", route: "/group2-investment" },
-    { name: "Group 3: Interest Rates", route: "/group3-interest-rates" },
+    { name: "Dive In", route: "/ForumPage" },
+    // { name: "Group 2: Investment", route: "/group2-investment" },
+    // { name: "Group 3: Interest Rates", route: "/group3-interest-rates" },
   ];
 
   return (
@@ -132,7 +132,7 @@ const Learning_paths = () => {
       <div className="bg-white w-full max-w-6xl mx-auto rounded-xl mt-6 pb-6 shadow-md">
         <div className="border border-gray-300 rounded-lg mt-4 p-4">
           {/* Study Groups Section */}
-          <h2 className="text-lg font-bold">Join a Study Group</h2>
+          <h2 className="text-lg font-bold">Engage With Peers</h2>
           <div className="mt-4 space-y-4">
             {sampleGroups.map((group, index) => (
               <button
