@@ -1,4 +1,4 @@
-// Profile Page
+// Profile Page -  Setup
 import React, { useState } from "react";
 import {
   FaUser,
