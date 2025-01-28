@@ -170,18 +170,7 @@ const Communitys = () => {
 
           <div className="w-1/4 bg-gray-50 border-l border-gray-300 p-5">
             <h2 className="text-2xl font-bold mb-5">Latest Financial News</h2>
-            <textarea
-              value={newUpdate}
-              onChange={(e) => setNewUpdate(e.target.value)}
-              placeholder="Share an update..."
-              className="w-full p-2 border border-gray-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            ></textarea>
-            <button
-              onClick={addFinancialUpdate}
-              className="bg-green-500 text-white py-2 px-4 rounded-md w-full hover:bg-green-700 transition-colors mb-5"
-            >
-              Post Update
-            </button>
+            
             <ul className="space-y-3">
               {financialUpdates.map((update, index) => (
                 <li
