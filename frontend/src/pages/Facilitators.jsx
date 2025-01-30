@@ -38,16 +38,16 @@ const Facilitator = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-b from-[#F1FAEE] to-[#A8DADC] min-h-screen">
+    <div className="bg-[#F8FAFC] min-h-screen">
       {/* Header */}
-      <header className="bg-[#1D3557] text-white py-6 text-center">
+      <header className="bg-[#002147] text-white py-6 text-center">
         <h1 className="text-3xl font-bold">Facilitator Services</h1>
         <p className="mt-2">Your Guide to Essential Financial Tasks</p>
       </header>
 
       {/* Services Section */}
       <section className="mt-8 max-w-7xl mx-auto px-6">
-        <h2 className="text-2xl font-semibold text-[#1D3557] mb-6 text-center">
+        <h2 className="text-2xl font-semibold text-[#002147] mb-6 text-center">
           Services & Instructions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -56,10 +56,10 @@ const Facilitator = () => {
               key={index}
               className="bg-white shadow-lg rounded-lg p-6 hover:shadow-2xl transform hover:scale-105 transition duration-300"
             >
-              <h3 className="text-xl font-semibold text-[#1D3557] mb-4">
+              <h3 className="text-xl font-semibold text-[#002147] mb-4">
                 {service.title}
               </h3>
-              <ol className="list-decimal list-inside text-[#457B9D] space-y-2">
+              <ol className="list-decimal list-inside text-[#6C757D] space-y-2">
                 {service.instructions.map((step, i) => (
                   <li key={i}>{step}</li>
                 ))}
@@ -78,16 +78,12 @@ const Facilitator = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="bg-[#457B9D] text-white py-8 mt-10 text-center">
-        <h3 className="text-2xl font-semibold">Need More Assistance?</h3>
-        <p className="mt-2">
-          Our facilitator is available for live guidance. Contact us now!
-        </p>
-        <button className="mt-4 px-6 py-2 bg-[#F1FAEE] text-[#1D3557] rounded-md shadow-md hover:bg-[#A8DADC] transition duration-300">
-          Contact Facilitator
-        </button>
-      </section>
+       
+      {/* Footer */}
+      <footer className="bg-[#002147] text-white py-6 px-6 text-center">
+        
+        <p className="text-sm mt-2">&copy; 2025 Fin-Quest. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 };
