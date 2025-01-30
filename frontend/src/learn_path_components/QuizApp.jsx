@@ -50,19 +50,19 @@ function QuizApp() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#A8DADC] to-[#F1FAEE] p-6">
-      <h1 className="text-3xl font-bold text-center text-[#457B9D] mb-8">
+    <div className="min-h-screen bg-gradient-to-b from-[#F4F4F4] to-[#F8FAFC] p-6">
+      <h1 className="text-3xl font-bold text-center text-[#002147] mb-8">
         {quizId} Quiz
       </h1>
 
       {loading ? (
-        <p className="text-center text-gray-600">Loading quiz...</p>
+        <p className="text-center text-[#6C757D]">Loading quiz...</p>
       ) : (
         <>
           <div id="quiz-container" className="space-y-6">
             {quizData.map((question, index) => (
               <div key={index} className="p-4 bg-white shadow-md rounded-md">
-                <h3 className="text-xl font-semibold text-[#457B9D] mb-4">{question.question}</h3>
+                <h3 className="text-xl font-semibold text-[#002147] mb-4">{question.question}</h3>
                 {question.options.map((option, i) => (
                   <div key={i} className="flex items-center mb-3">
                     <input
@@ -72,11 +72,11 @@ function QuizApp() {
                       value={option}
                       checked={userAnswers[index] === option}
                       onChange={() => handleOptionChange(index, option)}
-                      className="w-4 h-4 text-[#457B9D] focus:ring-[#457B9D] border-gray-300 rounded"
+                      className="w-4 h-4 text-[#002147] focus:ring-[#F39C12] border-[#6C757D] rounded"
                     />
                     <label
                       htmlFor={`q${index}-option${i}`}
-                      className="ml-2 text-gray-700 text-sm"
+                      className="ml-2 text-[#6C757D] text-sm"
                     >
                       {option}
                     </label>
@@ -89,7 +89,7 @@ function QuizApp() {
           <div className="mt-8 text-center">
             <button
               onClick={calculateScore}
-              className="px-6 py-3 bg-[#457B9D] text-white font-semibold rounded-md hover:bg-[#A8DADC] transform transition-all duration-300 hover:scale-105"
+              className="px-6 py-3 bg-[#002147] text-white font-semibold rounded-md hover:bg-[#F39C12] transform transition-all duration-300 hover:scale-105"
             >
               Submit Quiz
             </button>

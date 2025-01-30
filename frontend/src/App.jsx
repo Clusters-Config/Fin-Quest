@@ -19,8 +19,9 @@ import StockMarketBasics from './learn_path_components/StockMarketBasics';
 import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
 import ForumPage from "./learn_path_components/ForumPage";  
-import ProfilePage  from "./components/ProfilePage";
-
+import Profile  from "./pages/Profile";
+import ProfitLossLadder from "./GameComponents/ProfitLossLadder"
+import DailyChallenges from "./GameComponents/DailyChallenges"
 
 
 const App = () => {
@@ -47,7 +48,9 @@ const App = () => {
           <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}
           <Route path="/result" element={<ResultPage />} />
           <Route path="/ForumPage" element={<ForumPage />} />
-          <Route path="/components/ProfilePage" element={<ProfilePage />} />
+          <Route path="/Profile" element={<Profile />} />
+          <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
+          <Route path="/DailyChallenges" element={<DailyChallenges />} />
         </Routes>
       </div>
     </Router>

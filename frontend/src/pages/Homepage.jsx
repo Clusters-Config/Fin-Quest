@@ -1,70 +1,90 @@
 import { Link } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa"; // Import profile icon
+import { FaUserCircle } from "react-icons/fa"; // Profile icon
 
 function Homepage() {
   return (
-    <div className="bg-gradient-to-b from-[#457B9D] to-[#A8DADC] min-h-screen flex flex-col justify-between">
+    <div className="bg-white min-h-screen flex flex-col">
       
       {/* Navigation Bar */}
-      <nav className="bg-[#FFFFFF] shadow-lg px-6 py-4 flex justify-between items-center">
-        <div className="text-[#1D3557] text-2xl font-bold">FinQuest</div>
-        <ul className="flex space-x-4">
+      <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
+        <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
+        <ul className="flex space-x-6">
           <li>
-            <Link
-              to="/"
-              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300"
-            >
+            <Link to="/" className="text-white hover:text-[#F39C12] transition duration-300">
               Home
             </Link>
           </li>
           <li>
-            <Link
-              to="/features"
-              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300"
-            >
+            <Link to="/features" className="text-white hover:text-[#F39C12] transition duration-300">
               Features
             </Link>
           </li>
           <li>
-            <Link
-              to="/login"
-              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300"
-            >
+            <Link to="/login" className="text-white hover:text-[#F39C12] transition duration-300">
               Login
             </Link>
           </li>
           <li>
-            {/* Profile Icon */}
-            <Link
-              to="/components/ProfilePage"
-              className="text-[#6C757D] hover:text-[#1D3557] transition duration-300">
-              <FaUserCircle size={24} /> {/* Profile icon */}
+            <Link to="/Profile" className="text-white hover:text-[#F39C12] transition duration-300">
+              <FaUserCircle size={24} />
             </Link>
-
           </li>
         </ul>
       </nav>
 
       {/* Hero Section */}
-      <header className="text-center py-20 space-y-6">
-        <h1 className="text-5xl font-bold text-[#1D3557]">
-          Welcome to FinQuest!
+      <header className="text-center py-20 space-y-6 bg-[#F4F4F4]">
+        <h1 className="text-5xl font-bold text-[#002147]">
+          Learn Finance Through <span className="text-[#F39C12]">Play & Strategy!</span>
         </h1>
-        <p className="text-lg text-[#1D1616] leading-relaxed max-w-3xl mx-auto">
-          Embark on your journey to financial literacy through interactive
-          paths and AI-driven insights.
+        <p className="text-lg text-[#6C757D] leading-relaxed max-w-3xl mx-auto">
+          A gamified learning experience that makes financial literacy easy, engaging, and fun!
         </p>
-        <Link to="/features">
-          <button className="bg-[#457B9D] text-white px-6 py-3 rounded-lg shadow-lg hover:bg-[#74C2E1] transition duration-300">
-            Get Started
-          </button>
-        </Link>
+        <div className="space-x-4">
+          <Link to="/features">
+            <button className="bg-[#F39C12] text-[#002147] px-6 py-3 rounded-lg shadow-lg hover:bg-[#e67e22] transition duration-300">
+              Start Your Quest
+            </button>
+          </Link>
+        </div>
       </header>
 
+      {/* Why Choose Fin-Quest */}
+      <section className="text-center bg-[#F8FAFC] py-16">
+        <h2 className="text-3xl font-bold text-[#002147] mb-6">Why Choose Fin-Quest?</h2>
+        <p className="text-[#6C757D] max-w-3xl mx-auto mb-12">
+          We make financial literacy engaging, practical, and accessible to everyone.  
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-20">
+          <div className="bg-white shadow-md p-6 rounded-lg text-center border-t-4 border-[#F39C12]">
+            <h3 className="text-xl font-semibold text-[#002147]">Real-Life Scenarios</h3>
+            <p className="text-[#6C757D] mt-2">
+              Learn through real-world finance case studies. Our lessons draw inspiration from actual events, helping you understand complex financial concepts in a relatable way. You'll gain the skills to handle your own financial decisions confidently and wisely.
+            </p>
+          </div>
+          <div className="bg-white shadow-md p-6 rounded-lg text-center border-t-4 border-[#F39C12]">
+            <h3 className="text-xl font-semibold text-[#002147]">Engaging Gameplay</h3>
+            <p className="text-[#6C757D] mt-2">
+              Finance lessons designed like interactive quests. Dive into challenges and puzzles that keep you actively engaged as you learn. Whether you're tracking expenses or building investment strategies, you'll find every task both fun and educational.
+            </p>
+          </div>
+          <div className="bg-white shadow-md p-6 rounded-lg text-center border-t-4 border-[#F39C12]">
+            <h3 className="text-xl font-semibold text-[#002147]">Gamified Rewards</h3>
+            <p className="text-[#6C757D] mt-2">
+              Earn badges and points as you learn. Celebrate your milestones and progress with rewards that motivate you to keep learning. The more you complete, the higher your achievements, and the more confident you become in your financial knowledge.
+            </p>
+          </div>
+        </div>
+      </section>
+
+
       {/* Footer */}
-      <footer className="bg-[#F1FAEE] text-[#1D3557] py-4 text-center">
-        <p className="mt-4">&copy; 2025 FinQuest. All Rights Reserved.</p>
+      <footer className="bg-[#002147] text-white py-4 px-6 text-center">
+        <p className="text-lg italic">"Empowering financial literacy through gamification."</p>
+        <p className="text-sm mt-2">&copy; 2025 Fin-Quest. All Rights Reserved.</p>
       </footer>
+
+      
     </div>
   );
 }
