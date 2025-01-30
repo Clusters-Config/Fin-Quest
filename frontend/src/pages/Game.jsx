@@ -58,33 +58,33 @@ function GamifiedAdventures() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-[#F4F4F4] shadow-md text-center rounded-lg py-4">
               <img
-                src="/assets/quiz-master-icon.png" // Replace with your image path
+                src="../src/assets/QuizMaster.jpg" // Replace with your image path
                 alt="Quiz Master"
-                className="w-16 h-16 mx-auto mb-2" // Adjust the size as per your preference
+                className="w-18 h-18 mx-auto mb-2" // Adjust the size as per your preference
               />
               <h3 className="text-[#002147] font-bold">Quiz Master</h3>
             </div>
             <div className="bg-[#F4F4F4] shadow-md text-center rounded-lg py-4">
               <img
-                src="/assets/savings-guru-icon.png" // Replace with your image path
+                src="../src/assets/SavingGuru.jpg" // Replace with your image path
                 alt="Savings Guru"
-                className="w-16 h-16 mx-auto mb-2"
+                className="w-18 h-18 mx-auto mb-2"
               />
               <h3 className="text-[#002147] font-bold">Savings Guru</h3>
             </div>
             <div className="bg-[#F4F4F4] shadow-md text-center rounded-lg py-4">
               <img
-                src="/assets/budget-planner-icon.png" // Replace with your image path
+                src="../src/assets/BudgetPlanner.jpg" // Replace with your image path
                 alt="Budget Planner"
-                className="w-16 h-16 mx-auto mb-2"
+                className="w-18 h-18 mx-auto mb-2"
               />
               <h3 className="text-[#002147] font-bold">Budget Planner</h3>
             </div>
             <div className="bg-[#F4F4F4] shadow-md text-center rounded-lg py-4">
               <img
-                src="/assets/financial-expert-icon.png" // Replace with your image path
+                src="../src/assets/FinancialExpert.jpg" // Replace with your image path
                 alt="Financial Expert"
-                className="w-16 h-16 mx-auto mb-2"
+                className="w-18 h-18 mx-auto mb-2"
               />
               <h3 className="text-[#002147] font-bold">Financial Expert</h3>
             </div>
