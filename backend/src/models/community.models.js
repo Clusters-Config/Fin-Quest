@@ -8,7 +8,6 @@ const community = new mongo({
     domain : String,
     image : String,
 
-
 })
 
 const domain = mongoose.model('Domain',community);
