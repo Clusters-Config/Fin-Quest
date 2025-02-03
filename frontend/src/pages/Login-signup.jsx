@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function Login_signup() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState();
 
   const handleLoginClick = () => {
     setIsLogin(true);
@@ -31,8 +31,10 @@ function Login_signup() {
               </div>
               <button className="w-full py-3 text-lg font-bold text-white bg-[#F39C12] rounded-lg cursor-pointer hover:bg-[#e68912] transition-colors duration-300">
                 Login
-              </button>
-              <a href="#" className="mt-3 text-sm text-[#002147]" onClick={handleSignupClick}>No Account? Create one</a>
+              </button >
+              <h2 className="mt-3 text-sm text-[#002147]">No Account?
+              <a href="#"  onClick={handleSignupClick}> Create one</a>
+              </h2>
             </div>
           ) : (
             <div className="flex flex-col items-center w-full">
@@ -43,7 +45,9 @@ function Login_signup() {
               <button className="w-full py-3 text-lg font-bold text-white bg-[#F39C12] rounded-lg cursor-pointer hover:bg-[#e68912] transition-colors duration-300">
                 Sign Up
               </button>
-              <a href="#" className="mt-3 text-sm text-[#002147]" onClick={handleLoginClick}>Already an User! Sign In</a>
+              <h2 className="mt-3 text-sm text-[#002147]">Already an User!  
+              <a href="#"  onClick={handleLoginClick}> Sign In</a>
+              </h2>
             </div>
           )}
         </div>
