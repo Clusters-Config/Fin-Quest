@@ -40,7 +40,7 @@ const Communitys = () => {
       try {
         const response = await fetch(`https://newsdata.io/api/1/latest?apikey=${api}`);
         const data = await response.json();
-        const result = data.results;
+        const result = data.results.slice(0, 5); // Fetch only the top 5 news
         const updates = result.map((item) => item.title);
         setFinancialUpdates(updates);
       } catch (error) {
@@ -94,7 +94,7 @@ const Communitys = () => {
       <h1 className="text-4xl font-bold text-center text-[#01579B] mb-6 pt-5">Community Engagement</h1>
 
       <div className="flex flex-col lg:flex-row">
-        <div className="w-full lg:w-64 bg-[#E1F5FE] p-5">
+        <div className="w-full lg:w-64 bg-[#E1F5FE] p-5 rounded-lg shadow-md">
           <h2 className="text-xl font-bold mb-5">Roles</h2>
           <ul className="space-y-2">
             {roles.map((role) => (
