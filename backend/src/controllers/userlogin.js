@@ -1,30 +1,28 @@
 import { Apierror } from "../utils/Apierror.js";
-import { login } from "../models/login.models.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
+import { SignupSchema, } from "../models/signup.js";
 
 const userlogin  = AsyncHandler( async(req,res)=>{
+
     const {email,password} = req.body;
 
-    if ([email, password].some((exist) => exist.trim() === "")) {
-        throw new Apierror(400, "All elements required");
+    if([email,password].some((exist)=> typeof exist === "string" && exist.trim()=== "")){
+        throw new Apierror(404,"All fileds required");
     }
 
-    const existuser = await login.findOne({email});
-
-    
-    if(existuser){
-        throw new Apierror(403,"User already exist");
-    }
-
-    const LoginUser = await new login({
-        email,
-        password
+    const finduser = await SignupSchema.findOne({
+        $and:[{email},{password}]
     });
 
-    await LoginUser.save();
-    
-    console.log(LoginUser.email+" Created successful");
-    res.status(200).json(LoginUser);
+    if(!finduser){
+        throw new Apierror(404,"User not found");
+    }
+
+    console.log(email+" Login successful");
+    res.send("Login successful");
+
+
+
 });
 
 export {userlogin};
