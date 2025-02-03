@@ -34,13 +34,18 @@ const Communitys = () => {
     return matchesRole && matchesSearch;
   });
 
-  const api = "pub_66696cd93cb944d498af66a299cc4fbf91308";
+  // const api = "pub_66696cd93cb944d498af66a299cc4fbf91308";
+  const api = "IjFicwBbdUxCnqP4BTOc6Yzr1m2JBksh";
   useEffect(() => {
     const fetchFinancialUpdates = async () => {
       try {
-        const response = await fetch(`https://newsdata.io/api/1/latest?apikey=${api}`);
+        const response = await fetch(`https://api.apilayer.com/financelayer/news?date=today&keywords=at%26t&sources=seekingalpha.com&keyword=merger&tickers=dis`, {
+          headers: {
+            apikey: api
+          }
+        });
         const data = await response.json();
-        const result = data.results.slice(0, 5); // Fetch only the top 5 news
+        const result = data.data.slice(0, 5); // Fetch only the top 5 news
         const updates = result.map((item) => item.title);
         setFinancialUpdates(updates);
       } catch (error) {
@@ -51,6 +56,9 @@ const Communitys = () => {
 
     fetchFinancialUpdates();
   }, []);
+
+  //   fetchFinancialUpdates();
+  // }, []);
 
   const openModal = (person) => {
     setSelectedPerson(person);
