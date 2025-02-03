@@ -51,28 +51,13 @@ function ForumPage() {
   };
 
   return (
-    <div className={`${darkMode ? "bg-[#212529] text-white" : "bg-[#F8FAFC] text-black"} min-h-screen p-6`}>
+    <div className={`${darkMode ? "bg-[#212529] text-[#E9ECEF]" : "bg-[#F8FAFC] text-[#333333]"} min-h-screen p-6`}>
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-8 dark:bg-[#343a40]">
         <div className="flex justify-between mb-8">
-          <h1 className="text-3xl font-bold text-center text-[#002147] dark:text-[#F39C12]">
+          <h1 className="text-3xl font-bold text-center text-[#3A6A89] dark:text-[#F39C12]">
             Peer-to-Peer Learning Forum
           </h1>
-          {/* <button
-            onClick={() => setDarkMode(!darkMode)}
-            className="px-4 py-2 bg-gray-800 text-white rounded-md dark:bg-gray-600"
-          >
-            Toggle {darkMode ? "Light" : "Dark"} Mode
-          </button> */}
         </div>
-
-        {/* Search Bar */}
-        {/* <input
-          type="text"
-          placeholder="Search discussions..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 border rounded mb-4 w-full dark:bg-gray-700 dark:text-white"
-        /> */}
 
         {/* Webinar Section */}
         <div className="mb-8">
@@ -82,7 +67,7 @@ function ForumPage() {
           <ul className="space-y-4">
             <li className="flex items-center justify-between p-4 bg-[#F4F4F4] rounded-lg shadow-sm dark:bg-[#343a40]">
               <div>
-                <h3 className="font-bold text-[#002147] dark:text-[#F39C12]">
+                <h3 className="font-bold text-[#3A6A89] dark:text-[#F39C12]">
                   Financial Planning for Beginners
                 </h3>
                 <p className="text-sm text-[#6C757D] dark:text-[#6C757D]">
@@ -98,7 +83,7 @@ function ForumPage() {
 
         {/* Discussion Section */}
         <div className="mb-8">
-          <h2 className="text-2xl font-semibold text-[#002147] mb-4">
+          <h2 className="text-2xl font-semibold text-[#3A6A89] mb-4">
             Discussion Threads
           </h2>
           <div className="bg-[#F4F4F4] p-4 rounded-lg max-h-64 overflow-y-auto">
@@ -136,7 +121,7 @@ function ForumPage() {
             Polls
           </h2>
           <div className="bg-[#F4F4F4] p-6 rounded-lg shadow-md dark:bg-[#343a40]">
-            <h3 className="font-bold text-[#002147] dark:text-[#F39C12] text-lg mb-4">
+            <h3 className="font-bold text-[#3A6A89] dark:text-[#F39C12] text-lg mb-4">
               {poll.question}
             </h3>
             <ul className="space-y-4">
@@ -145,7 +130,7 @@ function ForumPage() {
                   key={index}
                   className="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm hover:bg-[#F39C12] dark:bg-[#343a40] dark:hover:bg-[#6C757D]"
                 >
-                  <span className="text-[#002147] dark:text-[#F39C12]">{option.text}</span>
+                  <span className="text-[#3A6A89] dark:text-[#F39C12]">{option.text}</span>
                   <button
                     onClick={() => vote(index)}
                     className="px-4 py-2 bg-[#F39C12] text-white rounded-lg hover:bg-[#F39C12] transition"
@@ -182,7 +167,7 @@ function ForumPage() {
                   key={index}
                   className="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm hover:bg-[#F39C12] dark:bg-[#343a40] dark:hover:bg-[#6C757D]"
                 >
-                  <span className="font-semibold text-[#002147] dark:text-[#F39C12]">
+                  <span className="font-semibold text-[#3A6A89] dark:text-[#F39C12]">
                     {user.name}
                   </span>
                   <span className="text-[#6C757D] font-medium dark:text-[#6C757D]">
@@ -199,3 +184,4 @@ function ForumPage() {
 }
 
 export default ForumPage;
+
