@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import {
-  FaUser,
-  FaPhone,
-  FaCalendarAlt,
-} from "react-icons/fa";
+import  { useState } from "react";
+// import {
+//   FaUser,
+//   FaPhone,
+//   FaCalendarAlt,
+// } from "react-icons/fa";
 
 function ProfilePage() {
   const [profileImage, setProfileImage] = useState(null);
@@ -60,20 +60,21 @@ function ProfilePage() {
         <div className="space-y-6">
           {/* First Name */}
           <div className="flex items-center">
-            <FaUser className="text-[#002147] w-6 h-6 mr-4" />
+            {/* <FaUser className="text-[#002147] w-6 h-6 mr-4" /> */}
             <div className="flex-grow">
               <label className="block text-[#6C757D] font-medium">First Name</label>
               <input
                 type="text"
                 placeholder="Enter your first name"
                 className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
+                required
               />
             </div>
           </div>
 
           {/* Last Name */}
           <div className="flex items-center">
-            <FaUser className="text-[#F39C12] w-6 h-6 mr-4" />
+            {/* <FaUser className="text-[#F39C12] w-6 h-6 mr-4" /> */}
             <div className="flex-grow">
               <label className="block text-[#6C757D] font-medium">Last Name</label>
               <input
@@ -86,11 +87,12 @@ function ProfilePage() {
 
           {/* Date of Birth */}
           <div className="flex items-center">
-            <FaCalendarAlt className="text-[#F39C12] w-6 h-6 mr-4" />
+            {/* <FaCalendarAlt className="text-[#F39C12] w-6 h-6 mr-4" /> */}
             <div className="flex-grow">
               <label className="block text-[#6C757D] font-medium">Date of Birth</label>
               <input
                 type="date"
+                placeholder="DOB"
                 className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
               />
             </div>
@@ -98,7 +100,7 @@ function ProfilePage() {
 
           {/* Phone Number */}
           <div className="flex items-center">
-            <FaPhone className="text-[#F39C12] w-6 h-6 mr-4" />
+            {/* <FaPhone className="text-[#F39C12] w-6 h-6 mr-4" /> */}
             <div className="flex-grow">
               <label className="block text-[#6C757D] font-medium">Phone Number</label>
               <input
