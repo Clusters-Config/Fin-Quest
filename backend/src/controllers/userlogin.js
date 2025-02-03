@@ -8,14 +8,22 @@ const userlogin  = AsyncHandler( async(req,res)=>{
     if ([email, password].some((exist) => exist.trim() === "")) {
         throw new Apierror(400, "All elements required");
     }
+
+    const existuser = await login.findOne({email});
+
+    
+    if(existuser){
+        throw new Apierror(403,"User already exist");
+    }
+
     const LoginUser = await new login({
         email,
         password
     });
 
-    await LoginUser.save()
+    await LoginUser.save();
     
-    console.log(LoginUser);
+    console.log(LoginUser.email+" Created successful");
     res.status(200).json(LoginUser);
 });
 
