@@ -155,6 +155,7 @@ function ForumPage() {
             className="p-2 border rounded w-full dark:bg-[#343a40] dark:text-white"
           />
         </div>
+        
 
         {/* Leaderboard */}
         <div className="mb-8">
