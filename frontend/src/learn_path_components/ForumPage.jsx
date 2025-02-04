@@ -1,4 +1,4 @@
-// Forum Page
+// Forum Page - Added
 import React, { useState } from "react";
 import { FaPaperPlane, FaPlus, FaUsers, FaVideo } from "react-icons/fa";
 
