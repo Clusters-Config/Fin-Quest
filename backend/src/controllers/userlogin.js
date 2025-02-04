@@ -14,13 +14,16 @@ const userlogin  = AsyncHandler( async(req,res)=>{
         $and:[{email}]
     });
 
-    const userpassword = finduser.password;
-
-    if(userpassword !== password)
-        throw new Apierror(403,"Password incorrect");
     if(!finduser){
         throw new Apierror(404,"User not found");
     }
+
+
+    
+    const userpassword = finduser.password;
+    if(userpassword !== password)
+        throw new Apierror(403,"Password incorrect");
+    
 
     console.log(email+" Login successful");
     res.send("Login successful");
