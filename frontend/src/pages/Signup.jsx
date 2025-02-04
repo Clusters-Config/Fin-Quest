@@ -35,8 +35,9 @@ function Signup() {
                 <button className="w-full py-3 mt-1  text-lg font-bold text-white bg-[#F39C12] rounded-lg cursor-pointer hover:bg-[#e68912] transition-colors duration-300" type='submit' >
                   Sign Up
                 </button>
-                <h2 className="mt-3 text-sm text-[#002147]">Already an User!  </h2>
+                <h2 className="mt-3 text-sm text-[#002147] text-center">Already an User!  
                 <a href="/login" > Sign In</a>
+                </h2>
                 
                 </form>
               </div>
