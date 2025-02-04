@@ -1,29 +1,54 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook for navigation
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook for navigation
 
 function GamifiedAdventures() {
   const navigate = useNavigate(); // Initialize navigate function
 
   const handleGameRedirect = () => {
-    navigate('/ProfitLossLadder'); // Redirect to ProfitLossLadder page
+    navigate("/ProfitLossLadder"); // Redirect to ProfitLossLadder page
   };
 
   const handleChallengeRedirect = () => {
-    navigate('/DailyChallenges'); // Redirect to DailyChallenges page
+    navigate("/DailyChallenges"); // Redirect to DailyChallenges page
+  };
+
+  const handleProfileRedirect = () => {
+    navigate("/GameProfile"); // Redirect to Profile page
   };
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
-      
       {/* Header */}
-      <header className="bg-[#002147] text-white p-6 text-center shadow-md">
-        <h1 className="text-3xl md:text-4xl font-bold">
-          Gamification Adventure
-        </h1>
-        <p className="text-lg mt-2">
-          Challenge yourself, earn rewards, and level up your financial skills
-          through fun, interactive experiences!
-        </p>
+      <header className="bg-[#002147] text-white p-6 text-center shadow-md flex items-center justify-between relative">
+        {/* Profile Icon */}
+        <button
+          onClick={handleProfileRedirect}
+          className="text-white absolute top-1/2 transform -translate-y-1/2 right-4"
+        >
+           <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-10 h-10" // Increased size of icon
+            >
+              <circle cx="12" cy="7" r="4" stroke="none" fill="currentColor" />
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7"
+              />
+            </svg>
+
+        </button>
+
+        <div className="text-center flex-grow">
+          <h1 className="text-3xl md:text-4xl font-bold">Gamification Adventure</h1>
+          <p className="text-lg mt-2">
+            Challenge yourself, earn rewards, and level up your financial skills
+            through fun, interactive experiences!
+          </p>
+        </div>
       </header>
 
       <main className="flex-grow px-6 py-10">
@@ -52,9 +77,7 @@ function GamifiedAdventures() {
 
         {/* Achievement Badges */}
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-[#002147] mb-4">
-            Achievement Badges
-          </h2>
+          <h2 className="text-2xl font-bold text-[#002147] mb-4">Achievement Badges</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="bg-[#F4F4F4] shadow-md text-center rounded-lg py-4">
               <img
@@ -93,9 +116,7 @@ function GamifiedAdventures() {
 
         {/* Daily Challenges */}
         <section className="bg-white shadow-lg rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-[#002147] mb-4">
-            Daily Challenges
-          </h2>
+          <h2 className="text-2xl font-bold text-[#002147] mb-4">Daily Challenges</h2>
           <p className="text-[#6C757D] mb-4">
             Learn about compound interest and complete today’s challenge!
           </p>
@@ -109,9 +130,7 @@ function GamifiedAdventures() {
 
         {/* Streak Tracker */}
         <section className="bg-white shadow-lg rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-[#002147] mb-4">
-            Streak Tracker
-          </h2>
+          <h2 className="text-2xl font-bold text-[#002147] mb-4">Streak Tracker</h2>
           <p className="text-[#6C757D]">
             <span className="font-bold">Current Streak:</span> 5 Days
           </p>

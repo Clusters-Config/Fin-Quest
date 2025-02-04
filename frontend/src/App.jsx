@@ -23,6 +23,7 @@ import Profile  from "./pages/Profile";
 import ProfitLossLadder from "./GameComponents/ProfitLossLadder"
 import DailyChallenges from "./GameComponents/DailyChallenges"
 import ProfilePage  from "./learn_path_components/ProfilePage";
+import GameProfile from "./GameComponents/GameProfile"
 
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
           <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
           <Route path="/DailyChallenges" element={<DailyChallenges />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
+          <Route path="/GameProfile" element={<GameProfile />} />
         </Routes>
       </div>
     </Router>
