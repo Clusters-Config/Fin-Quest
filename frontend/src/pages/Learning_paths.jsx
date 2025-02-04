@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa"; // Icon for the profile
 
 const Learning_paths = () => {
   const [openSection, setOpenSection] = useState(null);
@@ -53,18 +54,28 @@ const Learning_paths = () => {
   };
 
   const handleJoinGroup = (groupRoute) => {
-    // Navigate to the group page
     navigate(groupRoute);
   };
 
   const sampleGroups = [
     { name: "Dive In", route: "/ForumPage" },
-    // { name: "Group 2: Investment", route: "/group2-investment" },
-    // { name: "Group 3: Interest Rates", route: "/group3-interest-rates" },
   ];
 
   return (
     <div className="px-4 sm:px-6 lg:px-10">
+      {/* Navbar */}
+      <nav className="bg-[#002147] p-4 flex justify-between items-center">
+        <h1 className="text-white text-lg font-extrabold">Learning Hub</h1>
+        <div className="flex items-center space-x-4">
+          <button
+            onClick={() => navigate("/ProfilePage")}
+            className="text-white text-2xl"
+          >
+            <FaUserCircle />
+          </button>
+        </div>
+      </nav>
+
       {/* Header Section */}
       <div>
         <h1 className="text-center text-2xl sm:text-xl mt-8 text-[#002147] font-extrabold">
@@ -175,7 +186,14 @@ const Learning_paths = () => {
           </div>
         </div>
       </div>
+
+       {/* Footer */}
+       <footer className="bg-[#002147] text-white py-4 px-6 text-center">
+        <p className="text-sm mt-2">&copy; 2025 Fin-Quest. All Rights Reserved.</p>
+      </footer>
+
     </div>
+
   );
 };
 

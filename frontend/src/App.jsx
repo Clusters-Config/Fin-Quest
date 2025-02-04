@@ -22,6 +22,7 @@ import ForumPage from "./learn_path_components/ForumPage";
 import Profile  from "./pages/Profile";
 import ProfitLossLadder from "./GameComponents/ProfitLossLadder"
 import DailyChallenges from "./GameComponents/DailyChallenges"
+import ProfilePage  from "./learn_path_components/ProfilePage";
 
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
           <Route path="/Profile" element={<Profile />} />
           <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
           <Route path="/DailyChallenges" element={<DailyChallenges />} />
+          <Route path="/ProfilePage" element={<ProfilePage />} />
         </Routes>
       </div>
     </Router>

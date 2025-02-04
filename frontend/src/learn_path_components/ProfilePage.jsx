@@ -1,0 +1,94 @@
+import React, { useState } from "react";
+
+const ProfilePage = () => {
+  // Dummy student data
+  const student = {
+    name: "John Doe",
+    dob: "2000-05-15",
+    phone: "+1 234 567 890",
+    achievements: [
+      "Completed Module 1: Basics",
+      "Achieved 70% Progress in Module 2: Intermediate",
+      "Won 'Student of the Month' award for December 2024",
+    ],
+  };
+
+  // Learning modules progress
+  const [modules, setModules] = useState([
+    { name: "Module 1: Basics", progress: 70 },
+    { name: "Module 2: Intermediate", progress: 40 },
+    { name: "Module 3: Advanced", progress: 20 },
+  ]);
+
+  return (
+    <div className="bg-[#F4F4F4] min-h-screen">
+      {/* Navbar */}
+      <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
+        My Learning Path
+      </nav>
+
+      {/* Profile Container */}
+      <div className="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
+
+        {/* Profile Header */}
+        <h2 className="text-[#002147] text-2xl font-bold mb-6">Student Profile</h2>
+
+        {/* Student Info */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+          {/* Student Name */}
+          <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
+            <p className="text-lg font-semibold text-[#002147]">{student.name}</p>
+          </div>
+
+          {/* Date of Birth */}
+          <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
+            <p className="text-[#6C757D]">Date of Birth: {student.dob}</p>
+          </div>
+
+          {/* Phone Number */}
+          <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
+            <p className="text-[#6C757D]">Phone: {student.phone}</p>
+          </div>
+        </div>
+
+        {/* Learning Path Progress */}
+        <div className="mb-6">
+          <h3 className="text-xl font-semibold text-[#002147] mb-4">Learning Progress</h3>
+          {modules.map((module, index) => (
+            <div key={index} className="mb-4">
+              <p className="text-[#6C757D] font-medium">{module.name}</p>
+              <div className="w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="h-4 bg-[#F39C12] rounded-full"
+                  style={{ width: `${module.progress}%` }}
+                ></div>
+              </div>
+              <p className="text-sm text-[#002147]">{module.progress}% Completed</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Achievements Section */}
+        <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md mb-6">
+          <h3 className="text-[#002147] text-xl font-bold mb-4">Achievements</h3>
+          <ul className="list-disc pl-6 space-y-2">
+            {student.achievements.map((achievement, index) => (
+              <li key={index} className="text-[#6C757D]">{achievement}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Learning Path Overview */}
+        <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
+          <h3 className="text-[#002147] text-xl font-bold mb-4">Learning Path Overview</h3>
+          <p className="text-[#6C757D]">
+            This learning path consists of three modules, guiding students from basics to
+            advanced topics. Keep progressing and complete all modules to achieve mastery!
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ProfilePage;
