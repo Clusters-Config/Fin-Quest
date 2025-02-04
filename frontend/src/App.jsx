@@ -8,6 +8,7 @@ import Features from './pages/Features';
 import Facilitators from './pages/Facilitators';
 import Communitys from './pages/Communitys';
 import Chat from './pages/Chat';
+import Signup from './pages/Signup';
 
 // Learning path components
 import Saving_Essentials from './learn_path_components/Saving_Essentials';
@@ -32,9 +33,10 @@ const App = () => {
       <div>
         {/* Define the routes */}
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/home" element={<Homepage />} />
           <Route path="/features" element={<Features />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup/>}/>
           <Route path="/learning_paths" element={<Learning_paths />} />
           <Route path="/game" element={<Game />} />
           <Route path="/simulations" element={<Simulations />} />

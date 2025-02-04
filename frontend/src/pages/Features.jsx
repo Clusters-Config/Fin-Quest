@@ -9,7 +9,7 @@ function FeaturesPage() {
         <ul className="flex space-x-6">
           <li>
             <Link
-              to="/"
+              to="/home"
               className="text-white hover:text-[#F39C12] transition duration-300"
             >
               Home

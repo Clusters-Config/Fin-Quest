@@ -10,7 +10,7 @@ function Homepage() {
         <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
         <ul className="flex space-x-6">
           <li>
-            <Link to="/" className="text-white hover:text-[#F39C12] transition duration-300">
+            <Link to="/home" className="text-white hover:text-[#F39C12] transition duration-300">
               Home
             </Link>
           </li>
@@ -20,7 +20,7 @@ function Homepage() {
             </Link>
           </li>
           <li>
-            <Link to="/login" className="text-white hover:text-[#F39C12] transition duration-300">
+            <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
               Login
             </Link>
           </li>

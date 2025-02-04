@@ -6,14 +6,18 @@ const userlogin  = AsyncHandler( async(req,res)=>{
 
     const {email,password} = req.body;
 
-    if([email,password].some((exist)=> typeof exist === "string" && exist.trim()=== "")){
+    if([email,password].some((exist)=> exist.trim()=== "")){
         throw new Apierror(404,"All fileds required");
     }
 
     const finduser = await SignupSchema.findOne({
-        $and:[{email},{password}]
+        $and:[{email}]
     });
 
+    const userpassword = finduser.password;
+
+    if(userpassword !== password)
+        throw new Apierror(403,"Password incorrect");
     if(!finduser){
         throw new Apierror(404,"User not found");
     }

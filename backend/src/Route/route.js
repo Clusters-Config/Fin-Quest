@@ -5,7 +5,7 @@ import { Signup } from "../controllers/Signup.js";
 const router = Router();
 
 router.route("/login").post(userlogin);
-router.route("/create").post(Signup);
+router.route("/signup").post(Signup);
 
 
 export {router};
