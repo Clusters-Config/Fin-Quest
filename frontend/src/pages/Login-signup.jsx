@@ -17,7 +17,7 @@ function Login_signup() {
         .then(res => console.log(res))
         .then(res => {
           console.log(res);
-          navigate('/home');
+          navigate('/');
           loginbtn.innerHTML = "Logged in";
         })
         .catch(err => console.log(err))
