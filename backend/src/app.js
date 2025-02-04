@@ -13,10 +13,10 @@ const upload = multer()
 app.use(upload.any());
 
 
-app.use("/createuser", router);
+app.use("/user", router);
+router.route("/").get((req,res)=>{
+    res.send("/user/login \n /user/create");
+})
 
-app.get("/", (req, res) => {
-    res.send("Welcome to the API");
-});
 
 export {app};
