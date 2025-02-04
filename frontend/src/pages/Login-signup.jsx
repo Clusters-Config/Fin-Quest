@@ -19,9 +19,9 @@ function Login_signup() {
           {isLogin ? (
             <div className="flex flex-col items-center w-full">
               <h2 className="text-2xl font-bold text-[#002147] mb-4">Welcome Back!</h2>
-              <input type="text" placeholder="Username" className="w-full py-2 px-4 mb-3 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
+              <input type="text" placeholder="Email" className="w-full py-2 px-4 mt-1 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
               <br />
-              <input type="password" placeholder="Password" className="w-full py-2 px-4 mb-3 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
+              <input type="password" placeholder="Password" className="w-full py-2 px-4 mb-4 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
               <div className="w-full flex justify-between items-center mb-3">
                 <label className="flex items-center space-x-2 text-lg text-[#6C757D]">
                   <input type="checkbox" />
@@ -39,10 +39,10 @@ function Login_signup() {
           ) : (
             <div className="flex flex-col items-center w-full">
               <h2 className="text-2xl font-bold text-[#002147] mb-4">Create Your Account</h2>
-              <input type="email" placeholder="Email" className="w-full py-2 px-4 mb-3 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
               <input type="text" placeholder="Username" className="w-full py-2 px-4 mb-3 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
-              <input type="password" placeholder="Password" className="w-full py-2 px-4 mb-3 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
-              <button className="w-full py-3 text-lg font-bold text-white bg-[#F39C12] rounded-lg cursor-pointer hover:bg-[#e68912] transition-colors duration-300">
+              <input type="email" placeholder="Email" className="w-full py-2 px-4 mb-3 mt-1 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
+              <input type="password" placeholder="Password" className="w-full py-2 px-4 mt-1 mb-3 border-2 rounded-lg text-lg border-[#A5B68D] outline-none focus:border-[#F39C12] text-[#002147]" />
+              <button className="w-full py-3 mt-1  text-lg font-bold text-white bg-[#F39C12] rounded-lg cursor-pointer hover:bg-[#e68912] transition-colors duration-300">
                 Sign Up
               </button>
               <h2 className="mt-3 text-sm text-[#002147]">Already an User!  
