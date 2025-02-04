@@ -11,7 +11,6 @@ function Signup() {
       e.preventDefault()
       axios.post("http://127.0.0.1:3004/signup",{username,email,password})
       .then(res => console.log(res))
-      .then( alert("created"))
       .catch(err => console.log(err))
     }
   
