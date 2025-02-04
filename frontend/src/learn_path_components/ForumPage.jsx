@@ -1,3 +1,4 @@
+// Forum Page
 import React, { useState } from "react";
 import { FaPaperPlane, FaPlus, FaUsers, FaVideo } from "react-icons/fa";
 
