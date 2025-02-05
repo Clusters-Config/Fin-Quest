@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 function ProfilePage() {
-  const [profileImage, setProfileImage] = useState(null);
+  // const [profileImage, setProfileImage] = useState(null);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [dob, setDob] = useState("");
@@ -11,19 +11,19 @@ function ProfilePage() {
   const [email, setEmail] = useState("");
   const [isTermsChecked, setIsTermsChecked] = useState(false);
 
-  const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
-    }
-  };
+  // const handleImageUpload = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const imageUrl = URL.createObjectURL(file);
+  //     setProfileImage(imageUrl);
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
       .post("http://127.0.0.1:3004/profile", {
-        profileImage,
+        // profileImage,
         firstname,
         lastname,
         dob,
@@ -48,7 +48,7 @@ function ProfilePage() {
             <div className="w-32 h-32 mb-4 relative">
               <img
                 src={
-                  profileImage ||
+                  // profileImage ||
                   "https://via.placeholder.com/150?text=Upload+Image"
                 }
                 alt=""
@@ -66,7 +66,7 @@ function ProfilePage() {
               id="profileImageUpload"
               className="hidden"
               accept="image/*"
-              onChange={handleImageUpload}
+              // onChange={handleImageUpload}
             />
           </div>
 
