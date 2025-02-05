@@ -19,7 +19,7 @@ function Homepage() {
         <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
         <ul className="flex space-x-6">
           <li>
-            <Link to="/home" className="text-white hover:text-[#F39C12] transition duration-300">
+            <Link to="/" className="text-white hover:text-[#F39C12] transition duration-300">
               Home
             </Link>
           </li>
