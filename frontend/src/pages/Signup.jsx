@@ -9,7 +9,7 @@ function Signup() {
 
     const handleSubmit = (e) =>{
       e.preventDefault()
-      axios.post("http://127.0.0.1:3004/signup",{username,email,password})
+      axios.post("http://127.0.0.1:3007/signup",{username,email,password})
       .then(res => console.log(res))
       .catch(err => console.log(err))
     }

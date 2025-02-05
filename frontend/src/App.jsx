@@ -9,6 +9,7 @@ import Facilitators from './pages/Facilitators';
 import Communitys from './pages/Communitys';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
+import { AuthProvider } from "./pages/AuthContext";
 
 // Learning path components
 import Saving_Essentials from './learn_path_components/Saving_Essentials';
@@ -29,6 +30,7 @@ import GameProfile from "./GameComponents/GameProfile"
 
 const App = () => {
   return (
+    <AuthProvider>
     <Router>
       <div>
         {/* Define the routes */}
@@ -60,6 +62,7 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+    </AuthProvider>
   );
 };
 

@@ -1,7 +1,16 @@
-import { Link } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa"; // Profile icon
+import { Link } from "react-router-dom"; 
+import { useAuth } from "./AuthContext";
+import { FaUserCircle } from "react-icons/fa";
+
+// import { useState } from "react";
+
+
 
 function Homepage() {
+
+  const { login } = useAuth();
+
+
   return (
     <div className="bg-white min-h-screen flex flex-col">
       
@@ -21,7 +30,7 @@ function Homepage() {
           </li>
           <li>
             <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
-              Login
+            {login ? "LoggedIn" : "Login"}
             </Link>
           </li>
           <li>

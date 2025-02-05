@@ -6,7 +6,7 @@ import { SignupSchema } from "../models/signup.js";
 const profile_user = AsyncHandler(async (req,res)=>{
     const{firstname,lastname,dob,phone,hobbies,email} = req.body;
 
-    if([firstname,lastname,dob,phone,hobbies,email].some((exist)=> exist.trim() === ""))
+    if([firstname,lastname,dob,phone,hobbies,email].some((exist)=> exist?.trim() === ""))
         throw new Apierror(404,"All fields required");
 
     const existuser = await SignupSchema.findOne({

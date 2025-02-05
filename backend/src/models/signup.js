@@ -16,7 +16,10 @@ const signupSchema = new Schema({
         type:String,
         required:[true,"Password required"]
     },
-    
+    login:{
+        type:Boolean,
+        default:true
+    }
 },
 {
     timestamps:true

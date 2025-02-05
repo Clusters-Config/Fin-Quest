@@ -2,23 +2,29 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Homepage from './Homepage';
+import { useAuth } from './AuthContext';
+
 
 
 function Login_signup() {
 
       const [email,setemail] = useState();
       const [password,setpassword] = useState();
+      const { login, setLogin } = useAuth();
       const navigate = useNavigate();
 
       const handleSubmit = (e) =>{
-        const loginbtn = document.getElementById("loginbtn");
+        
         e.preventDefault()
-        axios.post("http://127.0.0.1:3004/login",{email,password})
-        .then(res => console.log(res))
+        
+        axios.post("http://127.0.0.1:3007/login",{email,password})
+        axios.post("http://127.0.0.1:3007/finduser",{email})
+        .then(user=>{
+          console.log(user)
+          setLogin(user)})
         .then(res => {
           console.log(res);
           navigate('/');
-          loginbtn.innerHTML = "Logged in";
         })
         .catch(err => console.log(err))
       }
@@ -56,4 +62,4 @@ function Login_signup() {
   );
 }
 
-export default Login_signup;
+export default Login_signup ;

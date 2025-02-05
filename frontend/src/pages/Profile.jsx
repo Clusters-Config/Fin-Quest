@@ -6,7 +6,7 @@ function ProfilePage() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [dob, setDob] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
+  const [phone, setPhonenumber] = useState("");
   const [hobbies, setHobbies] = useState("");
   const [email, setEmail] = useState("");
   const [isTermsChecked, setIsTermsChecked] = useState(false);
@@ -20,14 +20,14 @@ function ProfilePage() {
   // };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     axios
-      .post("http://127.0.0.1:3004/profile", {
+      .post("http://127.0.0.1:3007/profile", {
         // profileImage,
         firstname,
         lastname,
         dob,
-        phonenumber,
+        phone,
         hobbies,
         email,
       })
@@ -131,7 +131,7 @@ function ProfilePage() {
                   type="tel"
                   placeholder="Enter your phone number"
                   className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
-                  value={phonenumber}
+                  value={phone}
                   onChange={(e) => setPhonenumber(e.target.value)}
                 />
               </div>
