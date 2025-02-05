@@ -31,7 +31,4 @@ res.json(profile);
 
 
 
-
-
-
 export{profile_user}
