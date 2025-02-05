@@ -23,6 +23,11 @@ const profile = new Schema({
         type:String,
         required:true,
     },
+    email:{
+        type:String,
+        required:true,
+        lowercase:true
+    },
 },
 {
     timestamps:true

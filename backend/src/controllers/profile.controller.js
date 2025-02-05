@@ -8,9 +8,9 @@ const profile_user = AsyncHandler(async (req,res)=>{
     if([firstname,lastname,dob,phone,hobbies].some((exist)=> exist.trim() === ""))
         throw new Apierror(404,"All fields required");
 
-    // const existuser = await SignupSchema.findOne({
-    //     $or:[{username},{email}]
-    // });
+    const existuser = await SignupSchema.findOne({
+        $or:[{email}]
+    });
 
     if(existuser)throw new Apierror(404, "User already exist");
     let profile = await  new SignupSchema({
