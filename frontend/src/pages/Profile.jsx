@@ -1,14 +1,15 @@
-import  { useState } from "react";
-// import {
-//   FaUser,
-//   FaPhone,
-//   FaCalendarAlt,
-// } from "react-icons/fa";
+import { useState } from "react";
+import axios from "axios";
 
 function ProfilePage() {
   const [profileImage, setProfileImage] = useState(null);
-  const [isTermsChecked, setIsTermsChecked] = useState(false);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [dob, setDob] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
   const [hobbies, setHobbies] = useState("");
+  const [email, setEmail] = useState("");
+  const [isTermsChecked, setIsTermsChecked] = useState(false);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -18,8 +19,20 @@ function ProfilePage() {
     }
   };
 
-  const handleSaveChanges = () => {
-    alert("Your changes have been saved successfully!");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://127.0.0.1:3004/profile", {
+        profileImage,
+        firstname,
+        lastname,
+        dob,
+        phonenumber,
+        hobbies,
+        email,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -29,131 +42,159 @@ function ProfilePage() {
           Your Profile
         </h1>
 
-        {/* Profile Image Section */}
-        <div className="flex flex-col items-center mb-8">
-          <div className="w-32 h-32 mb-4 relative">
-            <img
-              src={
-                profileImage ||
-                "https://via.placeholder.com/150?text=Upload+Image"
-              }
-              alt=""
-              className="w-full h-full object-cover rounded-full shadow-lg"
-            />
-          </div>
-          <label
-            htmlFor="profileImageUpload"
-            className="cursor-pointer px-4 py-2 bg-[#F39C12] text-white text-sm font-semibold rounded-md hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
-          >
-            Upload Profile Picture
-          </label>
-          <input
-            type="file"
-            id="profileImageUpload"
-            className="hidden"
-            accept="image/*"
-            onChange={handleImageUpload}
-          />
-        </div>
-
-        {/* Form Section */}
-        <div className="space-y-6">
-          {/* First Name */}
-          <div className="flex items-center">
-            {/* <FaUser className="text-[#002147] w-6 h-6 mr-4" /> */}
-            <div className="flex-grow">
-              <label className="block text-[#6C757D] font-medium">First Name</label>
-              <input
-                type="text"
-                placeholder="Enter your first name"
-                className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
-                required
+        <form onSubmit={handleSubmit}>
+          {/* Profile Image Section */}
+          <div className="flex flex-col items-center mb-8">
+            <div className="w-32 h-32 mb-4 relative">
+              <img
+                src={
+                  profileImage ||
+                  "https://via.placeholder.com/150?text=Upload+Image"
+                }
+                alt=""
+                className="w-full h-full object-cover rounded-full shadow-lg"
               />
             </div>
-          </div>
-
-          {/* Last Name */}
-          <div className="flex items-center">
-            {/* <FaUser className="text-[#F39C12] w-6 h-6 mr-4" /> */}
-            <div className="flex-grow">
-              <label className="block text-[#6C757D] font-medium">Last Name</label>
-              <input
-                type="text"
-                placeholder="Enter your last name"
-                className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
-              />
-            </div>
-          </div>
-
-          {/* Date of Birth */}
-          <div className="flex items-center">
-            {/* <FaCalendarAlt className="text-[#F39C12] w-6 h-6 mr-4" /> */}
-            <div className="flex-grow">
-              <label className="block text-[#6C757D] font-medium">Date of Birth</label>
-              <input
-                type="date"
-                placeholder="DOB"
-                className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
-              />
-            </div>
-          </div>
-
-          {/* Phone Number */}
-          <div className="flex items-center">
-            {/* <FaPhone className="text-[#F39C12] w-6 h-6 mr-4" /> */}
-            <div className="flex-grow">
-              <label className="block text-[#6C757D] font-medium">Phone Number</label>
-              <input
-                type="tel"
-                placeholder="Enter your phone number"
-                className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
-              />
-            </div>
-          </div>
-
-          {/* Hobbies of Interest */}
-          <div className="flex flex-col">
-            <label className="block text-[#6C757D] font-medium mb-2">
-              Hobbies of Interest
+            <label
+              htmlFor="profileImageUpload"
+              className="cursor-pointer px-4 py-2 bg-[#F39C12] text-white text-sm font-semibold rounded-md hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
+            >
+              Upload Profile Picture
             </label>
-            <textarea
-              value={hobbies}
-              onChange={(e) => setHobbies(e.target.value)}
-              placeholder="List your hobbies..."
-              className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
-              rows="3"
-            ></textarea>
-          </div>
-
-          {/* Terms and Conditions */}
-          <div className="flex items-center">
             <input
-              type="checkbox"
-              id="termsCheckbox"
-              checked={isTermsChecked}
-              onChange={(e) => setIsTermsChecked(e.target.checked)}
-              className="mr-3 w-5 h-5 text-[#F39C12] focus:ring-[#F39C12]"
+              type="file"
+              id="profileImageUpload"
+              className="hidden"
+              accept="image/*"
+              onChange={handleImageUpload}
             />
-            <label htmlFor="termsCheckbox" className="text-[#6C757D]">
-              I agree to the terms and conditions
-            </label>
           </div>
-        </div>
 
-        {/* Submit Button */}
-        <div className="text-center mt-8">
-          <button
-            onClick={handleSaveChanges}
-            disabled={!isTermsChecked}
-            className={`px-6 py-3 font-semibold rounded-md ${
-              isTermsChecked
-                ? "bg-[#F39C12] text-white hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
-                : "bg-[#B0BEC5] text-[#6C757D] cursor-not-allowed"
-            }`}
-          >
-            Save Changes
-          </button>
-        </div>
+          {/* Form Section */}
+          <div className="space-y-6">
+            {/* First Name */}
+            <div className="flex items-center">
+              <div className="flex-grow">
+                <label className="block text-[#6C757D] font-medium">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your first name"
+                  className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
+                  value={firstname}
+                  onChange={(e) => setFirstname(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            {/* Last Name */}
+            <div className="flex items-center">
+              <div className="flex-grow">
+                <label className="block text-[#6C757D] font-medium">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your last name"
+                  className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
+                  value={lastname}
+                  onChange={(e) => setLastname(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Date of Birth */}
+            <div className="flex items-center">
+              <div className="flex-grow">
+                <label className="block text-[#6C757D] font-medium">
+                  Date of Birth
+                </label>
+                <input
+                  type="date"
+                  placeholder="DOB"
+                  className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
+                  value={dob}
+                  onChange={(e) => setDob(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Phone Number */}
+            <div className="flex items-center">
+              <div className="flex-grow">
+                <label className="block text-[#6C757D] font-medium">
+                  Phone Number
+                </label>
+                <input
+                  type="tel"
+                  placeholder="Enter your phone number"
+                  className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
+                  value={phonenumber}
+                  onChange={(e) => setPhonenumber(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Hobbies of Interest */}
+            <div className="flex flex-col">
+              <label className="block text-[#6C757D] font-medium mb-2">
+                Hobbies of Interest
+              </label>
+              <textarea
+                value={hobbies}
+                onChange={(e) => setHobbies(e.target.value)}
+                placeholder="List your hobbies..."
+                className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
+                rows="3"
+              ></textarea>
+            </div>
+
+            {/* Email */}
+            <div className="flex items-center">
+              <div className="flex-grow">
+                <label className="block text-[#6C757D] font-medium">Email</label>
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Terms and Conditions */}
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="termsCheckbox"
+                checked={isTermsChecked}
+                onChange={(e) => setIsTermsChecked(e.target.checked)}
+                className="mr-3 w-5 h-5 text-[#F39C12] focus:ring-[#F39C12]"
+              />
+              <label htmlFor="termsCheckbox" className="text-[#6C757D]">
+                I agree to the terms and conditions
+              </label>
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="text-center mt-8">
+            <button
+              type="submit"
+              disabled={!isTermsChecked}
+              className={`px-6 py-3 font-semibold rounded-md ${
+                isTermsChecked
+                  ? "bg-[#F39C12] text-white hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
+                  : "bg-[#B0BEC5] text-[#6C757D] cursor-not-allowed"
+              }`}
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
