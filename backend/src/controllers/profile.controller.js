@@ -1,11 +1,12 @@
-import { SignupSchema } from "../models/signup.js";
+import { profileSchema } from "../models/profile.models.js";
 import { Apierror } from "../utils/Apierror.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
+import { SignupSchema } from "../models/signup.js";
 
 const profile_user = AsyncHandler(async (req,res)=>{
-    const{firstname,lastname,dob,phone,hobbies} = req.body;
+    const{firstname,lastname,dob,phone,hobbies,email} = req.body;
 
-    if([firstname,lastname,dob,phone,hobbies].some((exist)=> exist.trim() === ""))
+    if([firstname,lastname,dob,phone,hobbies,email].some((exist)=> exist.trim() === ""))
         throw new Apierror(404,"All fields required");
 
     const existuser = await SignupSchema.findOne({
@@ -13,16 +14,17 @@ const profile_user = AsyncHandler(async (req,res)=>{
     });
 
     if(existuser)throw new Apierror(404, "User already exist");
-    let profile = await  new SignupSchema({
+    let profile = await  new profileSchema({
         firstname,
         lastname,
         dob,
         phone,
-        hobbies
+        hobbies,
+        email
     });
 
     await profile.save();
-console.log(username+" Updated successfully");
+console.log(firstname+" Updated successfully");
 
 res.json(profile);
 

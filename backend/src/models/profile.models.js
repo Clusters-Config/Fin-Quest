@@ -33,5 +33,5 @@ const profile = new Schema({
     timestamps:true
 });
 
-const profileschema = mongoose.model("profile.models",profile);
-export{profileschema};
+const profileSchema = mongoose.model("profile.models",profile);
+export{profileSchema};
