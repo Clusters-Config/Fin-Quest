@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from "axios";
 
 function ProfilePage() {
-  // const [profileImage, setProfileImage] = useState(null);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [dob, setDob] = useState("");
@@ -10,20 +9,12 @@ function ProfilePage() {
   const [hobbies, setHobbies] = useState("");
   const [email, setEmail] = useState("");
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-
-  // const handleImageUpload = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const imageUrl = URL.createObjectURL(file);
-  //     setProfileImage(imageUrl);
-  //   }
-  // };
+  const [showTermsModal, setShowTermsModal] = useState(false); // State to manage terms modal visibility
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     axios
       .post("http://127.0.0.1:3007/profile", {
-        // profileImage,
         firstname,
         lastname,
         dob,
@@ -35,6 +26,14 @@ function ProfilePage() {
       .catch((err) => console.log(err));
   };
 
+  const handleTermsClick = () => {
+    setShowTermsModal(true); // Show the terms and conditions modal
+  };
+
+  const handleCloseModal = () => {
+    setShowTermsModal(false); // Close the terms modal
+  };
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] p-6 text-[#6C757D]">
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8">
@@ -43,33 +42,6 @@ function ProfilePage() {
         </h1>
 
         <form onSubmit={handleSubmit}>
-          {/* Profile Image Section */}
-          <div className="flex flex-col items-center mb-8">
-            <div className="w-32 h-32 mb-4 relative">
-              <img
-                src={
-                  // profileImage ||
-                  "https://via.placeholder.com/150?text=Upload+Image"
-                }
-                alt=""
-                className="w-full h-full object-cover rounded-full shadow-lg"
-              />
-            </div>
-            <label
-              htmlFor="profileImageUpload"
-              className="cursor-pointer px-4 py-2 bg-[#F39C12] text-white text-sm font-semibold rounded-md hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
-            >
-              Upload Profile Picture
-            </label>
-            <input
-              type="file"
-              id="profileImageUpload"
-              className="hidden"
-              accept="image/*"
-              // onChange={handleImageUpload}
-            />
-          </div>
-
           {/* Form Section */}
           <div className="space-y-6">
             {/* First Name */}
@@ -175,7 +147,13 @@ function ProfilePage() {
                 className="mr-3 w-5 h-5 text-[#F39C12] focus:ring-[#F39C12]"
               />
               <label htmlFor="termsCheckbox" className="text-[#6C757D]">
-                I agree to the terms and conditions
+                I agree to the{" "}
+                <span
+                  onClick={handleTermsClick}
+                  className="text-[#F39C12] cursor-pointer underline"
+                >
+                  terms and conditions
+                </span>
               </label>
             </div>
           </div>
@@ -196,6 +174,27 @@ function ProfilePage() {
           </div>
         </form>
       </div>
+
+       {/* Terms Modal */}
+        {showTermsModal && (
+          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-6 rounded-lg shadow-md w-96 h-86">
+              <h3 className="text-xl font-bold mb-4">Terms and Conditions</h3>
+              <p className="text-[#6C757D] mb-4">
+                By using this website, you agree to our terms and conditions.
+                These include user privacy, data handling, and acceptable usage of
+                our services. Please read these terms carefully before proceeding.
+              </p>
+              <button
+                onClick={handleCloseModal}
+                className="bg-[#F39C12] text-white py-2 px-4 rounded-lg shadow-md hover:bg-[#e68912] transition duration-300 mt-4"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
     </div>
   );
 }

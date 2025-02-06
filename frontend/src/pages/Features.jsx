@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
+import { FaHome } from 'react-icons/fa';  // Import the Home icon from react-icons
 
 function FeaturesPage() {
   return (
     <div className="bg-white min-h-screen flex flex-col">
+      
+
       {/* Navigation Bar */}
       <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
         <div className="text-[#F39C12] text-2xl font-bold">FinQuest</div>
@@ -12,27 +15,12 @@ function FeaturesPage() {
               to="/"
               className="text-white hover:text-[#F39C12] transition duration-300"
             >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/features"
-              className="text-white hover:text-[#F39C12] transition duration-300"
-            >
-              Features
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/Communitys"
-              className="text-white hover:text-[#F39C12] transition duration-300"
-            >
-              Contact
+              <FaHome className="w-6 h-6 inline-block" /> {/* Display the home icon */}
             </Link>
           </li>
         </ul>
       </nav>
+
 
       {/* Features Section */}
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 py-10 max-w-5xl mx-auto mt-20"> {/* Increased margin-top */}

@@ -7,17 +7,17 @@ const ProfilePage = () => {
     dob: "2000-05-15",
     phone: "+1 234 567 890",
     achievements: [
-      "Completed Module 1: Basics",
-      "Achieved 70% Progress in Module 2: Intermediate",
+      "Completed Module 1: Basic Financial Concepts",
+      "Achieved 40% Progress in Module 2: Understanding Interest Rates",
       "Won 'Student of the Month' award for December 2024",
     ],
   };
 
   // Learning modules progress
   const [modules, setModules] = useState([
-    { name: "Module 1: Basics", progress: 70 },
-    { name: "Module 2: Intermediate", progress: 40 },
-    { name: "Module 3: Advanced", progress: 20 },
+    { name: "Module 1: Basic Financial Concepts", progress: 100 },
+    { name: "Module 2: Understanding Interest Rates", progress: 40 },
+    { name: "Module 3: Investment Basics", progress: 20 },
   ]);
 
   return (
