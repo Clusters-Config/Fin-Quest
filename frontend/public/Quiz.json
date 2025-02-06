@@ -1,4 +1,422 @@
-{
+{ 
+    "TerminologyPage":
+      [
+        {
+          "question": "What does the term 'Assets' refer to?",
+          "options": [
+            "Debts owed by a company",
+            "Resources owned by an individual or company that are expected to provide future benefits",
+            "Income generated from business operations",
+            "The value of an owner’s interest in a business"
+          ],
+          "answer": "Resources owned by an individual or company that are expected to provide future benefits"
+        },
+        {
+          "question": "What is a Balance Sheet?",
+          "options": [
+            "A financial statement showing the company’s revenue and expenses over a period of time",
+            "A record of all financial transactions of a company",
+            "A financial statement that shows a company’s assets, liabilities, and equity at a specific point in time",
+            "A calculation to determine when total revenues equal total costs"
+          ],
+          "answer": "A financial statement that shows a company’s assets, liabilities, and equity at a specific point in time"
+        },
+        {
+          "question": "Which of the following represents 'Liabilities'?",
+          "options": [
+            "The income generated from selling goods and services",
+            "Debts or obligations owed by a company",
+            "The costs incurred by a business in order to generate revenue",
+            "Money owed to a business by its customers"
+          ],
+          "answer": "Debts or obligations owed by a company"
+        },
+        {
+          "question": "Which statement describes 'Depreciation'?",
+          "options": [
+            "The gradual increase in the value of an asset",
+            "The allocation of the cost of an asset over its useful life",
+            "The gradual reduction in the value of an asset over time",
+            "The process of selling an asset for profit"
+          ],
+          "answer": "The gradual reduction in the value of an asset over time"
+        },
+        {
+          "question": "What is the 'Accrual Basis of Accounting'?",
+          "options": [
+            "Revenue and expenses are recorded when cash is exchanged",
+            "Revenue and expenses are recorded when they are earned or incurred, regardless of when cash is exchanged",
+            "Expenses are only recorded when paid",
+            "Revenue is recognized only at the end of the accounting period"
+          ],
+          "answer": "Revenue and expenses are recorded when they are earned or incurred, regardless of when cash is exchanged"
+        },
+        {
+          "question": "What does 'Credit' mean in accounting?",
+          "options": [
+            "An entry that increases assets or expenses",
+            "An entry that decreases liabilities, equity, or revenue",
+            "An entry that increases liabilities, equity, or revenue, and decreases assets or expenses",
+            "An entry that records sales of goods"
+          ],
+          "answer": "An entry that increases liabilities, equity, or revenue, and decreases assets or expenses"
+        },
+        {
+          "question": "What is 'Profit Margin'?",
+          "options": [
+            "A profitability ratio calculated by dividing net income by revenue",
+            "The difference between a company's assets and liabilities",
+            "The amount of profit earned on each sale",
+            "A ratio showing the total revenue generated from sales"
+          ],
+          "answer": "A profitability ratio calculated by dividing net income by revenue"
+        },
+        {
+          "question": "Which of the following is true about 'Retained Earnings'?",
+          "options": [
+            "The portion of a company’s profit that is kept within the business rather than paid out as dividends",
+            "Income from investments held by the company",
+            "The amount of capital invested in the company by shareholders",
+            "Revenue earned from the sale of stock"
+          ],
+          "answer": "The portion of a company’s profit that is kept within the business rather than paid out as dividends"
+        },
+        {
+          "question": "What does 'Working Capital' measure?",
+          "options": [
+            "The long-term profitability of a company",
+            "The difference between a company’s assets and liabilities",
+            "The short-term financial health of a company",
+            "The value of a company’s equity after liabilities are deducted"
+          ],
+          "answer": "The short-term financial health of a company"
+        },
+        {
+          "question": "What is 'Capital Structure'?",
+          "options": [
+            "The combination of debt and equity that a company uses to finance its operations",
+            "The process of determining the total revenue generated by a business",
+            "The financial statement showing the company's expenses",
+            "The proportion of assets to liabilities in a company"
+          ],
+          "answer": "The combination of debt and equity that a company uses to finance its operations"
+        }
+      ],
+
+
+      "Credit_Debit":
+      [
+        {
+          "question": "What does a 'Credit' entry do in accounting?",
+          "options": [
+            "Increases assets",
+            "Decreases liabilities",
+            "Increases liabilities, equity, or revenue",
+            "Decreases expenses"
+          ],
+          "answer": "Increases liabilities, equity, or revenue"
+        },
+        {
+          "question": "What does a 'Debit' entry do in accounting?",
+          "options": [
+            "Increases liabilities",
+            "Decreases revenue",
+            "Increases assets or expenses",
+            "Decreases equity"
+          ],
+          "answer": "Increases assets or expenses"
+        },
+        {
+          "question": "In double-entry accounting, what must always be true about debits and credits?",
+          "options": [
+            "Total debits must be greater than total credits",
+            "Total credits must equal total debits",
+            "Total debits and credits must be less than zero",
+            "Debits and credits must balance with assets only"
+          ],
+          "answer": "Total credits must equal total debits"
+        },
+        {
+          "question": "What is the impact of a credit on an asset account?",
+          "options": [
+            "Increase",
+            "Decrease",
+            "No impact",
+            "Reverses the effect of a debit"
+          ],
+          "answer": "Decrease"
+        },
+        {
+          "question": "Which of the following is an example of a debit?",
+          "options": [
+            "Receiving cash from a customer",
+            "Paying off a loan",
+            "Issuing shares to investors",
+            "Recording a sale"
+          ],
+          "answer": "Paying off a loan"
+        },
+        {
+          "question": "Which of the following would be credited in the case of a sale?",
+          "options": [
+            "Revenue",
+            "Cash",
+            "Inventory",
+            "Accounts Receivable"
+          ],
+          "answer": "Revenue"
+        },
+        {
+          "question": "Which account would you debit when purchasing supplies on credit?",
+          "options": [
+            "Supplies",
+            "Accounts Payable",
+            "Cash",
+            "Revenue"
+          ],
+          "answer": "Supplies"
+        },
+        {
+          "question": "What happens to equity when a company issues stock to investors?",
+          "options": [
+            "Equity increases",
+            "Equity decreases",
+            "Assets increase",
+            "Liabilities decrease"
+          ],
+          "answer": "Equity increases"
+        },
+        {
+          "question": "What is the primary purpose of the double-entry accounting system?",
+          "options": [
+            "To reduce the number of transactions recorded",
+            "To ensure that the accounting equation remains balanced",
+            "To increase the complexity of financial reporting",
+            "To make transactions easier to process"
+          ],
+          "answer": "To ensure that the accounting equation remains balanced"
+        },
+        {
+          "question": "Which of the following is increased by a debit entry?",
+          "options": [
+            "Accounts payable",
+            "Revenue",
+            "Assets",
+            "Liabilities"
+          ],
+          "answer": "Assets"
+        }
+      ],
+
+      "Accounting": 
+      [
+    {
+      "question": "What is the primary purpose of financial accounting?",
+      "options": [
+        "A) To help in decision-making for internal management",
+        "B) To prepare financial statements for external users",
+        "C) To investigate fraud and financial crimes",
+        "D) To track and manage production costs"
+      ],
+      "correctAnswer": "B) To prepare financial statements for external users"
+    },
+    {
+      "question": "Which of the following is a report generated in financial accounting?",
+      "options": [
+        "A) Cost Analysis",
+        "B) Income Statement",
+        "C) Budget Report",
+        "D) Fraud Investigations"
+      ],
+      "correctAnswer": "B) Income Statement"
+    },
+    {
+      "question": "Which of the following is a key responsibility of managerial accounting?",
+      "options": [
+        "A) Preparing tax returns",
+        "B) Investigating financial fraud",
+        "C) Providing information for internal decision-making",
+        "D) Ensuring the accuracy of financial statements"
+      ],
+      "correctAnswer": "C) Providing information for internal decision-making"
+    },
+    {
+      "question": "What does cost accounting primarily focus on?",
+      "options": [
+        "A) Preparing external financial reports",
+        "B) Tracking and controlling production costs",
+        "C) Complying with tax laws",
+        "D) Detecting financial fraud"
+      ],
+      "correctAnswer": "B) Tracking and controlling production costs"
+    },
+    {
+      "question": "Which of the following is true about tax accounting?",
+      "options": [
+        "A) It focuses on internal financial decision-making.",
+        "B) It involves preparing and filing tax returns.",
+        "C) It helps track production costs.",
+        "D) It investigates financial fraud and irregularities."
+      ],
+      "correctAnswer": "B) It involves preparing and filing tax returns."
+    },
+    {
+      "question": "Which type of accounting is primarily concerned with ensuring financial statements are free of fraud and misrepresentation?",
+      "options": [
+        "A) Managerial Accounting",
+        "B) Financial Accounting",
+        "C) Auditing",
+        "D) Tax Accounting"
+      ],
+      "correctAnswer": "C) Auditing"
+    },
+    {
+      "question": "Forensic accounting is often used to:",
+      "options": [
+        "A) Prepare tax returns for an organization",
+        "B) Track and control the costs of production",
+        "C) Investigate fraud and financial crimes",
+        "D) Prepare reports for external stakeholders"
+      ],
+      "correctAnswer": "C) Investigate fraud and financial crimes"
+    },
+    {
+      "question": "Which of the following is not a type of accounting?",
+      "options": [
+        "A) Financial Accounting",
+        "B) Managerial Accounting",
+        "C) Forensic Accounting",
+        "D) Market Accounting"
+      ],
+      "correctAnswer": "D) Market Accounting"
+    },
+    {
+      "question": "Which financial statement is commonly prepared using financial accounting?",
+      "options": [
+        "A) Cost of Goods Sold Report",
+        "B) Auditor’s Report",
+        "C) Balance Sheet",
+        "D) Forecasting Report"
+      ],
+      "correctAnswer": "C) Balance Sheet"
+    },
+    {
+      "question": "Which type of accounting helps in minimizing tax liabilities and ensuring tax compliance?",
+      "options": [
+        "A) Managerial Accounting",
+        "B) Cost Accounting",
+        "C) Tax Accounting",
+        "D) Auditing"
+      ],
+      "correctAnswer": "C) Tax Accounting"
+    }
+  ],
+      
+    "Pillars_Of_Accounting":
+    [
+      {
+        "question": "Which of the following best describes the pillar of **Relevance** in accounting?",
+        "options": [
+          "It ensures the financial information is accurate and free from bias.",
+          "It ensures that financial information can influence decision-making.",
+          "It ensures that financial information can be easily compared with others.",
+          "It ensures that financial information is consistent over periods."
+        ],
+        "correctAnswer": "It ensures that financial information can influence decision-making."
+      },
+      {
+        "question": "What does the pillar of **Reliability** ensure in accounting?",
+        "options": [
+          "The financial statements are free from errors and bias.",
+          "The financial information can be easily compared across periods.",
+          "The financial data is able to predict future performance.",
+          "The financial records are transparent and easy to understand."
+        ],
+        "correctAnswer": "The financial statements are free from errors and bias."
+      },
+      {
+        "question": "Which of the following is NOT a key aspect of **Comparability** in accounting?",
+        "options": [
+          "The ability to compare financial information across periods.",
+          "The ability to compare financial statements of different companies.",
+          "The application of different accounting methods in different periods.",
+          "The consistency of accounting practices across reporting periods."
+        ],
+        "correctAnswer": "The application of different accounting methods in different periods."
+      },
+      {
+        "question": "Why is the pillar of **Consistency** important in accounting?",
+        "options": [
+          "It ensures that financial data is relevant to the decision-making process.",
+          "It ensures that financial reports can be compared across time periods.",
+          "It ensures that financial information can be trusted and verified.",
+          "It ensures that the financial reporting remains flexible to changes."
+        ],
+        "correctAnswer": "It ensures that financial reports can be compared across time periods."
+      },
+      {
+        "question": "Which pillar of accounting is primarily concerned with whether the financial information can help predict future outcomes?",
+        "options": [
+          "Relevance",
+          "Reliability",
+          "Comparability",
+          "Consistency"
+        ],
+        "correctAnswer": "Relevance"
+      },
+      {
+        "question": "What is an example of **Reliability** in financial reporting?",
+        "options": [
+          "Consistently applying the same accounting methods over multiple years.",
+          "Including all financial transactions, whether or not they are material.",
+          "Providing financial information that is free from errors and bias.",
+          "Making comparisons between financial statements of different businesses."
+        ],
+        "correctAnswer": "Providing financial information that is free from errors and bias."
+      },
+      {
+        "question": "Which of the following is a result of applying the pillar of **Comparability** in accounting?",
+        "options": [
+          "Financial data from different periods becomes easily comparable.",
+          "Financial reports are free from error and bias.",
+          "Financial information is relevant and timely for decision-making.",
+          "Financial records remain consistent across multiple reporting periods."
+        ],
+        "correctAnswer": "Financial data from different periods becomes easily comparable."
+      },
+      {
+        "question": "What happens if a company changes its accounting method but does not disclose the change?",
+        "options": [
+          "It undermines the pillar of Relevance.",
+          "It undermines the pillar of Reliability.",
+          "It undermines the pillar of Comparability.",
+          "It undermines the pillar of Consistency."
+        ],
+        "correctAnswer": "It undermines the pillar of Consistency."
+      },
+      {
+        "question": "What does the concept of **Materiality** relate to in accounting?",
+        "options": [
+          "It relates to the comparability of financial statements.",
+          "It relates to the accuracy and completeness of financial records.",
+          "It refers to the significance of information that affects decision-making.",
+          "It refers to the ability to reliably predict future performance."
+        ],
+        "correctAnswer": "It refers to the significance of information that affects decision-making."
+      },
+      {
+        "question": "Which of the following is a primary objective of the pillar of **Relevance**?",
+        "options": [
+          "To ensure that accounting practices are consistent across periods.",
+          "To provide information that is useful for decision-making.",
+          "To ensure that financial statements can be compared across different companies.",
+          "To ensure the financial information is accurate and verifiable."
+        ],
+        "correctAnswer": "To provide information that is useful for decision-making."
+      }
+    ],
+
+
     "Saving_Essentials":
      
      [

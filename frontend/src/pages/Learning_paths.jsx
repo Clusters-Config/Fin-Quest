@@ -17,6 +17,21 @@ const Learning_paths = () => {
   const timelineData = [
     {
       id: 1,
+      title: "Basic Terminologies",
+      topics: [
+        { name: "Basic Finance Terminology", route: "/TerminologyPage" },
+        { name: "Credit and Debit", route: "/Credit_Debit" },
+      ],
+    },{
+      id: 2,
+      title: "Fundamentals of Accounting",
+      topics: [
+        { name: "Accounting and its Types", route: "/Accounting" },
+        { name: "Pillars of Accounting", route: "/Pillars_Of_Accounting" },
+      ],
+    },
+    {
+      id: 3,
       title: "Basic Financial Concepts",
       topics: [
         { name: "Saving Essentials", route: "/Saving_Essentials" },
@@ -24,7 +39,7 @@ const Learning_paths = () => {
       ],
     },
     {
-      id: 2,
+      id: 4,
       title: "Understanding Interest Rates",
       topics: [
         { name: "Simple vs. Compound Interest", route: "/SimpleVsCompoundInterest" },
@@ -32,7 +47,7 @@ const Learning_paths = () => {
       ],
     },
     {
-      id: 3,
+      id: 5,
       title: "Investment Basics",
       topics: [
         { name: "Deposit plans", route: "/DepositEssentials" },

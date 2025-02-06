@@ -12,6 +12,10 @@ import Signup from './pages/Signup';
 import { AuthProvider } from "./pages/AuthContext";
 
 // Learning path components
+import TerminologyPage from './learn_path_components/TerminologyPage';
+import Credit_Debit from './learn_path_components/Credit_Debit';
+import Accounting from './learn_path_components/Accounting';
+import Pillars_Of_Accounting from './learn_path_components/Pillars_Of_Accounting';
 import Saving_Essentials from './learn_path_components/Saving_Essentials';
 import Budgeting_Basics from './learn_path_components/Budgeting_Basics';
 import SimpleVsCompoundInterest from './learn_path_components/SimpleVsCompoundInterest';
@@ -46,6 +50,10 @@ const App = () => {
           <Route path="/TaxPage" element={<TaxPage />} />
           <Route path="/communitys" element={<Communitys />} />
           <Route path='/chat' element={<Chat />} />
+          <Route path="/TerminologyPage" element={<TerminologyPage />} />
+          <Route path="/Credit_Debit" element={<Credit_Debit/>} />
+          <Route path="/Accounting" element={<Accounting/>} />
+          <Route path="/Pillars_Of_Accounting" element={<Pillars_Of_Accounting/>} />
           <Route path="/Saving_Essentials" element={<Saving_Essentials />} />
           <Route path="/Budgeting_Basics" element={<Budgeting_Basics />} />
           <Route path="/SimpleVsCompoundInterest" element={<SimpleVsCompoundInterest />} />
