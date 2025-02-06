@@ -35,6 +35,7 @@ const Learning_paths = () => {
       id: 3,
       title: "Investment Basics",
       topics: [
+        { name: "Deposit plans", route: "/DepositEssentials" },
         { name: "Mutual Funds", route: "/MutualFundEssentials" },
         { name: "Stock Market", route: "/StockMarketBasics" },
       ],
@@ -64,20 +65,21 @@ const Learning_paths = () => {
   return (
     <div className="px-4 sm:px-6 lg:px-10">
       {/* Navbar */}
-      <nav className="bg-[#002147] p-4 flex justify-between items-center">
-        <h1 className="text-white text-lg font-extrabold">Learning Hub</h1>
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => navigate("/ProfilePage")}
-            className="text-white text-2xl"
-          >
-            <FaUserCircle />
-          </button>
-        </div>
-      </nav>
+        <nav className="bg-[#002147] p-4 w-full fixed top-0 left-0 z-10 flex justify-between items-center">
+          <h1 className="text-white text-lg font-extrabold">Learning Hub</h1>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => navigate("/ProfilePage")}
+              className="text-white text-2xl"
+            >
+              <FaUserCircle />
+            </button>
+          </div>
+        </nav>
+
 
       {/* Header Section */}
-      <div>
+      <div className="mt-16"> {/* Added margin-top to create space below the navbar */}
         <h1 className="text-center text-2xl sm:text-xl mt-8 text-[#002147] font-extrabold">
           Your Personalized Learning Path
         </h1>
@@ -85,6 +87,7 @@ const Learning_paths = () => {
           Embark on a journey designed to make you a financial expert, step by step!
         </p>
       </div>
+
 
       {/* Progress Tracker */}
       <div className="my-10">
@@ -186,14 +189,13 @@ const Learning_paths = () => {
           </div>
         </div>
       </div>
-
-       {/* Footer */}
-       <footer className="bg-[#002147] text-white py-4 px-6 text-center">
-        <p className="text-sm mt-2">&copy; 2025 Fin-Quest. All Rights Reserved.</p>
-      </footer>
+    
+          {/* Footer */}
+    <footer className="bg-[#002147] text-white py-4 px-6 text-center mt-10 w-full">
+      <p className="text-sm mt-2">&copy; 2025 Fin-Quest. All Rights Reserved.</p>
+    </footer>
 
     </div>
-
   );
 };
 

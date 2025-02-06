@@ -5,7 +5,7 @@ import Game from './pages/Game';
 import Login from './pages/Login-signup';
 import Simulations from './pages/Simulations';
 import Features from './pages/Features';
-import Facilitators from './pages/Facilitators';
+import TaxPage from './pages/TaxPage';
 import Communitys from './pages/Communitys';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
@@ -16,6 +16,7 @@ import Saving_Essentials from './learn_path_components/Saving_Essentials';
 import Budgeting_Basics from './learn_path_components/Budgeting_Basics';
 import SimpleVsCompoundInterest from './learn_path_components/SimpleVsCompoundInterest';
 import LoanImpacts from './learn_path_components/LoanImpacts';
+import DepositEssentials from './learn_path_components/DepositEssentials';
 import MutualFundEssentials from './learn_path_components/MutualFundEssentials';
 import StockMarketBasics from './learn_path_components/StockMarketBasics';
 import QuizApp from './learn_path_components/QuizApp';
@@ -42,13 +43,14 @@ const App = () => {
           <Route path="/learning_paths" element={<Learning_paths />} />
           <Route path="/game" element={<Game />} />
           <Route path="/simulations" element={<Simulations />} />
-          <Route path="/facilitators" element={<Facilitators />} />
+          <Route path="/TaxPage" element={<TaxPage />} />
           <Route path="/communitys" element={<Communitys />} />
           <Route path='/chat' element={<Chat />} />
           <Route path="/Saving_Essentials" element={<Saving_Essentials />} />
           <Route path="/Budgeting_Basics" element={<Budgeting_Basics />} />
           <Route path="/SimpleVsCompoundInterest" element={<SimpleVsCompoundInterest />} />
           <Route path="/LoanImpacts" element={<LoanImpacts />} />
+          <Route path="/DepositEssentials" element={<DepositEssentials />} />
           <Route path="/MutualFundEssentials" element={<MutualFundEssentials />} />
           <Route path="/StockMarketBasics" element={<StockMarketBasics />} />
           <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}

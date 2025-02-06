@@ -30,11 +30,17 @@ const Simulations = () => {
   const [savingsGoal, setSavingsGoal] = useState(0);
   const [savingsProgress, setSavingsProgress] = useState(0);
 
+  const [monthlySaving, setMonthlySaving] = useState(0); // New state for monthly savings
+  const [interestRate, setInterestRate] = useState(0); // New state for interest rate
+  const [years, setYears] = useState(0); // New state for years
+  const [futureValue, setFutureValue] = useState(0); // New state for future value
+
   const [popupVisible, setPopupVisible] = useState({
     budget: false,
     dailyMode: false,
     debt: false,
     savings: false,
+    futureValue: false, // New popup state for future value calculation
   });
 
   const [isDailyMode, setIsDailyMode] = useState(false);
@@ -75,6 +81,18 @@ const Simulations = () => {
     setPopupVisible((prev) => ({ ...prev, savings: true }));
   };
 
+  // Calculate Future Value with compound interest
+  const calculateFutureValue = () => {
+    const principal = monthlySaving;
+    const rate = interestRate / 100; // Convert to decimal
+    const time = years;
+    const n = 12; // Monthly compounding
+
+    const futureAmount = principal * (((1 + rate / n) ** (n * time) - 1) / (rate / n));
+    setFutureValue(futureAmount.toFixed(2)); // Save the calculated future value
+    setPopupVisible((prev) => ({ ...prev, futureValue: true }));
+  };
+
   return (
     <div className="bg-gradient-to-b from-[#F8FAFC] to-[#FFFFFF] min-h-screen flex items-center justify-center p-6">
       <div className="bg-white shadow-2xl rounded-xl w-full max-w-5xl p-8">
@@ -88,6 +106,79 @@ const Simulations = () => {
         </header>
 
         <div className="space-y-10 mt-8">
+          {/* Savings Goal Tracker */}
+          <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
+              <FaCoins /> Savings Goal Tracker
+            </h2>
+            <h4 className="text-sm mb-4 text-[#6C757D]">
+              Set savings goals and track your progress.
+            </h4>
+            <div className="space-y-6">
+              <InputField
+                label="Current Savings (₹)"
+                placeholder="Enter Current Savings"
+                onChange={setCurrentSavings}
+              />
+              <InputField
+                label="Savings Goal (₹)"
+                placeholder="Enter Savings Goal"
+                onChange={setSavingsGoal}
+              />
+              <button
+                onClick={trackSavings}
+                className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
+              >
+                <FaCoins /> Track Progress
+              </button>
+              <animated.div
+                style={popupAnimation(popupVisible.savings)}
+                className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
+              >
+                <p className="text-lg font-semibold">Progress: {savingsProgress}%</p>
+              </animated.div>
+            </div>
+          </div>
+
+          {/* Future Value Calculation */}
+          <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
+            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
+              <FaPiggyBank /> Future Value Calculation
+            </h2>
+            <h4 className="text-sm mb-4 text-[#6C757D]">
+              Calculate how much you will have in the future by saving regularly with interest.
+            </h4>
+            <div className="space-y-6">
+              <InputField
+                label="Monthly Saving Amount (₹)"
+                placeholder="Enter Monthly Saving"
+                onChange={setMonthlySaving}
+              />
+              <InputField
+                label="Interest Rate (%)"
+                placeholder="Enter Annual Interest Rate"
+                onChange={setInterestRate}
+              />
+              <InputField
+                label="Number of Years"
+                placeholder="Enter Number of Years"
+                onChange={setYears}
+              />
+              <button
+                onClick={calculateFutureValue}
+                className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
+              >
+                <FaCalculator /> Calculate Future Value
+              </button>
+              <animated.div
+                style={popupAnimation(popupVisible.futureValue)}
+                className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
+              >
+                <p className="text-lg font-semibold">Future Value: ₹{futureValue}</p>
+              </animated.div>
+            </div>
+          </div>
+
           {/* Monthly Budgeting / Daily Allowance */}
           <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
@@ -115,8 +206,7 @@ const Simulations = () => {
                   <span
                     className={`bg-white w-4 h-4 rounded-full shadow-md transform ${
                       isDailyMode ? "translate-x-5" : ""
-                    }`}
-                  ></span>
+                    }`}></span>
                 </span>
               </label>
             </div>
@@ -124,7 +214,7 @@ const Simulations = () => {
               {isDailyMode ? (
                 <>
                   <InputField
-                    label="Daily Expenses ($)"
+                    label="Daily Expenses (₹)"
                     placeholder="Enter Daily Expenses"
                     onChange={setDailyExpenses}
                   />
@@ -139,19 +229,19 @@ const Simulations = () => {
                     className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
                   >
                     <p className="text-lg font-semibold">
-                      Monthly Allowance: ${monthlyAllowance}
+                      Monthly Allowance: ₹{monthlyAllowance}
                     </p>
                   </animated.div>
                 </>
               ) : (
                 <>
                   <InputField
-                    label="Monthly Income ($)"
+                    label="Monthly Income (₹)"
                     placeholder="Enter Monthly Income"
                     onChange={setIncome}
                   />
                   <InputField
-                    label="Monthly Expenses ($)"
+                    label="Monthly Expenses (₹)"
                     placeholder="Enter Monthly Expenses"
                     onChange={setExpenses}
                   />
@@ -165,8 +255,8 @@ const Simulations = () => {
                     style={popupAnimation(popupVisible.budget)}
                     className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
                   >
-                    <p className="text-lg font-semibold">Budget: ${budget}</p>
-                    <p className="text-lg font-semibold">Daily Allowance: ${dailyAllowance}</p>
+                    <p className="text-lg font-semibold">Budget: ₹{budget}</p>
+                    <p className="text-lg font-semibold">Daily Allowance: ₹{dailyAllowance}</p>
                   </animated.div>
                 </>
               )}
@@ -181,12 +271,12 @@ const Simulations = () => {
             <h4 className="text-sm mb-4 text-[#6C757D]">Manage and repay debts efficiently.</h4>
             <div className="space-y-6">
               <InputField
-                label="Total Debt Amount ($)"
+                label="Total Debt Amount (₹)"
                 placeholder="Enter Total Debt"
                 onChange={setDebt}
               />
               <InputField
-                label="Monthly Payment ($)"
+                label="Monthly Payment (₹)"
                 placeholder="Enter Monthly Payment"
                 onChange={setMonthlyPayment}
               />
@@ -194,47 +284,13 @@ const Simulations = () => {
                 onClick={simulateDebt}
                 className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
               >
-                <FaCalculator /> Simulate Repayment
+                <FaPiggyBank /> Simulate Debt
               </button>
               <animated.div
                 style={popupAnimation(popupVisible.debt)}
                 className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
               >
-                <p className="text-lg font-semibold">Remaining Debt: ${remainingDebt}</p>
-              </animated.div>
-            </div>
-          </div>
-
-          {/* Savings Goal Tracker */}
-          <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
-              <FaCoins /> Savings Goal Tracker
-            </h2>
-            <h4 className="text-sm mb-4 text-[#6C757D]">
-              Set savings goals and track your progress.
-            </h4>
-            <div className="space-y-6">
-              <InputField
-                label="Current Savings ($)"
-                placeholder="Enter Current Savings"
-                onChange={setCurrentSavings}
-              />
-              <InputField
-                label="Savings Goal ($)"
-                placeholder="Enter Savings Goal"
-                onChange={setSavingsGoal}
-              />
-              <button
-                onClick={trackSavings}
-                className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
-              >
-                <FaCoins /> Track Progress
-              </button>
-              <animated.div
-                style={popupAnimation(popupVisible.savings)}
-                className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
-              >
-                <p className="text-lg font-semibold">Progress: {savingsProgress}%</p>
+                <p className="text-lg font-semibold">Remaining Debt: ₹{remainingDebt}</p>
               </animated.div>
             </div>
           </div>

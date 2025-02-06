@@ -373,6 +373,113 @@
             }
       ],
 
+      "DepositEssentials":
+     
+      [ 
+         
+         {
+            "question": "What is a deposit?",
+            "options": [
+              "A type of loan",
+              "A sum of money placed in a financial institution for safekeeping",
+              "A payment made for a service",
+              "A kind of insurance"
+            ],
+            "correctAnswer": "A sum of money placed in a financial institution for safekeeping"
+          },
+          {
+            "question": "Which type of deposit offers a guaranteed rate of interest for a fixed duration?",
+            "options": [
+              "Fixed Deposit",
+              "Demand Deposit",
+              "Recurring Deposit",
+              "Term Deposit"
+            ],
+            "correctAnswer": "Fixed Deposit"
+          },
+          {
+            "question": "What is a key benefit of a recurring deposit?",
+            "options": [
+              "The principal is withdrawn periodically",
+              "It allows monthly contributions to grow interest over time",
+              "It offers liquidity",
+              "It provides access to funds anytime"
+            ],
+            "correctAnswer": "It allows monthly contributions to grow interest over time"
+          },
+          {
+            "question": "Which type of deposit allows you to withdraw money at any time without penalties?",
+            "options": [
+              "Term Deposit",
+              "Demand Deposit",
+              "Fixed Deposit",
+              "Recurring Deposit"
+            ],
+            "correctAnswer": "Demand Deposit"
+          },
+          {
+            "question": "What is typically insured in a deposit account?",
+            "options": [
+              "The interest earned on the deposit",
+              "The principal amount deposited",
+              "The bank's assets",
+              "The bank's stock value"
+            ],
+            "correctAnswer": "The principal amount deposited"
+          },
+          {
+            "question": "Which of the following is NOT a type of deposit?",
+            "options": [
+              "Fixed Deposit",
+              "Savings Deposit",
+              "Recurring Deposit",
+              "Investment Deposit"
+            ],
+            "correctAnswer": "Investment Deposit"
+          },
+          {
+            "question": "What happens to a fixed deposit if you withdraw it before the maturity date?",
+            "options": [
+              "You receive the full principal and interest",
+              "You lose all your interest, and may incur a penalty",
+              "You get a partial refund of interest",
+              "The deposit is automatically converted into a demand deposit"
+            ],
+            "correctAnswer": "You lose all your interest, and may incur a penalty"
+          },
+          {
+            "question": "What is a major advantage of demand deposits?",
+            "options": [
+              "Higher interest rates than fixed deposits",
+              "Easy access to funds anytime",
+              "Guaranteed returns for a fixed time",
+              "Long-term investment benefits"
+            ],
+            "correctAnswer": "Easy access to funds anytime"
+          },
+          {
+            "question": "Which type of deposit is ideal for short-term savings with high liquidity?",
+            "options": [
+              "Fixed Deposit",
+              "Recurring Deposit",
+              "Demand Deposit",
+              "Term Deposit"
+            ],
+            "correctAnswer": "Demand Deposit"
+          },
+          {
+            "question": "What is typically the main purpose of a deposit in a financial institution?",
+            "options": [
+              "To generate passive income",
+              "To purchase securities",
+              "To secure your savings and earn interest",
+              "To pay for services"
+            ],
+            "correctAnswer": "To secure your savings and earn interest"
+          }
+        ],
+      
+
     "MutualFundEssentials":
       [
           {
