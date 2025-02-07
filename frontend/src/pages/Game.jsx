@@ -78,7 +78,7 @@ function GamifiedAdventures() {
 
         {/* Game Icon Section */}
         <section className="text-center mt-8">
-          <h2 className="text-2xl font-bold text-[#002147] mb-4">Play Profit-Loss Ladder</h2>
+          <h2 className="text-2xl font-bold text-[#002147] mb-4">Get Gamified Adventures </h2>
           <button
             onClick={toggleNotification} // Show the game notification when clicked
             className="bg-[#002147] text-white py-3 px-6 rounded-full shadow-md hover:bg-[#F39C12] transition duration-300"
@@ -126,16 +126,16 @@ function GamifiedAdventures() {
                 Profit-Loss Ladder
               </button>
               <button
-                onClick={() => handleGameRedirect("BudgetingGame")}
+                onClick={() => handleGameRedirect("Stock")}
                 className="w-full py-2 px-4 bg-[#002147] text-white rounded-lg shadow-md hover:bg-[#F39C12] transition duration-300"
               >
-                Budgeting Game
+                Stock Prediction
               </button>
               <button
-                onClick={() => handleGameRedirect("SavingsChallenge")}
+                onClick={() => handleGameRedirect("Monopoly")}
                 className="w-full py-2 px-4 bg-[#002147] text-white rounded-lg shadow-md hover:bg-[#F39C12] transition duration-300"
               >
-                Savings Challenge
+                Monopoly Game
               </button>
             </div>
             <button

@@ -3,9 +3,11 @@ import React, { useState } from "react";
 const ProfilePage = () => {
   // Dummy student data
   const student = {
+    photo: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png",
     name: "John Doe",
     dob: "2000-05-15",
     phone: "+1 234 567 890",
+    email:"johndoe@gmail.com",
     achievements: [
       "Completed Module 1: Basic Terminologies",
       "Achieved 95% Progress in Module 2: Fundamentals of Accounting",
@@ -36,24 +38,31 @@ const ProfilePage = () => {
         <h2 className="text-[#002147] text-2xl font-bold mb-6">Student Profile</h2>
 
         {/* Student Info */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-          {/* Student Name */}
-          <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
-            <p className="text-lg font-semibold text-[#002147]">{student.name}</p>
-          </div>
+        <div className="flex flex-col sm:flex-row gap-6 mb-6">
+  {/* Left Section - Student Photo */}
+  <div className="w-full sm:w-1/3 flex justify-center items-center">
+    <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
+      <img
+        src={student.photo}
+        alt="Student"
+        className="w-24 h-24 rounded-full mx-auto"
+      />
+    </div>
+  </div>
 
-          {/* Date of Birth */}
-          <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
-            <p className="text-[#6C757D]">Date of Birth: {student.dob}</p>
-          </div>
+  {/* Right Section - Student Details */}
+  <div className="w-full sm:w-2/3">
+    <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
+      <p className="text-lg font-semibold text-[#002147] mb-4">{student.name}</p>
+      <p className="text-[#6C757D] mb-2">Date of Birth: {student.dob}</p>
+      <p className="text-[#6C757D] mb-2">Phone: {student.phone}</p>
+      <p className="text-[#6C757D]">Email: {student.email}</p>
+    </div>
+  </div>
+</div>
 
-          {/* Phone Number */}
-          <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
-            <p className="text-[#6C757D]">Phone: {student.phone}</p>
-          </div>
-        </div>
 
-        {/* Learning Path Progress */}
+          {/* Learning Path Progress */}
         <div className="mb-6">
           <h3 className="text-xl font-semibold text-[#002147] mb-4">Learning Progress</h3>
           {modules.map((module, index) => (

@@ -27,7 +27,11 @@ import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
 import ForumPage from "./learn_path_components/ForumPage";  
 import Profile  from "./pages/Profile";
-import ProfitLossLadder from "./GameComponents/ProfitLossLadder"
+import ProfitLossLadder from "./GameComponents/ProfitLossLadder";
+import Stock from "./GameComponents/Stock";
+import Monopoly from "./GameComponents/Monopoly";
+
+
 import DailyChallenges from "./GameComponents/DailyChallenges"
 import ProfilePage  from "./learn_path_components/ProfilePage";
 import GameProfile from "./GameComponents/GameProfile"
@@ -66,6 +70,9 @@ const App = () => {
           <Route path="/ForumPage" element={<ForumPage />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
+          <Route path="/Stock" element={<Stock />} />
+          <Route path="/Monopoly" element={<Monopoly />} />
+
           <Route path="/DailyChallenges" element={<DailyChallenges />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/GameProfile" element={<GameProfile />} />
