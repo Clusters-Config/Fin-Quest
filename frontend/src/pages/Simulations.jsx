@@ -1,97 +1,191 @@
 import React, { useState } from "react";
-import { FaMoneyBillWave, FaPiggyBank, FaCoins, FaCalculator } from "react-icons/fa";
+import { FaMoneyBillWave, FaPiggyBank, FaCoins, FaCalculator, FaDollarSign, FaExchangeAlt, FaHouseUser, FaSchool, FaTag, FaSalesforce, FaSave, FaWeightHanging, FaPinterest, FaUserFriends } from "react-icons/fa";
 import { useSpring, animated } from "@react-spring/web";
+import { FactoryIcon } from "lucide-react";
 
-const InputField = ({ label, placeholder, onChange }) => (
-  <div className="flex flex-col">
+// Reusable Modal Component
+const Modal = ({ isOpen, onClose, title, children }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 className="text-xl font-bold text-[#002147] mb-4">{title}</h2>
+        {children}
+        <button onClick={onClose} className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition">
+          Close
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// Input Field Component
+const InputField = ({ label, placeholder, value, onChange }) => (
+  <div className="flex flex-col mb-3">
     <label className="text-sm font-semibold mb-1">{label}</label>
     <input
       type="number"
       placeholder={placeholder}
-      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F39C12] transition duration-300"
+      value={value}
+      className="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F39C12] transition"
       onChange={(e) => onChange(Number(e.target.value))}
     />
   </div>
 );
 
 const Simulations = () => {
+  // States for various features
   const [income, setIncome] = useState(0);
   const [expenses, setExpenses] = useState(0);
   const [budget, setBudget] = useState(0);
-  const [dailyAllowance, setDailyAllowance] = useState(0);
-  const [dailyExpenses, setDailyExpenses] = useState(0);
-  const [monthlyAllowance, setMonthlyAllowance] = useState(0);
+  const [savings, setSavings] = useState(0);
+  const [loanAmount, setLoanAmount] = useState(0);
+  const [interestRate, setInterestRate] = useState(0);
+  const [loanTerm, setLoanTerm] = useState(0);
+  const [loanRepayment, setLoanRepayment] = useState(0);
+  const [gstAmount, setGstAmount] = useState(0);
+
+  // Modal states
+  const [openModal, setOpenModal] = useState("");
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Calculation Functions
+  const calculateBudget = () => {
+    const remainingBudget = income - expenses;
+    setBudget(remainingBudget > 0 ? remainingBudget : 0);
+  };
+
+  const calculateLoan = () => {
+    const monthlyInterest = interestRate / 100 / 12;
+    const payment = (loanAmount * monthlyInterest) / (1 - Math.pow(1 + monthlyInterest, -loanTerm));
+    setLoanRepayment(payment.toFixed(2));
+  };
+
+  const calculateGST = () => {
+    setGstAmount((income * 0.18).toFixed(2)); // 18% GST
+  };
+
   
-  const [debt, setDebt] = useState(0);
-  const [monthlyPayment, setMonthlyPayment] = useState(0);
-  const [remainingDebt, setRemainingDebt] = useState(0);
-
-  const [currentSavings, setCurrentSavings] = useState(0);
-  const [savingsGoal, setSavingsGoal] = useState(0);
-  const [savingsProgress, setSavingsProgress] = useState(0);
-
-  const [monthlySaving, setMonthlySaving] = useState(0); // New state for monthly savings
-  const [interestRate, setInterestRate] = useState(0); // New state for interest rate
-  const [years, setYears] = useState(0); // New state for years
-  const [futureValue, setFutureValue] = useState(0); // New state for future value
-
-  const [popupVisible, setPopupVisible] = useState({
-    budget: false,
-    dailyMode: false,
-    debt: false,
-    savings: false,
-    futureValue: false, // New popup state for future value calculation
-  });
-
-  const [isDailyMode, setIsDailyMode] = useState(false);
-
-  const popupAnimation = (visible) =>
-    useSpring({
-      opacity: visible ? 1 : 0,
-      transform: visible ? "scale(1)" : "scale(0.8)",
-      config: { tension: 250, friction: 30 },
-    });
-
-  const calculateMonthlyBudget = () => {
-    const calculatedBudget = income - expenses > 0 ? income - expenses : 0;
-    setBudget(calculatedBudget);
-
-    const calculatedDailyAllowance = calculatedBudget / 30; // Assuming 30 days in a month
-    setDailyAllowance(calculatedDailyAllowance.toFixed(2));
-
-    setPopupVisible((prev) => ({ ...prev, budget: true }));
+  
+  // Calculation Functions
+  const calculateTax = () => {
+    const taxAmount = (income * taxRate) / 100;
+    setTaxAmount(taxAmount.toFixed(2));
   };
 
-  const calculateMonthlyAllowance = () => {
-    const calculatedAllowance = dailyExpenses * 30; // Calculate monthly allowance from daily expenses
-    setMonthlyAllowance(calculatedAllowance.toFixed(2));
 
-    setPopupVisible((prev) => ({ ...prev, dailyMode: true }));
+
+  // Calculation Functions for Capital Gain Tax
+const calculateCapitalGainTax = () => {
+  const capitalGain = salePrice - purchasePrice;
+  if (capitalGain > 0) {
+    const capitalGainTaxAmount = (capitalGain * capitalGainTaxRate) / 100;
+    setCapitalGainTaxAmount(capitalGainTaxAmount.toFixed(2));
+    setCapitalGain(capitalGain.toFixed(2));
+  } else {
+    setCapitalGainTaxAmount(0);
+    setCapitalGain(0);
+  }
+};
+
+
+ // State for Capital Gain Tax Calculation
+ const [purchasePrice, setPurchasePrice] = useState(0);
+ const [salePrice, setSalePrice] = useState(0);
+ const [capitalGainTaxRate, setCapitalGainTaxRate] = useState(0);
+ const [capitalGainTaxAmount, setCapitalGainTaxAmount] = useState(0);
+ const [capitalGain, setCapitalGain] = useState(0);
+
+  // State for Tax Calculation
+  const [taxRate, setTaxRate] = useState(0);
+  const [taxAmount, setTaxAmount] = useState(0);
+
+  // State for Sales Tax Calculation
+  const [price, setPrice] = useState(0);
+  const [salesTaxRate, setSalesTaxRate] = useState(0);
+  const [salesTaxAmount, setSalesTaxAmount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+     // Calculation Functions for Sales Tax
+  const calculateSalesTax = () => {
+    const salesTaxAmount = (price * salesTaxRate) / 100;
+    const totalPrice = price + salesTaxAmount;
+    setSalesTaxAmount(salesTaxAmount.toFixed(2));
+    setTotalPrice(totalPrice.toFixed(2));
   };
 
-  const simulateDebt = () => {
-    const updatedDebt = debt - monthlyPayment;
-    setRemainingDebt(updatedDebt > 0 ? updatedDebt.toFixed(2) : 0);
-    setPopupVisible((prev) => ({ ...prev, debt: true }));
+  // Calculation Functions for Corporate Tax
+  const calculateCorporateTax = () => {
+    const corporateTaxAmount = (taxableIncome * corporateTaxRate) / 100;
+    setCorporateTaxAmount(corporateTaxAmount.toFixed(2));
   };
+  
+  // State for Corporate Tax Calculation
+const [taxableIncome, setTaxableIncome] = useState(0);
+const [corporateTaxRate, setCorporateTaxRate] = useState(0);
+const [corporateTaxAmount, setCorporateTaxAmount] = useState(0);
+  
+// Calculation Functions for Monthly Budget
+const calculateMonthlyBudget = () => {
+  const remainingBudget = income - expenses;
+  setRemainingBudget(remainingBudget > 0 ? remainingBudget : 0);  // Ensure remaining budget is non-negative
+};
 
-  const trackSavings = () => {
-    const progress = (currentSavings / savingsGoal) * 100;
-    setSavingsProgress(progress > 100 ? 100 : progress.toFixed(2));
-    setPopupVisible((prev) => ({ ...prev, savings: true }));
-  };
+// State for Monthly Budget Calculation
+ const [remainingBudget, setRemainingBudget] = useState(0);
+  
+// Calculation Functions for Compound Interest
+const calculateCompoundInterest = () => {
+  const amount = principal * Math.pow(1 + (interestRate / compoundingPeriods), compoundingPeriods * time);
+  setAmount(amount.toFixed(2));
+};
 
-  // Calculate Future Value with compound interest
-  const calculateFutureValue = () => {
-    const principal = monthlySaving;
-    const rate = interestRate / 100; // Convert to decimal
-    const time = years;
-    const n = 12; // Monthly compounding
+// State for Compound Interest Calculation
+const [principal, setPrincipal] = useState(0);
+const [time, setTime] = useState(0);
+const [compoundingPeriods, setCompoundingPeriods] = useState(1);  // Default: annually
+const [amount, setAmount] = useState(0);
 
-    const futureAmount = principal * (((1 + rate / n) ** (n * time) - 1) / (rate / n));
-    setFutureValue(futureAmount.toFixed(2)); // Save the calculated future value
-    setPopupVisible((prev) => ({ ...prev, futureValue: true }));
-  };
+// Calculation Functions for Emergency Fund
+const calculateEmergencyFund = () => {
+  const emergencyFundAmount = monthlyExpenses * monthsForFund;
+  setEmergencyFund(emergencyFundAmount.toFixed(2));
+};
+
+// State for Emergency Fund Calculation
+const [monthlyExpenses, setMonthlyExpenses] = useState(0);
+const [monthsForFund, setMonthsForFund] = useState(6); // Default: 6 months
+const [emergencyFund, setEmergencyFund] = useState(0);
+
+// Comment state
+const [comments, setComments] = useState([]);
+const [newComment, setNewComment] = useState("");
+
+// Handle comment submission
+const handleCommentSubmit = () => {
+  if (newComment) {
+    setComments([...comments, { text: newComment, reply: "Thank you for your suggestion! We will consider it." }]);
+    setNewComment("");
+  }
+};
+
+ 
+ // Filtered content based on search query
+  const filteredContent = [
+    { label: "Budget Calculator", key: "budget" },
+    { label: "Loan Calculator", key: "loan" },
+    { label: "GST Calculator", key: "gst" },
+    { label: "Tax Calculator", key: "tax" },
+    { label: "Capital Gain Tax Calculator", key: "capitalGainTax" },
+    { label: "Corporate Tax Calculator", key: "corporateTax" },
+    { label: "Compound Interest Calculator", key: "compoundInterest" },
+    { label: "Emergency Fund Calculator", key: "emergencyFund" },
+    { label: "Sales Tax Calculator", key: "salestax" }
+     
+  ].filter((item) => item.label.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
     <div className="bg-gradient-to-b from-[#F8FAFC] to-[#FFFFFF] min-h-screen flex items-center justify-center p-6">
@@ -100,201 +194,200 @@ const Simulations = () => {
           <h1 className="text-3xl font-semibold flex items-center justify-center gap-3">
             <FaCalculator /> Real-World Financial Simulations
           </h1>
-          <p className="text-lg mt-2">
-            Simulate financial decisions and track your goals effortlessly.
-          </p>
+          <p className="text-lg mt-2">Simulate financial decisions and track your goals effortlessly.</p>
         </header>
 
-        <div className="space-y-10 mt-8">
-          {/* Savings Goal Tracker */}
-          <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
-              <FaCoins /> Savings Goal Tracker
-            </h2>
-            <h4 className="text-sm mb-4 text-[#6C757D]">
-              Set savings goals and track your progress.
-            </h4>
-            <div className="space-y-6">
-              <InputField
-                label="Current Savings (₹)"
-                placeholder="Enter Current Savings"
-                onChange={setCurrentSavings}
-              />
-              <InputField
-                label="Savings Goal (₹)"
-                placeholder="Enter Savings Goal"
-                onChange={setSavingsGoal}
-              />
-              <button
-                onClick={trackSavings}
-                className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
-              >
-                <FaCoins /> Track Progress
-              </button>
-              <animated.div
-                style={popupAnimation(popupVisible.savings)}
-                className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
-              >
-                <p className="text-lg font-semibold">Progress: {savingsProgress}%</p>
-              </animated.div>
-            </div>
-          </div>
-
-          {/* Future Value Calculation */}
-          <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
-              <FaPiggyBank /> Future Value Calculation
-            </h2>
-            <h4 className="text-sm mb-4 text-[#6C757D]">
-              Calculate how much you will have in the future by saving regularly with interest.
-            </h4>
-            <div className="space-y-6">
-              <InputField
-                label="Monthly Saving Amount (₹)"
-                placeholder="Enter Monthly Saving"
-                onChange={setMonthlySaving}
-              />
-              <InputField
-                label="Interest Rate (%)"
-                placeholder="Enter Annual Interest Rate"
-                onChange={setInterestRate}
-              />
-              <InputField
-                label="Number of Years"
-                placeholder="Enter Number of Years"
-                onChange={setYears}
-              />
-              <button
-                onClick={calculateFutureValue}
-                className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
-              >
-                <FaCalculator /> Calculate Future Value
-              </button>
-              <animated.div
-                style={popupAnimation(popupVisible.futureValue)}
-                className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
-              >
-                <p className="text-lg font-semibold">Future Value: ₹{futureValue}</p>
-              </animated.div>
-            </div>
-          </div>
-
-          {/* Monthly Budgeting / Daily Allowance */}
-          <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
-              <FaMoneyBillWave /> {isDailyMode ? "Daily Expenses & Monthly Allowance" : "Monthly Budgeting"}
-            </h2>
-            <h4 className="text-sm mb-4 text-[#6C757D]">
-              {isDailyMode
-                ? "Calculate your monthly allowance based on daily expenses."
-                : "Plan your income and expenses for financial stability."}
-            </h4>
-            <div className="flex justify-between items-center mb-6">
-              <span className="text-[#6C757D]">Switch to {isDailyMode ? "Monthly" : "Daily"} Mode</span>
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={isDailyMode}
-                  onChange={() => setIsDailyMode(!isDailyMode)}
-                />
-                <span
-                  className={`w-10 h-5 flex items-center bg-gray-300 rounded-full p-1 cursor-pointer ${
-                    isDailyMode ? "bg-[#F39C12]" : ""
-                  }`}
-                >
-                  <span
-                    className={`bg-white w-4 h-4 rounded-full shadow-md transform ${
-                      isDailyMode ? "translate-x-5" : ""
-                    }`}></span>
-                </span>
-              </label>
-            </div>
-            <div className="space-y-6">
-              {isDailyMode ? (
-                <>
-                  <InputField
-                    label="Daily Expenses (₹)"
-                    placeholder="Enter Daily Expenses"
-                    onChange={setDailyExpenses}
-                  />
-                  <button
-                    onClick={calculateMonthlyAllowance}
-                    className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
-                  >
-                    <FaCalculator /> Calculate Monthly Allowance
-                  </button>
-                  <animated.div
-                    style={popupAnimation(popupVisible.dailyMode)}
-                    className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
-                  >
-                    <p className="text-lg font-semibold">
-                      Monthly Allowance: ₹{monthlyAllowance}
-                    </p>
-                  </animated.div>
-                </>
-              ) : (
-                <>
-                  <InputField
-                    label="Monthly Income (₹)"
-                    placeholder="Enter Monthly Income"
-                    onChange={setIncome}
-                  />
-                  <InputField
-                    label="Monthly Expenses (₹)"
-                    placeholder="Enter Monthly Expenses"
-                    onChange={setExpenses}
-                  />
-                  <button
-                    onClick={calculateMonthlyBudget}
-                    className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
-                  >
-                    <FaCalculator /> Generate Budget
-                  </button>
-                  <animated.div
-                    style={popupAnimation(popupVisible.budget)}
-                    className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
-                  >
-                    <p className="text-lg font-semibold">Budget: ₹{budget}</p>
-                    <p className="text-lg font-semibold">Daily Allowance: ₹{dailyAllowance}</p>
-                  </animated.div>
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* Debt Management */}
-          <div className="bg-[#F4F4F4] shadow-lg rounded-lg p-6 hover:shadow-2xl transition duration-300">
-            <h2 className="text-2xl font-bold mb-4 flex items-center gap-2 text-[#002147]">
-              <FaPiggyBank /> Debt Management
-            </h2>
-            <h4 className="text-sm mb-4 text-[#6C757D]">Manage and repay debts efficiently.</h4>
-            <div className="space-y-6">
-              <InputField
-                label="Total Debt Amount (₹)"
-                placeholder="Enter Total Debt"
-                onChange={setDebt}
-              />
-              <InputField
-                label="Monthly Payment (₹)"
-                placeholder="Enter Monthly Payment"
-                onChange={setMonthlyPayment}
-              />
-              <button
-                onClick={simulateDebt}
-                className="bg-[#F39C12] text-white py-2 px-6 rounded-lg hover:bg-[#e67e22] transition duration-300 w-full"
-              >
-                <FaPiggyBank /> Simulate Debt
-              </button>
-              <animated.div
-                style={popupAnimation(popupVisible.debt)}
-                className="mt-4 p-4 bg-[#002147] text-white rounded-lg shadow-lg"
-              >
-                <p className="text-lg font-semibold">Remaining Debt: ₹{remainingDebt}</p>
-              </animated.div>
-            </div>
-          </div>
+        {/* Search Bar */}
+        <div className="mt-8 mb-6">
+          <input
+            type="text"
+            placeholder="Search simulations..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F39C12] transition"
+          />
         </div>
+
+        {/* Buttons to Open Modals */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          {filteredContent.map((item) => (
+            <button
+              key={item.key}
+              onClick={() => setOpenModal(item.key)}
+              className="bg-[#F39C12] text-white py-3 rounded-lg hover:bg-[#e67e22] transition w-full"
+            >
+              {item.key === "budget" && <FaMoneyBillWave className="inline-block mr-2" />}
+              {item.key === "loan" && <FaHouseUser className="inline-block mr-2" />}
+              {item.key === "gst" && <FaExchangeAlt className="inline-block mr-2" />}
+              {item.key === "tax" && <FaTag className="inline-block mr-2" />}
+              {item.key === "salestax" && <FaSalesforce className="inline-block mr-2" />}
+              {item.key === "capitalGainTax" && <FaWeightHanging className="inline-block mr-2" />}
+              {item.key === "corporateTax" && <FactoryIcon className="inline-block mr-2" />}
+              {item.key === "compoundInterest" && <FaPinterest className="inline-block mr-2" />}
+              {item.key === "emergencyFund" && <FaUserFriends className="inline-block mr-2" />}
+
+              {item.label}
+            </button>
+          ))}
+        </div>
+
+         {/* Modal for Tax Calculator */}
+          <Modal isOpen={openModal === "tax"} onClose={() => setOpenModal("")} title="Tax Calculator">
+            <InputField label="Income (₹)" placeholder="Enter income" value={income} onChange={setIncome} />
+            <InputField label="Tax Rate (%)" placeholder="Enter tax rate" value={taxRate} onChange={setTaxRate} />
+            <button onClick={calculateTax} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Tax
+            </button>
+            {taxAmount !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">Tax Amount: ₹{taxAmount}</p>}
+          </Modal>
+
+          {/* Modal for Capital Gain Tax Calculator */}
+          <Modal isOpen={openModal === "capitalGainTax"} onClose={() => setOpenModal("")} title="Capital Gain Tax Calculator">
+            <InputField label="Purchase Price (₹)" placeholder="Enter purchase price" value={purchasePrice} onChange={setPurchasePrice} />
+            <InputField label="Sale Price (₹)" placeholder="Enter sale price" value={salePrice} onChange={setSalePrice} />
+            <InputField label="Capital Gain Tax Rate (%)" placeholder="Enter tax rate" value={capitalGainTaxRate} onChange={setCapitalGainTaxRate} />
+            <button onClick={calculateCapitalGainTax} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Capital Gain Tax
+            </button>
+            {capitalGain > 0 && (
+              <div className="mt-3 text-lg font-semibold text-[#002147]">
+                <p>Capital Gain: ₹{capitalGain}</p>
+                <p>Capital Gain Tax: ₹{capitalGainTaxAmount}</p>
+              </div>
+            )}
+            {capitalGain === 0 && salePrice > 0 && <p className="mt-3 text-lg font-semibold text-[#e74c3c]">No Capital Gain (Loss Occurred)</p>}
+          </Modal>
+
+          {/* Budget Modal */}
+          <Modal isOpen={openModal === "budget"} onClose={() => setOpenModal("")} title="Budget Calculator">
+            <InputField label="Income (₹)" placeholder="Enter income" value={income} onChange={setIncome} />
+            <InputField label="Expenses (₹)" placeholder="Enter expenses" value={expenses} onChange={setExpenses} />
+            <button onClick={calculateBudget} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Budget
+            </button>
+            {budget !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">Remaining Budget: ₹{budget}</p>}
+          </Modal>
+
+          {/* Sales Tax Modal */}
+          <Modal isOpen={openModal === "salestax"} onClose={() => setOpenModal("")} title="Sales Tax Calculator">
+            <InputField label="Price (₹)" placeholder="Enter price" value={price} onChange={setPrice} />
+            <InputField label="Sales Tax Rate (%)" placeholder="Enter sales tax rate" value={salesTaxRate} onChange={setSalesTaxRate} />
+            <button onClick={calculateSalesTax} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Sales Tax
+            </button>
+            {salesTaxAmount !== 0 && (
+              <div className="mt-3 text-lg font-semibold text-[#002147]">
+                <p>Sales Tax Amount: ₹{salesTaxAmount}</p>
+                <p>Total Price (Including Tax): ₹{totalPrice}</p>
+              </div>
+            )}
+          </Modal>
+
+          {/* Corporate Tax Modal */}
+          <Modal isOpen={openModal === "corporateTax"} onClose={() => setOpenModal("")} title="Corporate Tax Calculator">
+            <InputField label="Taxable Income (₹)" placeholder="Enter taxable income" value={taxableIncome} onChange={setTaxableIncome} />
+            <InputField label="Corporate Tax Rate (%)" placeholder="Enter tax rate" value={corporateTaxRate} onChange={setCorporateTaxRate} />
+            <button onClick={calculateCorporateTax} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Corporate Tax
+            </button>
+            {corporateTaxAmount !== 0 && (
+              <div className="mt-3 text-lg font-semibold text-[#002147]">
+                <p>Corporate Tax: ₹{corporateTaxAmount}</p>
+              </div>
+            )}
+          </Modal>
+
+          {/* Compound Interest Modal */}
+          <Modal isOpen={openModal === "compoundInterest"} onClose={() => setOpenModal("")} title="Compound Interest Calculator">
+            <InputField label="Principal Amount (₹)" placeholder="Enter principal amount" value={principal} onChange={setPrincipal} />
+            <InputField label="Annual Interest Rate (%)" placeholder="Enter interest rate" value={interestRate} onChange={setInterestRate} />
+            <InputField label="Time (years)" placeholder="Enter time in years" value={time} onChange={setTime} />
+            <InputField label="Compounding Periods per Year" placeholder="Enter compounding periods per year" value={compoundingPeriods} onChange={setCompoundingPeriods} />
+            <button onClick={calculateCompoundInterest} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Compound Interest
+            </button>
+            {amount !== 0 && (
+              <div className="mt-3 text-lg font-semibold text-[#002147]">
+                <p>Accumulated Amount: ₹{amount}</p>
+              </div>
+            )}
+          </Modal>
+
+          {/* Emergency Fund Modal */}
+          <Modal isOpen={openModal === "emergencyFund"} onClose={() => setOpenModal("")} title="Emergency Fund Calculator">
+            <InputField label="Monthly Expenses (₹)" placeholder="Enter your monthly expenses" value={monthlyExpenses} onChange={setMonthlyExpenses} />
+            <InputField label="Months for Emergency Fund" placeholder="Enter number of months" value={monthsForFund} onChange={setMonthsForFund} />
+            <button onClick={calculateEmergencyFund} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Emergency Fund
+            </button>
+            {emergencyFund !== 0 && (
+              <div className="mt-3 text-lg font-semibold text-[#002147]">
+                <p>Recommended Emergency Fund: ₹{emergencyFund}</p>
+              </div>
+            )}
+          </Modal>
+
+          {/* Loan Modal */}
+          <Modal isOpen={openModal === "loan"} onClose={() => setOpenModal("")} title="Loan Calculator">
+            <InputField label="Loan Amount (₹)" placeholder="Enter loan amount" value={loanAmount} onChange={setLoanAmount} />
+            <InputField label="Interest Rate (%)" placeholder="Enter interest rate" value={interestRate} onChange={setInterestRate} />
+            <InputField label="Loan Term (months)" placeholder="Enter loan term" value={loanTerm} onChange={setLoanTerm} />
+            <button onClick={calculateLoan} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+              Calculate Loan
+            </button>
+            {loanRepayment !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">Monthly Payment: ₹{loanRepayment}</p>}
+          </Modal>
+
+          {/* GST Modal */}
+          <Modal isOpen={openModal === "gst"} onClose={() => setOpenModal("")} title="GST Calculator">
+            <InputField label="Income (₹)" placeholder="Enter amount" value={income} onChange={setIncome} />
+            <button onClick={calculateGST} className="w-full bg-[#9b59b6] text-white py-2 rounded-lg hover:bg-[#8e44ad] transition">
+              Calculate GST (18%)
+            </button>
+            {gstAmount !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">GST Amount: ₹{gstAmount}</p>}
+          </Modal>
+
+          {/* Modal for Comment Section */}
+          <Modal isOpen={openModal === "comments"} onClose={() => setOpenModal("")} title="Comment Section">
+            <h2 className="text-xl font-semibold text-[#002147]">Suggest a New Simulator</h2>
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Enter your suggestion..."
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F39C12] mt-3"
+            />
+            <button onClick={handleCommentSubmit} className="w-full bg-[#F39C12] text-white py-2 rounded-lg hover:bg-[#e67e22] transition mt-3">
+              Submit Comment
+            </button>
+            {comments.length > 0 && (
+              <div className="mt-4">
+                <h3 className="font-semibold text-[#002147]">Comments:</h3>
+                {comments.map((comment, index) => (
+                  <div key={index} className="mt-2 bg-gray-100 p-3 rounded-lg">
+                    <p>{comment.text}</p>
+                    <p className="text-sm text-[#6C757D] mt-1">{comment.reply}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+            {/* Quote near the close button */}
+            <div className="mt-4 text-center text-[#6C757D] text-sm italic">
+              "Your feedback shapes the future, thank you for sharing your thoughts!"
+            </div>
+          </Modal>
+
+
+        {/* Add a button to open the comment section */}
+        <div className="mt-8">
+          <button
+            onClick={() => setOpenModal("comments")}
+            className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition"
+          >
+            Suggest a Simulator
+          </button>
+        </div>
+
+       
       </div>
     </div>
   );
