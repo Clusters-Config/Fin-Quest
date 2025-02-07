@@ -8,7 +8,7 @@ const finduser = AsyncHandler( async (req,res)=>{
     const user = await SignupSchema.findOne({email});
 
    
-    res.json({login: user.login});    
+    res.json({login: user});    
 })
 
 export  {finduser};

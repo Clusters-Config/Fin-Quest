@@ -30,7 +30,7 @@ function Homepage() {
           </li>
           <li>
             <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
-            {login ? "LoggedIn" : "Login"}
+            {login ? login : "Login"}
             </Link>
           </li>
           <li>

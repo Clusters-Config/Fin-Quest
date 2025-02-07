@@ -21,7 +21,7 @@ function Login_signup() {
         axios.post("http://127.0.0.1:3007/finduser",{email})
         .then(user=>{
           console.log(user)
-          setLogin(user)})
+          setLogin(user.data.login.username)})
         .then(res => {
           console.log(res);
           navigate('/');
