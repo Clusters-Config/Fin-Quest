@@ -4,34 +4,38 @@ import { Schema } from "mongoose";
 const profile = new Schema({
     firstname:{
         type:String,
-        required:true,
+      
     },
 
     lastname:{
         type:String,
-        required:true,
+      
     },
     dob:{
-        type:Date,
-        required:true,
+        type:String,
+      
     },
     phone:{
         type:Number,
-        required:true,
+     
     },
     hobbies:{
         type:String,
-        required:true,
+       
     },
     email:{
         type:String,
-        required:true,
+
         lowercase:true
     },
+    user:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Signup"
+    }
 },
 {
     timestamps:true
 });
 
-const profileSchema = mongoose.model("profile.models",profile);
+const profileSchema = mongoose.model("profile",profile);
 export{profileSchema};

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { useAuth } from "./AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
   const [firstname, setFirstname] = useState("");
@@ -9,20 +11,23 @@ function ProfilePage() {
   const [hobbies, setHobbies] = useState("");
   const [email, setEmail] = useState("");
   const [isTermsChecked, setIsTermsChecked] = useState(false);
-  const [showTermsModal, setShowTermsModal] = useState(false); // State to manage terms modal visibility
+  const [showTermsModal, setShowTermsModal] = useState(false);
+  const {useremail} = useAuth(); 
+  const naviage = useNavigate()// State to manage terms modal visibility
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios
-      .post("http://127.0.0.1:3007/profile", {
+     const user =  axios.post("http://127.0.0.1:3007/profile", {
+        useremail,
         firstname,
         lastname,
         dob,
         phone,
         hobbies,
-        email,
       })
       .then((res) => console.log(res))
+      .then(naviage("/"))
+      .then(console.log(user))
       .catch((err) => console.log(err));
   };
 
@@ -121,20 +126,6 @@ function ProfilePage() {
                 className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
                 rows="3"
               ></textarea>
-            </div>
-
-            {/* Email */}
-            <div className="flex items-center">
-              <div className="flex-grow">
-                <label className="block text-[#6C757D] font-medium">Email</label>
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="mt-1 p-2 border rounded-md w-full focus:ring-[#F39C12] focus:border-[#F39C12] bg-[#F4F4F4] text-[#002147]"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
             </div>
 
             {/* Terms and Conditions */}

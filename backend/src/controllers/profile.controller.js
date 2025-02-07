@@ -1,36 +1,34 @@
-import { profileSchema } from "../models/profile.models.js";
 import { Apierror } from "../utils/Apierror.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
 import { SignupSchema } from "../models/signup.js";
 
-const profile_user = AsyncHandler(async (req,res)=>{
-    const{firstname,lastname,dob,phone,hobbies,email} = req.body;
+const profile_user = AsyncHandler(async (req, res) => {
+    
 
-    if([firstname,lastname,dob,phone,hobbies,email].some((exist)=> exist?.trim() === ""))
-        throw new Apierror(404,"All fields required");
+    
 
-    const existuser = await SignupSchema.findOne({
-        $or:[{email}]
-    });
+    const { useremail, firstname, lastname, dob, phone, hobbies } = req.body;
 
-    if(existuser)throw new Apierror(404, "User already exist");
-    let profile = await  new profileSchema({
+    if ([useremail ,firstname, lastname, dob, phone, hobbies].some((exist) => exist?.trim() === ""))
+        throw new Apierror(404, "All fields required");
+
+    const user = await SignupSchema.findOne({ 
+      email: useremail });
+
+    // Store the entire profile data in the SignupSchema
+    user.profile = {
         firstname,
         lastname,
         dob,
         phone,
         hobbies,
-        email
-    });
+    };
 
-    await profile.save();
-console.log(firstname+" Updated successfully");
+    await user.save();
 
-res.json(profile);
+    console.log(useremail + " Profile Updated Successfully");
 
+    res.json(user);
 });
 
-
-
-
-export{profile_user}
+export { profile_user };

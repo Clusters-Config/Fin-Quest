@@ -20,6 +20,9 @@ const Signup = AsyncHandler(async (req,res)=>{
     });
 
     await newSignup.save();
+
+    
+
 console.log(username+" Created successfully");
 
 res.json(newSignup);
