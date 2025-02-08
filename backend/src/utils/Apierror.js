@@ -4,6 +4,7 @@ class Apierror extends Error{
         this.statuscode = statuscode;
         this.message = message;
         console.log(statuscode,message);
+        return 0;
     }
 }
    

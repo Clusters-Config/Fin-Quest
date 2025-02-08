@@ -1,35 +1,102 @@
 import { Apierror } from "../utils/Apierror.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
-import { SignupSchema, } from "../models/signup.js";
+import { SignupSchema } from "../models/signup.js";
+import  jwt  from "jsonwebtoken";
 
-const userlogin  = AsyncHandler( async(req,res)=>{
+import { app } from "../app.js";
 
-    const {email,password} = req.body;
+const userlogin = AsyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
-    if([email,password].some((exist)=> exist.trim()=== "")){
-        throw new Apierror(404,"All fileds required");
+  if ([email, password].some((exist) => exist?.trim() === "")) {
+    throw new Apierror(404, "All fileds required");
+  }
+
+  const finduser = await SignupSchema.findOne({
+    $and: [{ email }],
+  });
+
+  if (!finduser) {
+    throw new Apierror(404, "User not found");
+  }
+
+  const userpassword = finduser.password;
+
+  if (userpassword !== password) {
+    res.json({valid: true})
+    throw new Apierror(404, "Password incorrect")
+  };
+
+  const accessToken = jwt.sign({ email : email ,password: password }, "json-access-token", {
+    expiresIn: "3m",
+  });
+  const refreshToken = jwt.sign({ email: email ,password :password}, "json-refresh-token", {
+    expiresIn: "10m",
+  });
+
+  res.cookie("accessToken", accessToken, {
+    maxAge: 60000,
+    httpOnly: false,
+    secure: true,
+    sameSite: "strict",
+  });
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: 600000,
+    secure: true, 
+    httpOnly: false,
+    sameSite: "strict",
+  });
+
+  const verifytoken = (req, res, next) => {
+    const accesstoken = req.cookies.accessToken;
+    if (!accesstoken) {
+        if(renewToken()){
+            next();
+        }
+        
+    } else {
+      jwt.verify(accesstoken, "json-access-token", (err, decode) => {
+        if (err) {
+          return res.json({ valid: false, message: "Invalid token" });
+        } else {
+          req.email = jwt.decode(accessToken).email;
+          next();
+        }
+      });
     }
+  };
 
-    const finduser = await SignupSchema.findOne({
-        $and:[{email}]
-    });
-
-    if(!finduser){
-        throw new Apierror(404,"User not found");
+  const renewToken = (req, res, next) => {
+    const refreshtoken = req.cookies.refreshToken;
+    let exist = false;
+    if (!refreshtoken) {
+      return res.json({ valid: false, message: "Invalid token" });
+    } else {
+      jwt.verify(refreshtoken, "json-refresh-token", (err, decode) => {
+        if (err) {
+          return res.json({ valid: false, message: "Invalid token" });
+        } else {
+          const Email = jwt.decode(refreshToken).email;
+          const accessToken = jwt.sign({ email: Email }, "json-access-token", {
+            expiresIn: "3m",
+          });
+          res.cookie("accessToken", accessToken, {
+            maxAge: 18000,
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict",
+          });
+          exist = true;
+          res.json({ valid: true, message: "Token Renewed" });
+        }
+      });
     }
+    return exist;
+  }
 
+  console.log(email + " Login successful");
 
-    
-    const userpassword = finduser.password;
-    if(userpassword !== password)
-        throw new Apierror(403,"Password incorrect");
-    
-
-    console.log(email+" Login successful");
-    res.send("Login successful");
-
-
-
+  res.send("Login successful");
 });
 
-export {userlogin};
+export { userlogin };

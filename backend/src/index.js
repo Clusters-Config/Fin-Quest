@@ -7,11 +7,11 @@ dotenv.config({
     path:"/Fin-Quest/backend/.env"
 });
 
-const hostname = "127.0.0.1";
+const hostname = "localhost";
 
 DbConnect();
 
-app.listen(process.env.PORT || 5000, () =>{      
+app.listen( process.env.PORT || 5000, () =>{      
     console.log("Connected DB");   
     console.log(`Server running at http://${hostname}:${process.env.PORT}`);
 });

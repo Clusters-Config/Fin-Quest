@@ -8,22 +8,28 @@ function Login_signup() {
       const [password,setpassword] = useState();
       const { login, setLogin, useremail , setuseremail } = useAuth();
       const navigate = useNavigate();
-
+      axios.defaults.withCredentials = true;
+      let valid = false;
+      
       const handleSubmit = (e) =>{
-        
+       
         e.preventDefault()
         
-        axios.post("http://127.0.0.1:3007/login",{email,password})
-        axios.post("http://127.0.0.1:3007/finduser",{email})
+        axios.post("http://localhost:4047/login",{email,password})
+        .then(res=>{
+          console.log(res.data.valid)
+          if(res.data.valid){
+            navigate("/login");
+          }
+        })
+        axios.post("http://localhost:4047/finduser", { email } )
         .then(user=>{
-          console.log(user)
           setLogin(user.data.login.username)
           let mail = user.data.login.email
           setuseremail(mail)
          }
         )
         .then(res => {
-          console.log(res);
           navigate('/');
         })
         .catch(err => console.log(err))

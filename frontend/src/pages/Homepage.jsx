@@ -1,14 +1,41 @@
 import { Link } from "react-router-dom"; 
-import { useAuth } from "./AuthContext";
 import { FaUserCircle } from "react-icons/fa";
+import { useEffect ,useState } from "react";
+import axios from "axios";
+import { useAuth } from "./AuthContext"
+import { useNavigate } from "react-router-dom";
+  
 
 // import { useState } from "react";
 
 
 
 function Homepage() {
+  const {setuseremail} = useAuth();
+  const [email ,setEmail] = useState("");
+  const [password ,setpassword] = useState("");
+  const navigate = useNavigate();
+  useEffect(()=>{
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:4047/verify",{withCredentials: true})
+    .then(res=>{
+      setEmail(res.data?.email),
+      setpassword(res.data?.password)
+      setuseremail(res.data?.email)
+    })
+    
+    
+  },[])
 
-  const { login } = useAuth();
+  useEffect(() => {
+    if(email){
+    axios.post("http://localhost:4047/login",{email,password})
+    .then(res=>{
+      if(!res.data.valid){
+        navigate("/login")
+      }
+    })
+  }}, []);
 
 
   return (
@@ -30,7 +57,7 @@ function Homepage() {
           </li>
           <li>
             <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
-            {login ? login : "Login"}
+            {email ? email :"Login"}
             </Link>
           </li>
           <li>
