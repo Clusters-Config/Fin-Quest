@@ -94,9 +94,13 @@ const SavingsCalculator = () => {
         />
       </div>
 
-      {/* Monthly Savings */}
+      {/* Dynamic Input based on Investment Type */}
       <div className="mt-4">
-        <label className="text-[#6C757D]">How much can you save per month? ₹</label>
+        <label className="text-[#6C757D]">
+          {investmentType === "swp"
+            ? "Enter the monthly withdrawal amount: ₹"
+            : "Enter the monthly savings amount: ₹"}
+        </label>
         <input
           type="number"
           value={monthlySaving}
