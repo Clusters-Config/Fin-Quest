@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Savings Calculator Component for SIP, Bank Interest, and Insurance
 const SavingsCalculator = () => {
   const [goal, setGoal] = useState("");
   const [monthlySaving, setMonthlySaving] = useState("");
@@ -33,13 +32,33 @@ const SavingsCalculator = () => {
           return amount;
         };
         totalAmount = compoundInterest(monthlySaving, interestRate, years);
-      } else if (investmentType === "insurance") {
-        // For Insurance, let's assume a constant 5% return (as an example).
-        const fixedReturnRate = 5;
-        totalAmount =
-          monthlySaving *
-          ((Math.pow(1 + fixedReturnRate / 100, years) - 1) /
-            (fixedReturnRate / 100));
+      } else if (investmentType === "swp") {
+        // For SWP, assume the user withdraws a fixed amount each month
+        // SWP calculation: Use compound interest for balance and subtract withdrawals over time
+
+        // Convert interest rate to monthly rate
+        const monthlyInterestRate = interestRate / 12 / 100;
+
+        // Total number of months for the investment
+        const numberOfMonths = years * 12;
+
+        // Initial investment for SWP
+        let initialInvestment = parseFloat(goal); // Assuming goal is the lump sum initial investment for SWP
+
+        // Monthly withdrawal
+        const monthlyWithdrawal = parseFloat(monthlySaving);
+
+        // Calculate the future value of the initial investment with compound interest
+        let finalAmount = initialInvestment;
+
+        for (let i = 0; i < numberOfMonths; i++) {
+          // Apply interest
+          finalAmount *= (1 + monthlyInterestRate);
+          // Withdraw monthly
+          finalAmount -= monthlyWithdrawal;
+        }
+
+        totalAmount = finalAmount;
       }
 
       setAmountSaved(totalAmount);
@@ -60,7 +79,7 @@ const SavingsCalculator = () => {
         >
           <option value="sip">SIP (Systematic Investment Plan)</option>
           <option value="bank">Bank Savings Account</option>
-          <option value="insurance">Insurance Savings</option>
+          <option value="swp">SWP (Systematic Withdrawal Plan)</option>
         </select>
       </div>
 
@@ -124,6 +143,9 @@ const SavingsCalculator = () => {
   );
 };
 
+ 
+
+
 const SavingEssentials = () => {
   const navigate = useNavigate();
   const [quizCompleted, setQuizCompleted] = useState(false);
@@ -160,6 +182,7 @@ const SavingEssentials = () => {
             prepare for future expenses, and reach your goals, whether it’s buying
             your first car, going on a school trip, or saving for college.
             Learning how to save now will set you up for a more financially
+            
             secure future!
           </p>
         </section>
