@@ -19,7 +19,7 @@ const Learning_paths = () => {
       id: 1,
       title: "Basic Terminologies",
       topics: [
-        { name: "Basic Finance Terminology", route: "/TerminologyPage" },
+        { name: "Goldern rules of Accounting", route: "/TerminologyPage" },
         { name: "Credit and Debit", route: "/Credit_Debit" },
       ],
     },{

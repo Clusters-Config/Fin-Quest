@@ -106,6 +106,11 @@ const StockMarketBasics = () => {
           <ul className="list-disc list-inside mt-3 text-[#6C757D]">
             <li><strong>Common Stock:</strong> This gives you voting rights and potential dividends.</li>
             <li><strong>Preferred Stock:</strong> This typically doesn’t come with voting rights, but offers fixed dividends.</li>
+            <li><strong>Primary Market:</strong> This is where companies issue new stocks to raise capital. It is also called the "new issue market." In this market, companies sell shares to the public for the first time through an Initial Public Offering (IPO).</li>
+            <li><strong>Secondary Market:</strong> After stocks are issued in the primary market, they are traded in the secondary market. This is where the buying and selling of existing shares happen. Examples include major stock exchanges like the NYSE and NASDAQ.</li>
+            <li><strong>Over-the-Counter (OTC) Market:</strong> Stocks traded in the OTC market are not listed on traditional exchanges. These are usually smaller companies or those that don’t meet the listing requirements of major exchanges.</li>
+            <li><strong>Bond Market:</strong> While technically not part of the stock market, the bond market deals with the buying and selling of government and corporate bonds. Bonds can be seen as an alternative investment, often used in conjunction with stocks.</li>
+            <li><strong>International Stock Market:</strong> Investors can also buy stocks listed in international markets such as the London Stock Exchange (LSE) or the Tokyo Stock Exchange (TSE). These provide opportunities for global diversification.</li>
           </ul>
         </section>
 

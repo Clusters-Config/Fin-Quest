@@ -60,8 +60,8 @@ const CreditDebitModule = () => {
           equation always stays in balance. For example, when a business receives cash from a customer for a product sold:
         </p>
         <pre className="bg-gray-100 p-4 rounded-lg mb-4">
-          Debit: Cash (Asset) increases
-          Credit: Sales Revenue (Equity) increases
+          <p>Debit: Cash [Real Account Rule]</p>
+          <p>Credit: Sales [Nominal Account]</p>
         </pre>
         <p className="text-[#6C757D] mb-6">
           Notice that one side of the transaction increases an asset (cash), while the other side increases equity (sales revenue).

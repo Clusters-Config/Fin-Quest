@@ -1,24 +1,72 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Simple Savings Calculator Component
+// Savings Calculator Component for SIP, Bank Interest, and Insurance
 const SavingsCalculator = () => {
   const [goal, setGoal] = useState("");
   const [monthlySaving, setMonthlySaving] = useState("");
-  const [months, setMonths] = useState(null);
+  const [interestRate, setInterestRate] = useState("");
+  const [years, setYears] = useState("");
+  const [investmentType, setInvestmentType] = useState("sip");
+  const [amountSaved, setAmountSaved] = useState(null);
 
-  const calculateTime = () => {
-    if (goal && monthlySaving) {
-      const monthsRequired = goal / monthlySaving;
-      setMonths(monthsRequired);
+  const calculateSavings = () => {
+    if (goal && monthlySaving && interestRate && years) {
+      let totalAmount = 0;
+
+      // For SIP or Bank Savings interest calculation
+      if (investmentType === "sip") {
+        // Formula for SIP returns: FV = P * [(1 + r)^n - 1] / r
+        const monthlyInterestRate = interestRate / 12 / 100; // Monthly interest rate
+        const numberOfMonths = years * 12; // Total months
+        totalAmount =
+          (monthlySaving *
+            ((Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1) /
+              monthlyInterestRate)) *
+          (1 + monthlyInterestRate); // Future Value of SIP
+      } else if (investmentType === "bank") {
+        // Formula for simple compound interest: A = P(1 + r/n)^(nt)
+        const compoundInterest = (principal, rate, time) => {
+          const amount =
+            principal *
+            Math.pow(1 + rate / 100, time); // Compound Interest formula
+          return amount;
+        };
+        totalAmount = compoundInterest(monthlySaving, interestRate, years);
+      } else if (investmentType === "insurance") {
+        // For Insurance, let's assume a constant 5% return (as an example).
+        const fixedReturnRate = 5;
+        totalAmount =
+          monthlySaving *
+          ((Math.pow(1 + fixedReturnRate / 100, years) - 1) /
+            (fixedReturnRate / 100));
+      }
+
+      setAmountSaved(totalAmount);
     }
   };
 
   return (
     <div className="mb-8">
       <h3 className="text-2xl font-semibold text-[#002147]">Savings Calculator</h3>
+
+      {/* Select Investment Type */}
       <div className="mt-4">
-        <label className="text-[#6C757D]">Enter your savings goal: $</label>
+        <label className="text-[#6C757D]">Select the investment type:</label>
+        <select
+          className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
+          value={investmentType}
+          onChange={(e) => setInvestmentType(e.target.value)}
+        >
+          <option value="sip">SIP (Systematic Investment Plan)</option>
+          <option value="bank">Bank Savings Account</option>
+          <option value="insurance">Insurance Savings</option>
+        </select>
+      </div>
+
+      {/* Goal */}
+      <div className="mt-4">
+        <label className="text-[#6C757D]">Enter your savings goal: ₹</label>
         <input
           type="number"
           value={goal}
@@ -26,8 +74,10 @@ const SavingsCalculator = () => {
           className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
         />
       </div>
+
+      {/* Monthly Savings */}
       <div className="mt-4">
-        <label className="text-[#6C757D]">How much can you save per month? $</label>
+        <label className="text-[#6C757D]">How much can you save per month? ₹</label>
         <input
           type="number"
           value={monthlySaving}
@@ -35,15 +85,39 @@ const SavingsCalculator = () => {
           className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
         />
       </div>
+
+      {/* Interest Rate */}
+      <div className="mt-4">
+        <label className="text-[#6C757D]">Enter the expected annual interest rate (%):</label>
+        <input
+          type="number"
+          value={interestRate}
+          onChange={(e) => setInterestRate(e.target.value)}
+          className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
+        />
+      </div>
+
+      {/* Number of Years */}
+      <div className="mt-4">
+        <label className="text-[#6C757D]">Enter the number of years:</label>
+        <input
+          type="number"
+          value={years}
+          onChange={(e) => setYears(e.target.value)}
+          className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
+        />
+      </div>
+
       <button
-        onClick={calculateTime}
+        onClick={calculateSavings}
         className="mt-4 bg-[#F39C12] hover:bg-[#A8DADC] text-white px-6 py-2 rounded-lg font-bold"
       >
-        Calculate Time
+        Calculate Savings
       </button>
-      {months && (
+
+      {amountSaved && (
         <div className="mt-4 text-lg text-[#6C757D]">
-          You will reach your goal in approximately {Math.ceil(months)} months.
+          Total savings after {years} years: ₹{amountSaved.toFixed(2)}
         </div>
       )}
     </div>
@@ -106,6 +180,26 @@ const SavingEssentials = () => {
           </ul>
         </section>
 
+        {/* Avenues Section */}
+      <div className="mt-8 text-[#6C757D]">
+      <h2 className="text-3xl font-semibold text-[#002147]">Different Saving Avenues</h2>
+        <p className="mt-3">
+          There are several avenues through which you can save and invest your money. Here are some common options:
+        </p>
+        <ul className="list-disc list-inside mt-3">
+          <li>
+            <strong>SIP (Systematic Investment Plan)</strong>: A method of investing in mutual funds through monthly contributions. It allows you to invest small amounts regularly and potentially grow your wealth over time. SIPs can provide higher returns but come with market risks.
+          </li>
+          <li>
+            <strong>Bank Savings Account</strong>: A simple option where your savings earn interest. The interest rates are generally lower, but it offers safety and liquidity.
+          </li>
+          <li>
+            <strong>Insurance</strong>: Insurance savings products, like life insurance or endowment policies, combine savings and protection. They provide financial security for your future and can offer returns after a certain period.
+          </li>
+        </ul>
+      </div>
+      
+
         {/* Savings Calculator */}
         <SavingsCalculator />
 
@@ -119,11 +213,13 @@ const SavingEssentials = () => {
           </p>
           <ol className="list-decimal list-inside mt-3 text-[#6C757D]">
             <li>Create a budget to track how much you’re spending versus how much you’re saving.</li>
-            <li>Set specific goals, like saving $10 per week for a month, or saving for a particular item.</li>
+            <li>Set specific goals, like saving ₹1000 per week for a month, or saving for a particular item.</li>
             <li>Put your money into a safe place, such as a savings account or a piggy bank, so you don’t spend it right away.</li>
             <li>Review your progress and adjust your goals if needed!</li>
           </ol>
         </section>
+
+        
 
         {/* Budgeting for Students */}
         <section className="mb-8">
@@ -148,7 +244,7 @@ const SavingEssentials = () => {
           </p>
           <ul className="list-disc list-inside mt-3 text-[#6C757D]">
             <li>Choose a goal that’s important to you and figure out how much you need to save.</li>
-            <li>Break your goal into smaller steps—like saving $20 a month for a new phone.</li>
+            <li>Break your goal into smaller steps—like saving ₹2000 a month for a new phone.</li>
             <li>Stay consistent. Even small, regular savings can add up to a big amount!</li>
           </ul>
         </section>
@@ -161,10 +257,11 @@ const SavingEssentials = () => {
           </p>
           <ul className="list-disc list-inside mt-3 text-[#6C757D]">
             <li>The first banknotes were used in China over 1,000 years ago!</li>
-            <li>Saving just $5 a week can add up to over $250 in a year.</li>
+            <li>Saving just ₹200 a week can add up to over ₹10,000 in a year.</li>
             <li>Did you know? The first piggy banks were made from clay in the 1800s.</li>
           </ul>
         </section>
+        
 
         {/* Key Takeaways */}
         <section className="mb-8">
