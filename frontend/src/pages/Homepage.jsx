@@ -25,7 +25,7 @@ function Homepage() {
     })
     
     
-  },[])
+  })
 
   useEffect(() => {
     if(email){
@@ -35,7 +35,7 @@ function Homepage() {
         navigate("/login")
       }
     })
-  }}, []);
+  }},[]);
 
 
   return (
