@@ -10,28 +10,29 @@ function Login_signup() {
       const navigate = useNavigate();
       axios.defaults.withCredentials = true;
       let valid = false;
+      let navi = true;
       
-      const handleSubmit = (e) =>{
+      const handleSubmit = async(e) =>{
        
         e.preventDefault()
         
-        axios.post("http://localhost:4047/login",{email,password})
+         await axios.post("http://localhost:4047/login",{email,password})
         .then(res=>{
-          if(res.data.valid){
+          console.log(res.data.valid)
+          valid = res.data.valid
+          if(valid){
             navigate("/login");
-          }
+             navi = false;
+             alert("Email or password incorrect")
+          }   
         })
-        axios.post("http://localhost:4047/finduser", { email } )
+        await axios.post("http://localhost:4047/finduser", { email : email } )
         .then(user=>{
-          setLogin(user.data.login.username)
-          let mail = user.data.login.email
+          let mail = user.data.user.email
           setuseremail(mail)
          }
         )
-        .then(res => {
-          navigate('/');
-        })
-        .catch(err => console.log(err))
+        if(navi){navigate("/")}
       }
  
 

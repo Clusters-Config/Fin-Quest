@@ -1,20 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 
+
 function ProfilePage() {
+  const [usersemail, setusersemail] = useState("");
+  const [ufirstname, setufirstname] = useState();  
+  const [ulastname, setulastname] = useState("");
+  const [udob, setudob] = useState("");
+  const [uphone, setuphonenumber] = useState();
+  const [uhobbies, setuhobbies] = useState("");
+
+  useEffect(()=>{
+    axios.get("http://localhost:4047/verify")
+    .then(res=>console.log(setusersemail(res.data.email)))
+  },[])
+ 
+
+  useEffect(()=>{
+    axios.post("http://localhost:4047/finduser", {useremail} )
+    .then(res=>{
+      setufirstname(res.data.user.profile[0].firstname)
+      setulastname(res.data.user.profile[0].lastname)
+      setudob(res.data.user.profile[0].dob)
+      setuphonenumber(res.data.user.profile[0].phone)
+      setuhobbies(res.data.user.profile[0].hobbies)
+      console.log(ufirstname)   
+      console.log(res)}) 
+  })   
+
+  useEffect(() => {
+    setFirstname(ufirstname),
+    setLastname(ulastname) // Sync whenever ufirstname updates
+    setDob(udob) 
+    setPhonenumber(uphone)
+    setHobbies(uhobbies)
+                      // Sync whenever ufirstname updates
+  },[ufirstname,ulastname,udob,uphone,uhobbies]);    
+  console.log(ufirstname)
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [dob, setDob] = useState("");
-  const [phone, setPhonenumber] = useState("");
+  const [phone, setPhonenumber] = useState();
   const [hobbies, setHobbies] = useState("");
-  const [email, setEmail] = useState("");
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
   const {useremail} = useAuth(); 
   const naviage = useNavigate()// State to manage terms modal visibility
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
      const user =  axios.post("http://127.0.0.1:4047/profile", {

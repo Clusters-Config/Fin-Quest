@@ -6,7 +6,7 @@ const profile_user = AsyncHandler(async (req, res) => {
     
     const { useremail, firstname, lastname, dob, phone, hobbies } = req.body;
 
-    if ([useremail ,firstname, lastname, dob, phone, hobbies].some((exist) => exist?.trim() === ""))
+    if ([useremail ,firstname, lastname, dob, phone, hobbies].some((exist) => String(exist).trim() === ""))
         throw new Apierror(404, "All fields required");
 
     const user = await SignupSchema.findOne({ 

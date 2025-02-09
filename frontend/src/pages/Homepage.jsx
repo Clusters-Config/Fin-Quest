@@ -11,31 +11,32 @@ import { useNavigate } from "react-router-dom";
 
 
 function Homepage() {
-  const {setuseremail} = useAuth();
+  const {useremail,setuseremail} = useAuth();
   const [email ,setEmail] = useState("");
   const [password ,setpassword] = useState("");
   const navigate = useNavigate();
+
   useEffect(()=>{
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify",{withCredentials: true})
     .then(res=>{
       setEmail(res.data?.email),
       setpassword(res.data?.password)
-      setuseremail(res.data?.email)
+      setuseremail(res.data?.email) 
     })
-    
-    
   })
 
   useEffect(() => {
     if(email){
     axios.post("http://localhost:4047/login",{email,password})
     .then(res=>{
-      if(!res.data.valid){
-        navigate("/login")
+      if(res.data.valid){
+        navigate("/")
       }
-    })
-  }},[]);
+    })  
+  }});
+
+  
 
 
   return (
