@@ -2,14 +2,14 @@ import jwt from "jsonwebtoken";
 
 const VerifyUser = (req, res, next) => {
     const accessToken = req.cookies?.accessToken;
-
+    const renewToken = req.cookies?.renewToken;
     if (!accessToken) {
-        return res.status(401).json({ error: "Access token missing" });
+         res.status(401).json({ error: "Access token missing" });
     }
 
     try {
         const decoded = jwt.verify(accessToken, "json-access-token");
-        res.json({valid:true ,email:decoded.email , password:decoded.password})
+        res.status(200).json({valid:true ,email:decoded.email , password:decoded.password})
         next();
     } catch (error) {
         return res.status(401).json({ error: "Invalid or expired token" });
