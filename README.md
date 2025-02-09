@@ -1,5 +1,11 @@
 # Fin-Quest - Finance Based
 
+**If the error: Port already in use occur, run this**
+```
+Get-Process -Id (Get-NetTCPConnection -LocalPort 5173).OwningProcess | Stop-Process -Force
+```
+-Change the port you want to kill here it is default as 5173
+
 ## I. Project Setup and Structure
 
 1. **Initialize Project:**
