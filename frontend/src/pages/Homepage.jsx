@@ -4,6 +4,7 @@ import { useEffect ,useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext"
 import { useNavigate } from "react-router-dom";
+
   
 
 // import { useState } from "react";
@@ -11,10 +12,11 @@ import { useNavigate } from "react-router-dom";
 
 
 function Homepage() {
-  const {useremail,setuseremail} = useAuth();
+  const {useremail,setuseremail,login} = useAuth();
   const [email ,setEmail] = useState("");
   const [password ,setpassword] = useState("");
   const navigate = useNavigate();
+  const[showtoast , setshowtoast] = useState(false)
 
   useEffect(()=>{
     axios.defaults.withCredentials = true;
@@ -24,24 +26,27 @@ function Homepage() {
       setpassword(res.data?.password)
       setuseremail(res.data?.email) 
     })
-  })
+  },[])
 
   useEffect(() => {
     if(email){
     axios.post("http://localhost:4047/login",{email,password})
     .then(res=>{
       if(res.data.valid){
-        navigate("/")
-      }
+        navigate("/")}
+        if(!showtoast){
+
+          setshowtoast(true);
+        }
     })  
   }});
 
-  
+  console.log(login)
+
 
 
   return (
     <div className="bg-white min-h-screen flex flex-col">
-      
       {/* Navigation Bar */}
       <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
         <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
@@ -65,6 +70,7 @@ function Homepage() {
             <Link to="/Profile" className="text-white hover:text-[#F39C12] transition duration-300">
               <FaUserCircle size={24} />
             </Link>
+         
           </li>
         </ul>
       </nav>

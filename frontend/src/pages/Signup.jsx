@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast ,Slide ,Bounce} from 'react-toastify';
 
 function Signup() {
   const [username, setusername] = useState();
@@ -15,11 +16,11 @@ function Signup() {
       .then((res) => {
         if (res.status === 200) {
           navigate("/login");
-          alert("Signup Successful");
+          toast.success("Signup Successful")
         }
       })
       .catch((err) => {
-        alert("User alredy exist or Something went wrong");
+        toast.error("User alredy exist")
         console.log(err);
       });
   };
@@ -58,6 +59,7 @@ function Signup() {
               >
                 Sign Up
               </button>
+              <ToastContainer  transition={Bounce}/>
               <h2 className="mt-3 text-sm text-[#002147] text-center">
                 Already an User!
                 <a href="/login"> Sign In</a>

@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
+import { ToastContainer, toast ,Slide ,Bounce} from 'react-toastify';
+
 
 function Login_signup() {
   const [email,setemail] = useState();
@@ -23,7 +25,10 @@ function Login_signup() {
           if(valid){
             navigate("/login");
              navi = false;
-             alert("Email or password incorrect")
+             toast.error('Email or password incorrect',{
+             });
+           
+            // alert("Email or password incorrect")
           }   
         })
         await axios.post("http://localhost:4047/finduser", { email : email } )
@@ -32,7 +37,9 @@ function Login_signup() {
           setuseremail(mail)
          }
         )
-        if(navi){navigate("/")}
+        if(navi){
+          navigate("/") 
+        }
       }
  
 
@@ -73,6 +80,7 @@ function Login_signup() {
               >
                 Login
               </button>
+              <ToastContainer  transition={Bounce}/>
               <h2 className="mt-3 text-sm text-[#002147]">
                 No Account?
                 <a href="signup">Create one</a>

@@ -17,6 +17,7 @@ const userlogin = AsyncHandler(async (req, res) => {
   });
 
   if (!finduser) {
+    res.json({ valid: true });
     throw new Apierror(404, "User not found");
   }
 
