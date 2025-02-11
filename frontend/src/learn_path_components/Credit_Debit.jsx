@@ -1,11 +1,11 @@
 import React from 'react';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 const CreditDebitModule = () => {
   const navigate = useNavigate();
-  const mod = 1; 
-    const path1 = "Credit_debit";
-    const location = useLocation();
+  // const mod = 1; 
+  //   // const path1 = "Credit_debit";
+  //   const location = useLocation();
 
   const handleQuizButtonClick = () => {
     // Navigate to the quiz page for Credit and Debit

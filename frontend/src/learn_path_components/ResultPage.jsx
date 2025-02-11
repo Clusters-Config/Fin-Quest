@@ -6,7 +6,7 @@ const ResultPage = () => {
   const location = useLocation();
   const { score, total ,mod ,page} = location.state || { score: 0, total: 0 };
   const [email,setemail] = useState("")
-  console.log(score)
+  console.log(score*30)
   console.log(mod+" "+page)
 
   useEffect(()=>{
