@@ -29,20 +29,21 @@ const userlogin = AsyncHandler(async (req, res) => {
   }
 
   const username = finduser.username;
-  const firstname = finduser.firstname;
-  const lastname = finduser.lastname;
-  const dob = finduser.dob;
-  const phone = finduser.phone;
+  const firstname = finduser.profile[0].firstname;
+  const lastname = finduser.profile[0].lastname;
+  const dob = finduser.profile[0].dob;
+  const phone = finduser.profile[0].phone;
+  const hobbies = finduser.profile[0].hobbies;
 
   const accessToken = jwt.sign(
-    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password },
+    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
     "json-access-token",
     {
       expiresIn: "3m",
     },
   );
   const refreshToken = jwt.sign(
-    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password },
+    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
     "json-refresh-token",
     {
       expiresIn: "10m",

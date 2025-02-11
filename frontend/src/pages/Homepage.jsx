@@ -23,13 +23,12 @@ function Homepage() {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify",{withCredentials: true})
     .then(res=>{
-      console.log(res)
       setEmail(res.data?.email),
       setpassword(res.data?.password)
       setuseremail(res.data?.email) 
       setusername(res.data?.username)
     })
-  },[])
+  })
 
   useEffect(() => {
     if(email){

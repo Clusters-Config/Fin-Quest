@@ -8,19 +8,14 @@ const ProfilePage = () => {
   const[phone,setphone] = useState();
   const [firstname , setfirstname] = useState("")
   const [lastname, setlastname] = useState("")
-  const{useremail} = useAuth()
   axios.defaults.withCredentials = true
   useEffect(()=>{
-    console.log("verify")
     axios.get("http://localhost:4047/verify").then(res=>{
-      console.log("res"+res)
       setemail(res.data.email)
-      console.log(res)
     })
   })
 
   useEffect(()=>{
-    console.log(useremail)
     axios.post("http://localhost:4047/finduser",{email})
     .then(res=>{
       console.log(res.data);
@@ -28,8 +23,8 @@ const ProfilePage = () => {
       setphone(res.data.user.profile[0].phone)
       setfirstname(res.data.user.profile[0].firstname)
       setlastname(res.data.user.profile[0].lastname)
-      console.log(res.data.user.profile[0].dob)
-      console.log(udob)
+
+   
     })
   })
 
