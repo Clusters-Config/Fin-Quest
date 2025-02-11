@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
+import axios from "axios";
 
 const ResultPage = () => {
   const location = useLocation();
-  const { score, total } = location.state || { score: 0, total: 0 };
+  const { score, total ,mod ,page} = location.state || { score: 0, total: 0 };
+  const [email,setemail] = useState("")
+  console.log(score)
+  console.log(mod+" "+page)
+
+  useEffect(()=>{
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:4047/verify")
+    .then(res=>{
+      setemail(res.data.email)
+    })
+  })
+  console.log(email)
+  useEffect(()=>{
+    axios.defaults.withCredentials = true;
+    axios.post(`http://localhost:4047/${mod}/${page}`,{score ,email})
+  })
+  
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F4F4F4] to-[#F8FAFC] p-6 flex justify-center items-center">

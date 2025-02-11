@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function QuizApp() {
   const { quizId } = useParams(); // Get the dynamic quizId from URL
@@ -7,7 +8,10 @@ function QuizApp() {
   const [quizData, setQuizData] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [loading, setLoading] = useState(true);
+  const location = useLocation()
+  const{mod,page} = location.state;
 
+  console.log(mod+" "+page)
   // Fetch the quiz data based on the quizId from the URL
   useEffect(() => {
     setLoading(true);
@@ -46,7 +50,7 @@ function QuizApp() {
     });
 
     // Pass the score to the result page via navigation
-    navigate("/result", { state: { score: calculatedScore, total: quizData.length } });
+    navigate("/result", { state: { score: calculatedScore, total: quizData.length , mod:mod , page:page} });
   };
 
   return (
