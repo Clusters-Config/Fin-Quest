@@ -271,14 +271,14 @@ function Stories() {
         <p className="text-lg mt-4">Learn from real-world financial experiences!</p>
       </header>
 
-      <div className="max-w-8xl mx-auto mt-15">
+      <div className="max-w-8xl mx-auto mt-15 ">
         {/* Financial Stories */}
-        <h2 className="text-2xl font-bold text-[#002147] mb-5">📖 Financial Success & Failure Stories</h2>
-        <div className="flex overflow-x-auto space-x-6 py-6">
+        <h2 className="text-2xl font-bold text-[#002147] mb-10 mt-10 text-center ">📖 Financial Success & Failure Stories</h2>
+        <div className="flex overflow-x-auto space-x-6 py-6 bg-slate-300">
           {stories.map((story) => (
             <div
               key={story.id}
-              className="flex-none bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 w-80"
+              className="flex-none bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 w-80 ml-4"
             >
               <h3 className={`text-xl font-semibold ${story.color} text-white p-2 rounded`}>
                 {story.title}
@@ -291,12 +291,12 @@ function Stories() {
         </div>
 
         {/* Case Studies */}
-        <h2 className="text-2xl font-bold text-[#002147] mt-10 mb-5">📊 Case Studies on Financial Management</h2>
-        <div className="flex overflow-x-auto space-x-6 py-6">
+        <h2 className="text-2xl font-bold text-[#002147] mt-10 mb-10 text-center">📊 Case Studies on Financial Management</h2>
+        <div className="flex overflow-x-auto space-x-6 py-6 bg-slate-300">
           {caseStudies.map((caseStudy) => (
             <div
               key={caseStudy.id}
-              className="flex-none bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 w-80"
+              className="flex-none bg-white p-5 rounded-lg shadow-lg hover:shadow-2xl transition duration-300 w-80 ml-4"
             >
               <h3 className={`text-xl font-semibold ${caseStudy.color} text-white p-2 rounded`}>
                 {caseStudy.title}
