@@ -72,6 +72,12 @@ function FeaturesPage() {
         >
           FinFlux
         </Link>
+        <Link
+          to="/SideHustleFinder"
+          className="block bg-[#F39C12] text-white py-4 px-8 rounded-lg shadow-lg hover:bg-[#1F4068] hover:scale-105 transform transition duration-300 text-center"
+        >
+          SideHustleFinder
+        </Link>
       </section>
 
       {/* Footer */}
