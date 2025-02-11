@@ -23,7 +23,7 @@ function FeaturesPage() {
 
 
       {/* Features Section */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 py-10 max-w-5xl mx-auto mt-20"> {/* Increased margin-top */}
+      <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 max-w-5xl mx-auto mt-20"> {/* Increased margin-top */}
         <Link
           to="/Learning_paths"
           className="block bg-[#F39C12] text-white py-4 px-8 rounded-lg shadow-lg hover:bg-[#e67e22] hover:scale-105 transform transition duration-300 text-center"
