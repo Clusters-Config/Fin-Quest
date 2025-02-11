@@ -4,8 +4,8 @@ import jwt, { decode } from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
 const finduser = AsyncHandler(async (req, res) => {
-  const { email, useremail} = req.body;
-  // console.log(useremail); 
+  const { email} = req.body;
+  const {useremail} = req.body;
   
   const user = await SignupSchema.findOne({ email: useremail || email});
 

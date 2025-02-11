@@ -74,7 +74,6 @@ const App = () => {
           <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
           <Route path="/Stock" element={<Stock />} />
           <Route path="/Monopoly" element={<Monopoly />} />
-
           <Route path="/DailyChallenges" element={<DailyChallenges />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/GameProfile" element={<GameProfile />} />

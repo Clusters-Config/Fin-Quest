@@ -1,13 +1,44 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useAuth } from "../pages/AuthContext";
 const ProfilePage = () => {
-  // Dummy student data
+  const[email,setemail] = useState()
+  const[udob,setudob] = useState();
+  const[dob,setdob] = useState();
+  const[phone,setphone] = useState();
+  const [firstname , setfirstname] = useState("")
+  const [lastname, setlastname] = useState("")
+  const{useremail} = useAuth()
+  axios.defaults.withCredentials = true
+  useEffect(()=>{
+    console.log("verify")
+    axios.get("http://localhost:4047/verify").then(res=>{
+      console.log("res"+res)
+      setemail(res.data.email)
+      console.log(res)
+    })
+  })
+
+  useEffect(()=>{
+    console.log(useremail)
+    axios.post("http://localhost:4047/finduser",{email})
+    .then(res=>{
+      console.log(res.data);
+      setudob(res.data.user.profile[0].dob)
+      setphone(res.data.user.profile[0].phone)
+      setfirstname(res.data.user.profile[0].firstname)
+      setlastname(res.data.user.profile[0].lastname)
+      console.log(res.data.user.profile[0].dob)
+      console.log(udob)
+    })
+  })
+
   const student = {
     photo: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png",
-    name: "John Doe",
-    dob: "2000-05-15",
-    phone: "+1 234 567 890",
-    email:"johndoe@gmail.com",
+    name: firstname+" "+lastname,
+    dob: udob,
+    phone: phone,
+    email:email,
     achievements: [
       "Completed Module 1: Basic Terminologies",
       "Achieved 95% Progress in Module 2: Fundamentals of Accounting",
