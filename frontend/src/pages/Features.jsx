@@ -66,6 +66,12 @@ function FeaturesPage() {
         >
           Financial Journeys
         </Link>
+        <Link
+          to="/FinFlux"
+          className="block bg-[#002147] text-white py-4 px-8 rounded-lg shadow-lg hover:bg-[#1F4068] hover:scale-105 transform transition duration-300 text-center"
+        >
+          FinFlux
+        </Link>
       </section>
 
       {/* Footer */}

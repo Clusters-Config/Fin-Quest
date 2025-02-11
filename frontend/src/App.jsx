@@ -7,6 +7,7 @@ import Simulations from './pages/Simulations';
 import Features from './pages/Features';
 import TaxPage from './pages/TaxPage';
 import Stories from './pages/Stories';
+import FinFlux from './pages/FinFlux';
 import Communitys from './pages/Communitys';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/simulations" element={<Simulations />} />
           <Route path="/TaxPage" element={<TaxPage />} />
           <Route path="/Stories" element={< Stories />} />
+          <Route path="/FinFlux" element={< FinFlux />} />
           <Route path="/communitys" element={<Communitys />} />
           <Route path='/chat' element={<Chat />} />
           <Route path="/TerminologyPage" element={<TerminologyPage />} />
