@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 
 const finduser = AsyncHandler(async (req, res) => {
   const { email, useremail} = req.body;
-  console.log(useremail); 
+  // console.log(useremail); 
   
   const user = await SignupSchema.findOne({ email: useremail || email});
 
