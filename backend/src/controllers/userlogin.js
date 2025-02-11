@@ -28,15 +28,17 @@ const userlogin = AsyncHandler(async (req, res) => {
     throw new Apierror(404, "Password incorrect");
   }
 
+  const username = finduser.username;
+
   const accessToken = jwt.sign(
-    { email: email, password: password },
+    {  username:username ,email: email, password: password },
     "json-access-token",
     {
       expiresIn: "3m",
     },
   );
   const refreshToken = jwt.sign(
-    { email: email, password: password },
+    { username:username, email: email, password: password },
     "json-refresh-token",
     {
       expiresIn: "10m",

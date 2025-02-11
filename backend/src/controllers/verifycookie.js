@@ -4,12 +4,12 @@ const VerifyUser = (req, res, next) => {
     const accessToken = req.cookies?.accessToken;
     const refreshToken = req.cookies?.refreshToken;
     if (!accessToken) {
-        console.log("No access token")
         if(refreshToken){
             const email = jwt.decode(refreshToken).email;
             const password = jwt.decode(refreshToken).password;
+            const username = jwt.decode(refreshToken).username;
             const accessToken = jwt.sign(
-                { email: email, password: password },
+                { username:username, email: email, password: password },
                 "json-access-token",
                 {
                   expiresIn: "3m",
@@ -32,7 +32,7 @@ const VerifyUser = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(accessToken, "json-access-token");
-        res.status(202).json({valid:true ,email:decoded.email , password:decoded.password})
+        res.status(202).json({valid:true ,email:decoded.email , password:decoded.password, username:decoded.username})
         next();
     } catch (error) {
         return res.status(401).json({ error: "Invalid or expired token" });

@@ -27,7 +27,6 @@ function Login_signup() {
              navi = false;
              toast.error('Email or password incorrect',{
              });
-           
             // alert("Email or password incorrect")
           }   
         })

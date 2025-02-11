@@ -17,14 +17,17 @@ function Homepage() {
   const [password ,setpassword] = useState("");
   const navigate = useNavigate();
   const[showtoast , setshowtoast] = useState(false)
+  const[username,setusername] = useState();
 
   useEffect(()=>{
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify",{withCredentials: true})
     .then(res=>{
+      console.log(res)
       setEmail(res.data?.email),
       setpassword(res.data?.password)
       setuseremail(res.data?.email) 
+      setusername(res.data?.username)
     })
   },[])
 
@@ -40,9 +43,6 @@ function Homepage() {
         }
     })  
   }});
-
-  console.log(login)
-
 
 
   return (
@@ -63,7 +63,7 @@ function Homepage() {
           </li>
           <li>
             <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
-            {email ? email :"Login"}
+            {username ? username :"Login"}
             </Link>
           </li>
           <li>
