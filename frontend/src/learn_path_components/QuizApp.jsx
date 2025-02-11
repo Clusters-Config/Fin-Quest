@@ -50,7 +50,7 @@ function QuizApp() {
     });
 
     // Pass the score to the result page via navigation
-    navigate("/result", { state: { score: calculatedScore, total: quizData.length , mod:mod , page:page} });
+    navigate("/result", { state: { score: calculatedScore, total: quizData.length } });
   };
 
   return (

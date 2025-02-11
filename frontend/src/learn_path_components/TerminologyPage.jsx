@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
 const TerminologyPage = () => {
     const navigate = useNavigate();
-    const mod = 1; // Initialize navigate function to programmatically navigate
-    const path1 = "TerminologyPage";
-    const location = useLocation();
+    // const mod = 1; // Initialize navigate function to programmatically navigate
+    // const path1 = "TerminologyPage";
+    // const location = useLocation();
     
     const terminologyData = [
     {
@@ -332,7 +332,7 @@ const TerminologyPage = () => {
   ];
 
   const handleQuizClick = () => {
-    navigate('/QuizApp/TerminologyPage',{state:{mod:mod, page:path1}}); // Redirect to the quiz page when the button is clicked
+    navigate('/QuizApp/TerminologyPage'); // Redirect to the quiz page when the button is clicked
   };
 
   return (
