@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa"; // Icon for the profile
+import axios from "axios";
+
 
 const Learning_paths = () => {
   const [openSection, setOpenSection] = useState(null);
+  const [username,setusername] = useState("");
+  const [uusername,setuusername] = useState("");
+
+
   const navigate = useNavigate();
 
   const handleToggle = (sectionId) => {
@@ -13,6 +19,20 @@ const Learning_paths = () => {
   const handleTopicClick = (route) => {
     navigate(route);
   };
+
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:4047/verify")
+    .then((res) => {
+      console.log(res.data.username);
+      setuusername(res.data.username);
+    })
+  });
+
+  useEffect(() => {
+    setusername(uusername);
+  },[uusername]);
+  
 
   const timelineData = [
     {
@@ -95,8 +115,8 @@ const Learning_paths = () => {
 
       {/* Header Section */}
       <div className="mt-16"> {/* Added margin-top to create space below the navbar */}
-        <h1 className="text-center text-2xl sm:text-xl mt-8 text-[#002147] font-extrabold">
-          Your Personalized Learning Path
+        <h1 className="text-center text-2xl sm:text-xl mt-10 pt-10 text-[#002147] font-extrabold">
+          {username.toUpperCase()}'s  Learning Path
         </h1>
         <p className="text-center text-sm sm:text-base mt-3 text-[#6C757D]">
           Embark on a journey designed to make you a financial expert, step by step!
