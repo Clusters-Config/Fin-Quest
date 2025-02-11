@@ -10,8 +10,9 @@ function ProfilePage() {
   const [udob, setudob] = useState("");
   const [uphone, setuphonenumber] = useState();
   const [uhobbies, setuhobbies] = useState("");
-  axios.defaults.withCredentials = true;
   useEffect(()=>{
+    axios.defaults.withCredentials = true;
+
     axios.get("http://localhost:4047/verify")
     .then(res=>{setufirstname(res.data.firstname)
       setulastname(res.data.lastname)
