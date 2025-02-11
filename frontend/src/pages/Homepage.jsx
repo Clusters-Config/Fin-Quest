@@ -63,7 +63,7 @@ function Homepage() {
           </li>
           <li>
             {
-            useremail? <button className="text-white hover:text-orange-400">{username}</button> : <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
+            useremail? <button className="text-white hover:text-orange-400 transition-all">{username}</button> : <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
             {username ? username :"Login"}
             </Link>}
             
