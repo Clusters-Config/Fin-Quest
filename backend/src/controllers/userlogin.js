@@ -28,12 +28,12 @@ const userlogin = AsyncHandler(async (req, res) => {
     throw new Apierror(404, "Password incorrect");
   }
 
-  const username = finduser.username;
-  const firstname = finduser.profile[0].firstname;
-  const lastname = finduser.profile[0].lastname;
-  const dob = finduser.profile[0].dob;
-  const phone = finduser.profile[0].phone;
-  const hobbies = finduser.profile[0].hobbies;
+  const username = finduser?.username;
+  const firstname = finduser?.profile[0]?.firstname;
+  const lastname = finduser?.profile[0]?.lastname;
+  const dob = finduser?.profile[0]?.dob;
+  const phone = finduser?.profile[0]?.phone;
+  const hobbies = finduser?.profile[0]?.hobbies;
 
   const accessToken = jwt.sign(
     { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
