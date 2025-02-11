@@ -6,6 +6,8 @@ const resultSchema = new Schema({
             type:String,
             lowercase:true
         },
+        module: [
+            {
             mod1: 
             [
                 {
@@ -86,7 +88,9 @@ const resultSchema = new Schema({
                     }
                 }  
             ],
-
+        }]
+    
+    },
     {
         timestamps:true
 });

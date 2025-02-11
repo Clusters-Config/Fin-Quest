@@ -12,7 +12,7 @@ const TerminologyPage = AsyncHandler(async(req,res)=>{
 
     const result = new ResultSchema({
         email:useremail,
-        module.mod1[0].path1: score
+        // module.mod1[0].path1: score
     })
 
 })
