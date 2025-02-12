@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 const PillarsOfAccountingModule = () => {
   const navigate = useNavigate();
+  const mod = 1;
+  const page = "resultpage";
+  const path = "path2"
+  const mods = "mod2"
 
   const handleQuizButtonClick = () => {
     // Navigate to the quiz page for Pillars of Accounting
-    navigate('/QuizApp/Pillars_Of_Accounting');
+    navigate('/QuizApp/Pillars_Of_Accounting',{state:{mod:mod, page:page,path:path,mods:mods}});
   };
 
   return (

@@ -24,7 +24,6 @@ const Learning_paths = () => {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify")
     .then((res) => {
-      console.log(res.data.username);
       setuusername(res.data.username);
     })
   });

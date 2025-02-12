@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 // Simple Interest vs Compound Interest Seminar Page
 const SimpleVsCompoundInterest = () => {
   const navigate = useNavigate();
+  const page = "resultpage";
+  const path = "path1"
+  const mods = "mod4"
 
   // Function to handle quiz redirection
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/SimpleVsCompoundInterest"); // Replace with actual route for your quiz page
+    navigate("/QuizApp/SimpleVsCompoundInterest",{state:{ page:page,path:path,mods:mods}}); // Replace with actual route for your quiz page
   };
 
   return (

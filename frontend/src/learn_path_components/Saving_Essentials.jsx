@@ -8,6 +8,7 @@ const SavingsCalculator = () => {
   const [years, setYears] = useState("");
   const [investmentType, setInvestmentType] = useState("sip");
   const [amountSaved, setAmountSaved] = useState(null);
+  
 
   const calculateSavings = () => {
     if (goal && monthlySaving && interestRate && years) {
@@ -153,10 +154,14 @@ const SavingsCalculator = () => {
 const SavingEssentials = () => {
   const navigate = useNavigate();
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [savingProgress, setSavingProgress] = useState(20); // Percentage progress for demonstration
+  const [savingProgress, setSavingProgress] = useState(20);
+  const mod = 1;
+  const page = "resultpage";
+  const path = "path1"
+  const mods = "mod3" // Percentage progress for demonstration
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/Saving_Essentials"); // Replace "/quiz" with the route of your Quiz page
+    navigate("/QuizApp/Saving_Essentials",{state:{mod:mod, page:page,path:path,mods:mods}}); // Replace "/quiz" with the route of your Quiz page
   };
 
   const handleDownloadTracker = () => {

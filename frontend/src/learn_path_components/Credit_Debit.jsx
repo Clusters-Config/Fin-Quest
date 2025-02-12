@@ -6,10 +6,15 @@ const CreditDebitModule = () => {
   // const mod = 1; 
   //   // const path1 = "Credit_debit";
   //   const location = useLocation();
+      const mod = 0;
+      const page = "resultpage";
+      const path = "path2"
+      const mods = "mod1"
+    
 
   const handleQuizButtonClick = () => {
     // Navigate to the quiz page for Credit and Debit
-    navigate('/QuizApp/Credit_Debit');
+    navigate('/QuizApp/Credit_Debit',{state:{mod:mod, page:page,path:path,mods:mods}});
   };
 
   return (

@@ -65,10 +65,13 @@ const LoanCalculator = () => {
 };
 
 const LoanImpacts = () => {
+  const page = "resultpage";
+  const path = "path2"
+  const mods = "mod4"
   const navigate = useNavigate();
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/LoanImpacts"); // Replace "/quiz2" with the route of your Quiz page for loans
+    navigate("/QuizApp/LoanImpacts",{state:{ page:page,path:path,mods:mods}}); // Replace "/quiz2" with the route of your Quiz page for loans
   };
 
   return (

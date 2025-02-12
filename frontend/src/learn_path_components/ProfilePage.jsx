@@ -43,7 +43,7 @@ const ProfilePage = () => {
 
   // Learning modules progress
   const [modules, setModules] = useState([
-    { name: "Module 1: Basic Terminologies", progress: 100 },
+    { name: "Module 1: Basic Terminologies", progress: 60 },
     { name: "Module 2: Fundamentals of Accounting", progress: 95 },
     { name: "Module 3: Basic Financial Concepts", progress: 30 },
     { name: "Module 4: Understanding Interest Rates", progress: 10 },

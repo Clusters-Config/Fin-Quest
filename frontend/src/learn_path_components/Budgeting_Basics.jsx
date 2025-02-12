@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const BudgetBasics = () => {
+  const mod = 1;
+  const page = "resultpage";
+  const path = "path2"
+  const mods = "mod3"
+  const navigate = useNavigate()
+
+  const handleQuizRedirect = () => {
+    navigate("/QuizApp/Budgeting_Basics",{state:{mod:mod, page:page,path:path,mods:mods}}); // Replace "/quiz" with the route of your Quiz page
+  };
   return (
     <div className="bg-gradient-to-b from-[#F4F4F4] to-[#FFFFFF] min-h-screen p-6 flex flex-col justify-between">
       <div>
@@ -143,11 +153,11 @@ const BudgetBasics = () => {
 
       {/* Take Quiz Button */}
       <div className="flex justify-center mt-auto mb-4">
-        <Link to="/QuizApp/Budgeting_Basics">
-          <button className="bg-[#F39C12] hover:bg-[#002147] text-white px-6 py-3 rounded-lg font-bold text-xl transform transition-all duration-300 hover:scale-105 border-2 border-solid border-[#F39C12] hover:border-[#002147]">
+       
+          <button onClick={handleQuizRedirect} className="bg-[#F39C12] hover:bg-[#002147] text-white px-6 py-3 rounded-lg font-bold text-xl transform transition-all duration-300 hover:scale-105 border-2 border-solid border-[#F39C12] hover:border-[#002147]">
             Take Quiz <i className="fas fa-check-circle ml-2"></i>
           </button>
-        </Link>
+       
       </div>
     </div>
   );

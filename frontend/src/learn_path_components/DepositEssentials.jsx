@@ -64,9 +64,12 @@ const DepositCalculator = () => {
 
 const DepositEssentials = () => {
   const navigate = useNavigate();
+  const page = "resultpage";
+  const path = "path1"
+  const mods = "mod5"
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/DepositEssentials"); // Replace with the route for your Deposit Quiz page
+    navigate("/QuizApp/DepositEssentials",{state:{ page:page,path:path,mods:mods}}); // Replace with the route for your Deposit Quiz page
   };
 
   return (

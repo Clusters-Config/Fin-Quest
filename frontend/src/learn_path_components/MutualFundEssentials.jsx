@@ -63,10 +63,13 @@ const MutualFundCalculator = () => {
 };
 
 const MutualFundEssentials = () => {
+  const page = "resultpage";
+  const path = "path2"
+  const mods = "mod5"
   const navigate = useNavigate();
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/MutualFundEssentials"); // Replace "/quiz" with the route for your Quiz page on Mutual Funds
+    navigate("/QuizApp/MutualFundEssentials",{state:{ page:page,path:path,mods:mods}}); // Replace "/quiz" with the route for your Quiz page on Mutual Funds
   };
 
   return (

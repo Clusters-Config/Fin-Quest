@@ -3,10 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 const AccountingTypesModule = () => {
   const navigate = useNavigate();
+  const mod = 1;
+  const page = "resultpage";
+  const path = "path1"
+  const mods = "mod2"
 
   const handleQuizButtonClick = () => {
     // Navigate to the quiz page for Accounting Types
-    navigate('/QuizApp/Accounting');
+    navigate('/QuizApp/Accounting',{state:{mod:mod, page:page,path:path,mods:mods}});
   };
 
   return (

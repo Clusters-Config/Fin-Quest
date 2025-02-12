@@ -4,10 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const TerminologyPage = () => {
     const navigate = useNavigate();
-    const mod = 1;
-    const path1 = "resultpage";
-    const location = useLocation();
-    console.log(location)
+    const mod = 0;
+    const page = "resultpage";
+    const path = "path1"
+    const mods = "mod1"
     // const location = useLocation();
     const terminologyData = [
     {
@@ -333,7 +333,7 @@ const TerminologyPage = () => {
   ];
 
   const handleQuizClick = () => {
-    navigate('/QuizApp/TerminologyPage',{state:{mod:mod, page:path1}}); // Redirect to the quiz page when the button is clicked
+    navigate('/QuizApp/TerminologyPage',{state:{mod:mod, page:page,path:path,mods:mods}}); // Redirect to the quiz page when the button is clicked
   };
 
   return (
