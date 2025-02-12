@@ -30,8 +30,8 @@ const ProfilePage = () => {
     .then(res=>{
       setudob(res?.data?.user?.profile[0]?.dob)
       setphone(res?.data?.user?.profile[0]?.phone)
-      setfirstname(res?.data?.user?.profile[0]?.firstname)
-      setlastname(res?.data?.user?.profile[0]?.lastname)
+      setfirstname(res?.data?.user?.profile[0]?.firstname || "")
+      setlastname(res?.data?.user?.profile[0]?.lastname || "")
 
    
     })
@@ -96,7 +96,7 @@ const ProfilePage = () => {
       <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
         My Learning Path
       </nav>
-      <button onClick={handleLogOut} className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all absolute right-80 top-24">Logout</button>
+      {email?<button onClick={handleLogOut} className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all absolute right-80 top-24">Logout</button>:""}
       {/* Profile Container */}
       <div className="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
 
