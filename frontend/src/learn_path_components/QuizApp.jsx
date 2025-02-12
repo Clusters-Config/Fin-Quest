@@ -8,8 +8,8 @@ function QuizApp() {
   const [quizData, setQuizData] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [loading, setLoading] = useState(true);
-  // const location = useLocation()
-  // const{mod,page} = location.state;
+  const location = useLocation()
+  const{mod,page} = location.state || {};
 
   // console.log(mod+" "+page)
   // Fetch the quiz data based on the quizId from the URL
@@ -50,7 +50,7 @@ function QuizApp() {
     });
 
     // Pass the score to the result page via navigation
-    navigate("/result", { state: { score: calculatedScore, total: quizData.length } });
+    navigate("/result", { state: { score: calculatedScore, total: quizData.length , mod: mod , page:page } });
   };
 
   return (

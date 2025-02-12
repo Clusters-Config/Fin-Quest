@@ -12,6 +12,6 @@ router.route("/signup").post(Signup);
 router.route("/profile").post(profile_user);
 router.route("/finduser").post(finduser);
 router.route('/verify').get(VerifyUser);
-router.route("/1/TerminologyPage").post(TerminologyPage)
+router.route("/resultpage").post(TerminologyPage)
 
 export {router};

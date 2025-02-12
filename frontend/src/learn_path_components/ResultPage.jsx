@@ -5,24 +5,25 @@ import axios from "axios";
 const ResultPage = () => {
   const location = useLocation();
   const { score, total ,mod ,page} = location.state || { score: 0, total: 0 };
-  // const [email,setemail] = useState("")
-  // console.log(score*30)
-  // console.log(mod+" "+page)
+  const [email,setemail] = useState("")
+  console.log(score*10)
+  console.log(mod+" "+page)
+  let userscore = score*10
 
-  // useEffect(()=>{
-  //   axios.defaults.withCredentials = true;
-  //   axios.get("http://localhost:4047/verify")
-  //   .then(res=>{
-  //     setemail(res.data.email)
-  //   })
-  // })
-  // console.log(email)
-  // useEffect(()=>{
-  //   axios.defaults.withCredentials = true;
-  //   axios.post(`http://localhost:4047/${mod}/${page}`,{score ,email})
-  // })
+  useEffect(()=>{
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:4047/verify")
+    .then(res=>{
+      setemail(res.data.email)
+    })
+  })
+  console.log(email)
+  useEffect(()=>{
+    axios.defaults.withCredentials = true;
+    axios.post(`http://localhost:4047/${page}`,{userscore ,email,mod})
+  })
   
-
+  console.log(mod+" "+  page)
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F4F4F4] to-[#F8FAFC] p-6 flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-lg p-8 w-80 text-center animate__animated animate__fadeIn">
