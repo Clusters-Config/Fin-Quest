@@ -20,7 +20,6 @@ function Login_signup() {
         
          await axios.post("http://localhost:4047/login",{email,password})
         .then(res=>{
-          console.log(res.data.valid)
           valid = res.data.valid
           if(valid){
             navigate("/login");

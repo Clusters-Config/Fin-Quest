@@ -3,9 +3,10 @@ import { userlogin } from "../controllers/userlogin.js";
 import { Signup } from "../controllers/Signup.js";
 import { profile_user } from "../controllers/profile.controller.js"; 
 import {finduser} from "../controllers/finduser.js"
-import VerifyUser from "../controllers/verifycookie.js";
+import {VerifyUser} from "../controllers/verifycookie.js";
 import TerminologyPage from "../controllers/Result.js";
 import { finduserlearning } from "../controllers/finduser.js";
+import { clearcookies } from "../controllers/verifycookie.js";
 const router = Router();
 
 router.route("/login").post(userlogin);
@@ -15,5 +16,6 @@ router.route("/finduser").post(finduser);
 router.route('/verify').get(VerifyUser);
 router.route("/resultpage").post(TerminologyPage)
 router.route("/finduserlearning").post(finduserlearning)
+router.route("/clearcookies").get(clearcookies)
 
 export {router};

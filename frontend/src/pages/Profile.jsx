@@ -10,6 +10,7 @@ function ProfilePage() {
   const [udob, setudob] = useState("");
   const [uphone, setuphonenumber] = useState();
   const [uhobbies, setuhobbies] = useState("");
+
   useEffect(()=>{
     axios.defaults.withCredentials = true;
 
@@ -30,6 +31,9 @@ function ProfilePage() {
     setPhonenumber(uphone)
     setHobbies(uhobbies)
   },[ufirstname,ulastname,udob,uphone,uhobbies]);    
+
+  
+
 
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");

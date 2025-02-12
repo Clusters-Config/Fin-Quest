@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../pages/AuthContext";
+import { useNavigate } from "react-router-dom";
 const ProfilePage = () => {
   const[email,setemail] = useState()
   const[udob,setudob] = useState();
@@ -8,6 +9,9 @@ const ProfilePage = () => {
   const[phone,setphone] = useState();
   const [firstname , setfirstname] = useState("")
   const [lastname, setlastname] = useState("")
+  const[uemail, setuemail] = useState("")
+  const[progresss,setprogress] = useState()
+  const navigate = useNavigate()
   axios.defaults.withCredentials = true
   useEffect(()=>{
     axios.get("http://localhost:4047/verify").then(res=>{
@@ -15,18 +19,52 @@ const ProfilePage = () => {
     })
   })
 
+  const handleLogOut = ()=>{
+    axios.get("http://localhost:4047/clearcookies")
+    .then(()=>{
+      navigate("/",{state:{login:true}})
+    })
+  }
   useEffect(()=>{
     axios.post("http://localhost:4047/finduser",{email})
     .then(res=>{
-      console.log(res.data);
-      setudob(res.data.user.profile[0].dob)
-      setphone(res.data.user.profile[0].phone)
-      setfirstname(res.data.user.profile[0].firstname)
-      setlastname(res.data.user.profile[0].lastname)
+      setudob(res?.data?.user?.profile[0]?.dob)
+      setphone(res?.data?.user?.profile[0]?.phone)
+      setfirstname(res?.data?.user?.profile[0]?.firstname)
+      setlastname(res?.data?.user?.profile[0]?.lastname)
 
    
     })
   })
+
+  useEffect(()=>{
+    axios.defaults.withCredentials=true;
+    axios.get("http://localhost:4047/verify")
+    .then(res=>{
+      setuemail(res.data.email)
+    })
+  })
+
+  useEffect(()=>{
+    axios.post("http://localhost:4047/finduserlearning",{email})
+    .then(res=>{
+      setprogress(res.data.module[0].mod1.path1)
+    })
+  })
+
+  useEffect(()=>{
+    if(progresss!==undefined){ 
+      setModules([
+        { name: "Module 1: Basic Terminologies",  progress: progresss },
+    { name: "Module 2: Fundamentals of Accounting", progress: 95 },
+    { name: "Module 3: Basic Financial Concepts", progress: 30 },
+    { name: "Module 4: Understanding Interest Rates", progress: 10 },
+    { name: "Module 5: Investment Basics", progress: 0 },
+      ])
+    }
+   
+  },[progresss])
+
 
   const student = {
     photo: "https://i.pinimg.com/originals/e7/13/89/e713898b573d71485de160a7c29b755d.png",
@@ -43,12 +81,14 @@ const ProfilePage = () => {
 
   // Learning modules progress
   const [modules, setModules] = useState([
-    { name: "Module 1: Basic Terminologies", progress: 60 },
+    { name: "Module 1: Basic Terminologies",  progress: progresss },
     { name: "Module 2: Fundamentals of Accounting", progress: 95 },
     { name: "Module 3: Basic Financial Concepts", progress: 30 },
     { name: "Module 4: Understanding Interest Rates", progress: 10 },
     { name: "Module 5: Investment Basics", progress: 0 },
   ]);
+
+
 
   return (
     <div className="bg-[#F4F4F4] min-h-screen">
@@ -56,7 +96,7 @@ const ProfilePage = () => {
       <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
         My Learning Path
       </nav>
-
+      <button onClick={handleLogOut} className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all absolute right-80 top-24">Logout</button>
       {/* Profile Container */}
       <div className="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
 

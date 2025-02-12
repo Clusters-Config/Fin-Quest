@@ -34,30 +34,29 @@ const userlogin = AsyncHandler(async (req, res) => {
   const dob = finduser?.profile[0]?.dob;
   const phone = finduser?.profile[0]?.phone;
   const hobbies = finduser?.profile[0]?.hobbies;
-
   const accessToken = jwt.sign(
     { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
     "json-access-token",
     {
-      expiresIn: "3m",
+      expiresIn: "30m",
     },
   );
   const refreshToken = jwt.sign(
     { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
     "json-refresh-token",
     {
-      expiresIn: "10m",
+      expiresIn: "60m",
     },
   );
 
   res.cookie("accessToken", accessToken, {
-    maxAge: 180000,
+    maxAge: 1800000,
     httpOnly: false,
     secure: true,
     sameSite: "strict",
   });
   res.cookie("refreshToken", refreshToken, {
-    maxAge: 600000,
+    maxAge: 3600000,
     secure: true,
     httpOnly: false,
     sameSite: "strict",

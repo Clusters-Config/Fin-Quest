@@ -15,9 +15,8 @@ const finduser = AsyncHandler(async (req, res) => {
 
 
 const finduserlearning = AsyncHandler(async(req,res)=>{
-  const {useremail} = req.body;
-  const user = await ResultSchema.findOne({email:useremail})
-  console.log(user?.email)
+  const {email} = req.body;
+  const user = await ResultSchema.findOne({email:email})
   if(user){
     res.status(201).json(user)
   }

@@ -17,11 +17,11 @@ const VerifyUser = (req, res, next) => {
                 { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
                 "json-access-token",
                 {
-                  expiresIn: "3m",
+                  expiresIn: "30m",
                 });
 
                 res.cookie("accessToken", accessToken, {
-                    maxAge: 180000,
+                    maxAge: 1800000,
                     httpOnly: false,
                     secure: true,
                     sameSite: "strict",
@@ -44,4 +44,13 @@ const VerifyUser = (req, res, next) => {
     }
 };
 
-export default VerifyUser;
+const clearcookies = async(req,res)=>{
+    const accessToken = req.cookies?.accessToken
+    const refreshToken = req.cookies?.refreshToken
+
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
+    res.status(201).json({messgae:"Done"})
+}
+
+export { VerifyUser,clearcookies};

@@ -8,7 +8,8 @@ const Learning_paths = () => {
   const [openSection, setOpenSection] = useState(null);
   const [username,setusername] = useState("");
   const [uusername,setuusername] = useState("");
-
+  const[email, setemail] = useState("")
+  const[progress,setprogress] = useState()
 
   const navigate = useNavigate();
 
@@ -31,7 +32,21 @@ const Learning_paths = () => {
   useEffect(() => {
     setusername(uusername);
   },[uusername]);
-  
+
+  useEffect(()=>{
+    axios.defaults.withCredentials=true;
+    axios.get("http://localhost:4047/verify")
+    .then(res=>{
+      setemail(res.data.email)
+    })
+  })
+
+  useEffect(()=>{
+    axios.post("http://localhost:4047/finduserlearning",{email})
+    .then(res=>{
+      setprogress(res.data.module[0].mod1.path1)
+    })
+  })
 
   const timelineData = [
     {

@@ -4,6 +4,7 @@ import { useEffect ,useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext"
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
   
 
@@ -12,7 +13,18 @@ import { useNavigate } from "react-router-dom";
 
 
 function Homepage() {
-  const {useremail,setuseremail,login} = useAuth();
+  const location = useLocation();
+  const[login,setlogin] = useState(location.state||false)
+
+  useEffect(()=>{
+    if(login){
+      window.location.reload()
+      setlogin(false)
+      navigate({ state: null });
+    }
+  },[])
+  
+  const {useremail,setuseremail} = useAuth();
   const [email ,setEmail] = useState("");
   const [password ,setpassword] = useState("");
   const navigate = useNavigate();
