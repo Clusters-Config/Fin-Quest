@@ -122,25 +122,41 @@ const ProfilePage = () => {
   return (
     <div className="bg-[#F4F4F4] min-h-screen">
       {/* Navbar */}
-      <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
-        My Learning Path
-      </nav>
-      {email ? (
-        <button
+        <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
+          My Learning Path
+        </nav>
+        {/* {email ? (
+          <div className="flex justify-end p-4">
+            <button
           onClick={handleLogOut}
-          className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all absolute right-32 top-24"
-        >
+          className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all mt-10"
+            >
           Logout
-        </button>
-      ) : (
-        ""
-      )}
-      {/* Profile Container */}
+            </button>
+          </div>
+        ) : (
+          ""
+        )} */}
+        {/* Profile Container */}
       <div className="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
         {/* Profile Header */}
-        <h2 className="text-[#002147] text-2xl font-bold mb-6">
-          Student Profile
-        </h2>
+        <div className="grid grid-cols-2 items-center mb-6">
+          <h1 className="text-[#002147] text-2xl font-bold">
+            Student Profile
+          </h1>
+          {email ? (
+            <div className="flex justify-end">
+              <button
+                onClick={handleLogOut}
+                className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
 
         {/* Student Info */}
         <div className="flex flex-col sm:flex-row gap-6 mb-6">
