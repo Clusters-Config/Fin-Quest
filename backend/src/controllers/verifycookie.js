@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
+import { AsyncHandler } from "../utils/AsyncHandler.js";
 
-const VerifyUser = async(req, res, next) => {
+const VerifyUser = AsyncHandler(async(req, res) => {
     const accessToken = req.cookies?.accessToken;
     const refreshToken = req.cookies?.refreshToken;
     if (!accessToken) {
@@ -20,12 +21,14 @@ const VerifyUser = async(req, res, next) => {
                   expiresIn: "30m",
                 });
 
-                res.cookie("accessToken", accessToken, {
+                 res.cookie("accessToken", accessToken, {
                     maxAge: 1800000,
                     httpOnly: false,
                     secure: true,
                     sameSite: "strict",
                   });
+
+                 res.status(200).send("Done")
         }
         else{
            return res.json({ error: "Access and Refresh token missing please login" });
@@ -40,15 +43,15 @@ const VerifyUser = async(req, res, next) => {
     } catch (error) {
          res.status(401).json({ error: "Invalid or expired token" });
     }
-};
+});
 
 const clearcookies = async(req,res)=>{
-    const accessToken = req.cookies?.accessToken
-    const refreshToken = req.cookies?.refreshToken
 
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
-    return res.status(200).send("Success")
+    console.log("done")
+     res.json({message:"Done"})
+
 }
 
 export { VerifyUser,clearcookies};

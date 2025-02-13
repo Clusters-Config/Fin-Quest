@@ -25,12 +25,12 @@ const ProfilePage = () => {
     axios.get("http://localhost:4047/verify").then((res) => {
       setemail(res.data.email);
     });
-  });
+  },[]);
 
   const handleLogOut = () => {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/clearcookies").then(() => {
-      navigate("/", { state: { login: true } });
+      navigate("/",{ state: { login: true } });
     });
   };
   useEffect(() => {
@@ -42,21 +42,15 @@ const ProfilePage = () => {
     });
   });
 
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
-      setuemail(res.data.email);
-    });
-  });
 
   useEffect(() => {
-    axios
-      .post("http://localhost:4047/finduserlearning", { email })
+    axios.defaults.withCredentials = true;
+      axios.post("http://localhost:4047/finduserlearning", { email })
       .then((res) => {
-        setTerminologies1(res.data.module[0].mod1.path1); 
-        setTerminologies2(res.data.module[0].mod1.path2); 
-        setAccounting1(res.data.module[0].mod2.path1)
-        setAccounting2(res.data.module[0].mod2.path2)
+        setTerminologies1(res?.data?.module[0]?.mod1?.path1); 
+        setTerminologies2(res?.data?.module[0]?.mod1?.path2); 
+        setAccounting1(res?.data?.module[0]?.mod2?.path1)
+        setAccounting2(res?.data?.module[0]?.mod2?.path2)
       });
   });
 
@@ -85,14 +79,15 @@ const ProfilePage = () => {
   })
  
   useEffect(() => {
-      setModules([
-        { name: "Module 1: Basic Terminologies", progress: Terminologies },
-        { name: "Module 2: Fundamentals of Accounting", progress: Accounting },
-        { name: "Module 3: Basic Financial Concepts", progress: 30 },
-        { name: "Module 4: Understanding Interest Rates", progress: 10 },
-        { name: "Module 5: Investment Basics", progress: 0 },
-      ])
-  });
+    setModules([
+      { name: "Module 1: Basic Terminologies", progress: Terminologies },
+      { name: "Module 2: Fundamentals of Accounting", progress: Accounting },
+      { name: "Module 3: Basic Financial Concepts", progress: 30 },
+      { name: "Module 4: Understanding Interest Rates", progress: 10 },
+      { name: "Module 5: Investment Basics", progress: 0 },
+    ]);
+  }, [Terminologies, Accounting]);
+  
 
 
 

@@ -1,7 +1,5 @@
 import { SignupSchema } from "../models/signup.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
-import jwt, { decode } from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 import { ResultSchema } from "../models/result.js";
 
 const finduser = AsyncHandler(async (req, res) => {
@@ -10,7 +8,7 @@ const finduser = AsyncHandler(async (req, res) => {
   
   const user = await SignupSchema.findOne({ email: useremail || email});
 
-  res.status(202).json({user});
+   return res.status(202).json({user});
 });
 
 
@@ -18,10 +16,10 @@ const finduserlearning = AsyncHandler(async(req,res)=>{
   const {email} = req.body;
   const user = await ResultSchema.findOne({email:email})
   if(user){
-    res.status(201).json(user)
+   return res.status(201).json(user)
   }
   else{
-    res.status(404).json({ message: "User not found"})
+    return res.json({ message: "User not found"})
   }
 })
 

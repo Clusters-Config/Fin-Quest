@@ -22,7 +22,7 @@ function Homepage() {
       setlogin(false)
       navigate({ state: null });
     }
-  },[])
+  })
   
   const {useremail,setuseremail} = useAuth();
   const [email ,setEmail] = useState("");
@@ -49,7 +49,6 @@ function Homepage() {
       if(res.data.valid){
         navigate("/")}
         if(!showtoast){
-
           setshowtoast(true);
         }
     })  

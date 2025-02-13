@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
-import { FaBook } from "react-icons/fa";
-import { Link } from "react-router-dom";
 
 
 function ProfilePage() {
@@ -15,16 +13,16 @@ function ProfilePage() {
 
   useEffect(()=>{
     axios.defaults.withCredentials = true;
-
     axios.get("http://localhost:4047/verify")
-    .then(res=>{setufirstname(res.data.firstname)
+    .then(res=>{
+      setufirstname(res.data.firstname)
       setulastname(res.data.lastname)
       setudob(res.data.dob)
       setuphonenumber(res.data.phone)
       setuhobbies(res.data.hobbies) 
      }
    )  
-  },[])
+  })
  
   useEffect(() => {
     setFirstname(ufirstname),
