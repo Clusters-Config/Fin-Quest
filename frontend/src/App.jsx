@@ -26,15 +26,20 @@ import LoanImpacts from './learn_path_components/LoanImpacts';
 import DepositEssentials from './learn_path_components/DepositEssentials';
 import MutualFundEssentials from './learn_path_components/MutualFundEssentials';
 import StockMarketBasics from './learn_path_components/StockMarketBasics';
+import Finance_Principles from './learn_path_components/Finance_Principles';
+import Goals_Finance  from './learn_path_components/Goals_Finance';
+
+
+
 import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
 import ForumPage from "./learn_path_components/ForumPage";  
 import Profile  from "./pages/Profile";
+
+
 import ProfitLossLadder from "./GameComponents/ProfitLossLadder";
 import Stock from "./GameComponents/Stock";
 import Monopoly from "./GameComponents/Monopoly";
-
-
 import DailyChallenges from "./GameComponents/DailyChallenges"
 import ProfilePage  from "./learn_path_components/ProfilePage";
 import GameProfile from "./GameComponents/GameProfile"
@@ -60,6 +65,8 @@ const App = () => {
           <Route path="/SideHustleFinder" element={<  SideHustleFinder />} />
           <Route path="/communitys" element={<Communitys />} />
           <Route path='/chat' element={<Chat />} />
+
+          
           <Route path="/TerminologyPage" element={<TerminologyPage />} />
           <Route path="/Credit_Debit" element={<Credit_Debit/>} />
           <Route path="/Accounting" element={<Accounting/>} />
@@ -71,10 +78,16 @@ const App = () => {
           <Route path="/DepositEssentials" element={<DepositEssentials />} />
           <Route path="/MutualFundEssentials" element={<MutualFundEssentials />} />
           <Route path="/StockMarketBasics" element={<StockMarketBasics />} />
+          <Route path="/Finance_Principles" element={<Finance_Principles />} />
+          <Route path="/Goals_Finance" element={<Goals_Finance />} />
+
+
           <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}
           <Route path="/result" element={<ResultPage />} />
           <Route path="/ForumPage" element={<ForumPage />} />
           <Route path="/Profile" element={<Profile />} />
+
+
           <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
           <Route path="/Stock" element={<Stock />} />
           <Route path="/Monopoly" element={<Monopoly />} />

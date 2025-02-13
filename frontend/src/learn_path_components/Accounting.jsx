@@ -40,6 +40,49 @@ const AccountingTypesModule = () => {
           <li>To provide insights for management in decision-making.</li>
         </ul>
 
+        <h3 className="text-xl font-semibold text-[#002147] mb-4">Types of Accounts</h3>
+        <p className="text-[#6C757D] mb-4">
+          An account may be related to a person or a thing – tangible or intangible. The accounting treatment depends on the type of account. Let us classify these accounts based on their common characteristics:
+        </p>
+
+        <h4 className="text-lg font-semibold text-[#002147] mb-4">1. Personal Accounts</h4>
+        <p className="text-[#6C757D] mb-4">
+          These are accounts related to persons. There are three types of personal accounts:
+        </p>
+        <ul className="list-disc ml-6 mb-4">
+          <li><strong>Natural Persons:</strong> Accounts related to individual persons like Suresh's A/c, Anil's A/c, etc.</li>
+          <li><strong>Artificial Persons:</strong> Accounts related to entities such as companies, partnerships, etc. Examples include Infosys Technologies A/c, ABC Bank A/c, etc.</li>
+          <li><strong>Representative Persons:</strong> These accounts represent a collective group of individuals or entities, for example, Salary Payable A/c, Rent Payable A/c, etc.</li>
+        </ul>
+
+        <h4 className="text-lg font-semibold text-[#002147] mb-4">2. Real Accounts</h4>
+        <p className="text-[#6C757D] mb-4">
+          These accounts are related to assets or properties. Real accounts can be:
+        </p>
+        <ul className="list-disc ml-6 mb-4">
+          <li><strong>Tangible Real Accounts:</strong> Accounts related to physical assets like Machinery A/c, Cash A/c, Stock A/c, etc.</li>
+          <li><strong>Intangible Real Accounts:</strong> Accounts related to non-physical assets like Goodwill A/c, Trademark A/c, Patents & Copyrights A/c, etc.</li>
+        </ul>
+
+        <h4 className="text-lg font-semibold text-[#002147] mb-4">3. Nominal Accounts</h4>
+        <p className="text-[#6C757D] mb-4">
+          These accounts represent expenses, losses, incomes, and gains. For example:
+        </p>
+        <ul className="list-disc ml-6 mb-4">
+          <li>Salary and Wages A/c, Rent A/c, Travelling Expenses A/c, etc.</li>
+          <li>Income accounts like Commission Received A/c, Gain from Sales A/c, etc.</li>
+        </ul>
+
+        <h4 className="text-lg font-semibold text-[#002147] mb-4">Additional Explanation on Account Types</h4>
+        <p className="text-[#6C757D] mb-4">
+          Let us further understand the classification of accounts:
+        </p>
+        <ul className="list-disc ml-6 mb-4">
+          <li><strong>Personal Accounts:</strong> These accounts are related to individuals, companies, or groups and include accounts such as Suresh’s A/c, ABC Bank A/c, etc.</li>
+          <li><strong>Real Accounts:</strong> These can be tangible (physical assets like cash and stock) or intangible (non-physical assets like goodwill and intellectual properties).</li>
+          <li><strong>Nominal Accounts:</strong> These accounts capture the daily operational activities like expenses, losses, and incomes such as Rent A/c, Salary A/c, and Gain from Sale A/c.</li>
+        </ul>
+
         <h3 className="text-xl font-semibold text-[#002147] mb-4">Types of Accounting</h3>
         <p className="text-[#6C757D] mb-4">
           Accounting can be divided into several categories based on its purpose, scope, and the specific needs of an organization.
@@ -143,6 +186,8 @@ const AccountingTypesModule = () => {
           <li>Failing to reconcile bank statements regularly.</li>
           <li>Not adhering to proper accounting standards and tax regulations.</li>
         </ul>
+
+        
 
         <div className="text-center">
           <button

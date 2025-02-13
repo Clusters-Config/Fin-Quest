@@ -94,10 +94,7 @@ const TerminologyPage = () => {
       term: "Asset Accounts",
       definition: "Accounts that track the company’s assets, such as cash, inventory, and property."
     },
-    {
-      term: "Liability Accounts",
-      definition: "Accounts that track the company’s debts and obligations, such as loans or accounts payable."
-    },
+     
     {
       term: "Equity Accounts",
       definition: "Accounts that track the ownership interest in the company, such as stockholder’s equity and retained earnings."
@@ -329,7 +326,88 @@ const TerminologyPage = () => {
     {
       term: "Personal Finance Planning",
       definition: "The process of managing one’s financial activities, including budgeting, investing, and retirement planning."
-    }
+    },
+    
+    {
+         term: "Transaction",
+         definition: "An event or business activity that involves an exchange of money or money’s worth between parties, which changes the financial position of a person. Transactions can be either cash or credit transactions."
+      },
+      {
+         term: "Goods/Services",
+        "definition": "Goods are tangible articles or commodities bought, sold, or produced by a business, whereas services are intangible and are rendered for profit or without the objective of earning profits."
+      },
+       
+      {
+         term: "Asset",
+        "definition": "A resource owned by the business with the purpose of generating future profits. Assets can be tangible (physical existence) or intangible (no physical existence but generate future benefits)."
+      },
+      {
+         term: "Liability",
+        "definition": "An obligation of a financial nature to be settled at a future date, representing money the business owes to other parties."
+      },
+      {
+         term: "Internal Liability",
+        "definition": "Represents the proprietor's equity, including amounts such as capital, reserves, and undistributed profits."
+      },
+      {
+         term: "Working Capital",
+        "definition": "Refers to the current assets required to maintain a business's operations. Gross working capital is the total of current assets, while net working capital is the difference between current assets and current liabilities."
+      },
+      {
+         term: "Contingent Liability",
+        "definition": "A potential obligation that may arise depending on the outcome of a future event, which is not recorded but disclosed in the financial statements."
+      },
+      {
+         term: "Capital",
+        "definition": "The amount invested in the business by its owners, which may include cash, goods, or other assets. For corporate entities, capital is typically represented as share capital."
+      },
+      {
+         term: "Drawings",
+        "definition": "Amount withdrawn by the owner from the business for personal use, which reduces the owner's capital. This term does not apply to corporate bodies."
+      },
+      {
+         term: "Net Worth",
+        "definition": "The excess of total assets over total liabilities, representing the owner's equity in the business."
+      },
+      {
+         term: "Non-current Investments",
+        "definition": "Investments held for more than one year, typically for long-term purposes, such as fixed deposits for extended periods."
+      },
+      {
+         term: "Current Investments",
+        "definition": "Investments that are readily realizable and intended to be held for no more than one year from the date of investment."
+      },
+      {
+         term: "Debtor",
+        "definition": "Persons or entities who owe money to the business, typically for goods or services sold on credit."
+      },
+      {
+         term: "Creditor",
+        "definition": "A person or entity to whom the business owes money, often for goods or services purchased on credit."
+      },
+      {
+         term: "Capital Expenditure",
+        "definition": "Expenditure incurred to acquire a fixed asset intended for long-term use, such as purchasing machinery or office equipment."
+      },
+      {
+         term: "Revenue Expenditure",
+        "definition": "Expenditure incurred to generate revenue in the current period, such as repairs, wages, and insurance. It is typically short-term in nature."
+      },
+       
+      {
+         term: "Profit and Loss Account or Income Statement",
+        "definition": "A financial statement showing the revenue and expenses of the business over a specific accounting period, ultimately revealing profit or loss."
+      },
+      {
+         term: "Trade Discount",
+        "definition": "A discount typically offered by wholesalers to retailers, calculated on the list or invoice price. Trade discounts are not recorded in the books of accounts, and transactions are recorded at net values."
+      },
+      {
+         term: "Cash Discount",
+        "definition": "A discount offered to encourage early payment by a debtor, typically recorded in the books of accounts after applying any trade discounts."
+      }
+    
+    
   ];
 
   const handleQuizClick = () => {
@@ -339,7 +417,7 @@ const TerminologyPage = () => {
   return (
     <div className="p-6 bg-gradient-to-r from-[#F4F4F4] to-[#F8FAFC] min-h-screen">
       <h1 className="text-4xl font-extrabold text-[#002147] text-center my-6">
-        Basic Finance Terminology
+        Basic Accountancy Terminology
       </h1>
       <div className="bg-white p-8 rounded-lg shadow-2xl max-w-5xl mx-auto">
         <h2 className="text-3xl font-semibold text-[#002147] mb-6">Essential Financial Terms You Should Know</h2>

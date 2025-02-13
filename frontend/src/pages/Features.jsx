@@ -7,7 +7,7 @@ function FeaturesPage() {
       
       {/* Navigation Bar */}
       <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
-        <div className="text-[#6A5ACD] text-2xl font-bold">Finance Fusion Paths</div>
+        <div className="text-[#F39C12] text-2xl font-bold">Finance Fusion Paths</div>
         <ul className="flex space-x-6">
           <li>
             <Link
@@ -22,7 +22,7 @@ function FeaturesPage() {
 
       {/* Page Title & Subtitle */}
       <div className="text-center mt-10">
-        <h1 className="text-4xl font-semibold text-[#6A5ACD]">Finance Fusion Paths</h1>
+        <h1 className="text-4xl font-semibold text-[#002147]">Finance Fusion Paths</h1>
         <p className="text-gray-600 mt-2">
           Your all-in-one platform for mastering personal finance through interactive learning and real-world applications.
         </p>

@@ -1,20 +1,15 @@
 import React from 'react';
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const CreditDebitModule = () => {
   const navigate = useNavigate();
-  // const mod = 1; 
-  //   // const path1 = "Credit_debit";
-  //   const location = useLocation();
-      const mod = 0;
-      const page = "resultpage";
-      const path = "path2"
-      const mods = "mod1"
-    
+  const mod = 0;
+  const page = "resultpage";
+  const path = "path2";
+  const mods = "mod1";
 
   const handleQuizButtonClick = () => {
-    // Navigate to the quiz page for Credit and Debit
-    navigate('/QuizApp/Credit_Debit',{state:{mod:mod, page:page,path:path,mods:mods}});
+    navigate('/QuizApp/Credit_Debit', { state: { mod: mod, page: page, path: path, mods: mods } });
   };
 
   return (
@@ -26,7 +21,6 @@ const CreditDebitModule = () => {
         <h2 className="text-3xl font-semibold text-[#002147] mb-6">
           What are Credit and Debit in Accounting?
         </h2>
-
         <p className="text-[#6C757D] mb-4">
           Credit and Debit are fundamental concepts in accounting. These terms refer to entries made in an organization's
           accounting records (the ledger), used to track financial transactions. Understanding how to apply credits and debits
@@ -76,68 +70,43 @@ const CreditDebitModule = () => {
           The sum of debits (cash) and credits (sales revenue) must be equal.
         </p>
 
-        <h3 className="text-xl font-semibold text-[#002147] mb-4">Example of Credit and Debit in Action</h3>
+        {/* Adding the new content here */}
+        <h3 className="text-xl font-semibold text-[#002147] mb-4">The Account Concept in Accounting</h3>
         <p className="text-[#6C757D] mb-4">
-          Let's look at a more detailed example to understand the application of debits and credits:
+          One must get conversant with accounting terms before embarking on learning actual record-keeping based on the rules. 
+          An "Account" is defined as a summarized record of transactions related to a person or thing. For instance, when a business deals with customers and suppliers, each of the customers and suppliers will be a separate account.
         </p>
-        <ul className="list-disc ml-6 mb-4">
-          <li>If a company sells a product for $1,000 in cash, the accounting entries would be:</li>
-        </ul>
-        <pre className="bg-gray-100 p-4 rounded-lg mb-4">
-          Debit: Cash (Asset) +$1,000
-          Credit: Sales Revenue (Equity) +$1,000
-        </pre>
-        <ul className="list-disc ml-6 mb-4">
-          <li>If the company later pays $300 for rent, the entries would be:</li>
-        </ul>
-        <pre className="bg-gray-100 p-4 rounded-lg mb-4">
-          Debit: Rent Expense (Expense) +$300
-          Credit: Cash (Asset) -$300
-        </pre>
-        <p className="text-[#6C757D] mb-6">
-          In both cases, debits and credits are balanced, ensuring the integrity of the financial records.
+        <p className="text-[#6C757D] mb-4">
+          It is important to know that each person is identified as a separate account by the bank when opening an account. The account is also related to things – both tangible and intangible, such as land, buildings, equipment, brand value, trademarks, etc.
+        </p>
+        <p className="text-[#6C757D] mb-4">
+          When a business transaction happens, one must identify the “account” that will be affected and then apply the rules to decide the accounting treatment. Typically, an account is shown in the form of an English letter ‘T’, which has two sides: the left-hand side (debit) and the right-hand side (credit).
         </p>
 
-        <h3 className="text-xl font-semibold text-[#002147] mb-4">Understanding Debits and Credits in Different Accounts</h3>
+        <h3 className="text-xl font-semibold text-[#002147] mb-4">The Concept of Balance in Accounts</h3>
         <p className="text-[#6C757D] mb-4">
-          In accounting, different types of accounts react differently to debits and credits. Below is a quick overview:
+          Each side of an account shows effects, so you can easily find the totals and determine the difference between the two. This difference is known as the "balance." If the debit side total exceeds the credit side, the balance is termed as a "debit balance." If the credit side total exceeds the debit side, it is called a "credit balance." If both sides are equal, the balance is referred to as a "nil balance."
         </p>
-        <table className="table-auto border-collapse border border-gray-300 mb-6 w-full">
-          <thead>
-            <tr>
-              <th className="border px-4 py-2 text-left">Account Type</th>
-              <th className="border px-4 py-2 text-left">Debit Effect</th>
-              <th className="border px-4 py-2 text-left">Credit Effect</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="border px-4 py-2">Assets (e.g., Cash, Inventory)</td>
-              <td className="border px-4 py-2">Increase</td>
-              <td className="border px-4 py-2">Decrease</td>
-            </tr>
-            <tr>
-              <td className="border px-4 py-2">Liabilities (e.g., Loans, Payables)</td>
-              <td className="border px-4 py-2">Decrease</td>
-              <td className="border px-4 py-2">Increase</td>
-            </tr>
-            <tr>
-              <td className="border px-4 py-2">Equity (e.g., Stockholder's Equity)</td>
-              <td className="border px-4 py-2">Decrease</td>
-              <td className="border px-4 py-2">Increase</td>
-            </tr>
-            <tr>
-              <td className="border px-4 py-2">Revenue (e.g., Sales)</td>
-              <td className="border px-4 py-2">Decrease</td>
-              <td className="border px-4 py-2">Increase</td>
-            </tr>
-            <tr>
-              <td className="border px-4 py-2">Expenses (e.g., Rent, Utilities)</td>
-              <td className="border px-4 py-2">Increase</td>
-              <td className="border px-4 py-2">Decrease</td>
-            </tr>
-          </tbody>
-        </table>
+        
+        <h3 className="text-xl font-semibold text-[#002147] mb-4">Example of a Cash Account</h3>
+  <pre className="bg-gray-100 p-4 rounded-lg mb-4 overflow-x-auto">
+    <code>
+      {`
+        Dr. Cash Account          Cr.
+        Particulars                Amount      | Particulars           Amount
+        -------------------------------------------- | --------------------------------------------
+        Cash brought into business   1,00,000     | Paid for goods purchased    50,000
+        Received for goods sold      25,000       | Paid for rent               15,000
+        Balance at the end           60,000       |                             
+        -------------------------------------------- | --------------------------------------------
+        Total                        1,25,000     | Total                    1,25,000
+      `}
+    </code>
+  </pre>
+
+        <p className="text-[#6C757D] mb-4">
+          From the example above, the debit side of the Cash account reflects cash coming into the business, while the credit side shows cash flowing out. The "balance at the end" reflects the available cash in the business.
+        </p>
 
         <h3 className="text-xl font-semibold text-[#002147] mb-4">Why Debits and Credits Matter?</h3>
         <p className="text-[#6C757D] mb-4">
