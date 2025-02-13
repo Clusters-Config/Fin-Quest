@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 
-const VerifyUser = (req, res, next) => {
+const VerifyUser = async(req, res, next) => {
     const accessToken = req.cookies?.accessToken;
     const refreshToken = req.cookies?.refreshToken;
     if (!accessToken) {
         if(refreshToken){
-            const email = jwt.decode(refreshToken).email;
+            const email =  jwt.decode(refreshToken).email;
             const password = jwt.decode(refreshToken).password;
             const username = jwt.decode(refreshToken).username;
             const firstname = jwt.decode(refreshToken).firstname;
@@ -26,21 +26,19 @@ const VerifyUser = (req, res, next) => {
                     secure: true,
                     sameSite: "strict",
                   });
-                console.log("Created access token with refresh token")
-                res.status(202).json({messgae:"Created access token with refresh token"})
         }
         else{
-            res.status(401).json({ error: "Access and Refresh token missing please login" });
+           return res.json({ error: "Access and Refresh token missing please login" });
         }
          
     }
 
     try {
         const decoded = jwt.verify(accessToken, "json-access-token");
-        res.status(202).json({valid:true ,email:decoded.email , password:decoded.password, username:decoded.username , firstname:decoded.firstname,lastname:decoded.lastname, dob:decoded.dob, phone:decoded.phone ,hobbies:decoded.hobbies})
-        next();
+         res.status(202).json({valid:true ,email:decoded.email , password:decoded.password, username:decoded.username , firstname:decoded.firstname,lastname:decoded.lastname, dob:decoded.dob, phone:decoded.phone ,hobbies:decoded.hobbies})
+
     } catch (error) {
-        return res.status(401).json({ error: "Invalid or expired token" });
+         res.status(401).json({ error: "Invalid or expired token" });
     }
 };
 
@@ -50,7 +48,7 @@ const clearcookies = async(req,res)=>{
 
     res.clearCookie("accessToken");
     res.clearCookie("refreshToken");
-    res.status(201).json({messgae:"Done"})
+    return res.status(200).send("Success")
 }
 
 export { VerifyUser,clearcookies};
