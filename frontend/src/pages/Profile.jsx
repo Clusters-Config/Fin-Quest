@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import { FaBook } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 
 function ProfilePage() {
@@ -70,7 +72,9 @@ function ProfilePage() {
   };
 
   return (
+    
     <div className="min-h-screen bg-[#F8FAFC] p-6 text-[#6C757D]">
+       
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-3xl font-bold text-[#002147] mb-8 text-center">
           Your Profile

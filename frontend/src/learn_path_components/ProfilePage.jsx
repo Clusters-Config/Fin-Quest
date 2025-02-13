@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "../pages/AuthContext";
 import { useNavigate } from "react-router-dom";
+
+
 const ProfilePage = () => {
   const [email, setemail] = useState();
   const [udob, setudob] = useState();
@@ -18,7 +19,8 @@ const ProfilePage = () => {
   const[Accounting2, setAccounting2] = useState()
   const[Accounting,setAccounting] = useState()
   const navigate = useNavigate();
-  useEffect(() => {
+
+  useEffect(() =>{
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify").then((res) => {
       setemail(res.data.email);
@@ -51,7 +53,6 @@ const ProfilePage = () => {
     axios
       .post("http://localhost:4047/finduserlearning", { email })
       .then((res) => {
-        setprogress(res.data.module[0].mod1.path1); 
         setTerminologies1(res.data.module[0].mod1.path1); 
         setTerminologies2(res.data.module[0].mod1.path2); 
         setAccounting1(res.data.module[0].mod2.path1)
@@ -60,12 +61,30 @@ const ProfilePage = () => {
   });
 
   useEffect(()=>{
-     setTerminologies(Terminologies1/2 + Terminologies2/2)
-     setAccounting(Accounting1/2 + Accounting2/2)
+
+    if(Terminologies1>=70 || Terminologies2>=70){
+      setTerminologies(50)
+    }
+    else{
+      setTerminologies(0)
+    }
+    if(Terminologies1>=70 && Terminologies2>=70){
+      setTerminologies(100)
+    }
+    
+    if(Accounting1>=70 || Accounting2>=70){
+      setAccounting(50)
+    }
+    else{
+      setAccounting(0)
+    }
+    if(Accounting1>=70 && Accounting2>=70){
+      setAccounting(100)
+    }
+   
   })
  
   useEffect(() => {
-
       setModules([
         { name: "Module 1: Basic Terminologies", progress: Terminologies },
         { name: "Module 2: Fundamentals of Accounting", progress: Accounting },
@@ -73,7 +92,7 @@ const ProfilePage = () => {
         { name: "Module 4: Understanding Interest Rates", progress: 10 },
         { name: "Module 5: Investment Basics", progress: 0 },
       ])
-  },[Terminologies]);
+  });
 
 
 
@@ -109,7 +128,7 @@ const ProfilePage = () => {
       {email ? (
         <button
           onClick={handleLogOut}
-          className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all absolute right-80 top-24"
+          className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all absolute right-32 top-24"
         >
           Logout
         </button>

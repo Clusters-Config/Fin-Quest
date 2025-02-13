@@ -63,11 +63,6 @@ function Homepage() {
         <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
         <ul className="flex space-x-6">
           <li>
-            <Link to="/" className="text-white hover:text-[#F39C12] transition duration-300">
-              Home
-            </Link>
-          </li>
-          <li>
             <Link to="/features" className="text-white hover:text-[#F39C12] transition duration-300">
               Features
             </Link>
