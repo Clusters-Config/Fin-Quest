@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaBook, FaGamepad, FaChartLine, FaRobot, FaUsers, FaCalculator, FaRoute, FaNewspaper, FaBriefcase } from "react-icons/fa"; 
+import { FaBook, FaGamepad, FaChartLine, FaRobot, FaUsers, FaCalculator, FaRoute, FaNewspaper, FaBriefcase, FaHome } from "react-icons/fa"; 
 
 function FeaturesPage() {
   return (
@@ -14,7 +14,7 @@ function FeaturesPage() {
               to="/"
               className="text-white hover:text-[#6A5ACD] transition duration-300"
             >
-              <FaBook className="w-6 h-6 inline-block" />
+              <FaHome className="w-6 h-6 inline-block" />
             </Link>
           </li>
         </ul>
@@ -22,7 +22,7 @@ function FeaturesPage() {
 
       {/* Page Title & Subtitle */}
       <div className="text-center mt-10">
-        <h1 className="text-4xl font-semibold text-[#002147]">Finance Fusion Paths</h1>
+        <h1 className="text-4xl font-semibold text-[#F39C12]">Finance Fusion Paths</h1>
         <p className="text-gray-600 mt-2">
           Your all-in-one platform for mastering personal finance through interactive learning and real-world applications.
         </p>
