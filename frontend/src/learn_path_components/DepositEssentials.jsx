@@ -11,15 +11,16 @@ const DepositCalculator = () => {
   const calculateDeposit = () => {
     if (principal && rateOfInterest && timePeriod) {
       const rate = rateOfInterest / 100;
-      const maturityVal = 
-        principal * Math.pow(1 + rate, timePeriod); // Simple compound interest formula for Deposit
+      const maturityVal = principal * Math.pow(1 + rate, timePeriod); // Simple compound interest formula for Deposit
       setMaturityAmount(maturityVal.toFixed(2));
     }
   };
 
   return (
     <div className="mb-8">
-      <h3 className="text-2xl font-semibold text-[#002147]">Deposit Calculator (INR)</h3>
+      <h3 className="text-2xl font-semibold text-[#002147]">
+        Deposit Calculator (INR)
+      </h3>
       <div className="mt-4">
         <label className="text-[#6C757D]">Initial Deposit (INR):</label>
         <input
@@ -65,11 +66,14 @@ const DepositCalculator = () => {
 const DepositEssentials = () => {
   const navigate = useNavigate();
   const page = "resultpage";
-  const path = "path1"
-  const mods = "mod5"
+  const path = "path1";
+  const mods = "mod4";
+  const type = "finance";
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/DepositEssentials",{state:{ page:page,path:path,mods:mods}}); // Replace with the route for your Deposit Quiz page
+    navigate("/QuizApp/DepositEssentials", {
+      state: { page: page, path: path, mods: mods, type: type },
+    }); // Replace with the route for your Deposit Quiz page
   };
 
   return (
@@ -81,41 +85,79 @@ const DepositEssentials = () => {
 
       {/* Content Section */}
       <div className="bg-white p-8 rounded-lg shadow-2xl max-w-5xl mx-auto">
-
         {/* Introduction */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">What are Deposits?</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            What are Deposits?
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            Deposits are sums of money that you place in a financial institution, such as a bank or credit union, for safekeeping. 
-            These funds can earn interest over time, making deposits an excellent option for growing your savings with minimal risk.
+            Deposits are sums of money that you place in a financial
+            institution, such as a bank or credit union, for safekeeping. These
+            funds can earn interest over time, making deposits an excellent
+            option for growing your savings with minimal risk.
           </p>
         </section>
 
         {/* Types of Deposits */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">Types of Deposits</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            Types of Deposits
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            There are several types of deposits that vary based on the duration and interest they offer:
+            There are several types of deposits that vary based on the duration
+            and interest they offer:
           </p>
           <ul className="list-disc list-inside mt-3 text-[#6C757D]">
-            <li><strong>Fixed Deposits:</strong> A deposit where you invest a lump sum amount for a fixed tenure, and it earns a guaranteed rate of interest.</li>
-            <li><strong>Recurring Deposits:</strong> A deposit where you invest a fixed amount every month for a predetermined period to earn interest.</li>
-            <li><strong>Demand Deposits:</strong> Deposits that can be withdrawn at any time, such as a checking or savings account.</li>
-            <li><strong>Term Deposits:</strong> Similar to fixed deposits, but these are made for a specific term, with the principal returning at maturity along with interest.</li>
+            <li>
+              <strong>Fixed Deposits:</strong> A deposit where you invest a lump
+              sum amount for a fixed tenure, and it earns a guaranteed rate of
+              interest.
+            </li>
+            <li>
+              <strong>Recurring Deposits:</strong> A deposit where you invest a
+              fixed amount every month for a predetermined period to earn
+              interest.
+            </li>
+            <li>
+              <strong>Demand Deposits:</strong> Deposits that can be withdrawn
+              at any time, such as a checking or savings account.
+            </li>
+            <li>
+              <strong>Term Deposits:</strong> Similar to fixed deposits, but
+              these are made for a specific term, with the principal returning
+              at maturity along with interest.
+            </li>
           </ul>
         </section>
 
         {/* Benefits of Deposits */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">Benefits of Depositing Money</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            Benefits of Depositing Money
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            Depositing your money offers several advantages, especially for those looking for safe and stable growth:
+            Depositing your money offers several advantages, especially for
+            those looking for safe and stable growth:
           </p>
           <ul className="list-disc list-inside mt-3 text-[#6C757D]">
-            <li><strong>Security:</strong> Deposits are typically insured (such as FDIC insurance), ensuring your money is safe even if the bank fails.</li>
-            <li><strong>Guaranteed Returns:</strong> Fixed and term deposits offer guaranteed returns at a specified interest rate, making them low-risk investments.</li>
-            <li><strong>Liquidity:</strong> Demand deposits and savings accounts allow quick access to your funds whenever needed.</li>
-            <li><strong>Easy to Manage:</strong> Deposits are easy to open and manage, requiring little to no effort once set up.</li>
+            <li>
+              <strong>Security:</strong> Deposits are typically insured (such as
+              FDIC insurance), ensuring your money is safe even if the bank
+              fails.
+            </li>
+            <li>
+              <strong>Guaranteed Returns:</strong> Fixed and term deposits offer
+              guaranteed returns at a specified interest rate, making them
+              low-risk investments.
+            </li>
+            <li>
+              <strong>Liquidity:</strong> Demand deposits and savings accounts
+              allow quick access to your funds whenever needed.
+            </li>
+            <li>
+              <strong>Easy to Manage:</strong> Deposits are easy to open and
+              manage, requiring little to no effort once set up.
+            </li>
           </ul>
         </section>
 
@@ -124,24 +166,43 @@ const DepositEssentials = () => {
 
         {/* How to Start with Deposits */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">How to Start Depositing Money</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            How to Start Depositing Money
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            Getting started with deposits is straightforward. Here are the basic steps:
+            Getting started with deposits is straightforward. Here are the basic
+            steps:
           </p>
           <ol className="list-decimal list-inside mt-3 text-[#6C757D]">
-            <li>Research different deposit options based on your financial goals and time horizon.</li>
-            <li>Choose a trusted financial institution (bank or credit union) and open the account or deposit you prefer.</li>
-            <li>Deposit your money and let it earn interest over the agreed period.</li>
-            <li>Review your deposit options periodically to ensure they are meeting your financial needs.</li>
+            <li>
+              Research different deposit options based on your financial goals
+              and time horizon.
+            </li>
+            <li>
+              Choose a trusted financial institution (bank or credit union) and
+              open the account or deposit you prefer.
+            </li>
+            <li>
+              Deposit your money and let it earn interest over the agreed
+              period.
+            </li>
+            <li>
+              Review your deposit options periodically to ensure they are
+              meeting your financial needs.
+            </li>
           </ol>
         </section>
 
         {/* Key Takeaways */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">Key Takeaways</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            Key Takeaways
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            Deposits are a reliable and safe way to save and grow your money. By understanding the different types of deposits and their benefits,
-            you can make informed decisions to strengthen your financial position while minimizing risk.
+            Deposits are a reliable and safe way to save and grow your money. By
+            understanding the different types of deposits and their benefits,
+            you can make informed decisions to strengthen your financial
+            position while minimizing risk.
           </p>
         </section>
 

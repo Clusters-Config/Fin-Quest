@@ -7,10 +7,11 @@ const AccountingTypesModule = () => {
   const page = "resultpage";
   const path = "path1"
   const mods = "mod2"
+  const type = "account"
 
   const handleQuizButtonClick = () => {
     // Navigate to the quiz page for Accounting Types
-    navigate('/QuizApp/Accounting',{state:{mod:mod, page:page,path:path,mods:mods}});
+    navigate('/QuizApp/Accounting',{state:{mod:mod, page:page,path:path,mods:mods,type:type}});
   };
 
   return (

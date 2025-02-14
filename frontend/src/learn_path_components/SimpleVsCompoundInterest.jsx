@@ -6,11 +6,12 @@ const SimpleVsCompoundInterest = () => {
   const navigate = useNavigate();
   const page = "resultpage";
   const path = "path1"
-  const mods = "mod4"
+  const mods = "mod3"
+  const type = "finance"
 
   // Function to handle quiz redirection
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/SimpleVsCompoundInterest",{state:{ page:page,path:path,mods:mods}}); // Replace with actual route for your quiz page
+    navigate("/QuizApp/SimpleVsCompoundInterest",{state:{ page:page,path:path,mods:mods,type:type}}); // Replace with actual route for your quiz page
   };
 
   return (

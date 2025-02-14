@@ -7,9 +7,10 @@ const CreditDebitModule = () => {
   const page = "resultpage";
   const path = "path2";
   const mods = "mod1";
+  const type = "account"
 
   const handleQuizButtonClick = () => {
-    navigate('/QuizApp/Credit_Debit', { state: { mod: mod, page: page, path: path, mods: mods } });
+    navigate('/QuizApp/Credit_Debit', { state: { mod: mod, page: page, path: path, mods: mods ,type:type} });
   };
 
   return (

@@ -63,12 +63,13 @@ const StockInvestmentCalculator = () => {
 const StockMarketBasics = () => {
   const page = "resultpage";
   const path = "path3"
-  const mods = "mod5"
+  const mods = "mod4"
+  const type = "finance"
   const navigate = useNavigate();
   const [quizCompleted, setQuizCompleted] = useState(false);
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/StockMarketBasics",{state:{ page:page,path:path,mods:mods}}); // Replace with your quiz page route
+    navigate("/QuizApp/StockMarketBasics",{state:{ page:page,path:path,mods:mods,type:type}}); // Replace with your quiz page route
   };
 
   return (

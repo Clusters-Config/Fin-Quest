@@ -9,7 +9,7 @@ function QuizApp() {
   const [userAnswers, setUserAnswers] = useState({});
   const [loading, setLoading] = useState(true);
   const location = useLocation()
-  const{mod,page,path,mods} = location.state || {};
+  const{mod,page,path,mods,type} = location.state || {};
 
   // console.log(mod+" "+page)
   // Fetch the quiz data based on the quizId from the URL
@@ -50,7 +50,7 @@ function QuizApp() {
     });
 
     // Pass the score to the result page via navigation
-    navigate("/result", { state: { score: calculatedScore, total: quizData.length , mod: mod , page:page , path:path, mods:mods} });
+    navigate("/result", { state: { score: calculatedScore, total: quizData.length , mod: mod , page:page , path:path, mods:mods, type:type} });
   };
 
   return (

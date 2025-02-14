@@ -158,10 +158,11 @@ const SavingEssentials = () => {
   const mod = 1;
   const page = "resultpage";
   const path = "path1"
-  const mods = "mod3" // Percentage progress for demonstration
+  const mods = "mod2"
+  const type = "finance" // Percentage progress for demonstration
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/Saving_Essentials",{state:{mod:mod, page:page,path:path,mods:mods}}); // Replace "/quiz" with the route of your Quiz page
+    navigate("/QuizApp/Saving_Essentials",{state:{mod:mod, page:page,path:path,mods:mods,type:type}}); // Replace "/quiz" with the route of your Quiz page
   };
 
   const handleDownloadTracker = () => {

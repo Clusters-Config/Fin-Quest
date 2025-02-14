@@ -6,11 +6,12 @@ const BudgetBasics = () => {
   const mod = 1;
   const page = "resultpage";
   const path = "path2"
-  const mods = "mod3"
+  const mods = "mod2"
+  const type = "finance"
   const navigate = useNavigate()
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/Budgeting_Basics",{state:{mod:mod, page:page,path:path,mods:mods}}); // Replace "/quiz" with the route of your Quiz page
+    navigate("/QuizApp/Budgeting_Basics",{state:{mod:mod, page:page,path:path,mods:mods,type:type}}); // Replace "/quiz" with the route of your Quiz page
   };
   return (
     <div className="bg-gradient-to-b from-[#F4F4F4] to-[#FFFFFF] min-h-screen p-6 flex flex-col justify-between">

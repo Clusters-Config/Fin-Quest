@@ -11,15 +11,16 @@ const MutualFundCalculator = () => {
   const calculateInvestment = () => {
     if (investment && rateOfReturn && years) {
       const rate = rateOfReturn / 100;
-      const futureVal =
-        investment * Math.pow(1 + rate, years); // Simple compound interest formula
+      const futureVal = investment * Math.pow(1 + rate, years); // Simple compound interest formula
       setFutureValue(futureVal.toFixed(2));
     }
   };
 
   return (
     <div className="mb-8">
-      <h3 className="text-2xl font-semibold text-[#002147]">Mutual Fund Calculator</h3>
+      <h3 className="text-2xl font-semibold text-[#002147]">
+        Mutual Fund Calculator
+      </h3>
       <div className="mt-4">
         <label className="text-[#6C757D]">Initial Investment: $</label>
         <input
@@ -64,12 +65,15 @@ const MutualFundCalculator = () => {
 
 const MutualFundEssentials = () => {
   const page = "resultpage";
-  const path = "path2"
-  const mods = "mod5"
+  const path = "path2";
+  const mods = "mod4";
+  const type = "finance";
   const navigate = useNavigate();
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/MutualFundEssentials",{state:{ page:page,path:path,mods:mods}}); // Replace "/quiz" with the route for your Quiz page on Mutual Funds
+    navigate("/QuizApp/MutualFundEssentials", {
+      state: { page: page, path: path, mods: mods, type: type },
+    }); // Replace "/quiz" with the route for your Quiz page on Mutual Funds
   };
 
   return (
@@ -81,43 +85,75 @@ const MutualFundEssentials = () => {
 
       {/* Content Section */}
       <div className="bg-white p-8 rounded-lg shadow-2xl max-w-5xl mx-auto">
-
         {/* Introduction */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">What are Mutual Funds?</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            What are Mutual Funds?
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            Mutual funds are investment vehicles that pool money from many investors to invest in a diversified portfolio of
-            stocks, bonds, or other securities. They are managed by professional fund managers, which means they offer
-            a way for individuals to invest in a variety of assets without having to do all the research or manage the
+            Mutual funds are investment vehicles that pool money from many
+            investors to invest in a diversified portfolio of stocks, bonds, or
+            other securities. They are managed by professional fund managers,
+            which means they offer a way for individuals to invest in a variety
+            of assets without having to do all the research or manage the
             investments themselves.
           </p>
         </section>
 
         {/* Types of Mutual Funds */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">Types of Mutual Funds</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            Types of Mutual Funds
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            There are several types of mutual funds, each focusing on a different investment strategy:
+            There are several types of mutual funds, each focusing on a
+            different investment strategy:
           </p>
           <ul className="list-disc list-inside mt-3 text-[#6C757D]">
-            <li><strong>Equity Funds:</strong> Invest primarily in stocks, aiming for higher returns but higher risk.</li>
-            <li><strong>Bond Funds:</strong> Invest in bonds or other fixed-income securities, offering lower risk but also lower returns.</li>
-            <li><strong>Index Funds:</strong> Track a specific market index (like the S&P 500), offering low fees and diversification.</li>
-            <li><strong>Money Market Funds:</strong> Invest in short-term, low-risk securities, providing lower returns but more stability.</li>
+            <li>
+              <strong>Equity Funds:</strong> Invest primarily in stocks, aiming
+              for higher returns but higher risk.
+            </li>
+            <li>
+              <strong>Bond Funds:</strong> Invest in bonds or other fixed-income
+              securities, offering lower risk but also lower returns.
+            </li>
+            <li>
+              <strong>Index Funds:</strong> Track a specific market index (like
+              the S&P 500), offering low fees and diversification.
+            </li>
+            <li>
+              <strong>Money Market Funds:</strong> Invest in short-term,
+              low-risk securities, providing lower returns but more stability.
+            </li>
           </ul>
         </section>
 
         {/* Mutual Fund Benefits */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">Benefits of Investing in Mutual Funds</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            Benefits of Investing in Mutual Funds
+          </h2>
           <p className="text-[#6C757D] mt-3">
             Investing in mutual funds comes with several key advantages:
           </p>
           <ul className="list-disc list-inside mt-3 text-[#6C757D]">
-            <li><strong>Diversification:</strong> Your money is spread across different securities, reducing risk.</li>
-            <li><strong>Professional Management:</strong> Fund managers do the research and decision-making for you.</li>
-            <li><strong>Accessibility:</strong> You can invest in mutual funds with relatively small amounts of money.</li>
-            <li><strong>Liquidity:</strong> Mutual funds can be bought and sold daily, providing flexibility.</li>
+            <li>
+              <strong>Diversification:</strong> Your money is spread across
+              different securities, reducing risk.
+            </li>
+            <li>
+              <strong>Professional Management:</strong> Fund managers do the
+              research and decision-making for you.
+            </li>
+            <li>
+              <strong>Accessibility:</strong> You can invest in mutual funds
+              with relatively small amounts of money.
+            </li>
+            <li>
+              <strong>Liquidity:</strong> Mutual funds can be bought and sold
+              daily, providing flexibility.
+            </li>
           </ul>
         </section>
 
@@ -126,25 +162,41 @@ const MutualFundEssentials = () => {
 
         {/* How to Start Investing in Mutual Funds */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">How to Start Investing in Mutual Funds</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            How to Start Investing in Mutual Funds
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            Getting started with mutual funds is relatively easy. Here’s how you can begin:
+            Getting started with mutual funds is relatively easy. Here’s how you
+            can begin:
           </p>
           <ol className="list-decimal list-inside mt-3 text-[#6C757D]">
-            <li>Research different mutual funds based on your investment goals, risk tolerance, and time horizon.</li>
+            <li>
+              Research different mutual funds based on your investment goals,
+              risk tolerance, and time horizon.
+            </li>
             <li>Open an account with a brokerage or mutual fund company.</li>
-            <li>Start with a small amount and gradually increase your investment as you learn more.</li>
-            <li>Review your investments periodically and make adjustments as needed.</li>
+            <li>
+              Start with a small amount and gradually increase your investment
+              as you learn more.
+            </li>
+            <li>
+              Review your investments periodically and make adjustments as
+              needed.
+            </li>
           </ol>
         </section>
 
         {/* Key Takeaways */}
         <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">Key Takeaways</h2>
+          <h2 className="text-3xl font-semibold text-[#002147]">
+            Key Takeaways
+          </h2>
           <p className="text-[#6C757D] mt-3">
-            Mutual funds are an excellent way to invest, especially for beginners. They provide diversification, professional
-            management, and flexibility. By starting early and being consistent with your investments, you can grow your
-            wealth over time and achieve your financial goals.
+            Mutual funds are an excellent way to invest, especially for
+            beginners. They provide diversification, professional management,
+            and flexibility. By starting early and being consistent with your
+            investments, you can grow your wealth over time and achieve your
+            financial goals.
           </p>
         </section>
 

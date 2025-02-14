@@ -8,6 +8,7 @@ const TerminologyPage = () => {
     const page = "resultpage";
     const path = "path1"
     const mods = "mod1"
+    const type = "account"
     // const location = useLocation();
     const terminologyData = [
     {
@@ -411,7 +412,7 @@ const TerminologyPage = () => {
   ];
 
   const handleQuizClick = () => {
-    navigate('/QuizApp/TerminologyPage',{state:{mod:mod, page:page,path:path,mods:mods}}); // Redirect to the quiz page when the button is clicked
+    navigate('/QuizApp/TerminologyPage',{state:{mod:mod, page:page,path:path,mods:mods,type:type}}); // Redirect to the quiz page when the button is clicked
   };
 
   return (

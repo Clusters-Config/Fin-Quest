@@ -8,6 +8,11 @@ const FinancePrinciple = () => {
   const [years, setYears] = useState("");  // Missing semicolon here
   const [npv, setNpv] = useState(null);
 
+  const page = "resultpage";
+  const path = "path1"
+  const mods = "mod1"
+  const type = "finance"
+
   // Calculate NPV using the provided formula
   const calculateNPV = () => {
     if (cashOutlay && cashBenefits && discountRate && years) {
@@ -26,7 +31,7 @@ const FinancePrinciple = () => {
   const navigate = useNavigate();
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/Finance_Principles"); // Replace with your actual quiz route
+    navigate("/QuizApp/Finance_Principles",{state:{page:page,path:path,mods:mods,type:type}}); // Replace with your actual quiz route
   };
 
   return (

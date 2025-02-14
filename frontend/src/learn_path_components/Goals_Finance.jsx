@@ -4,9 +4,13 @@ import { useNavigate } from 'react-router-dom';
 const ShareholderWealthMaximization = () => {
   const [quizRedirect, setQuizRedirect] = useState(false);
   const navigate = useNavigate();
+  const page = "resultpage";
+  const path = "path2"
+  const mods = "mod1"
+  const type = "finance"
 
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/Goals_Finance"); // Replace with your actual quiz route
+    navigate("/QuizApp/Goals_Finance",{state:{page:page,path:path,mods:mods,type:type}}); // Replace with your actual quiz route
   };
 
   return (

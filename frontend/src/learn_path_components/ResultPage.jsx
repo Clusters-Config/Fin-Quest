@@ -4,7 +4,7 @@ import axios from "axios";
 
 const ResultPage = () => {
   const location = useLocation();
-  const { score, total ,mod ,page,path,mods} = location.state || { score: 0, total: 0 };
+  const { score, total ,mod ,page,path,mods,type} = location.state || { score: 0, total: 0 };
   const [email,setemail] = useState("")
   let userscore = score*10
 
@@ -17,7 +17,7 @@ const ResultPage = () => {
   })
   useEffect(()=>{
     axios.defaults.withCredentials = true;
-    axios.post(`http://localhost:4047/${page}`,{userscore ,email,mod,path,mods})
+    axios.post(`http://localhost:4047/${page}`,{userscore ,email,mod,path,mods,type})
   })
   
   return (

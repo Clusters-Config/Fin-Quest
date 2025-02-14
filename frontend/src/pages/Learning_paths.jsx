@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Learning_paths = () => {
   const [openSection, setOpenSection] = useState({}); // Track opened sections by category
-  const [username, setusername] = useState("");
+  const [username, setusername] = useState(null);
   const [uusername, setuusername] = useState("");
   const [email, setemail] = useState("");
   const [progress, setprogress] = useState();
@@ -148,7 +148,7 @@ const Learning_paths = () => {
       {/* Header Section */}
       <div className="mt-16">
         <h1 className="text-center text-2xl sm:text-xl mt-10 pt-10 text-[#002147] font-extrabold">
-          {username.toUpperCase()}'s Learning Path
+          {username?.toUpperCase()} Learning Path
         </h1>
         <p className="text-center text-sm sm:text-base mt-3 text-[#6C757D]">
           Embark on a journey designed to make you a financial expert, step by step!

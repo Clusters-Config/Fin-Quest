@@ -7,10 +7,11 @@ const PillarsOfAccountingModule = () => {
   const page = "resultpage";
   const path = "path2"
   const mods = "mod2"
+  const type = "account"
 
   const handleQuizButtonClick = () => {
     // Navigate to the quiz page for Pillars of Accounting
-    navigate('/QuizApp/Pillars_Of_Accounting',{state:{mod:mod, page:page,path:path,mods:mods}});
+    navigate('/QuizApp/Pillars_Of_Accounting',{state:{mod:mod, page:page,path:path,mods:mods,type:type}});
   };
 
   return (
