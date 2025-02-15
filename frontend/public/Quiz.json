@@ -531,7 +531,7 @@
               "Maximise profits",
               "Minimise costs"
             ],
-            "correct_answer": "Maximise current market value of the firm’s equity"
+            "answer": "Maximise current market value of the firm’s equity"
           },
           {
             "question": "What is the legal argument in favour of shareholder wealth maximisation?",
@@ -541,7 +541,7 @@
               "The government mandates profit maximisation",
               "Firms must balance the interests of all stakeholders"
             ],
-            "correct_answer": "Managers are agents of the shareholders and must prioritise their interests"
+            "answer": "Managers are agents of the shareholders and must prioritise their interests"
           },
           {
             "question": "What does the economic argument for shareholder wealth maximisation emphasize?",
@@ -551,7 +551,7 @@
               "Managers should be paid based on shareholder returns",
               "All investments should focus on growth"
             ],
-            "correct_answer": "Maximising shareholder wealth leads to the most efficient use of resources"
+            "answer": "Maximising shareholder wealth leads to the most efficient use of resources"
           },
           {
             "question": "What is the main critique raised by capital market sceptics?",
@@ -561,7 +561,7 @@
               "Shareholders are always correct in their value assessment",
               "Managers should have the same priorities as shareholders"
             ],
-            "correct_answer": "Stock markets tend to be myopic and fail to reflect long-term values"
+            "answer": "Stock markets tend to be myopic and fail to reflect long-term values"
           },
           {
             "question": "What alternative goals to shareholder wealth maximisation are commonly discussed?",
@@ -571,7 +571,7 @@
               "Maximising earnings per share",
               "All of the above"
             ],
-            "correct_answer": "All of the above"
+            "answer": "All of the above"
           },
           {
             "question": "What is a key disadvantage of maximising profits as a goal?",
@@ -581,7 +581,7 @@
               "It ignores stakeholder interests",
               "It neglects the role of customer satisfaction"
             ],
-            "correct_answer": "It doesn’t account for timing and duration of profit"
+            "answer": "It doesn’t account for timing and duration of profit"
           },
           {
             "question": "What is the key modification proposed in the goal of shareholder wealth maximisation?",
@@ -591,7 +591,7 @@
               "Managers should focus on customer satisfaction over shareholder returns",
               "Managers should ignore market price volatility"
             ],
-            "correct_answer": "Managers should balance short-term and long-term shareholder interests"
+            "answer": "Managers should balance short-term and long-term shareholder interests"
           },
           {
             "question": "Which of the following is NOT a compelling argument for shareholder wealth maximisation?",
@@ -601,7 +601,7 @@
               "Decisional argument",
               "Balancing stakeholder interests"
             ],
-            "correct_answer": "Balancing stakeholder interests"
+            "answer": "Balancing stakeholder interests"
           },
           {
             "question": "In the context of India, which factor has increased companies’ focus on shareholder wealth maximisation?",
@@ -611,7 +611,7 @@
               "Rise of government-controlled companies",
               "Decrease in capital market activity"
             ],
-            "correct_answer": "Foreign exposure and liberalisation"
+            "answer": "Foreign exposure and liberalisation"
           },
           {
             "question": "Which statement best defines the goal of shareholder wealth maximisation?",
@@ -621,7 +621,7 @@
               "Balancing the interests of all stakeholders",
               "Maximising profits in the short term"
             ],
-            "correct_answer": "Creating value for shareholders by increasing the firm’s equity value"
+            "answer": "Creating value for shareholders by increasing the firm’s equity value"
           }
         ],
       

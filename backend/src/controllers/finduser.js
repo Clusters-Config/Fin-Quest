@@ -1,6 +1,8 @@
   import { SignupSchema } from "../models/signup.js";
   import { AsyncHandler } from "../utils/AsyncHandler.js";
   import { ResultSchema } from "../models/result.js";
+  import cookie from "cookie-parser"
+  import jwt from "jsonwebtoken"
 
   const finduser = AsyncHandler(async (req, res) => {
     const { email } = req.body;
@@ -21,4 +23,10 @@
     }
   });
 
-  export { finduser, finduserlearning };
+  const decode = AsyncHandler(async(req,res)=>{
+    const refreshToken = req.cookies?.refreshToken;
+    const decoded = jwt?.verify(refreshToken ,"json-refresh-token")
+    res.json(decoded.email)
+  })
+
+  export { finduser, finduserlearning ,decode};

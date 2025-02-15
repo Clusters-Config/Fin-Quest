@@ -8,12 +8,48 @@ const Learning_paths = () => {
   const [username, setusername] = useState(null);
   const [uusername, setuusername] = useState("");
   const [email, setemail] = useState("");
-  const [progress, setprogress] = useState();
+  const [progress, setprogress] = useState(0);
+
+  // const [modules, setModules] = useState([
+  //     { name: "Module 1: Basic Terminologies", progress: Terminologies },
+  //     { name: "Module 2: Fundamentals of Accounting", progress: 95 },
+  //     { name: "Module 3: Basic Financial Concepts", progress: 30 },
+  //     { name: "Module 4: Understanding Interest Rates", progress: 10 },
+  //     { name: "Module 5: Investment Basics", progress: 0 },
+  //   ]);
+
+
+
+    const [Accounting1, setAccounting1] = useState();
+    const [Accounting2, setAccounting2] = useState();
+    const [Accounting, setAccounting] = useState();
+    const [FAccounting1, setFAccounting1] = useState();
+    const [FAccounting2, setFAccounting2] = useState();
+    const [FAccounting, setFAccounting] = useState();
+    const [Financial1, setFinancial1] = useState();
+    const [Financial2, setFinancial2] = useState();
+    const [Financial, setFinancial] = useState();
+    const [Saving1, setSaving1] = useState();
+    const [Saving2, setSaving2] = useState();
+    const [Saving, setSaving] = useState();
+    const [Interest1, setInterest1] = useState();
+    const [Interest2, setInterest2] = useState();
+    const [Interest, setInterest] = useState();
+    const [Investment1, setInvestment1] = useState();
+    const [Investment2, setInvestment2] = useState();
+    const [Investment3, setInvestment3] = useState();
+    const [Investment, setInvestment] = useState();;
+
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios.post("http://localhost:4047/finduserlearning").then((res) => {
+    });
+  });
 
   const navigate = useNavigate();
 
   const handleToggle = (category, sectionId) => {
-    setOpenSection(prevState => ({
+    setOpenSection((prevState) => ({
       ...prevState,
       [category]: prevState[category] === sectionId ? null : sectionId,
     }));
@@ -28,23 +64,100 @@ const Learning_paths = () => {
     axios.get("http://localhost:4047/verify").then((res) => {
       setuusername(res.data.username);
     });
-  }, []);
+  });
 
   useEffect(() => {
     setusername(uusername);
   }, [uusername]);
+
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify").then((res) => {
       setemail(res.data.email);
     });
-  }, []);
+  });
 
   useEffect(() => {
-    axios.post("http://localhost:4047/finduserlearning", { email }).then((res) => {
-      setprogress(res.data.module[0].mod1.path1);
+    axios
+      .post("http://localhost:4047/finduserlearning", { email })
+      .then((res) => {
+        setAccounting1(res?.data?.accouting[0]?.mod1.path1);
+        setAccounting2(res?.data?.accouting[0]?.mod1.path2);
+        setFAccounting1(res?.data?.accouting[0]?.mod2.path1);
+        setFAccounting2(res?.data?.accouting[0]?.mod2.path2);
+        setFinancial1(res?.data?.finance[0]?.mod1.path1);
+        setFinancial2(res?.data?.finance[0]?.mod1.path2);
+        setSaving1(res?.data?.finance[0]?.mod2.path1);
+        setSaving2(res?.data?.finance[0]?.mod2.path2);
+        setInterest1(res?.data?.finance[0]?.mod3.path1);
+        setInterest2(res?.data?.finance[0]?.mod3.path2);
+        setInvestment1(res?.data?.finance[0]?.mod4.path1);
+        setInvestment2(res?.data?.finance[0]?.mod4.path2);
+        setInvestment3(res?.data?.finance[0]?.mod4.path3);
+      });
+  });
+
+  useEffect(() => {
+      if (Accounting1 >= 70 && Accounting2 >= 70) {
+        setAccounting(100);
+      } else if (Accounting1 >= 70 || Accounting2 >= 70) {
+        setAccounting(50);
+      } else {
+        setAccounting(0);
+      }
+  
+      if (FAccounting1 >= 70 && FAccounting2 >= 70) {
+        setFAccounting(100);
+      } else if (FAccounting1 >= 70 || FAccounting2 >= 70) {
+        setFAccounting(50);
+      } else {
+        setFAccounting(0);
+      }
+  
+      if (Financial1 >= 70 && Financial2 >= 70) {
+        setFinancial(100);
+      } else if (Financial1 >= 70 || Financial2 >= 70) {
+        setFinancial(50);
+      } else {
+        setFinancial(0);
+      }
+  
+      if (Saving1 >= 70 && Saving2 >= 70) {
+        setSaving(100);
+      } else if (Saving1 >= 70 || Saving2 >= 70) {
+        setSaving(50);
+      } else {
+        setSaving(0);
+      }
+  
+      if (Interest1 >= 70 && Interest2 >= 70) {
+        setInterest(100);
+      } else if (Interest1 >= 70 || Interest2 >= 70) {
+        setInterest(50);
+      } else {
+        setInterest(0);
+      }
+  
+      if (Investment1 >= 70 && Investment2 >= 70 && Investment3 >= 70) {
+        setInvestment(100);
+      } else if (Investment1 >= 70 && Investment2 >= 70) {
+        setInvestment(66);
+      } else if (Investment1 >= 70 && Investment3 >= 70) {
+        setInvestment(66);
+      } else if (Investment2 >= 70 && Investment3 >= 70) {
+        setInvestment(66);
+      } else if (Investment2 >= 70 || Investment3 >= 70 || Investment1 >= 70) {
+        setInvestment(33);
+      } else {
+        setInvestment(0);
+      }
     });
-  }, [email]);
+
+    useEffect(()=>{
+      setprogress(Math.floor(
+        (Accounting + FAccounting + Financial + Saving + Interest + Investment)/6
+      ))
+    })
 
   // Timeline Data with Categories (Accounting and Finance)
   const timelineData = [
@@ -56,7 +169,10 @@ const Learning_paths = () => {
           title: "Accounting for Beginners: Key Terms & Transactions",
           topics: [
             { name: "Accounting Glossary", route: "/TerminologyPage" },
-            { name: "The Concepts Of ‘DEBIT’ AND ‘CREDIT’", route: "/Credit_Debit" },
+            {
+              name: "The Concepts Of ‘DEBIT’ AND ‘CREDIT’",
+              route: "/Credit_Debit",
+            },
           ],
         },
         {
@@ -92,7 +208,10 @@ const Learning_paths = () => {
           id: 3,
           title: "Understanding Interest Rates",
           topics: [
-            { name: "Simple vs. Compound Interest", route: "/SimpleVsCompoundInterest" },
+            {
+              name: "Simple vs. Compound Interest",
+              route: "/SimpleVsCompoundInterest",
+            },
             { name: "Impact on Loans", route: "/LoanImpacts" },
           ],
         },
@@ -125,9 +244,7 @@ const Learning_paths = () => {
     navigate(groupRoute);
   };
 
-  const sampleGroups = [
-    { name: "Dive In", route: "/ForumPage" },
-  ];
+  const sampleGroups = [{ name: "Dive In", route: "/ForumPage" }];
 
   return (
     <div className="px-4 sm:px-6 lg:px-10">
@@ -150,17 +267,23 @@ const Learning_paths = () => {
           {username?.toUpperCase()} Learning Path
         </h1>
         <p className="text-center text-sm sm:text-base mt-3 text-[#6C757D]">
-          Embark on a journey designed to make you a financial expert, step by step!
+          Embark on a journey designed to make you a financial expert, step by
+          step!
         </p>
       </div>
 
       {/* Progress Tracker */}
       <div className="my-10">
-        <h2 className="ml-6 sm:ml-2 text-xl text-[#002147] font-bold">Progress Tracker</h2>
+        <h2 className="ml-6 sm:ml-2 text-xl text-[#002147] font-bold">
+          Progress Tracker
+        </h2>
         <div className="bg-white py-6 mt-4 rounded-lg">
-          <div className="bg-[#F4F4F4] rounded-full h-6 sm:h-7 my-2 mx-4 sm:mx-10">
-            <div className="bg-[#F39C12] h-6 sm:h-7 rounded-full w-9/12">
-              <h3 className="text-center text-white text-xs sm:text-sm pt-1">70% Completed</h3>
+          <div className="bg-[#e9e7e7] rounded-full ">
+            <div
+              className={`bg-[#F39C12] h-6 sm:h-7 rounded-full`}
+              style={{ width: `${progress}%` }}
+            >
+              <h3 className="text-center text-black text-xs sm:text-sm pt-1">{`${progress}% Completed`}</h3>
             </div>
           </div>
         </div>
@@ -168,12 +291,19 @@ const Learning_paths = () => {
 
       {/* Learning Timeline */}
       <div>
-        <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold">Learning Timeline</h1>
+        <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold">
+          Learning Timeline
+        </h1>
         <div className="bg-white w-full max-w-6xl mx-auto rounded-xl mt-6 pb-6 shadow-md">
           {timelineData.map((category) => (
-            <div key={category.category} className="border border-[#6C757D] rounded-lg mt-4 p-4">
+            <div
+              key={category.category}
+              className="border border-[#6C757D] rounded-lg mt-4 p-4"
+            >
               {/* Category Header */}
-              <h2 className="text-xl text-[#002147] font-extrabold">{category.category}</h2>
+              <h2 className="text-xl text-[#002147] font-extrabold">
+                {category.category}
+              </h2>
               {category.modules.map((section) => (
                 <div key={section.id} className="mt-4">
                   {/* Section Header */}
@@ -182,12 +312,20 @@ const Learning_paths = () => {
                     onClick={() => handleToggle(category.category, section.id)}
                   >
                     <div
-                      className={`w-9 h-9 ${openSection[category.category] === section.id ? "bg-[#002147]" : "bg-[#6C757D]"} rounded-full mx-6`}
+                      className={`w-9 h-9 ${
+                        openSection[category.category] === section.id
+                          ? "bg-[#002147]"
+                          : "bg-[#6C757D]"
+                      } rounded-full mx-6`}
                     >
-                      <h1 className="py-1 text-white text-center">{section.id}</h1>
+                      <h1 className="py-1 text-white text-center">
+                        {section.id}
+                      </h1>
                     </div>
                     <div className="ml-4">
-                      <h1 className="text-lg font-extrabold text-[#002147]">{section.title}</h1>
+                      <h1 className="text-lg font-extrabold text-[#002147]">
+                        {section.title}
+                      </h1>
                     </div>
                   </div>
 
@@ -213,11 +351,15 @@ const Learning_paths = () => {
       </div>
 
       {/* Peer-to-Peer Learning Section */}
-      <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold">Peer-to-Peer Learning & Collaboration</h1>
+      <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold">
+        Peer-to-Peer Learning & Collaboration
+      </h1>
       <div className="bg-white w-full max-w-6xl mx-auto rounded-xl mt-6 pb-6 shadow-md">
         <div className="border border-[#6C757D] rounded-lg mt-4 p-4">
           {/* Study Groups Section */}
-          <h2 className="text-lg font-bold text-[#002147]">Engage With Peers</h2>
+          <h2 className="text-lg font-bold text-[#002147]">
+            Engage With Peers
+          </h2>
           <div className="mt-4 space-y-4">
             {sampleGroups.map((group, index) => (
               <button
@@ -232,7 +374,9 @@ const Learning_paths = () => {
 
           {/* Discussion Section */}
           <div className="mt-8">
-            <h2 className="text-lg font-bold text-[#002147]">Discussion Board</h2>
+            <h2 className="text-lg font-bold text-[#002147]">
+              Discussion Board
+            </h2>
             <textarea
               className="w-full p-2 border border-[#6C757D] rounded-md mt-4"
               rows="4"
@@ -263,7 +407,9 @@ const Learning_paths = () => {
 
       {/* Footer */}
       <footer className="bg-[#002147] text-white py-4 px-6 text-center mt-10 w-full">
-        <p className="text-sm mt-2">&copy; 2025 Fin-Quest. All Rights Reserved.</p>
+        <p className="text-sm mt-2">
+          &copy; 2025 Fin-Quest. All Rights Reserved.
+        </p>
       </footer>
     </div>
   );

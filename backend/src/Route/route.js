@@ -7,6 +7,7 @@ import {VerifyUser} from "../controllers/verifycookie.js";
 import TerminologyPage from "../controllers/Result.js";
 import { finduserlearning } from "../controllers/finduser.js";
 import { clearcookies } from "../controllers/verifycookie.js";
+import { decode } from "../controllers/finduser.js";
 const router = Router();
 
 router.route("/login").post(userlogin);
@@ -17,5 +18,6 @@ router.route('/verify').get(VerifyUser);
 router.route("/resultpage").post(TerminologyPage)
 router.route("/finduserlearning").post(finduserlearning)
 router.route("/clearcookies").get(clearcookies)
+router.route("/decode").get(decode)
 
 export {router};
