@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa"; // Icon for the profile
 import axios from "axios";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 const Learning_paths = () => {
   const [openSection, setOpenSection] = useState({}); // Track opened sections by category
@@ -166,7 +167,7 @@ const Learning_paths = () => {
       modules: [
         {
           id: 1,
-          title: "Accounting for Beginners: Key Terms & Transactions",
+          title: `Accounting for Beginners: Key Terms & Transactions `,
           topics: [
             { name: "Accounting Glossary", route: "/TerminologyPage" },
             {
@@ -177,7 +178,7 @@ const Learning_paths = () => {
         },
         {
           id: 2,
-          title: "Fundamentals of Accounting",
+          title: `Fundamentals of Accounting `,
           topics: [
             { name: "Accounting Overview", route: "/Accounting" },
             { name: "Pillars of Accounting", route: "/Pillars_Of_Accounting" },
@@ -298,11 +299,11 @@ const Learning_paths = () => {
           {timelineData.map((category) => (
             <div
               key={category.category}
-              className="border border-[#6C757D] rounded-lg mt-4 p-4"
+              className="border border-[#6C757D] rounded-lg mt-4 p-4" 
             >
               {/* Category Header */}
               <h2 className="text-xl text-[#002147] font-extrabold">
-                {category.category}
+                {category.category} 
               </h2>
               {category.modules.map((section) => (
                 <div key={section.id} className="mt-4">
@@ -323,9 +324,9 @@ const Learning_paths = () => {
                       </h1>
                     </div>
                     <div className="ml-4">
-                      <h1 className="text-lg font-extrabold text-[#002147]">
+                      <div className="text-lg font-extrabold text-[#002147] flex ">
                         {section.title}
-                      </h1>
+                      </div>
                     </div>
                   </div>
 
