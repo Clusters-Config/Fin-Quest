@@ -148,7 +148,7 @@ function ForumPage() {
         {/* File Sharing */}
         <div className="mb-8">
           <h2 className="text-2xl font-semibold text-[#6C757D] mb-4 dark:text-[#6C757D]">
-            Share Files
+            Share Files - Regarding Financial Aspects
           </h2>
           <input
             type="file"
@@ -159,7 +159,7 @@ function ForumPage() {
         
 
         {/* Leaderboard */}
-        <div className="mb-8">
+        {/* <div className="mb-8">
           <h2 className="text-2xl font-semibold text-[#F39C12] mb-4 dark:text-[#F39C12]">
             Top Contributors
           </h2>
@@ -180,7 +180,7 @@ function ForumPage() {
               ))}
             </ul>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
