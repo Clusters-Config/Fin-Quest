@@ -66,7 +66,7 @@ const ProfilePage = () => {
     axios
       .post("http://localhost:4047/finduserlearning", { email })
       .then((res) => {
-        console.log(res);
+  
         setAccounting1(res?.data?.accouting[0]?.mod1.path1);
         setAccounting2(res?.data?.accouting[0]?.mod1.path2);
         setFAccounting1(res?.data?.accouting[0]?.mod2.path1);
@@ -83,7 +83,6 @@ const ProfilePage = () => {
       });
   });
 
-  console.log(Interest1);
 
   useEffect(() => {
     if (Accounting1 >= 70 && Accounting2 >= 70) {

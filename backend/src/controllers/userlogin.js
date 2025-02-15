@@ -108,7 +108,7 @@ const userlogin = AsyncHandler(async (req, res) => {
     return exist;
   };
 
-  // console.log(email + " Login successful");
+
 
   res.send("Login successful");
 });

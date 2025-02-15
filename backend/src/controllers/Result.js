@@ -8,15 +8,13 @@
 
 	const resultuser = await ResultSchema.findOne({ email: email });
 
-	console.log(email);
 
 	if (!email) {
 		throw new Apierror(404, "User not found");
 	}
 
-	console.log(type);
+
 	if((type=="account"&& mods == "mod1" && path == "path1")) {
-		console.log("acc")
 		if (resultuser) {
 		resultuser.accouting[0].mod1.path1 = userscore;
 		await resultuser.save();
@@ -85,7 +83,6 @@
 	}
 
 	else if ((type == "finance" && mods == "mod1" && path == "path1")) {
-		console.log("fin")
 		if (resultuser) {
 		resultuser.finance[0].mod1.path1 = userscore;
 		await resultuser.save();
