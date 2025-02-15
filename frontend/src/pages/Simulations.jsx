@@ -10,10 +10,13 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-96 max-h-[95vh] overflow-y-auto">
         <h2 className="text-xl font-bold text-[#002147] mb-4">{title}</h2>
         {children}
-        <button onClick={onClose} className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition">
+        <button
+          onClick={onClose}
+          className="mt-4 w-full bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+        >
           Close
         </button>
       </div>
@@ -62,19 +65,11 @@ const Simulations = () => {
   const [totalPrice, setTotalPrice] = useState();
   // State for Monthly Budget Calculation
   const [remainingBudget, setRemainingBudget] = useState();
-  // State for Corporate Tax Calculation
-  const [taxableIncome, setTaxableIncome] = useState();
-  const [corporateTaxRate, setCorporateTaxRate] = useState();
-  const [corporateTaxAmount, setCorporateTaxAmount] = useState();
   // State for Compound Interest Calculation
   const [principal, setPrincipal] = useState();
   const [time, setTime] = useState();
   const [compoundingPeriods, setCompoundingPeriods] = useState();  // Default: annually
-  const [amount, setAmount] = useState();
-  // State for Emergency Fund Calculation
-  const [monthlyExpenses, setMonthlyExpenses] = useState();
-  const [monthsForFund, setMonthsForFund] = useState(); // Default: 6 months
-  const [emergencyFund, setEmergencyFund] = useState();
+  const [amount, setAmount] = useState(); 
   // States for loan inputs
   const [loanTenure, setLoanTenure] = useState();
   const [emiAmount, setEmiAmount] = useState(null);
@@ -83,10 +78,22 @@ const Simulations = () => {
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("INR");
   const [convertedAmount, setConvertedAmount] = useState(null);
-   
+  //States of credit card payoff
+  const [balance, setBalance] = useState("");
+  const [apr, setApr] = useState("");
+  const [monthlyPayment, setMonthlyPayment] = useState("");
+  const [payoffTime, setPayoffTime] = useState(null);
+  //States of public provident fund calculator
+  const [initialInvestment, setInitialInvestment] = useState("");
+  const [annualContribution, setAnnualContribution] = useState("");
+  const [years, setYears] = useState(15); // Default duration of 15 years for PPF
+  const [maturityAmount, setMaturityAmount] = useState(null);
+  const [totalInterest, setTotalInterest] = useState(null);
+  //States od FDC calculator
+  const [compoundingFrequency, setCompoundingFrequency] = useState(); // Default frequency (Quarterly)
    
   
-
+    
   // Calculation Functions
   const calculateBudget = () => {
     const remainingBudget = income - expenses;
@@ -98,6 +105,19 @@ const Simulations = () => {
     const payment = (loanAmount * monthlyInterest) / (1 - Math.pow(1 + monthlyInterest, -loanTerm));
     setLoanRepayment(payment.toFixed(2));
   };
+
+  // Function to calculate FD maturity amount
+  const calculateFD = () => {
+    const principalAmount = parseFloat(principal);
+    const rate = parseFloat(interestRate) / 100;
+    const time = parseInt(years, 10);
+    const n = parseInt(compoundingFrequency, 10);
+
+    // Formula for Compound Interest
+    const maturity = principalAmount * Math.pow(1 + rate / n, n * time);
+    setMaturityAmount(maturity.toFixed(2));
+  };
+
 
   // Function to calculate GST
   const calculateGST = () => {
@@ -123,12 +143,33 @@ const Simulations = () => {
     setTotalPrice(totalPrice.toFixed(2));
   };
 
-  // Calculation Functions for Corporate Tax
-  const calculateCorporateTax = () => {
-    const corporateTaxAmount = (taxableIncome * corporateTaxRate) / 100;
-    setCorporateTaxAmount(corporateTaxAmount.toFixed(2));
+  // Function to calculate PPF maturity
+  const calculatePPF = () => {
+    // Convert inputs to numbers
+    const principal = parseFloat(initialInvestment);
+    const yearlyContribution = parseFloat(annualContribution);
+    const rate = parseFloat(interestRate) / 100;
+    const duration = parseInt(years, 10);
+
+    // Calculate compound interest for initial investment
+    let maturity = principal * Math.pow(1 + rate, duration);
+
+    // Calculate compound interest for annual contributions (as yearly deposits)
+    let totalContributions = 0;
+    for (let i = 1; i <= duration; i++) {
+      totalContributions += yearlyContribution * Math.pow(1 + rate, duration - i);
+    }
+
+    maturity += totalContributions;
+
+    // Calculate total interest earned
+    const totalInvested = principal + yearlyContribution * duration;
+    const interestEarned = maturity - totalInvested;
+
+    setMaturityAmount(maturity.toFixed(2));
+    setTotalInterest(interestEarned.toFixed(2));
   };
-    
+
   // Calculation Functions for Monthly Budget
   const calculateMonthlyBudget = () => {
     const remainingBudget = income - expenses;
@@ -140,12 +181,6 @@ const Simulations = () => {
     const amount =principal * Math.pow(1 + (interestRate / (compoundingPeriods * 100)), compoundingPeriods * time);
     ;
     setAmount(amount.toFixed(2));
-  };
-
-  // Calculation Functions for Emergency Fund
-  const calculateEmergencyFund = () => {
-    const emergencyFundAmount = monthlyExpenses * monthsForFund;
-    setEmergencyFund(emergencyFundAmount.toFixed(2));
   };
 
   // Function to calculate EMI based on the formula
@@ -163,6 +198,34 @@ const Simulations = () => {
       alert('Please enter valid values for all fields!');
     }
   };
+
+   
+     
+    
+    // Function to calculate the payoff time in months
+    const calculatePayoffTime = () => {
+      if (!balance || !apr || !monthlyPayment) return;
+  
+      // Convert APR to a decimal and calculate the monthly interest rate
+      const monthlyInterestRate = (parseFloat(apr) / 100) / 12;
+      let remainingBalance = parseFloat(balance);
+      const monthlyPaymentAmount = parseFloat(monthlyPayment);
+  
+      if (monthlyPaymentAmount <= remainingBalance * monthlyInterestRate) {
+        alert('Monthly payment is too low to pay off the debt!');
+        return;
+      }
+  
+      // Calculate the number of months needed to pay off the debt
+      let months = 0;
+      while (remainingBalance > 0) {
+        const interest = remainingBalance * monthlyInterestRate;
+        remainingBalance += interest - monthlyPaymentAmount;
+        months++;
+      }
+  
+      setPayoffTime(months);
+    };
 
 
 
@@ -199,14 +262,14 @@ const Simulations = () => {
 
  // Filtered content based on search query
   const filteredContent = [
-    { label: "Budget Calculator", key: "budget" },
+    { label: "Credit CardPayoff Calculator", key: "creditCardPayoff" },
     { label: "Currency Converter", key: "currencyConverter" },
     { label: "GST Calculator", key: "gst" },
     { label: "Tax Calculator", key: "tax" },
     { label: "EMI Calculator ", key: "EMI" },
-    { label: "Corporate Tax Calculator", key: "corporateTax" },
+    { label: "PPF Calculator", key: "ppf" },
     { label: "Compound Interest Calculator", key: "compoundInterest" },
-    { label: "Emergency Fund Calculator", key: "emergencyFund" },
+    { label: "FDC Calculator", key: "fd" },
     { label: "Sales Tax Calculator", key: "salestax" }
      
   ].filter((item) => item.label.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -240,33 +303,148 @@ const Simulations = () => {
               onClick={() => setOpenModal(item.key)}
               className="bg-[#F39C12] text-white py-3 rounded-lg hover:bg-[#e67e22] transition w-full"
             >
-              {item.key === "budget" && <FaMoneyBillWave className="inline-block mr-2" />}
-              {item.key === "currencyConverter" && <FaHouseUser className="inline-block mr-2" />}
-              {item.key === "gst" && <FaExchangeAlt className="inline-block mr-2" />}
+              {item.key === "creditCardPayoff" && <FaMoneyBillWave className="inline-block mr-2" />}
+              {item.key === "currencyConverter" && <FaCoins className="inline-block mr-2" />}
+              {item.key === "gst" && <FaCalculator className="inline-block mr-2" />}
               {item.key === "tax" && <FaTag className="inline-block mr-2" />}
               {item.key === "salestax" && <FaSalesforce className="inline-block mr-2" />}
               {item.key === "EMI" && <FaMoneyCheck className="inline-block mr-2" />}
-              {item.key === "corporateTax" && <FactoryIcon className="inline-block mr-2" />}
+              {item.key === "ppf" && <FactoryIcon className="inline-block mr-2" />}
               {item.key === "compoundInterest" && <FaPinterest className="inline-block mr-2" />}
-              {item.key === "emergencyFund" && <FaUserFriends className="inline-block mr-2" />}
+              {item.key === "fd" && <FaUserFriends className="inline-block mr-2" />}
 
               {item.label}
             </button>
           ))}
         </div>
+          
 
-         {/* Modal for Tax Calculator */}
-          <Modal isOpen={openModal === "tax"} onClose={() => setOpenModal("")} title="Tax Calculator">
-            <InputField label="Income (₹)" placeholder="Enter income" value={income} onChange={setIncome} />
-            <InputField label="Tax Rate (%)" placeholder="Enter tax rate" value={taxRate} onChange={setTaxRate} />
-            <button onClick={calculateTax} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
-              Calculate Tax
-            </button>
-            {taxAmount !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">Tax Amount: ₹{taxAmount}</p>}
-          </Modal>
+         {/* Modal and State Management */}
+              <Modal isOpen={openModal === "creditCardPayoff"} onClose={() => setOpenModal("")} title="Credit Card Payoff Calculator">
+                 {/* Credit Card Payoff Description and Formula inside a Box */}
+                    <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                      <p className="font-semibold text-[#002147]">How the Payoff is Calculated:</p>
+                      <p className="text-[#555]">
+                        The payoff time depends on your balance, monthly payment, and interest rate. Formula:
+                      </p>
+                      <p className="text-[#002147] font-semibold mt-2">
+                        <span className="text-bold">Time = log(Payment / (Payment - Balance × Interest)) / log(1 + Interest)</span>
+                      </p>
+                      <p className="text-[#555] mt-2">
+                        Where:
+                        <ul className="list-disc pl-5 mt-2">
+                          <li><span className="font-semibold">Balance:</span> Your credit card balance.</li>
+                          <li><span className="font-semibold">Payment:</span> Monthly payment.</li>
+                          <li><span className="font-semibold">Interest:</span> Monthly interest rate (APR/12).</li>
+                        </ul>
+                      </p>
+                    </div>
+
+                <InputField 
+                  label="Credit Card Balance (₹)" 
+                  placeholder="Enter balance" 
+                  value={balance} 
+                  onChange={setBalance} 
+                />
+                <InputField 
+                  label="Annual Percentage Rate (APR) (%)" 
+                  placeholder="Enter APR" 
+                  value={apr} 
+                  onChange={setApr} 
+                />
+                <InputField 
+                  label="Monthly Payment (₹)" 
+                  placeholder="Enter monthly payment" 
+                  value={monthlyPayment} 
+                  onChange={setMonthlyPayment} 
+                />
+                <button 
+                  onClick={calculatePayoffTime} 
+                  className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition"
+                >
+                  Calculate Payoff Time
+                </button>
+                {payoffTime !== null && (
+                  <p className="mt-3 text-lg font-semibold text-[#002147]">
+                    Time to Pay Off: {payoffTime} months
+                  </p>
+                )}
+              </Modal>
+
+          {/* Modal for Tax Calculator */}
+              <Modal isOpen={openModal === "tax"} onClose={() => setOpenModal("")} title="Tax Calculator">
+                  {/* Tax Description and Formula inside a Box */}
+                      <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                        <p className="font-semibold text-[#002147]">How the Tax is Calculated:</p>
+                        <p className="text-[#555]">
+                          The tax is calculated by applying the given tax rate on your income. The formula is:
+                        </p>
+                        <p className="text-[#002147] font-semibold mt-4">
+                          <span className="text-bold">Tax Amount = Income × (Tax Rate / 100)</span>
+                        </p>
+                        <p className="text-[#555] mt-2">
+                          Where:
+                          <ul className="list-disc pl-5 mt-2 space-y-2">
+                            <li><span className="font-semibold">Income:</span> Your total taxable income in ₹.</li>
+                            <li><span className="font-semibold">Tax Rate:</span> The percentage of income that will be taxed.</li>
+                          </ul>
+                        </p>
+                      </div>
+                <div className="space-y-4">
+                  {/* Input Fields for Tax Calculator */}
+                  <InputField
+                    label="Income (₹)"
+                    placeholder="Enter income"
+                    value={income}
+                    onChange={setIncome}
+                  />
+                  <InputField
+                    label="Tax Rate (%)"
+                    placeholder="Enter tax rate"
+                    value={taxRate}
+                    onChange={setTaxRate}
+                  />
+
+                  {/* Button to Calculate Tax */}
+                  <button
+                    onClick={calculateTax}
+                    className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition"
+                  >
+                    Calculate Tax
+                  </button>
+
+
+                  {/* Display Tax Amount */}
+                  {taxAmount !== 0 && (
+                    <div className="mt-3 text-lg font-semibold text-[#002147]">
+                      <p>Tax Amount: ₹{taxAmount}</p>
+                    </div>
+                  )}
+                </div>
+              </Modal>
+
  
            {/* EMI Calculator Modal */}
             <Modal isOpen={openModal === "EMI"} onClose={() => setOpenModal("")} title="EMI Calculator">
+              {/* EMI Calculator Description and Formula inside a Box */}
+                  <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                    <p className="font-semibold text-[#002147]">How EMI is Calculated:</p>
+                    <p className="text-[#555]">
+                      EMI is calculated based on the loan amount, interest rate, and loan tenure. Formula:
+                    </p>
+                    <p className="text-[#002147] font-semibold">
+                      <span className="text-bold">EMI = [P × r × (1 + r)^n] / [(1 + r)^n - 1]</span>
+                    </p>
+                    <p className="text-[#555] mt-2">
+                      Where:
+                      <ul className="list-disc pl-5 mt-2">
+                        <li><span className="font-semibold">P:</span> Principal loan amount.</li>
+                        <li><span className="font-semibold">r:</span> Monthly interest rate (Annual Interest Rate / 12).</li>
+                        <li><span className="font-semibold">n:</span> Number of monthly installments (loan tenure in months).</li>
+                      </ul>
+                    </p>
+                  </div>
+
               {/* Loan Purpose Dropdown */}
               <div className="mb-3">
                 <label htmlFor="loanPurpose" className="block text-lg">Loan Purpose</label>
@@ -326,18 +504,89 @@ const Simulations = () => {
               )}
             </Modal>
 
-          {/* Budget Modal */}
-          <Modal isOpen={openModal === "budget"} onClose={() => setOpenModal("")} title="Budget Calculator">
-            <InputField label="Income (₹)" placeholder="Enter income" value={income} onChange={setIncome} />
-            <InputField label="Expenses (₹)" placeholder="Enter expenses" value={expenses} onChange={setExpenses} />
-            <button onClick={calculateBudget} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
-              Calculate Budget
-            </button>
-            {budget !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">Remaining Budget: ₹{budget}</p>}
-          </Modal>
+        {/* Modal with FD Form */}
+            <Modal isOpen={openModal === "fd"} onClose={() => setOpenModal("")} title="FD Calculator">
+              {/* Fixed Deposit (FD) Calculator Description and Formula inside a Box */}
+                  <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                    <p className="font-semibold text-[#002147]">How Fixed Deposit (FD) Returns are Calculated:</p>
+                    <p className="text-[#555]">
+                      Fixed Deposit returns are calculated based on the principal amount, interest rate, and tenure. Formula for maturity amount:
+                    </p>
+                    <p className="text-[#002147] font-semibold">
+                      <span className="text-bold">Maturity Amount = P × (1 + r/n)^(nt)</span>
+                    </p>
+                    <p className="text-[#555] mt-2">
+                      Where:
+                      <ul className="list-disc pl-5 mt-2">
+                        <li><span className="font-semibold">P:</span> Principal amount (initial investment).</li>
+                        <li><span className="font-semibold">r:</span> Annual interest rate (as a decimal).</li>
+                        <li><span className="font-semibold">n:</span> Number of compounding periods per year (typically 4 for quarterly compounding).</li>
+                        <li><span className="font-semibold">t:</span> Tenure of the FD (in years).</li>
+                      </ul>
+                    </p>
+                  </div>
+
+              {/* Input Fields for FD Calculator */}
+              <InputField
+                label="Principal Amount (₹)"
+                placeholder="Enter Principal Amount"
+                value={principal}
+                onChange={setPrincipal}
+              />
+              <InputField
+                label="Interest Rate (%)"
+                placeholder="Enter Interest Rate"
+                value={interestRate}
+                onChange={setInterestRate}
+              />
+              <InputField
+                label="Duration (Years)"
+                placeholder="Enter Duration"
+                value={years}
+                onChange={setYears}
+              />
+              <InputField
+                label="Compounding Frequency (Per Year)"
+                placeholder="Enter Frequency (1 for Annually, 4 for Quarterly, etc.)"
+                value={compoundingFrequency}
+                onChange={setCompoundingFrequency}
+              />
+
+              <button
+                onClick={calculateFD}
+                className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition"
+              >
+                Calculate Maturity
+              </button>
+
+              {/* Display Results */}
+              {maturityAmount && (
+                <div className="mt-3 text-lg font-semibold text-[#002147]">
+                  <p>Maturity Amount: ₹{maturityAmount}</p>
+                </div>
+              )}
+            </Modal> 
 
           {/* Sales Tax Modal */}
           <Modal isOpen={openModal === "salestax"} onClose={() => setOpenModal("")} title="Sales Tax Calculator">
+            {/* Sales Tax Calculator Description and Formula inside a Box */}
+              <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                <p className="font-semibold text-[#002147]">How Sales Tax is Calculated:</p>
+                <p className="text-[#555]">
+                  Sales tax is calculated by applying the sales tax rate to the price of a product or service. Formula:
+                </p>
+                <p className="text-[#002147] font-semibold mt-2">
+                  <span className="text-bold">Sales Tax = Price × (Tax Rate / 100)</span>
+                </p>
+                <p className="text-[#555] mt-2">
+                  Where:
+                  <ul className="list-disc pl-5 mt-2">
+                    <li><span className="font-semibold">Price:</span> The price of the product or service.</li>
+                    <li><span className="font-semibold">Tax Rate:</span> The sales tax rate as a percentage.</li>
+                  </ul>
+                </p>
+              </div>
+
             <InputField label="Price (₹)" placeholder="Enter price" value={price} onChange={setPrice} />
             <InputField label="Sales Tax Rate (%)" placeholder="Enter sales tax rate" value={salesTaxRate} onChange={setSalesTaxRate} />
             <button onClick={calculateSalesTax} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
@@ -351,147 +600,240 @@ const Simulations = () => {
             )}
           </Modal>
 
-          {/* Corporate Tax Modal */}
-          <Modal isOpen={openModal === "corporateTax"} onClose={() => setOpenModal("")} title="Corporate Tax Calculator">
-            <InputField label="Taxable Income (₹)" placeholder="Enter taxable income" value={taxableIncome} onChange={setTaxableIncome} />
-            <InputField label="Corporate Tax Rate (%)" placeholder="Enter tax rate" value={corporateTaxRate} onChange={setCorporateTaxRate} />
-            <button onClick={calculateCorporateTax} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
-              Calculate Corporate Tax
-            </button>
-            {corporateTaxAmount !== 0 && (
-              <div className="mt-3 text-lg font-semibold text-[#002147]">
-                <p>Corporate Tax: ₹{corporateTaxAmount}</p>
-              </div>
-            )}
-          </Modal>
+        {/* PPF Calculator Modal */}
+            <Modal isOpen={openModal === "ppf"} onClose={() => setOpenModal("")} title="PPF Calculator">
+              {/* PPF Calculator Description and Formula inside a Box */}
+                <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                  <p className="font-semibold text-[#002147]">How PPF Maturity is Calculated:</p>
+                  <p className="text-[#555]">
+                    The PPF maturity amount is based on your initial investment, annual contributions, interest rate, and tenure. Formula:
+                  </p>
+                  <p className="text-[#002147] font-semibold mt-2">
+                    <span className="text-bold">Maturity Amount = P × [(1 + r/n)^(nt) - 1] / (r/n)</span>
+                  </p>
+                  <p className="text-[#555] mt-2">
+                    Where:
+                    <ul className="list-disc pl-5 mt-2">
+                      <li><span className="font-semibold">P:</span> Annual Contribution (investment).</li>
+                      <li><span className="font-semibold">r:</span> Annual Interest Rate (as a decimal).</li>
+                      <li><span className="font-semibold">n:</span> Number of compounding periods per year (typically 1 for PPF).</li>
+                      <li><span className="font-semibold">t:</span> Duration of the investment (in years).</li>
+                    </ul>
+                  </p>
+                </div>
 
-          {/* Compound Interest Modal */}
-          <Modal isOpen={openModal === "compoundInterest"} onClose={() => setOpenModal("")} title="Compound Interest Calculator">
-            <InputField label="Principal Amount (₹)" placeholder="Enter principal amount" value={principal} onChange={setPrincipal} />
-            <InputField label="Annual Interest Rate (%)" placeholder="Enter interest rate" value={interestRate} onChange={setInterestRate} />
-            <InputField label="Time (years)" placeholder="Enter time in years" value={time} onChange={setTime} />
-            <InputField label="Compounding Periods per Year" placeholder="Enter compounding periods per year" value={compoundingPeriods} onChange={setCompoundingPeriods} />
-            <button onClick={calculateCompoundInterest} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
-              Calculate Compound Interest
-            </button>
-            {amount !== 0 && (
-              <div className="mt-3 text-lg font-semibold text-[#002147]">
-                <p>Accumulated Amount: ₹{amount}</p>
-              </div>
-            )}
-          </Modal>
-
-          {/* Emergency Fund Modal */}
-          <Modal isOpen={openModal === "emergencyFund"} onClose={() => setOpenModal("")} title="Emergency Fund Calculator">
-            <InputField label="Monthly Expenses (₹)" placeholder="Enter your monthly expenses" value={monthlyExpenses} onChange={setMonthlyExpenses} />
-            <InputField label="Months for Emergency Fund" placeholder="Enter number of months" value={monthsForFund} onChange={setMonthsForFund} />
-            <button onClick={calculateEmergencyFund} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
-              Calculate Emergency Fund
-            </button>
-            {emergencyFund !== 0 && (
-              <div className="mt-3 text-lg font-semibold text-[#002147]">
-                <p>Recommended Emergency Fund: ₹{emergencyFund}</p>
-              </div>
-            )}
-          </Modal>
-
-           {/* Currency Converter Modal */}
-            <Modal isOpen={openModal === "currencyConverter"} onClose={() => setOpenModal("")} title="Currency Converter">
-              {/* Amount Input */}
-              <InputField 
-                label="Amount" 
-                placeholder="Enter amount" 
-                value={amount} 
-                onChange={setAmount} 
+              {/* Input Fields for PPF Calculator */}
+              <InputField
+                label="Initial Investment (₹)"
+                placeholder="Enter Initial Investment"
+                value={initialInvestment}
+                onChange={setInitialInvestment}
               />
-
-              {/* From Currency Dropdown */}
-              <div className="mb-3">
-                <label htmlFor="fromCurrency" className="block text-lg">From Currency</label>
-                <select 
-                  id="fromCurrency"
-                  value={fromCurrency}
-                  onChange={(e) => setFromCurrency(e.target.value)}
-                  className="w-full py-2 px-4 border border-gray-300 rounded-lg"
-                >
-                  {currencies.map(currency => (
-                    <option key={currency} value={currency}>
-                      {currency}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* To Currency Dropdown */}
-              <div className="mb-3">
-                <label htmlFor="toCurrency" className="block text-lg">To Currency</label>
-                <select 
-                  id="toCurrency"
-                  value={toCurrency}
-                  onChange={(e) => setToCurrency(e.target.value)}
-                  className="w-full py-2 px-4 border border-gray-300 rounded-lg"
-                >
-                  {currencies.map(currency => (
-                    <option key={currency} value={currency}>
-                      {currency}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Convert Button */}
-              <button 
-                onClick={convertCurrency} 
-                className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition mt-3"
+              <InputField
+                label="Annual Contribution (₹)"
+                placeholder="Enter Annual Contribution"
+                value={annualContribution}
+                onChange={setAnnualContribution}
+              />
+              <InputField
+                label="Interest Rate (%)"
+                placeholder="Enter Interest Rate"
+                value={interestRate}
+                onChange={setInterestRate}
+              />
+              <InputField
+                label="Duration (Years)"
+                placeholder="Enter Duration"
+                value={years}
+                onChange={setYears}
+              />
+              <button
+                onClick={calculatePPF}
+                className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition"
               >
-                Convert
+                Calculate Maturity
               </button>
 
-              {/* Display Converted Amount */}
-              {convertedAmount && (
-                <div className="mt-3 text-center">
-                  <h3 className="text-xl font-semibold text-[#002147]">
-                    Converted Amount: {convertedAmount} {toCurrency}
-                  </h3>
+              {/* Display results */}
+              {maturityAmount && (
+                <div className="mt-3 text-lg font-semibold text-[#002147]">
+                  <p>Maturity Amount: ₹{maturityAmount}</p>
+                  <p>Total Interest Earned: ₹{totalInterest}</p>
                 </div>
               )}
             </Modal>
 
 
-         {/* Modal for GST Calculator */}
-          <Modal isOpen={openModal === "gst"} onClose={() => setOpenModal("")} title="GST Calculator">
-            {/* Input field for expenses */}
-            <input
-              type="number"
-              value={expenseAmount}
-              onChange={(e) => setExpenseAmount(parseFloat(e.target.value))}
-              placeholder="Enter Expense Amount"
-              className="w-full py-2 px-4 border border-gray-300 rounded-lg mt-3"
+        {/* Compound Interest Modal */}
+            <Modal isOpen={openModal === "compoundInterest"} onClose={() => setOpenModal("")} title="Compound Interest Calculator">
+              {/* Compound Interest Calculator Description and Formula inside a Box */}
+                <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                  <p className="font-semibold text-[#002147]">How Compound Interest is Calculated:</p>
+                  <p className="text-[#555]">
+                    Compound Interest is calculated on the principal amount and any accumulated interest. Formula:
+                  </p>
+                  <p className="text-[#002147] font-semibold">
+                    <span className="text-bold">A = P × (1 + r/n)^(nt)</span>
+                  </p>
+                  <p className="text-[#555] mt-2">
+                    Where:
+                    <ul className="list-disc pl-5 mt-2">
+                      <li><span className="font-semibold">A:</span> Accumulated amount after interest.</li>
+                      <li><span className="font-semibold">P:</span> Principal amount (initial investment).</li>
+                      <li><span className="font-semibold">r:</span> Annual interest rate (as a decimal).</li>
+                      <li><span className="font-semibold">n:</span> Number of times interest is compounded per year.</li>
+                      <li><span className="font-semibold">t:</span> Time the money is invested for (in years).</li>
+                    </ul>
+                  </p>
+                </div>
+
+              <InputField label="Principal Amount (₹)" placeholder="Enter principal amount" value={principal} onChange={setPrincipal} />
+              <InputField label="Annual Interest Rate (%)" placeholder="Enter interest rate" value={interestRate} onChange={setInterestRate} />
+              <InputField label="Time (years)" placeholder="Enter time in years" value={time} onChange={setTime} />
+              <InputField label="Compounding Periods per Year" placeholder="Enter compounding periods per year" value={compoundingPeriods} onChange={setCompoundingPeriods} />
+              <button onClick={calculateCompoundInterest} className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition">
+                Calculate Compound Interest
+              </button>
+              {amount !== 0 && (
+                <div className="mt-3 text-lg font-semibold text-[#002147]">
+                  <p>Accumulated Amount: ₹{amount}</p>
+                </div>
+              )}
+            </Modal>
+
+        {/* Currency Converter Modal */}
+          <Modal isOpen={openModal === "currencyConverter"} onClose={() => setOpenModal("")} title="Currency Converter">
+            {/* Currency Converter Description and Formula inside a Box */}
+              <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                <p className="font-semibold text-[#002147]">How the Currency Conversion is Calculated:</p>
+                <p className="text-[#555]">
+                  The conversion is based on the exchange rate between the two currencies. Formula:
+                </p>
+                <p className="text-[#002147] font-semibold mt-2">
+                  <span className="text-bold">Converted Amount = Amount × Exchange Rate</span>
+                </p>
+                <p className="text-[#555] mt-2">
+                  Where:
+                  <ul className="list-disc pl-5 mt-2">
+                    <li><span className="font-semibold">Amount:</span> The amount you want to convert.</li>
+                    <li><span className="font-semibold">Exchange Rate:</span> The rate between the two currencies.</li>
+                  </ul>
+                </p>
+              </div>
+
+            {/* Amount Input */}
+            <InputField 
+              label="Amount" 
+              placeholder="Enter amount" 
+              value={amount} 
+              onChange={setAmount} 
             />
 
-            {/* Select for GST percentage */}
-            <select
-              value={gstPercentage}
-              onChange={(e) => setGstPercentage(parseFloat(e.target.value))}
-              className="w-full py-2 px-4 border border-gray-300 rounded-lg mt-3"
-            >
-              <option value={5}>5%</option>
-              <option value={12}>12%</option>
-              <option value={18}>18%</option>
-              <option value={28}>28%</option>
-            </select>
+            {/* From Currency Dropdown */}
+            <div className="mb-3">
+              <label htmlFor="fromCurrency" className="block text-lg">From Currency</label>
+              <select 
+                id="fromCurrency"
+                value={fromCurrency}
+                onChange={(e) => setFromCurrency(e.target.value)}
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg"
+              >
+                {currencies.map(currency => (
+                  <option key={currency} value={currency}>
+                    {currency}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            {/* Calculate GST Button */}
-            <button
-              onClick={calculateGST}
-              className="w-full bg-[#9b59b6] text-white py-2 rounded-lg hover:bg-[#8e44ad] transition mt-3"
+            {/* To Currency Dropdown */}
+            <div className="mb-3">
+              <label htmlFor="toCurrency" className="block text-lg">To Currency</label>
+              <select 
+                id="toCurrency"
+                value={toCurrency}
+                onChange={(e) => setToCurrency(e.target.value)}
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg"
+              >
+                {currencies.map(currency => (
+                  <option key={currency} value={currency}>
+                    {currency}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Convert Button */}
+            <button 
+              onClick={convertCurrency} 
+              className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition mt-3"
             >
-              Calculate GST ({gstPercentage}%)
+              Convert
             </button>
 
-            {/* Show GST Amount */}
-            {gstAmount !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">GST Amount: ₹{gstAmount}</p>}
+            {/* Display Converted Amount */}
+            {convertedAmount && (
+              <div className="mt-3 text-center">
+                <h3 className="text-xl font-semibold text-[#002147]">
+                  Converted Amount: {convertedAmount} {toCurrency}
+                </h3>
+              </div>
+            )}
           </Modal>
+
+
+        {/* Modal for GST Calculator */}
+            <Modal isOpen={openModal === "gst"} onClose={() => setOpenModal("")} title="GST Calculator">
+              {/* GST Calculator Description and Formula inside a Box */}
+                <div className="mt-4 p-4 border border-gray-300 rounded-lg bg-gray-50">
+                  <p className="font-semibold text-[#002147]">How GST is Calculated:</p>
+                  <p className="text-[#555]">
+                    GST is calculated based on the given rate applied to the original price. Formula:
+                  </p>
+                  <p className="text-[#002147] font-semibold mt-2">
+                    <span className="text-bold">GST Amount = Price × (GST Rate / 100)</span>
+                  </p>
+                  <p className="text-[#555] mt-2">
+                    Where:
+                    <ul className="list-disc pl-5 mt-2">
+                      <li><span className="font-semibold">Price:</span> The original price of the product/service.</li>
+                      <li><span className="font-semibold">GST Rate:</span> The GST percentage applicable.</li>
+                    </ul>
+                  </p>
+                </div>
+
+              {/* Input field for expenses */}
+              <input
+                type="number"
+                value={expenseAmount}
+                onChange={(e) => setExpenseAmount(parseFloat(e.target.value))}
+                placeholder="Enter Expense Amount"
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg mt-3"
+              />
+
+              {/* Select for GST percentage */}
+              <select
+                value={gstPercentage}
+                onChange={(e) => setGstPercentage(parseFloat(e.target.value))}
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg mt-3"
+              >
+                <option value={5}>5%</option>
+                <option value={12}>12%</option>
+                <option value={18}>18%</option>
+                <option value={28}>28%</option>
+              </select>
+
+              {/* Calculate GST Button */}
+              <button
+                onClick={calculateGST}
+                className="w-full bg-[#9b59b6] text-white py-2 rounded-lg hover:bg-[#8e44ad] transition mt-3"
+              >
+                Calculate GST ({gstPercentage}%)
+              </button>
+
+              {/* Show GST Amount */}
+              {gstAmount !== 0 && <p className="mt-3 text-lg font-semibold text-[#002147]">GST Amount: ₹{gstAmount}</p>}
+            </Modal>
 
 
 
