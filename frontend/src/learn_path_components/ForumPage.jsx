@@ -151,7 +151,7 @@ function ForumPage() {
             Share Files - Regarding Financial Aspects
           </h2>
           <input
-            type="file"
+            type="/pdf"
             onChange={handleFileUpload}
             className="p-2 border rounded w-full dark:bg-[#343a40] dark:text-white"
           />
