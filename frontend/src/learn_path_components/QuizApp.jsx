@@ -8,10 +8,9 @@ function QuizApp() {
   const [quizData, setQuizData] = useState([]);
   const [userAnswers, setUserAnswers] = useState({});
   const [loading, setLoading] = useState(true);
-  const location = useLocation()
-  const{mod,page,path,mods,type} = location.state || {};
+  const location = useLocation();
+  const { mod, page, path, mods, type } = location.state || {};
 
-  // console.log(mod+" "+page)
   // Fetch the quiz data based on the quizId from the URL
   useEffect(() => {
     setLoading(true);
@@ -43,14 +42,29 @@ function QuizApp() {
 
   const calculateScore = () => {
     let calculatedScore = 0;
+
     quizData.forEach((question, index) => {
-      if (userAnswers[index] === question.answer) {
+      const userAnswer = userAnswers[index]; // Get user's selected answer for the question
+      const correctAnswer = question.correctAnswer || question.answer; // Get the correct answer from quiz data
+
+      // Only increment score if the user has selected an option and it matches the correct answer
+      if (userAnswer !== undefined && userAnswer === correctAnswer) {
         calculatedScore++;
       }
     });
 
     // Pass the score to the result page via navigation
-    navigate("/result", { state: { score: calculatedScore, total: quizData.length , mod: mod , page:page , path:path, mods:mods, type:type} });
+    navigate("/result", {
+      state: {
+        score: calculatedScore,
+        total: quizData.length,
+        mod: mod,
+        page: page,
+        path: path,
+        mods: mods,
+        type: type,
+      },
+    });
   };
 
   return (

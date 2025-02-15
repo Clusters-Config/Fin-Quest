@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const ProfilePage = () => {
   const [email, setemail] = useState();
   const [udob, setudob] = useState();
@@ -12,25 +11,45 @@ const ProfilePage = () => {
   const [lastname, setlastname] = useState("");
   const [uemail, setuemail] = useState("");
   const [progresss, setprogress] = useState();
-  const[Terminologies1 , setTerminologies1] = useState()
-  const[Terminologies2 , setTerminologies2] = useState()
-  const[Terminologies,setTerminologies] = useState();
-  const[Accounting1, setAccounting1] = useState()
-  const[Accounting2, setAccounting2] = useState()
-  const[Accounting,setAccounting] = useState()
+
+  // const[Acounting1 , setAccounting1] = useState()
+  // const[Acounting2 , setAccounting2] = useState()
+  // const[Acounting , setAccounting] = useState()
+
+  const [Terminologies, setTerminologies] = useState();
+  const [Accounting1, setAccounting1] = useState();
+  const [Accounting2, setAccounting2] = useState();
+  const [Accounting, setAccounting] = useState();
+  const [FAccounting1, setFAccounting1] = useState();
+  const [FAccounting2, setFAccounting2] = useState();
+  const [FAccounting, setFAccounting] = useState();
+  const [Financial1, setFinancial1] = useState();
+  const [Financial2, setFinancial2] = useState();
+  const [Financial, setFinancial] = useState();
+  const [Saving1, setSaving1] = useState();
+  const [Saving2, setSaving2] = useState();
+  const [Saving, setSaving] = useState();
+  const [Interest1, setInterest1] = useState();
+  const [Interest2, setInterest2] = useState();
+  const [Interest, setInterest] = useState();
+  const [Investment1, setInvestment1] = useState();
+  const [Investment2, setInvestment2] = useState();
+  const [Investment3, setInvestment3] = useState();
+  const [Investment, setInvestment] = useState();
+
   const navigate = useNavigate();
 
-  useEffect(() =>{
+  useEffect(() => {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify").then((res) => {
       setemail(res.data.email);
     });
-  },[]);
+  }, []);
 
   const handleLogOut = () => {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/clearcookies").then(() => {
-      navigate("/",{ state: { login: true } });
+      navigate("/", { state: { login: true } });
     });
   };
   useEffect(() => {
@@ -42,54 +61,96 @@ const ProfilePage = () => {
     });
   });
 
-
   useEffect(() => {
     axios.defaults.withCredentials = true;
-      axios.post("http://localhost:4047/finduserlearning", { email })
+    axios
+      .post("http://localhost:4047/finduserlearning", { email })
       .then((res) => {
-        setTerminologies1(res?.data?.module[0]?.mod1?.path1); 
-        setTerminologies2(res?.data?.module[0]?.mod1?.path2); 
-        setAccounting1(res?.data?.module[0]?.mod2?.path1)
-        setAccounting2(res?.data?.module[0]?.mod2?.path2)
+        console.log(res);
+        setAccounting1(res?.data?.accouting[0]?.mod1.path1);
+        setAccounting2(res?.data?.accouting[0]?.mod1.path2);
+        setFAccounting1(res?.data?.accouting[0]?.mod2.path1);
+        setFAccounting2(res?.data?.accouting[0]?.mod2.path2);
+        setFinancial1(res?.data?.finance[0]?.mod1.path1);
+        setFinancial2(res?.data?.finance[0]?.mod1.path2);
+        setSaving1(res?.data?.finance[0]?.mod2.path1);
+        setSaving2(res?.data?.finance[0]?.mod2.path2);
+        setInterest1(res?.data?.finance[0]?.mod3.path1);
+        setInterest2(res?.data?.finance[0]?.mod3.path2);
+        setInvestment1(res?.data?.finance[0]?.mod4.path1);
+        setInvestment2(res?.data?.finance[0]?.mod4.path2);
+        setInvestment3(res?.data?.finance[0]?.mod4.path3);
       });
   });
 
-  useEffect(()=>{
+  console.log(Interest1);
 
-    if(Terminologies1>=70 || Terminologies2>=70){
-      setTerminologies(50)
+  useEffect(() => {
+    if (Accounting1 >= 70 && Accounting2 >= 70) {
+      setAccounting(100);
+    } else if (Accounting1 >= 70 || Accounting2 >= 70) {
+      setAccounting(50);
+    } else {
+      setAccounting(0);
     }
-    else{
-      setTerminologies(0)
+
+    if (FAccounting1 >= 70 && FAccounting2 >= 70) {
+      setFAccounting(100);
+    } else if (FAccounting1 >= 70 || FAccounting2 >= 70) {
+      setFAccounting(50);
+    } else {
+      setFAccounting(0);
     }
-    if(Terminologies1>=70 && Terminologies2>=70){
-      setTerminologies(100)
+
+    if (Financial1 >= 70 && Financial2 >= 70) {
+      setFinancial(100);
+    } else if (Financial1 >= 70 || Financial2 >= 70) {
+      setFinancial(50);
+    } else {
+      setFinancial(0);
     }
-    
-    if(Accounting1>=70 || Accounting2>=70){
-      setAccounting(50)
+
+    if (Saving1 >= 70 && Saving2 >= 70) {
+      setSaving(100);
+    } else if (Saving1 >= 70 || Saving2 >= 70) {
+      setSaving(50);
+    } else {
+      setSaving(0);
     }
-    else{
-      setAccounting(0)
+
+    if (Interest1 >= 70 && Interest2 >= 70) {
+      setInterest(100);
+    } else if (Interest1 >= 70 || Interest2 >= 70) {
+      setInterest(50);
+    } else {
+      setInterest(0);
     }
-    if(Accounting1>=70 && Accounting2>=70){
-      setAccounting(100)
+
+    if (Investment1 >= 70 && Investment2 >= 70 && Investment3 >= 70) {
+      setInvestment(100);
+    } else if (Investment1 >= 70 && Investment2 >= 70) {
+      setInvestment(66);
+    } else if (Investment1 >= 70 && Investment3 >= 70) {
+      setInvestment(66);
+    } else if (Investment2 >= 70 && Investment3 >= 70) {
+      setInvestment(66);
+    } else if (Investment2 >= 70 || Investment3 >= 70 || Investment1 >= 70) {
+      setInvestment(33);
+    } else {
+      setInvestment(0);
     }
-   
-  })
- 
+  });
+
   useEffect(() => {
     setModules([
-      { name: "Module 1: Basic Terminologies", progress: Terminologies },
-      { name: "Module 2: Fundamentals of Accounting", progress: Accounting },
-      { name: "Module 3: Basic Financial Concepts", progress: 30 },
-      { name: "Module 4: Understanding Interest Rates", progress: 10 },
-      { name: "Module 5: Investment Basics", progress: 0 },
+      { name: "Module 1: Accounting for Beginners", progress: Accounting },
+      { name: "Module 2: Fundamentals of Accounting", progress: FAccounting },
+      { name: "Module 3: Basic Financial Concepts", progress: Financial },
+      { name: "Module 4: Saving & Budgeting", progress: Saving },
+      { name: "Module 5: Understanding Interest Rates", progress: Interest },
+      { name: "Module 6: Investment Basics", progress: Investment },
     ]);
-  }, [Terminologies, Accounting]);
-  
-
-
+  }, [Accounting, FAccounting, Financial, Saving, Interest, Investment]);
 
   const student = {
     photo:
@@ -99,7 +160,6 @@ const ProfilePage = () => {
     phone: phone,
     email: email,
     achievements: [
-      "Completed Module 1: Basic Terminologies",
       "Achieved 95% Progress in Module 2: Fundamentals of Accounting",
       "Won 'Student of the Month' award for December 2024",
     ],
@@ -117,10 +177,10 @@ const ProfilePage = () => {
   return (
     <div className="bg-[#F4F4F4] min-h-screen">
       {/* Navbar */}
-        <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
-          My Learning Path
-        </nav>
-        {/* {email ? (
+      <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
+        My Learning Path
+      </nav>
+      {/* {email ? (
           <div className="flex justify-end p-4">
             <button
           onClick={handleLogOut}
@@ -132,13 +192,11 @@ const ProfilePage = () => {
         ) : (
           ""
         )} */}
-        {/* Profile Container */}
+      {/* Profile Container */}
       <div className="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
         {/* Profile Header */}
         <div className="grid grid-cols-2 items-center mb-6">
-          <h1 className="text-[#002147] text-2xl font-bold">
-            Student Profile
-          </h1>
+          <h1 className="text-[#002147] text-2xl font-bold">Student Profile</h1>
           {email ? (
             <div className="flex justify-end">
               <button

@@ -14,7 +14,9 @@
 		throw new Apierror(404, "User not found");
 	}
 
-	if ((type = "account" && mods == "mod1" && path == "path1")) {
+	console.log(type);
+	if((type=="account"&& mods == "mod1" && path == "path1")) {
+		console.log("acc")
 		if (resultuser) {
 		resultuser.accouting[0].mod1.path1 = userscore;
 		await resultuser.save();
@@ -31,7 +33,7 @@
 		}
 	}
 
-	if ((type = "account" && mods == "mod1" && path == "path2")) {
+	else if ((type == "account" && mods == "mod1" && path == "path2")) {
 		if (resultuser) {
 		resultuser.accouting[0].mod1.path2 = userscore;
 		await resultuser.save();
@@ -48,7 +50,7 @@
 		}
 	}
 
-	if ((type = "account" && mods == "mod2" && path == "path1")) {
+	else if ((type == "account" && mods == "mod2" && path == "path1")) {
 		if (resultuser) {
 		resultuser.accouting[0].mod2.path1 = userscore;
 		await resultuser.save();
@@ -65,7 +67,7 @@
 		}
 	}
 
-	if ((type = "account" && mods == "mod2" && path == "path2")) {
+	else if ((type == "account" && mods == "mod2" && path == "path2")) {
 		if (resultuser) {
 		resultuser.accouting[0].mod2.path2 = userscore;
 		await resultuser.save();
@@ -82,7 +84,8 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod1" && path == "path1")) {
+	else if ((type == "finance" && mods == "mod1" && path == "path1")) {
+		console.log("fin")
 		if (resultuser) {
 		resultuser.finance[0].mod1.path1 = userscore;
 		await resultuser.save();
@@ -93,13 +96,12 @@
 			finance: [{}],
 		});
 		resultuser.finance[0].mod1.path1 = userscore;
-
 		await result.save();
 		console.log("Account updated");
 		}
 	}
 
-	if ((type = "finance" && mods == "mod1" && path == "path2")) {
+	else if ((type == "finance" && mods == "mod1" && path == "path2")) {
 		if (resultuser) {
 		resultuser.finance[0].mod1.path2 = userscore;
 		await resultuser.save();
@@ -116,7 +118,7 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod2" && path == "path1")) {
+	else if ((type == "finance" && mods == "mod2" && path == "path1")) {
 		if (resultuser) {
 		resultuser.finance[0].mod2.path1 = userscore;
 		await resultuser.save();
@@ -133,7 +135,7 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod2" && path == "path2")) {
+	else if ((type == "finance" && mods == "mod2" && path == "path2")) {
 		if (resultuser) {
 		resultuser.finance[0].mod2.path2 = userscore;
 		await resultuser.save();
@@ -150,7 +152,7 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod3" && path == "path1")) {
+	else if ((type =="finance" && mods == "mod3" && path == "path1")) {
 		if (resultuser) {
 		resultuser.finance[0].mod3.path1 = userscore;
 		await resultuser.save();
@@ -167,7 +169,7 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod3" && path == "path2")) {
+	else if ((type == "finance" && mods == "mod3" && path == "path2")) {
 		if (resultuser) {
 		resultuser.finance[0].mod3.path2 = userscore;
 		await resultuser.save();
@@ -184,7 +186,7 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod4" && path == "path1")) {
+	else if ((type =="finance" && mods == "mod4" && path == "path1")) {
 		if (resultuser) {
 		resultuser.finance[0].mod4.path1 = userscore;
 		await resultuser.save();
@@ -201,7 +203,7 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod4" && path == "path2")) {
+	else if ((type == "finance" && mods == "mod4" && path == "path2")) {
 		if (resultuser) {
 		resultuser.finance[0].mod4.path2 = userscore;
 		await resultuser.save();
@@ -218,7 +220,7 @@
 		}
 	}
 
-	if ((type = "finance" && mods == "mod4" && path == "path3")) {
+	else if ((type == "finance" && mods == "mod4" && path == "path3")) {
 		if (resultuser) {
 		resultuser.finance[0].mod4.path3 = userscore;
 		await resultuser.save();
