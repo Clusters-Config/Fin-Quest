@@ -139,7 +139,8 @@ const calculateMonthlyBudget = () => {
   
 // Calculation Functions for Compound Interest
 const calculateCompoundInterest = () => {
-  const amount = principal * Math.pow(1 + (interestRate / compoundingPeriods), compoundingPeriods * time);
+  const amount =principal * Math.pow(1 + (interestRate / (compoundingPeriods * 100)), compoundingPeriods * time);
+  ;
   setAmount(amount.toFixed(2));
 };
 
