@@ -33,7 +33,6 @@ const Learning_paths = () => {
   useEffect(() => {
     setusername(uusername);
   }, [uusername]);
-
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify").then((res) => {

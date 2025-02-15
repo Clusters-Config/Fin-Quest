@@ -29,7 +29,7 @@ function FeaturesPage() {
       </div>
 
       {/* Features Grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-6 py-10 max-w-6xl mx-auto">
+      <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 max-w-6xl mx-auto">
         {[ 
           { path: "/Learning_paths", label: "Learning Path", desc: "Master financial concepts through structured learning paths", icon: <FaBook className="text-blue-500 w-8 h-8" /> },
           { path: "/Game", label: "Gamification", desc: "Learn while earning points and badges", icon: <FaGamepad className="text-purple-500 w-8 h-8" /> },
