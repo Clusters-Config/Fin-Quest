@@ -89,7 +89,7 @@ function ForumPage() {
             Discussion Threads
           </h2>
           <div className="bg-[#F4F4F4] p-4 rounded-lg max-h-64 overflow-y-auto">
-            {messages.map((msg, index) => (
+            {/* {messages.map((msg, index) => (
               <div
                 key={index}
                 className={`p-2 mb-2 rounded-md ${
@@ -113,7 +113,10 @@ function ForumPage() {
               className="px-4 py-2 bg-[#002147] text-white rounded-r-md hover:bg-[#F39C12]"
             >
               <FaPaperPlane />
-            </button>
+            </button> */}
+            <div className="flex justify-center">
+            <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center">Join Global Chat</button>
+            </div>
           </div>
         </div>
 
