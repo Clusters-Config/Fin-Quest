@@ -91,9 +91,7 @@ const Simulations = () => {
   const [totalInterest, setTotalInterest] = useState(null);
   //States od FDC calculator
   const [compoundingFrequency, setCompoundingFrequency] = useState(); // Default frequency (Quarterly)
-   
   
-    
   // Calculation Functions
   const calculateBudget = () => {
     const remainingBudget = income - expenses;
@@ -199,9 +197,7 @@ const Simulations = () => {
     }
   };
 
-   
-     
-    
+  
     // Function to calculate the payoff time in months
     const calculatePayoffTime = () => {
       if (!balance || !apr || !monthlyPayment) return;
@@ -226,7 +222,6 @@ const Simulations = () => {
   
       setPayoffTime(months);
     };
-
 
 
   // List of currencies for dropdown
