@@ -45,6 +45,12 @@ import ProfilePage  from "./learn_path_components/ProfilePage";
 import GameProfile from "./GameComponents/GameProfile"
 
 
+import ChatContainer from './learn_path_components/forum_components/ChatContainer';
+import ChatLists from './learn_path_components/forum_components/ChatLists';
+import InputText from './learn_path_components/forum_components/InputText';
+import UserLogin from './learn_path_components/forum_components/UserLogin';
+// import style from './learn_path_components/forum_components/UserLogin'
+
 const App = () => {
   return (
     <AuthProvider>
@@ -94,6 +100,14 @@ const App = () => {
           <Route path="/DailyChallenges" element={<DailyChallenges />} />
           <Route path="/ProfilePage" element={<ProfilePage />} />
           <Route path="/GameProfile" element={<GameProfile />} />
+
+
+          {/* Forum Page Routes */}
+          <Route path="/ChatContainer" element={<ChatContainer />} />
+          <Route path="/ChatLists" element={<ChatLists />} />
+          <Route path="/InputText" element={<InputText />} />
+          <Route path="/UserLogin" element={<UserLogin />} />
+
         </Routes>
       </div>
     </Router>

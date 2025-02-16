@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaReact } from "react-icons/fa6";
-import "./styles.css";
+// import "./styles.css";
 import _ from "lodash";
 
 const UserLogin = ({ setUser }) => {

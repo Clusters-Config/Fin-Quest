@@ -1,6 +1,7 @@
 // Forum Page - Added
 import React, { useState } from "react";
 import { FaPaperPlane, FaPlus, FaUsers, FaVideo } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function ForumPage() {
   const [message, setMessage] = useState("");
@@ -89,34 +90,10 @@ function ForumPage() {
             Discussion Threads
           </h2>
           <div className="bg-[#F4F4F4] p-4 rounded-lg max-h-64 overflow-y-auto">
-            {/* {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`p-2 mb-2 rounded-md ${
-                  msg.user === "You" ? "bg-[#F39C12] text-right" : "bg-[#002147] text-white"
-                }`}
-              >
-                <strong>{msg.user}:</strong> {msg.text}
-              </div>
-            ))}
-          </div>
-          <div className="flex mt-4">
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="Type your message..."
-              className="flex-grow p-2 border rounded-l-md focus:outline-none"
-            />
-            <button
-              onClick={handleSendMessage}
-              className="px-4 py-2 bg-[#002147] text-white rounded-r-md hover:bg-[#F39C12]"
-            >
-              <FaPaperPlane />
-            </button> */}
+           
             <div className="flex justify-center">
               
-            <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center">Join Global Chat</button>
+            <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center"><Link to='./forum_components/ChatContainer.jsx'>Join Global Chat</Link></button>
             </div>
           </div>
         </div>
