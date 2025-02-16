@@ -1,0 +1,345 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 10px;
+}
+
+/* App Container */
+.App {
+    background-color: #ece5dd;
+    min-height: 90vh;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+    max-width: 1200px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    transition: 0.3s ease-in-out;
+}
+
+.App:hover {
+    transform: translateY(-3px);
+}
+
+/* Login */
+.login_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login_icon {
+    margin-right: 12px;
+    color: #04aaa9;
+    font-size: 50px;
+}
+
+.login_form {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.login_form input {
+    height: 50px;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    border: 2px solid #04aaa9;
+    font-size: 16px;
+    padding: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.login_form input:focus {
+    border-color: #075e54;
+    outline: none;
+    box-shadow: 0 0 8px rgba(7, 94, 84, 0.5);
+}
+
+.login_form button {
+    width: 140px;
+    height: 50px;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: #075e54;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.login_form button:hover {
+    background-color: #064c44;
+    transform: scale(1.08);
+}
+
+/* Chat Container */
+.chats_header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #075e54;
+    color: white;
+    border-radius: 10px;
+    align-items: center;
+    font-weight: bold;
+}
+
+.chats_icon {
+    font-size: 28px;
+}
+
+.chats_logout {
+    color: #06b3b3;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.chats_logout:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Chats List */
+.chats_list {
+    height: 70vh;
+    overflow-y: auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    width: 100%;
+    max-width: 95%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat Messages */
+.chat_sender, .chat_receiver {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+}
+
+.chat_sender {
+    justify-content: flex-end;
+}
+
+.chat_receiver {
+    justify-content: flex-start;
+}
+
+.chat_sender img, .chat_receiver img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat_sender p, .chat_receiver p {
+    padding: 14px;
+    border-radius: 10px;
+    max-width: 75%;
+    font-size: 16px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    transition: 0.3s ease-in-out;
+}
+
+.chat_sender p {
+    background-color: #dcf8c6;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.chat_receiver p {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+/* Input Text */
+.inputtext_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.inputtext_container textarea {
+    width: 75%;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    transition: 0.3s ease-in-out;
+}
+
+.inputtext_container textarea:focus {
+    border-color: #04aaa9;
+    outline: none;
+    box-shadow: 0 0 8px rgba(4, 170, 170, 0.5);
+}
+
+.inputtext_container button {
+    width: 22%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #04aaa9;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.inputtext_container button:hover {
+    background-color: #038c8c;
+    transform: scale(1.05);
+}
+
+/* Scrollbar Customization */
+.chats_list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chats_list::-webkit-scrollbar-track {
+    background: #f0f2f5;
+    border-radius: 10px;
+}
+
+.chats_list::-webkit-scrollbar-thumb {
+    background: #075e54;
+    border-radius: 10px;
+}
+
+.chats_list::-webkit-scrollbar-thumb:hover {
+    background: #064c44;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .App {
+        width: 98%;
+        padding: 20px;
+    }
+
+    .login_form input, .login_form button {
+        width: 90%;
+    }
+
+    .chats_list {
+        height: 60vh;
+    }
+
+    .inputtext_container textarea {
+        width: 65%;
+    }
+
+    .inputtext_container button {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+    .login_title {
+        font-size: 24px;
+    }
+
+    .login_icon {
+        font-size: 40px;
+    }
+
+    .chats_list {
+        height: 55vh;
+    }
+
+    .inputtext_container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .inputtext_container textarea {
+        width: 100%;
+    }
+
+    .inputtext_container button {
+        width: 100%;
+    }
+}
+/* Input Text Container - Wider Chat Bar */
+.inputtext_container textarea {
+    width: 85%; /* Increased width */
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    transition: 0.3s ease-in-out;
+}
+
+.inputtext_container button {
+    width: 12%; /* Adjusted button size */
+    height: 50px;
+    border-radius: 10px;
+    background-color: #04aaa9;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+/* Chat Messages - Reduced Size */
+.chat_sender p, .chat_receiver p {
+    padding: 10px; /* Reduced padding */
+    border-radius: 8px;
+    max-width: 65%; /* Slightly smaller */
+    font-size: 14px; /* Reduced font size */
+    line-height: 1.3;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+    .inputtext_container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .inputtext_container textarea {
+        width: 100%;
+    }
+
+    .inputtext_container button {
+        width: 100%;
+    }
+}

@@ -115,6 +115,7 @@ function ForumPage() {
               <FaPaperPlane />
             </button> */}
             <div className="flex justify-center">
+              
             <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center">Join Global Chat</button>
             </div>
           </div>
