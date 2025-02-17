@@ -1,92 +1,128 @@
 import React, { useState } from "react";
 
-// Sample activity data
-const activityData = [
-  { id: 1, title: "Personal Finance Basics Course", type: "Course", skills: ["Finance", "Budgeting", "Investing"], link: "#", category: "Maths & Biology" },
-  { id: 2, title: "Entrepreneurship Bootcamp", type: "Bootcamp", skills: ["Business", "Startup", "Marketing"], link: "#", category: "Arts & Science" },
-  { id: 3, title: "Start Your Own Business Challenge", type: "Competition", skills: ["Business", "Marketing", "Strategy"], link: "#", category: "Arts & Science" },
-  { id: 4, title: "Stock Market Simulation", type: "Competition", skills: ["Finance", "Investing", "Stock Market"], link: "#", category: "Maths & Biology" },
-  { id: 5, title: "Social Media Marketing for Small Businesses", type: "Workshop", skills: ["Marketing", "Social Media", "Business"], link: "#", category: "Arts & Science" },
-  { id: 6, title: "Building Your First Budget", type: "Course", skills: ["Finance", "Budgeting", "Planning"], link: "#", category: "Maths & Biology" },
-  { id: 7, title: "Financial Literacy for Teens", type: "Course", skills: ["Finance", "Money Management", "Saving"], link: "#", category: "Maths & Computer" },
-  { id: 8, title: "Startup Idea Pitch Competition", type: "Competition", skills: ["Entrepreneurship", "Pitching", "Business"], link: "#", category: "Arts & Science" },
-  { id: 9, title: "Online Business Development for Students", type: "Workshop", skills: ["Business", "E-commerce", "Marketing"], link: "#", category: "Arts & Science" },
-  { id: 10, title: "Investing 101 for Beginners", type: "Course", skills: ["Investing", "Stock Market", "Finance"], link: "#", category: "Maths & Biology" },
-  { id: 11, title: "Introduction to Coding with Python", type: "Course", skills: ["Programming", "Python", "Problem Solving"], link: "#", category: "Maths & Computer" },
-  { id: 12, title: "Hackathon: Build Your First App", type: "Competition", skills: ["Programming", "App Development", "Teamwork"], link: "#", category: "Maths & Computer" },
-];
-
-// Sample case study data
-const caseStudies = [
-  { id: 1, name: "Rahul Sharma", story: "Started a small online clothing store using Shopify at age 16 and now runs a successful e-commerce business.", lessons: "Starting small and focusing on your target audience can help you build a strong foundation for a business." },
-  { id: 2, name: "Ananya Rao", story: "Won a startup pitch competition with an idea for a student-led tutoring platform, which led to a partnership with a local education center.", lessons: "Having a clear vision and being able to pitch it effectively is crucial to starting a business." },
-];
+// Finance-related roles and skills required for IT/Engineering students
+const financeRoles = {
+  Commerce: [
+    { role: "Financial Analyst", skills: ["Data Analysis", "Excel", "Financial Modelling", "Problem Solving"], description: "A Financial Analyst evaluates financial data to assist in strategic decision-making and forecasting." },
+    { role: "Investment Banking Analyst", skills: ["Financial Modelling", "Market Research", "Valuation"], description: "An Investment Banking Analyst supports mergers, acquisitions, and financial transactions in the investment banking industry." },
+    { role: "Private Equity Analyst", skills: ["Due Diligence", "Valuation", "Financial Modelling", "Market Research"], description: "Private Equity Analysts work in firms that invest in private companies, conducting research and analysis to inform investment decisions." },
+    { role: "Investment Portfolio Manager", skills: ["Portfolio Management", "Financial Analysis", "Market Knowledge"], description: "Investment Portfolio Managers create and manage portfolios for individuals or institutions, balancing risks and returns." },
+    { role: "FinTech Product Manager", skills: ["Product Development", "User Research", "Agile Methodology", "Financial Services Knowledge"], description: "FinTech Product Managers lead the development of new financial technology products, often for startups or digital banks." },
+    { role: "Treasury Analyst", skills: ["Cash Management", "Banking Operations", "Risk Management", "Financial Forecasting"], description: "Treasury Analysts manage a company’s finances, focusing on cash flow, investments, and financial risks." },
+    { role: "Mergers & Acquisitions Analyst", skills: ["Valuation", "Financial Modelling", "Due Diligence", "Market Research"], description: "M&A Analysts support firms involved in mergers, acquisitions, and corporate restructuring activities." },
+    { role: "Credit Analyst", skills: ["Credit Risk Analysis", "Financial Modelling", "Market Research"], description: "Credit Analysts assess the creditworthiness of individuals, companies, or organizations seeking financing." },
+    { role: "Risk Manager", skills: ["Risk Assessment", "Data Analysis", "Financial Modelling"], description: "Risk Managers identify, assess, and mitigate risks within an organization, including market, credit, and operational risks." },
+    { role: "Tax Manager", skills: ["Tax Planning", "Corporate Tax", "Financial Analysis"], description: "Tax Managers oversee corporate tax compliance and work on tax planning strategies for businesses." },
+    { role: "Real Estate Investment Analyst", skills: ["Market Research", "Real Estate Valuation", "Financial Modelling"], description: "Real Estate Investment Analysts evaluate real estate assets to identify investment opportunities." },
+    { role: "Compliance Officer", skills: ["Regulatory Compliance", "Risk Management", "Financial Reporting"], description: "Compliance Officers ensure companies comply with laws and regulations within the financial services sector." },
+    { role: "Venture Capital Analyst", skills: ["Due Diligence", "Market Research", "Valuation"], description: "Venture Capital Analysts research and analyze investment opportunities in emerging startups." },
+    { role: "Corporate Finance Analyst", skills: ["Financial Modelling", "Valuation", "Financial Reporting"], description: "Corporate Finance Analysts provide financial insights and support in corporate finance functions such as capital budgeting and forecasting." },
+    { role: "Internal Auditor", skills: ["Audit Procedures", "Internal Controls", "Financial Analysis"], description: "Internal Auditors review and assess the internal financial processes and controls of a company to ensure accuracy and compliance." }
+  ],
+  Engineering: [
+    { role: "Financial Engineer", skills: ["Programming", "Quantitative Finance", "Risk Management"], description: "Financial Engineers design and develop financial products using mathematical and computational methods." },
+    { role: "Blockchain Developer", skills: ["Blockchain Technology", "Cryptography", "Financial Knowledge"], description: "Blockchain Developers create decentralized applications and systems based on blockchain technology for the finance industry." },
+    { role: "Data Scientist in Finance", skills: ["Data Science", "Machine Learning", "Big Data", "Statistical Analysis"], description: "Data Scientists in Finance use statistical models and algorithms to interpret financial data and support decision-making." },
+    { role: "Quantitative Analyst", skills: ["Quantitative Analysis", "Programming", "Risk Management", "Mathematics"], description: "Quantitative Analysts develop complex models for pricing financial products and managing risks." },
+    { role: "Financial Software Developer", skills: ["Software Development", "Finance APIs", "C++/Java", "Financial Systems"], description: "Financial Software Developers build software applications that support financial services, such as trading platforms or banking apps." },
+    { role: "Financial Data Engineer", skills: ["Data Engineering", "Big Data", "ETL Processes", "Data Modeling"], description: "Financial Data Engineers build systems for collecting, processing, and storing financial data for analytics." },
+    { role: "Algorithmic Trader", skills: ["Algorithm Development", "Machine Learning", "Programming"], description: "Algorithmic Traders use mathematical models and algorithms to automate trading strategies in financial markets." },
+    { role: "Financial Systems Architect", skills: ["System Architecture", "Software Development", "Financial Technology"], description: "Financial Systems Architects design and build large-scale systems that support financial transactions and services." },
+    { role: "Crypto Asset Developer", skills: ["Blockchain", "Cryptography", "Smart Contracts"], description: "Crypto Asset Developers create and maintain decentralized applications and platforms for cryptocurrencies." },
+    { role: "Big Data Analyst in Finance", skills: ["Big Data", "Data Analytics", "Machine Learning"], description: "Big Data Analysts use massive datasets to analyze trends and make predictions within the financial industry." },
+    { role: "Machine Learning Engineer", skills: ["Machine Learning", "Python", "Data Science"], description: "Machine Learning Engineers develop algorithms and models that allow systems to make predictions based on financial data." },
+    { role: "Cloud Financial Engineer", skills: ["Cloud Computing", "Financial Modelling", "Data Management"], description: "Cloud Financial Engineers develop cloud-based solutions to manage financial transactions and data analytics." },
+    { role: "IT Security Analyst", skills: ["Cybersecurity", "Network Security", "Risk Management"], description: "IT Security Analysts ensure the integrity and security of financial data systems against cyber threats." },
+    { role: "DevOps Engineer for Financial Platforms", skills: ["DevOps", "Cloud Infrastructure", "Automation"], description: "DevOps Engineers build and maintain scalable infrastructure for financial platforms and services." }
+  ],
+  Science: [
+    { role: "Credit Risk Analyst", skills: ["Credit Analysis", "Financial Modelling", "Risk Management", "Data Analysis"], description: "Credit Risk Analysts evaluate the creditworthiness of individuals and companies to mitigate risks." },
+    { role: "Actuary", skills: ["Risk Assessment", "Statistics", "Mathematics", "Probability Theory"], description: "Actuaries assess financial risks and uncertainties in insurance, pension funds, and other financial services." },
+    { role: "Tax Technology Consultant", skills: ["Tax Law", "Software Development", "Data Analysis", "Automation"], description: "Tax Technology Consultants develop systems to automate tax compliance and planning processes using technology." },
+    { role: "Digital Asset Analyst", skills: ["Cryptocurrency", "Blockchain", "Financial Analysis", "Digital Assets"], description: "Digital Asset Analysts evaluate the financial value of digital assets like cryptocurrencies and NFTs, focusing on market trends and investments." },
+    { role: "Investment Banking Analyst", skills: ["Financial Modelling", "Market Research", "Valuation"], description: "An Investment Banking Analyst supports mergers, acquisitions, and financial transactions in the investment banking industry." },
+    { role: "Financial Analyst", skills: ["Data Analysis", "Excel", "Financial Modelling", "Problem Solving"], description: "A Financial Analyst evaluates financial data to assist in strategic decision-making and forecasting." },
+    { role: "Biostatistician", skills: ["Statistics", "Data Analysis", "Risk Assessment"], description: "Biostatisticians apply statistical methods to analyze data from the health and pharmaceutical industries." },
+    { role: "Sustainability Analyst", skills: ["Sustainability Reporting", "Financial Modelling", "Environmental Impact"], description: "Sustainability Analysts assess financial strategies and policies with respect to sustainability and environmental impact." },
+    { role: "Financial Data Scientist", skills: ["Data Science", "Machine Learning", "Big Data", "Financial Analytics"], description: "Financial Data Scientists use machine learning models and data analytics to forecast trends and market behavior." },
+    { role: "Healthcare Financial Analyst", skills: ["Financial Modelling", "Healthcare Systems", "Data Analysis"], description: "Healthcare Financial Analysts evaluate financial performance within the healthcare industry, focusing on hospital operations and insurance markets." },
+    { role: "Investment Risk Analyst", skills: ["Risk Assessment", "Portfolio Management", "Market Research"], description: "Investment Risk Analysts focus on analyzing and managing risks in investment portfolios and strategies." },
+    { role: "Pension Fund Manager", skills: ["Pension Fund Management", "Financial Modelling", "Regulatory Knowledge"], description: "Pension Fund Managers are responsible for managing pension funds and ensuring long-term investment growth." },
+    { role: "Economic Research Analyst", skills: ["Econometrics", "Economic Modeling", "Financial Data Analysis"], description: "Economic Research Analysts gather and analyze economic data to provide insights into financial markets and economic conditions." },
+    { role: "Insurance Risk Analyst", skills: ["Insurance Risk Modelling", "Data Analysis", "Market Research"], description: "Insurance Risk Analysts assess the financial risk associated with insurance products and policies." }
+  ]
+};
 
 const SideHustleFinder = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Maths & Biology");
-  const [filteredActivities, setFilteredActivities] = useState(
-    activityData.filter((activity) => activity.category === selectedCategory)
-  );
+  const [selectedCategory, setSelectedCategory] = useState("Commerce");
+  const [filteredRoles, setFilteredRoles] = useState(financeRoles[selectedCategory]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    setFilteredActivities(activityData.filter((activity) => activity.category === category));
+    setFilteredRoles(financeRoles[category]);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredResults = filteredRoles.filter((role) =>
+    role.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    role.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()))
+  );
+
   return (
-    <div className="min-h-screen bg-[#F4F4F4]"> 
+    <div className="min-h-screen bg-[#F4F4F4]">
       {/* Main Content */}
       <div className="p-6">
-        <h2 className="text-4xl font-bold text-[#002147] text-center mb-8">Student Financial & Business Opportunities 🚀</h2>
+        <h2 className="text-4xl font-bold text-[#002147] text-center mb-8">Finance-Related Roles by Category 🚀</h2>
 
         {/* Category Buttons */}
         <div className="flex justify-center space-x-8 mb-8">
-          {["Maths & Biology", "Maths & Computer", "Arts & Science"].map((category) => (
+          {["Commerce", "Engineering", "Science"].map((category) => (
             <button
               key={category}
               onClick={() => handleCategorySelect(category)}
-              className={`p-3 rounded-lg text-white transition duration-300 ease-in-out hover:bg-[#F39C12] ${
-                selectedCategory === category ? "bg-[#002147]" : "bg-[#6C757D]"
-              }`}
+              className={`p-3 rounded-lg text-white transition duration-300 ease-in-out hover:bg-[#F39C12] ${selectedCategory === category ? "bg-[#002147]" : "bg-[#6C757D]"}`}
             >
               {category}
             </button>
           ))}
         </div>
 
-        {/* Activity Listings */}
+        {/* Search Bar */}
+        <div className="flex justify-center mb-6">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search for roles or skills..."
+            className="px-4 py-2 border rounded-lg w-1/2 focus:outline-none focus:ring-2 focus:ring-[#F39C12] text-[#002147]"
+          />
+        </div>
+
+        {/* Role Listings */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredActivities.length > 0 ? (
-            filteredActivities.map((activity) => (
+          {filteredResults.length > 0 ? (
+            filteredResults.map((role, index) => (
               <div
-                key={activity.id}
+                key={index}
                 className="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-lg shadow-lg transition transform hover:scale-105 duration-300 ease-in-out"
               >
-                <h4 className="text-lg font-semibold text-[#002147]">{activity.title}</h4>
-                <p className="text-sm text-[#6C757D]">{activity.type}</p>
-                <a href={activity.link} className="text-[#F39C12] hover:underline mt-2 block">
-                  Learn More
-                </a>
+                <h4 className="text-lg font-semibold text-[#002147]">{role.role}</h4>
+                <p className="text-sm text-[#6C757D]">{role.description}</p>
+                <p className="font-semibold text-[#F39C12] mt-2">Skills Required:</p>
+                <ul className="list-disc ml-5">
+                  {role.skills.map((skill, idx) => (
+                    <li key={idx} className="text-[#6C757D]">{skill}</li>
+                  ))}
+                </ul>
               </div>
             ))
           ) : (
-            <p className="text-[#6C757D]">No opportunities found. Try another category.</p>
+            <p className="text-[#6C757D]">No roles found. Try another category or search.</p>
           )}
-        </div>
-
-        {/* Case Studies Section */}
-        <div className="mt-12 bg-[#F8FAFC] p-8 rounded-lg shadow-lg">
-          <h3 className="text-2xl font-semibold text-[#002147] mb-6">Success Stories</h3>
-          {caseStudies.map((caseStudy) => (
-            <div
-              key={caseStudy.id}
-              className="bg-white bg-opacity-60 backdrop-blur-md p-6 rounded-lg shadow-lg mb-6"
-            >
-              <h4 className="text-lg font-semibold text-[#002147]">{caseStudy.name}</h4>
-              <p className="text-[#6C757D]">{caseStudy.story}</p>
-              <p className="italic text-[#6C757D]">Lesson: {caseStudy.lessons}</p>
-            </div>
-          ))}
         </div>
       </div>
 
