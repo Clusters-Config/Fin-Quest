@@ -93,7 +93,7 @@ function ForumPage() {
            
             <div className="flex justify-center">
               
-            <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center"><Link to='./forum_components/ChatContainer.jsx'>Join Global Chat</Link></button>
+            <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center"><Link to='/ChatContainer'>Join Global Chat</Link></button>
             </div>
           </div>
         </div>

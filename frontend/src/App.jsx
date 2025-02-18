@@ -30,7 +30,6 @@ import Finance_Principles from './learn_path_components/Finance_Principles';
 import Goals_Finance  from './learn_path_components/Goals_Finance';
 
 
-
 import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
 import ForumPage from "./learn_path_components/ForumPage";  

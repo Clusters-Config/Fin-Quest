@@ -2,8 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
-import { ToastContainer, toast ,Slide ,Bounce} from 'react-toastify';
-
+import { ToastContainer, toast  ,Bounce} from 'react-toastify';
 
 function Login_signup() {
   const [email,setemail] = useState();
@@ -40,7 +39,6 @@ function Login_signup() {
         }
       }
  
-
   return (
     <div className="min-h-screen flex justify-center items-center bg-[#F8FAFC]">
       <div className="w-[400px] bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
@@ -80,8 +78,8 @@ function Login_signup() {
               </button>
               <ToastContainer  transition={Bounce}/>
               <h2 className="mt-3 text-sm text-[#002147]">
-                No Account?
-                <a href="signup">Create one</a>
+                New User? 
+                <a href="signup"> Create one</a>
               </h2>
             </div>
           </form>

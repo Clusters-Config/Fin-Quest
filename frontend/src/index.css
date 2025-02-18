@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #F4F4F4; /* Hero section background */
+  background: #F4F4F4; 
 }
 
 .chatbot-popup {
@@ -37,7 +37,7 @@
   padding: 15px 22px;
   align-items: center;
   justify-content: space-between;
-  background: #002147; /* Dark Blue */
+  background: #002147;
 }
 
 .chat-header .header-info {
@@ -52,7 +52,7 @@
   padding: 6px;
   flex-shrink: 0;
   fill: #002147;
-  background: white; /* Accent color */
+  background: white;
   border-radius: 50%;
 }
 
@@ -92,7 +92,7 @@
   scrollbar-width: thin;
   scrollbar-color: #F39C12 transparent;
   background-color: rgb(108, 117, 125,0.3);
-  /* background: linear-gradient(to bottom, #002147, #6C757D, #F8FAFC, #FFFFFF); */
+
 }
 
 .chat-body .message {
