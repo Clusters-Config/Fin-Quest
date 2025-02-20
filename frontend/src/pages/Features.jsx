@@ -39,7 +39,8 @@ function FeaturesPage() {
           { path: "/TaxPage", label: "Taxes", desc: "Understand and optimize your tax planning", icon: <FaCalculator className="text-pink-500 w-8 h-8" /> },
           { path: "/Stories", label: "Financial Journeys", desc: "Track your progress and set financial goals", icon: <FaRoute className="text-blue-500 w-8 h-8" /> },
           { path: "/FinFlux", label: "FinFlux", desc: "Stay updated with market trends and analysis", icon: <FaNewspaper className="text-orange-500 w-8 h-8" /> },
-          { path: "/SideHustleFinder", label: "Side Hustle", desc: "Discover and manage additional income streams", icon: <FaBriefcase className="text-teal-500 w-8 h-8" /> }
+          { path: "/SideHustleFinder", label: "Side Hustle", desc: "Discover and manage additional income streams", icon: <FaBriefcase className="text-teal-500 w-8 h-8" /> },
+          { path: "/Financial_Assistant", label: "Financial Assistant ", desc: "Discover and manage additional income streams", icon: <FaBriefcase className="text-teal-500 w-8 h-8" /> }
         ].map((feature) => (
           <Link
             key={feature.path}

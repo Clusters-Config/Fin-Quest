@@ -12,6 +12,7 @@ import SideHustleFinder from './pages/SideHustleFinder';
 import Communitys from './pages/Communitys';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
+import Financial_Assistant from './pages/Financial_Assistan';
 import { AuthProvider } from "./pages/AuthContext";
 
 // Learning path components
@@ -70,6 +71,7 @@ const App = () => {
           <Route path="/SideHustleFinder" element={<  SideHustleFinder />} />
           <Route path="/communitys" element={<Communitys />} />
           <Route path='/chat' element={<Chat />} />
+          <Route path="/Financial_Assistant" element={<Financial_Assistant />} />
 
           
           <Route path="/TerminologyPage" element={<TerminologyPage />} />
