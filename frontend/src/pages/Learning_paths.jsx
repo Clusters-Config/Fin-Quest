@@ -176,8 +176,11 @@ const Learning_paths = () => {
     .then(res=>{console.log(res)
       let path  = res.data
       console.log(path)
-      let data = path.map((ele)=>{
-        return ele.comment
+      let data = path.map((element)=>{
+        return({
+          email:element.comment,
+          username:element.username
+        })
       })
       setdata(data)
     
@@ -427,7 +430,7 @@ const Learning_paths = () => {
               <div className="mt-4 max-h-36 w-6/6 overflow-auto">
                 {data.map((data, idx) => (
                   <p key={idx} className="text-sm font-bold text-gray-600 ml-5">
-                     {username+": "}{data}
+                     {data.username+": "}{data.email}
                   </p>
                 ))}
               </div>
