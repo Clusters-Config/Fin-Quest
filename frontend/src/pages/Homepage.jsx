@@ -61,11 +61,11 @@ function Homepage() {
       <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
         <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
         <ul className="flex space-x-6">
-          <li>
+          {/* <li>
             <Link to="/features" className="text-white hover:text-[#F39C12] transition duration-300">
               Features
             </Link>
-          </li>
+          </li> */}
           <li>
             {
             useremail? <button className="text-white hover:text-orange-400 transition-all"><Link to="/ProfilePage">{username}</Link></button> : <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
