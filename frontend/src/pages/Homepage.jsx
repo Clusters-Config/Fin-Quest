@@ -15,6 +15,8 @@ import { useLocation } from "react-router-dom";
 function Homepage() {
   const location = useLocation();
   const[login,setlogin] = useState(location.state||false)
+  // const backgroundImage = `url(${require('../assets/p1.jpg')})`;
+
 
   useEffect(()=>{
     if(login){
@@ -55,17 +57,18 @@ function Homepage() {
   }});
 
 
+
   return (
     <div className="bg-white min-h-screen flex flex-col">
       {/* Navigation Bar */}
       <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
         <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
         <ul className="flex space-x-6">
-          {/* <li>
+          <li>
             <Link to="/features" className="text-white hover:text-[#F39C12] transition duration-300">
               Features
             </Link>
-          </li> */}
+          </li>
           <li>
             {
             useremail? <button className="text-white hover:text-orange-400 transition-all"><Link to="/ProfilePage">{username}</Link></button> : <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
@@ -83,16 +86,16 @@ function Homepage() {
       </nav>
 
       {/* Hero Section */}
-      <header className="text-center py-20 space-y-6 bg-[#F4F4F4]">
-        <h1 className="text-5xl font-bold text-[#002147]">
-          Learn Finance Through <span className="text-[#F39C12]">Play & Strategy!</span>
+      <header className="text-center py-40 sm:py-12 space-y-6" id="bg">
+        <h1 className="text-7xl sm:text-4xl font-bold text-[#002147] ">
+          Learn Finance <br /><bv  />Through <span className="text-[#F39C12] ">Play & Strategy!</span>
         </h1>
-        <p className="text-lg text-[#6C757D] leading-relaxed max-w-3xl mx-auto">
+        <p className="text-xlsm:text-lg sm:py-[10px] py-8 text-[] leading-relaxed max-w-4xl mx-auto">
           A gamified learning experience that makes financial literacy easy, engaging, and fun!
         </p>
         <div className="space-x-4">
           <Link to="/features">
-            <button className="bg-[#F39C12] text-[#002147] px-6 py-3 rounded-lg shadow-lg hover:bg-[#e67e22] transition duration-300">
+            <button className="bg-[#F39C12] text-[#002147] px-6 py-3 sm:my-5 rounded-lg shadow-lg hover:bg-[#e67e22] transition duration-300">
               Start Your Quest
             </button>
           </Link>
