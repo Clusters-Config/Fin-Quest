@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatLists from "./ChatLists";
 import InputText from "./InputText";
 import UserLogin from "./UserLogin";
 import socketIOClient from "socket.io-client";
-
 
 const ChatContainer = () => {
   const [user, setUser] = useState(localStorage.getItem("user"));
@@ -15,14 +14,14 @@ const ChatContainer = () => {
       setChats(chats);
     });
 
-    socketio.on('message', (msg) => {
-      setChats((prevChats) => [...prevChats, msg])
-    })
+    socketio.on("message", (msg) => {
+      setChats((prevChats) => [...prevChats, msg]);
+    });
 
     return () => {
-      socketio.off('chat')
-      socketio.off('message')
-    }
+      socketio.off("chat");
+      socketio.off("message");
+    };
   }, []);
 
   const addMessage = (chat) => {
@@ -31,24 +30,26 @@ const ChatContainer = () => {
       message: chat,
       avatar: localStorage.getItem("avatar"),
     };
-    socketio.emit('newMessage', newChat)
+    socketio.emit("newMessage", newChat);
   };
 
   const Logout = () => {
-    localStorage.removeItem("user")
-    localStorage.removeItem('avatar')
-    setUser('')
-  }
+    localStorage.removeItem("user");
+    localStorage.removeItem("avatar");
+    setUser("");
+  };
 
   return (
-    <div>
+    <div className="min-h-screen bg-blue-900 flex items-center justify-center p-4">
       {user ? (
-        <div className="home">
-          <div className="chats_header">
-            <h4>Username: {user}</h4>
-
-            <p className="chats_logout" onClick={Logout}>
-              <strong>Logout</strong>
+        <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h4 className="text-lg font-semibold text-gray-800">Username: {user}</h4>
+            <p
+              className="cursor-pointer text-blue-600 font-bold"
+              onClick={Logout}
+            >
+              Logout
             </p>
           </div>
           <ChatLists chats={chats} />

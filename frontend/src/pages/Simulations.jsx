@@ -90,7 +90,9 @@ const Simulations = () => {
   const [maturityAmount, setMaturityAmount] = useState(null);
   const [totalInterest, setTotalInterest] = useState(null);
   //States od FDC calculator
-  const [compoundingFrequency, setCompoundingFrequency] = useState(); // Default frequency (Quarterly)
+  const [compoundingFrequency, setCompoundingFrequency] = useState();
+   // Default frequency (Quarterly)
+   const [suggestion,setsuggestion] = useState("")
   
   // Calculation Functions
   const calculateBudget = () => {
@@ -867,6 +869,7 @@ const Simulations = () => {
           <button
             onClick={() => setOpenModal("comments")}
             className="w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#e67e22] transition"
+            value={suggestion}
           >
             Suggest a Simulator
           </button>
