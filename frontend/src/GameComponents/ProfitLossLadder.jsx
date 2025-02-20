@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const App = () => {
+const ProfitLossLadder = () => {
   const [player1Amount, setPlayer1Amount] = useState(100);
   const [player2Amount, setPlayer2Amount] = useState(100);
   const [player3Amount, setPlayer3Amount] = useState(100);
@@ -152,4 +152,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default ProfitLossLadder;
