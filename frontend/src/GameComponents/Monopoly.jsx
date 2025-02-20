@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useToast } from "@/hooks/use-toast";
 
 const FinancialGame = () => {
   const [questions] = useState([
@@ -14,7 +13,46 @@ const FinancialGame = () => {
       correctAnswer: "GDP",
       options: ["GDP", "Inflation", "Revenue", "Investment"],
     },
-    // Additional questions
+      {
+        "definition": "A financial statement that provides a snapshot of a company's financial position at a specific time.",
+        "correctAnswer": "Balance Sheet",
+        "options": ["Income Statement", "Balance Sheet", "Cash Flow Statement", "Budget"]
+      },
+      {
+        "definition": "A financial statement that shows a company's profitability over a period of time.",
+        "correctAnswer": "Income Statement",
+        "options": ["Balance Sheet", "Cash Flow Statement", "Income Statement", "Trial Balance"]
+      },
+      {
+        "definition": "A financial statement that tracks cash inflows and outflows.",
+        "correctAnswer": "Cash Flow Statement",
+        "options": ["Balance Sheet", "Income Statement", "Cash Flow Statement", "Profit and Loss Statement"]
+      },
+      {
+        "definition": "The formula used to calculate Net Income.",
+        "correctAnswer": "Revenue - Expenses",
+        "options": ["Revenue - Expenses", "Assets - Liabilities", "Cash Inflows - Cash Outflows", "Equity + Liabilities"]
+      },
+      {
+        "definition": "The term referring to a company's total revenues minus expenses.",
+        "correctAnswer": "Net Profit",
+        "options": ["Net Profit", "Gross Profit", "Operating Income", "Equity"]
+      },
+      {
+        "definition": "The abbreviation for Earnings Before Interest, Taxes, Depreciation, and Amortization.",
+        "correctAnswer": "EBITDA",
+        "options": ["EBITDA", "EBIT", "EBT", "EBITA"]
+      },
+      {
+        "definition": "The accounting principle stating that expenses should be recorded in the same period as the revenues they help generate.",
+        "correctAnswer": "Matching Principle",
+        "options": ["Matching Principle", "Revenue Recognition Principle", "Cost Principle", "Going Concern Principle"]
+      },
+      {
+        "definition": "The financial metric used to measure a company's ability to meet short-term obligations.",
+        "correctAnswer": "Current Ratio",
+        "options": ["Debt-to-Equity Ratio", "Current Ratio", "Return on Assets", "Operating Margin"]
+      }
   ]);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -23,24 +61,25 @@ const FinancialGame = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [retryStars, setRetryStars] = useState(3);
   const [score, setScore] = useState(0);
-  const { toast } = useToast(); // Using the toast from the custom hook
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const handleWordClick = (word) => {
     setSelectedWord(word);
     if (word === questions[currentQuestionIndex].correctAnswer) {
       setIsCorrect(true);
-      setScore(prevScore => prevScore + (retryStars * 100)); // Award points
-      toast({
-        title: "Excellent!",
-        description: `You earned ${retryStars * 100} points! 🌟`,
-      });
+      const pointsEarned = retryStars * 100;
+      setScore(prevScore => prevScore + pointsEarned);
+      setToastMessage(`Excellent! You earned ${pointsEarned} points! 🌟`);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
     } else {
       setIsCorrect(false);
       setRetryStars(prev => {
         const newStars = prev - 1;
         if (newStars === 0) {
           setTimeout(() => {
-            nextQuestion(); // Move to next question after 1.5 seconds if out of retries
+            nextQuestion();
           }, 1500);
         }
         return newStars;
@@ -60,7 +99,7 @@ const FinancialGame = () => {
     } else {
       const finalScore = score;
       let message = "";
-
+      
       if (finalScore >= questions.length * 250) {
         message = "Outstanding performance! You're a financial wizard! 🧙‍♂️";
       } else if (finalScore >= questions.length * 150) {
@@ -69,11 +108,9 @@ const FinancialGame = () => {
         message = "Keep practicing! You're learning! 💪";
       }
 
-      toast({
-        title: "Game Completed!",
-        description: `Final Score: ${finalScore} - ${message}`,
-        duration: 5000, // Show for 5 seconds
-      });
+      setToastMessage(`Game Completed! Final Score: ${finalScore} - ${message}`);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 5000);
     }
   };
 
@@ -97,15 +134,16 @@ const FinancialGame = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 via-yellow-200 to-blue-300 p-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-red-50 via-yellow-50 to-blue-100 p-6">
+
       <motion.div
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className="text-center mb-8"
       >
-        <h1 className="text-4xl font-bold mb-4 text-white">Financial Word Search</h1>
+        <h1 className="text-4xl font-bold mb-4 text-black;">Financial Word Search</h1>
         <div className="bg-white/30 backdrop-blur-sm rounded-full px-4 py-1 inline-block">
-          <span className="text-white">Question {currentQuestionIndex + 1} of {questions.length}</span>
+          <span className="text-black">Question {currentQuestionIndex + 1} of {questions.length}</span>
         </div>
         
         <div className="mt-4 flex items-center justify-center gap-2">
@@ -219,6 +257,19 @@ const FinancialGame = () => {
       >
         <span className="text-lg font-semibold">Score: {score}</span>
       </motion.div>
+
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-20 right-4 bg-white rounded-lg shadow-lg p-4 max-w-md"
+          >
+            {toastMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
