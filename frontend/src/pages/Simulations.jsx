@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMoneyBillWave, FaPiggyBank, FaCoins, FaCalculator, FaDollarSign, FaExchangeAlt, FaHouseUser, FaSchool, FaTag, FaSalesforce, FaSave, FaWeightHanging, FaPinterest, FaUserFriends, FaMoneyCheck } from "react-icons/fa";
 import { useSpring, animated } from "@react-spring/web";
 import { FactoryIcon } from "lucide-react";
@@ -93,6 +93,16 @@ const Simulations = () => {
   const [compoundingFrequency, setCompoundingFrequency] = useState();
    // Default frequency (Quarterly)
    const [suggestion,setsuggestion] = useState("")
+   const [email,setemail] = useState();
+   const [newcomments, setcomment] = useState("");
+
+   useEffect(()=>{
+    axios.defaults.withCredentials = true
+    axios.get(" http://localhost:4047/verify")
+    .then(res=>setemail(res.data.email))
+   })
+
+
   
   // Calculation Functions
   const calculateBudget = () => {
@@ -251,9 +261,12 @@ const Simulations = () => {
 
   // Handle comment submission
   const handleCommentSubmit = () => {
+
     if (newComment) {
       setComments([...comments, { text: newComment, reply: "Thank you for your suggestion! We will consider it." }]);
       setNewComment("");
+      axios.defaults.withCredentials = true
+    axios.post(" http://localhost:4047/comment",{email,newcomments})
     }
   };
 
@@ -839,7 +852,7 @@ const Simulations = () => {
             <h2 className="text-xl font-semibold text-[#002147]">Suggest a New Simulator</h2>
             <textarea
               value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
+              onChange={(e) => {setNewComment(e.target.value),setcomment(e.target.value)}}
               placeholder="Enter your suggestion..."
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F39C12] mt-3"
             />

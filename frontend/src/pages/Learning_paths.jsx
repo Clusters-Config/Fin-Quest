@@ -19,32 +19,29 @@ const Learning_paths = () => {
   //     { name: "Module 5: Investment Basics", progress: 0 },
   //   ]);
 
-
-
-    const [Accounting1, setAccounting1] = useState();
-    const [Accounting2, setAccounting2] = useState();
-    const [Accounting, setAccounting] = useState();
-    const [FAccounting1, setFAccounting1] = useState();
-    const [FAccounting2, setFAccounting2] = useState();
-    const [FAccounting, setFAccounting] = useState();
-    const [Financial1, setFinancial1] = useState();
-    const [Financial2, setFinancial2] = useState();
-    const [Financial, setFinancial] = useState();
-    const [Saving1, setSaving1] = useState();
-    const [Saving2, setSaving2] = useState();
-    const [Saving, setSaving] = useState();
-    const [Interest1, setInterest1] = useState();
-    const [Interest2, setInterest2] = useState();
-    const [Interest, setInterest] = useState();
-    const [Investment1, setInvestment1] = useState();
-    const [Investment2, setInvestment2] = useState();
-    const [Investment3, setInvestment3] = useState();
-    const [Investment, setInvestment] = useState();;
+  const [Accounting1, setAccounting1] = useState();
+  const [Accounting2, setAccounting2] = useState();
+  const [Accounting, setAccounting] = useState();
+  const [FAccounting1, setFAccounting1] = useState();
+  const [FAccounting2, setFAccounting2] = useState();
+  const [FAccounting, setFAccounting] = useState();
+  const [Financial1, setFinancial1] = useState();
+  const [Financial2, setFinancial2] = useState();
+  const [Financial, setFinancial] = useState();
+  const [Saving1, setSaving1] = useState();
+  const [Saving2, setSaving2] = useState();
+  const [Saving, setSaving] = useState();
+  const [Interest1, setInterest1] = useState();
+  const [Interest2, setInterest2] = useState();
+  const [Interest, setInterest] = useState();
+  const [Investment1, setInvestment1] = useState();
+  const [Investment2, setInvestment2] = useState();
+  const [Investment3, setInvestment3] = useState();
+  const [Investment, setInvestment] = useState();
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.post("http://localhost:4047/finduserlearning").then((res) => {
-    });
+    axios.post("http://localhost:4047/finduserlearning").then((res) => {});
   });
 
   const navigate = useNavigate();
@@ -99,66 +96,74 @@ const Learning_paths = () => {
   });
 
   useEffect(() => {
-      if (Accounting1 >= 70 && Accounting2 >= 70) {
-        setAccounting(100);
-      } else if (Accounting1 >= 70 || Accounting2 >= 70) {
-        setAccounting(50);
-      } else {
-        setAccounting(0);
-      }
-  
-      if (FAccounting1 >= 70 && FAccounting2 >= 70) {
-        setFAccounting(100);
-      } else if (FAccounting1 >= 70 || FAccounting2 >= 70) {
-        setFAccounting(50);
-      } else {
-        setFAccounting(0);
-      }
-  
-      if (Financial1 >= 70 && Financial2 >= 70) {
-        setFinancial(100);
-      } else if (Financial1 >= 70 || Financial2 >= 70) {
-        setFinancial(50);
-      } else {
-        setFinancial(0);
-      }
-  
-      if (Saving1 >= 70 && Saving2 >= 70) {
-        setSaving(100);
-      } else if (Saving1 >= 70 || Saving2 >= 70) {
-        setSaving(50);
-      } else {
-        setSaving(0);
-      }
-  
-      if (Interest1 >= 70 && Interest2 >= 70) {
-        setInterest(100);
-      } else if (Interest1 >= 70 || Interest2 >= 70) {
-        setInterest(50);
-      } else {
-        setInterest(0);
-      }
-  
-      if (Investment1 >= 70 && Investment2 >= 70 && Investment3 >= 70) {
-        setInvestment(100);
-      } else if (Investment1 >= 70 && Investment2 >= 70) {
-        setInvestment(66);
-      } else if (Investment1 >= 70 && Investment3 >= 70) {
-        setInvestment(66);
-      } else if (Investment2 >= 70 && Investment3 >= 70) {
-        setInvestment(66);
-      } else if (Investment2 >= 70 || Investment3 >= 70 || Investment1 >= 70) {
-        setInvestment(33);
-      } else {
-        setInvestment(0);
-      }
-    });
+    if (Accounting1 >= 70 && Accounting2 >= 70) {
+      setAccounting(100);
+    } else if (Accounting1 >= 70 || Accounting2 >= 70) {
+      setAccounting(50);
+    } else {
+      setAccounting(0);
+    }
 
-    useEffect(()=>{
-      setprogress(Math.floor(
-        (Accounting + FAccounting + Financial + Saving + Interest + Investment)/6
-      ))
-    })
+    if (FAccounting1 >= 70 && FAccounting2 >= 70) {
+      setFAccounting(100);
+    } else if (FAccounting1 >= 70 || FAccounting2 >= 70) {
+      setFAccounting(50);
+    } else {
+      setFAccounting(0);
+    }
+
+    if (Financial1 >= 70 && Financial2 >= 70) {
+      setFinancial(100);
+    } else if (Financial1 >= 70 || Financial2 >= 70) {
+      setFinancial(50);
+    } else {
+      setFinancial(0);
+    }
+
+    if (Saving1 >= 70 && Saving2 >= 70) {
+      setSaving(100);
+    } else if (Saving1 >= 70 || Saving2 >= 70) {
+      setSaving(50);
+    } else {
+      setSaving(0);
+    }
+
+    if (Interest1 >= 70 && Interest2 >= 70) {
+      setInterest(100);
+    } else if (Interest1 >= 70 || Interest2 >= 70) {
+      setInterest(50);
+    } else {
+      setInterest(0);
+    }
+
+    if (Investment1 >= 70 && Investment2 >= 70 && Investment3 >= 70) {
+      setInvestment(100);
+    } else if (Investment1 >= 70 && Investment2 >= 70) {
+      setInvestment(66);
+    } else if (Investment1 >= 70 && Investment3 >= 70) {
+      setInvestment(66);
+    } else if (Investment2 >= 70 && Investment3 >= 70) {
+      setInvestment(66);
+    } else if (Investment2 >= 70 || Investment3 >= 70 || Investment1 >= 70) {
+      setInvestment(33);
+    } else {
+      setInvestment(0);
+    }
+  });
+
+  useEffect(() => {
+    setprogress(
+      Math.floor(
+        (Accounting +
+          FAccounting +
+          Financial +
+          Saving +
+          Interest +
+          Investment) /
+          6
+      )
+    );
+  });
 
   // Timeline Data with Categories (Accounting and Finance)
   const timelineData = [
@@ -265,7 +270,7 @@ const Learning_paths = () => {
       {/* Header Section */}
       <div className="mt-16">
         <h1 className="text-center text-2xl sm:text-xl mt-10 pt-10 text-[#002147] font-extrabold">
-          {username? `${username.toUpperCase()}'s` : "Yours"} Learning Path
+          {username ? `${username.toUpperCase()}'s` : "Yours"} Learning Path
         </h1>
         <p className="text-center text-sm sm:text-base mt-3 text-[#6C757D]">
           Embark on a journey designed to make you a financial expert, step by
@@ -282,9 +287,9 @@ const Learning_paths = () => {
           <div className="bg-[#e9e7e7] rounded-full transition-all ">
             <div
               className={`bg-[#F39C12] h-6 sm:h-7 rounded-full transition-all`}
-              style={{ width: `${progress}%` , transition:"all"}}
+              style={{ width: `${progress}%`, transition: "all" }}
             >
-              <h3 className="text-center text-black text-xs sm:text-sm pt-1 transition-all" >{`${progress}% Completed`}</h3>
+              <h3 className="text-center text-black text-xs sm:text-sm pt-1 transition-all">{`${progress}% Completed`}</h3>
             </div>
           </div>
         </div>
@@ -299,11 +304,11 @@ const Learning_paths = () => {
           {timelineData.map((category) => (
             <div
               key={category.category}
-              className="border border-[#6C757D] rounded-lg mt-4 p-4" 
+              className="border border-[#6C757D] rounded-lg mt-4 p-4"
             >
               {/* Category Header */}
               <h2 className="text-xl text-[#002147] font-extrabold">
-                {category.category} 
+                {category.category}
               </h2>
               {category.modules.map((section) => (
                 <div key={section.id} className="mt-4">
@@ -391,10 +396,9 @@ const Learning_paths = () => {
             >
               Post Discussion
             </button>
-
             <div className="mt-6">
               <h3 className="text-lg font-semibold text-[#002147]">Comments</h3>
-              <div className="mt-4">
+              <div className="mt-4 border max-h-36 w-96 overflow-auto  ">
                 {discussions.map((comment, idx) => (
                   <p key={idx} className="text-sm text-[#6C757D]">
                     * {comment}
