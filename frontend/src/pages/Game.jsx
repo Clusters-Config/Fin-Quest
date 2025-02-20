@@ -131,12 +131,12 @@ function GamifiedAdventures() {
               >
                 Stock Prediction
               </button>
-              <button
+              {/* <button
                 onClick={() => handleGameRedirect("Monopoly")}
                 className="w-full py-2 px-4 bg-[#002147] text-white rounded-lg shadow-md hover:bg-[#F39C12] transition duration-300"
               >
                 Monopoly Game
-              </button>
+              </button> */}
             </div>
             <button
               onClick={toggleNotification}
