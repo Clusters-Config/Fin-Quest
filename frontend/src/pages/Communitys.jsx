@@ -35,18 +35,18 @@ const Communitys = () => {
   });
 
   // const api = "pub_66696cd93cb944d498af66a299cc4fbf91308";
-  const api = "IjFicwBbdUxCnqP4BTOc6Yzr1m2JBksh";
+  const api = "pub_668680cb7f49ae92853a14cd9534d380d7b80";
   useEffect(() => {
     const fetchFinancialUpdates = async () => {
       try {
-        const response = await fetch(`https://api.apilayer.com/financelayer/news?date=today&keywords=at%26t&sources=seekingalpha.com&keyword=merger&tickers=dis`, {
+        const response = await fetch(`https://newsdata.io/api/1/news?apikey=pub_668680cb7f49ae92853a14cd9534d380d7b80&q=finance&language=en `, {
           headers: {
             apikey: api
           }
         });
         const data = await response.json();
-        const result = data.data.slice(0, 5); // Fetch only the top 5 news
-        const updates = result.map((item) => item.title);
+        const result = data.results.slice(0, 5); // Fetch only the top 5 news
+        const updates = result.map((item) => item?.description);
         setFinancialUpdates(updates);
       } catch (error) {
         console.error("Error fetching financial updates:", error);
