@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa"; // Icon for the profile
-import axios from "axios";
+import axios, { all } from "axios";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";
 
 const Learning_paths = () => {
   const [openSection, setOpenSection] = useState({}); // Track opened sections by category
-  const [username, setusername] = useState(null);
+  const [username, setusername] = useState("null");
   const [uusername, setuusername] = useState("");
   const [email, setemail] = useState("");
   const [progress, setprogress] = useState(0);
@@ -265,7 +265,7 @@ const Learning_paths = () => {
       {/* Header Section */}
       <div className="mt-16">
         <h1 className="text-center text-2xl sm:text-xl mt-10 pt-10 text-[#002147] font-extrabold">
-          {username?.toUpperCase()} Learning Path
+          {username? `${username.toUpperCase()}'s` : "Yours"} Learning Path
         </h1>
         <p className="text-center text-sm sm:text-base mt-3 text-[#6C757D]">
           Embark on a journey designed to make you a financial expert, step by
@@ -275,16 +275,16 @@ const Learning_paths = () => {
 
       {/* Progress Tracker */}
       <div className="my-10">
-        <h2 className="ml-6 sm:ml-2 text-xl text-[#002147] font-bold">
+        <h2 className="ml-6 sm:ml-2 text-xl text-[#002147] font-bold transition-all">
           Progress Tracker
         </h2>
-        <div className="bg-white py-6 mt-4 rounded-lg">
-          <div className="bg-[#e9e7e7] rounded-full ">
+        <div className="bg-white py-6 mt-4 rounded-lg transition-all">
+          <div className="bg-[#e9e7e7] rounded-full transition-all ">
             <div
-              className={`bg-[#F39C12] h-6 sm:h-7 rounded-full`}
-              style={{ width: `${progress}%` }}
+              className={`bg-[#F39C12] h-6 sm:h-7 rounded-full transition-all`}
+              style={{ width: `${progress}%` , transition:"all"}}
             >
-              <h3 className="text-center text-black text-xs sm:text-sm pt-1">{`${progress}% Completed`}</h3>
+              <h3 className="text-center text-black text-xs sm:text-sm pt-1 transition-all" >{`${progress}% Completed`}</h3>
             </div>
           </div>
         </div>
