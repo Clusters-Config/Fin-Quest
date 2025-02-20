@@ -39,7 +39,7 @@ const Communitys = () => {
   useEffect(() => {
     const fetchFinancialUpdates = async () => {
       try {
-        const response = await fetch(`https://newsdata.io/api/1/news?apikey=pub_668680cb7f49ae92853a14cd9534d380d7b80&q=finance&language=en `, {
+        const response = await fetch(`https://newsdata.io/api/1/news?apikey=pub_66696cd93cb944d498af66a299cc4fbf91308&q=finance%20news&country=in&language=en  `, {
           headers: {
             apikey: api
           }
