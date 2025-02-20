@@ -46,7 +46,8 @@ const Communitys = () => {
         });
         const data = await response.json();
         const result = data.results.slice(0, 5); // Fetch only the top 5 news
-        const updates = result.map((item) => item?.description);
+        const updates = result.map((item) => item?.title);
+        // console.log("Financial Updates:", updates);
         setFinancialUpdates(updates);
       } catch (error) {
         console.error("Error fetching financial updates:", error);
