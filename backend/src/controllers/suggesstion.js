@@ -31,29 +31,31 @@ const suggesstion = AsyncHandler(async(req,res)=>{
 })
 
 const discussion = AsyncHandler(async(req,res)=>{
-    const{email,discussion} = req.body;
+    const{email,discussion,username} = req.body;
 
     if([email,discussion].some((exist)=> !exist?.trim()))
         throw new Apierror(404,"All fields required");
 
-    const user = await discussionSchema.findOne({email:email});
 
-    if(user){
+    
         // const commentuser = await suggesstionSchema.findOne({email:email})
         
-            const udiscussion = new suggesstionSchema({
+            const udiscussion = new discussionSchema({
+                username:username,
                 email:email,
                 comment:discussion             
             })
 
             await udiscussion?.save()
-        
-    }
-    
 
-   return res.status(202)
-    
+            return res.json(udiscussion)
+        
     
 })
 
-export {discussion,suggesstion}
+const finddiscussion = AsyncHandler(async(req,res)=>{
+    const data = await discussionSchema.find({})
+    res.json(data)
+})
+
+export {discussion,suggesstion,finddiscussion}

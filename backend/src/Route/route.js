@@ -8,9 +8,10 @@ import TerminologyPage from "../controllers/Result.js";
 import { finduserlearning } from "../controllers/finduser.js";
 import { clearcookies } from "../controllers/verifycookie.js";
 import { decode } from "../controllers/finduser.js";
-import {chat} from "../controllers/chat.controller.js";
+// import {chat} from "../controllers/chat.controller.js";
 import {suggesstion} from "../controllers/suggesstion.js";
 import {discussion} from "../controllers/suggesstion.js";
+import { finddiscussion } from "../controllers/suggesstion.js";
 const router = Router();
 
 router.route("/login").post(userlogin);
@@ -22,9 +23,10 @@ router.route("/resultpage").post(TerminologyPage)
 router.route("/finduserlearning").post(finduserlearning)
 router.route("/clearcookies").get(clearcookies)
 router.route("/decode").get(decode)
-router.route("/chat").post(chat)
+// router.route("/chat").post(chat)
 router.route("/comment").post(suggesstion)
 router.route("/discussion").post(discussion)
+router.route("/finddiscussion").get(finddiscussion)
 
 
 export {router};

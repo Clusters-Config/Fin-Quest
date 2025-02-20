@@ -12,6 +12,9 @@ const suggesstion  = new Schema({
 
 
 const discussion = new Schema({
+    username:{
+        type:String
+    },
     comment:{
         type:String
     },

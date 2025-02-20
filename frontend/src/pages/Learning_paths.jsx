@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa"; // Icon for the profile
 import axios, { all } from "axios";
-import { IoCheckmarkDoneSharp } from "react-icons/io5";
+import { IoCheckmarkDoneSharp } from "react-icons/io5";   
+import { Parentheses } from "lucide-react";
+import { element } from "prop-types";
+
 
 const Learning_paths = () => {
   const [openSection, setOpenSection] = useState({}); // Track opened sections by category
@@ -38,7 +41,10 @@ const Learning_paths = () => {
   const [Investment2, setInvestment2] = useState();
   const [Investment3, setInvestment3] = useState();
   const [Investment, setInvestment] = useState();
-
+  const [discussion, setDiscussion] = useState("");
+  const [discussions, setDiscussions] = useState([]);
+  const [studyGroups, setStudyGroups] = useState([]);
+  const [data ,setdata] = useState([]);
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios.post("http://localhost:4047/finduserlearning").then((res) => {});
@@ -165,6 +171,22 @@ const Learning_paths = () => {
     );
   });
 
+  useEffect(()=>{
+    axios.get("http://localhost:4047/finddiscussion")
+    .then(res=>{console.log(res)
+      let path  = res.data
+      console.log(path)
+      let data = path.map((ele)=>{
+        return ele.comment
+      })
+      setdata(data)
+    
+     
+    })    
+  })
+
+  console.log(data)
+
   // Timeline Data with Categories (Accounting and Finance)
   const timelineData = [
     {
@@ -235,11 +257,15 @@ const Learning_paths = () => {
   ];
 
   // Peer-to-Peer Collaboration section
-  const [discussion, setDiscussion] = useState("");
-  const [discussions, setDiscussions] = useState([]);
-  const [studyGroups, setStudyGroups] = useState([]);
+ 
 
   const handlePostDiscussion = () => {
+    console.log("h")
+    axios.post("http://localhost:4047/discussion",{email,discussion,username})
+    .then(res=>console.log(res))
+    .catch((err)=>{
+      console.log(err)
+    })
     if (discussion.trim()) {
       setDiscussions([...discussions, discussion]);
       setDiscussion("");
@@ -398,10 +424,10 @@ const Learning_paths = () => {
             </button>
             <div className="mt-6">
               <h3 className="text-lg font-semibold text-[#002147]">Comments</h3>
-              <div className="mt-4 border max-h-36 w-96 overflow-auto  ">
-                {discussions.map((comment, idx) => (
-                  <p key={idx} className="text-sm text-[#6C757D]">
-                    * {comment}
+              <div className="mt-4 max-h-36 w-6/6 overflow-auto">
+                {data.map((data, idx) => (
+                  <p key={idx} className="text-sm font-bold text-gray-600 ml-5">
+                     {username+": "}{data}
                   </p>
                 ))}
               </div>

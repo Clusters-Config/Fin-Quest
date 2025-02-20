@@ -1,12 +1,11 @@
 // Chat Controller for Global Chat
 
-const express = require('express')
-const http = require('http')
-const Server = require('socket.io').Server
-const Connection = require('./db.js')
-const mongoose = require("mongoose")
-const Chat = require('./models/Chat.js')
-const { timeStamp } = require('console')
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import Connection from './db.js';
+import mongoose from 'mongoose';
+import Chat from './models/Chat.js';
 
 const chat = express()
 chat.use(express.json())
