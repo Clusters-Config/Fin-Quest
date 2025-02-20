@@ -113,40 +113,71 @@ function GamifiedAdventures() {
         </div>
       )}
 
-      {/* Game Notification Popup */}
-      {showNotification && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-md w-11/12 sm:w-1/2">
-            <h3 className="text-xl font-bold mb-4">Choose a Game</h3>
-            <div className="space-y-4">
-              <button
-                onClick={() => handleGameRedirect("ProfitLossLadder")}
-                className="w-full py-2 px-4 bg-[#002147] text-white rounded-lg shadow-md hover:bg-[#F39C12] transition duration-300"
-              >
-                Profit-Loss Ladder
-              </button>
-              <button
-                onClick={() => handleGameRedirect("Stock")}
-                className="w-full py-2 px-4 bg-[#002147] text-white rounded-lg shadow-md hover:bg-[#F39C12] transition duration-300"
-              >
-                Stock Prediction
-              </button>
-              {/* <button
-                onClick={() => handleGameRedirect("Monopoly")}
-                className="w-full py-2 px-4 bg-[#002147] text-white rounded-lg shadow-md hover:bg-[#F39C12] transition duration-300"
-              >
-                Monopoly Game
-              </button> */}
-            </div>
-            <button
-              onClick={toggleNotification}
-              className="bg-[#F39C12] text-white py-2 px-4 rounded-lg shadow-md hover:bg-[#e67e22] transition duration-300 mt-4"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
+       {/* Game Notification Popup */}
+{showNotification && (
+  <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+    <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 sm:w-1/2 max-w-md">
+      <div className="flex items-center space-x-4 mb-6">
+        {/* Icon for notification */}
+        <img
+          src="src\assets\Game.jpeg" // Replace with your desired image/icon
+          alt="Game Icon"
+          className="w-12 h-12 rounded-full"
+        />
+        <h3 className="text-2xl font-bold text-gray-800">Choose a Game</h3>
+      </div>
+      <div className="space-y-4">
+        {/* Profit-Loss Ladder Button */}
+        <button
+          onClick={() => handleGameRedirect("ProfitLossLadder")}
+          className="w-full py-3 px-4 bg-[#002147] text-white rounded-lg shadow-lg hover:bg-[#F39C12] transition duration-300 flex items-center justify-center space-x-3"
+        >
+          <img
+            src="src\assets\profit loss ladder.jpg" // Replace with your desired icon for this game
+            alt="Profit-Loss Icon"
+            className="w-6 h-6"
+          />
+          <span>Profit-Loss Ladder</span>
+        </button>
+
+        {/* Stock Prediction Button */}
+        <button
+          onClick={() => handleGameRedirect("Stock")}
+          className="w-full py-3 px-4 bg-[#002147] text-white rounded-lg shadow-lg hover:bg-[#F39C12] transition duration-300 flex items-center justify-center space-x-3"
+        >
+          <img
+            src="src\assets\stock prediction.jpg" // Replace with your desired icon for this game
+            alt="Stock Icon"
+            className="w-6 h-6"
+          />
+          <span>Stock Prediction</span>
+        </button>
+
+        {/* Monopoly Game Button */}
+        <button
+          onClick={() => handleGameRedirect("Monopoly")}
+          className="w-full py-3 px-4 bg-[#002147] text-white rounded-lg shadow-lg hover:bg-[#F39C12] transition duration-300 flex items-center justify-center space-x-3"
+        >
+          <img
+            src="https://via.placeholder.com/20" // Replace with your desired icon for this game
+            alt=""
+            className="w-6 h-6"
+          />
+          <span>Word Search</span>
+        </button>
+      </div>
+
+      {/* Close Button */}
+      <button
+        onClick={toggleNotification}
+        className="w-full py-3 px-4 bg-[#F39C12] text-white rounded-lg shadow-lg hover:bg-[#e67e22] transition duration-300 mt-6"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }

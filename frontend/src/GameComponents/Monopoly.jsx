@@ -1,206 +1,226 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useToast } from "@/hooks/use-toast";
 
-const Monopoly = () => {
-  const [players, setPlayers] = useState([
-    { name: "Player 1", money: 1500, position: 0, properties: [] },
-    { name: "Player 2", money: 1500, position: 0, properties: [] },
+const FinancialGame = () => {
+  const [questions] = useState([
+    {
+      definition: "A financial statement showing a company's assets, liabilities, and equity.",
+      correctAnswer: "Balance Sheet",
+      options: ["Balance Sheet", "Income", "Cash Flow", "Budget"],
+    },
+    {
+      definition: "The total value of goods and services produced in a country.",
+      correctAnswer: "GDP",
+      options: ["GDP", "Inflation", "Revenue", "Investment"],
+    },
+    // Additional questions
   ]);
-  const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
-  const [gameOver, setGameOver] = useState(false);
-  const [status, setStatus] = useState("");
-  const [diceRoll, setDiceRoll] = useState(0);
-  const [instructionsVisible, setInstructionsVisible] = useState(true);
-  const [gameStarted, setGameStarted] = useState(false);
 
-  const boardProperties = [
-    { name: "Go", price: 0, type: "special" },
-    { name: "Mediterranean Avenue", price: 60, type: "property" },
-    { name: "Community Chest", price: 0, type: "special" },
-    { name: "Baltic Avenue", price: 60, type: "property" },
-    { name: "Income Tax", price: 200, type: "special" },
-    { name: "Reading Railroad", price: 200, type: "property" },
-    { name: "Oriental Avenue", price: 100, type: "property" },
-    { name: "Chance", price: 0, type: "special" },
-    { name: "Vermont Avenue", price: 100, type: "property" },
-    { name: "Connecticut Avenue", price: 120, type: "property" },
-  ];
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedWord, setSelectedWord] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [retryStars, setRetryStars] = useState(3);
+  const [score, setScore] = useState(0);
+  const { toast } = useToast(); // Using the toast from the custom hook
 
-  useEffect(() => {
-    if (players.filter(player => player.money <= 0).length === players.length - 1) {
-      setGameOver(true);
-      setStatus(`${players[currentPlayerIndex].name} wins!`);
-    }
-  }, [players]);
-
-  const rollDice = () => {
-    if (gameOver) return;
-
-    const roll = Math.floor(Math.random() * 6) + 1;
-    setDiceRoll(roll);
-
-    const newPlayerPosition = players[currentPlayerIndex].position + roll;
-    if (newPlayerPosition >= boardProperties.length) {
-      setPlayers((prevPlayers) => {
-        const updatedPlayers = [...prevPlayers];
-        updatedPlayers[currentPlayerIndex].position = newPlayerPosition - boardProperties.length;
-        updatedPlayers[currentPlayerIndex].money += 200; // Collect $200 for passing GO
-        return updatedPlayers;
+  const handleWordClick = (word) => {
+    setSelectedWord(word);
+    if (word === questions[currentQuestionIndex].correctAnswer) {
+      setIsCorrect(true);
+      setScore(prevScore => prevScore + (retryStars * 100)); // Award points
+      toast({
+        title: "Excellent!",
+        description: `You earned ${retryStars * 100} points! 🌟`,
       });
-      setStatus(`${players[currentPlayerIndex].name} passed GO! Collected $200.`);
     } else {
-      setPlayers((prevPlayers) => {
-        const updatedPlayers = [...prevPlayers];
-        updatedPlayers[currentPlayerIndex].position = newPlayerPosition;
-        return updatedPlayers;
+      setIsCorrect(false);
+      setRetryStars(prev => {
+        const newStars = prev - 1;
+        if (newStars === 0) {
+          setTimeout(() => {
+            nextQuestion(); // Move to next question after 1.5 seconds if out of retries
+          }, 1500);
+        }
+        return newStars;
       });
-      handleSquareAction(newPlayerPosition);
     }
+    setShowFeedback(true);
   };
 
-  const handleSquareAction = (position) => {
-    const currentSquare = boardProperties[position];
-    const player = players[currentPlayerIndex];
+  const nextQuestion = () => {
+    setShowFeedback(false);
+    setIsCorrect(false);
+    setRetryStars(3);
+    setSelectedWord("");
+    
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      const finalScore = score;
+      let message = "";
 
-    if (currentSquare.type === "property") {
-      if (player.money >= currentSquare.price) {
-        setStatus(`${player.name} bought ${currentSquare.name} for $${currentSquare.price}.`);
-        setPlayers((prevPlayers) => {
-          const updatedPlayers = [...prevPlayers];
-          updatedPlayers[currentPlayerIndex].money -= currentSquare.price;
-          updatedPlayers[currentPlayerIndex].properties.push(currentSquare.name);
-          return updatedPlayers;
-        });
+      if (finalScore >= questions.length * 250) {
+        message = "Outstanding performance! You're a financial wizard! 🧙‍♂️";
+      } else if (finalScore >= questions.length * 150) {
+        message = "Great job! You've got solid financial knowledge! 📚";
       } else {
-        setStatus(`${player.name} doesn't have enough money to buy ${currentSquare.name}.`);
+        message = "Keep practicing! You're learning! 💪";
       }
-    } else if (currentSquare.type === "special") {
-      if (currentSquare.name === "Go") {
-        setPlayers((prevPlayers) => {
-          const updatedPlayers = [...prevPlayers];
-          updatedPlayers[currentPlayerIndex].money += 200;
-          return updatedPlayers;
-        });
-        setStatus(`${player.name} passed Go and collected $200.`);
-      } else if (currentSquare.name === "Income Tax") {
-        setPlayers((prevPlayers) => {
-          const updatedPlayers = [...prevPlayers];
-          updatedPlayers[currentPlayerIndex].money -= 200;
-          return updatedPlayers;
-        });
-        setStatus(`${player.name} paid $200 in Income Tax.`);
-      }
+
+      toast({
+        title: "Game Completed!",
+        description: `Final Score: ${finalScore} - ${message}`,
+        duration: 5000, // Show for 5 seconds
+      });
     }
   };
 
-  const nextPlayer = () => {
-    setCurrentPlayerIndex((prevIndex) => (prevIndex + 1) % players.length);
-    setStatus("");
+  const generateGrid = () => {
+    const allWords = [...questions[currentQuestionIndex].options];
+    const gridSize = 4;
+    const gridWords = [...allWords, "Income", "Profit", "Revenue", "Assets", "Liabilities"];
+    while (gridWords.length < gridSize * gridSize) {
+      gridWords.push("Empty");
+    }
+    return shuffle(gridWords);
   };
 
-  const handleStartGame = () => {
-    setGameOver(false);
-    setPlayers([
-      { name: "Player 1", money: 1500, position: 0, properties: [] },
-      { name: "Player 2", money: 1500, position: 0, properties: [] },
-    ]);
-    setCurrentPlayerIndex(0);
-    setStatus("");
-    setGameStarted(true);
-    setInstructionsVisible(false); // Hide instructions after game starts
+  const shuffle = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
   };
 
   return (
-    <div className="flex flex-col items-center p-5  text-white bg-opacity-90">
-      <h1 className="text-4xl font-bold mb-8">Monopoly Finance Game</h1>
-
-      {gameStarted ? (
-        gameOver ? (
-          <div className="bg-white text-black p-6 rounded-lg shadow-lg text-center w-full max-w-md">
-            <h2 className="text-2xl text-red-600">Game Over!</h2>
-            <p className="text-lg text-gray-700">{status}</p>
-            <button
-              onClick={handleStartGame}
-              className="mt-6 bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 transition"
-            >
-              Start New Game
-            </button>
-          </div>
-        ) : (
-          <div className="space-y-8">
-            <h2 className="text-xl font-semibold text-yellow-300">{players[currentPlayerIndex].name}'s Turn</h2>
-
-            <div className="flex justify-center space-x-6 mb-4">
-              <button
-                onClick={rollDice}
-                className="bg-blue-500 text-white p-4 rounded-lg shadow-lg hover:bg-blue-600 transition"
-              >
-                Roll Dice
-              </button>
-              <button
-                onClick={nextPlayer}
-                className="bg-gray-500 text-white p-4 rounded-lg shadow-lg hover:bg-gray-600 transition"
-              >
-                Next Player
-              </button>
-            </div>
-
-            <div className="text-xl text-gray-200">{status}</div>
-
-            <div className="flex justify-around space-x-8">
-              {players.map((player, index) => (
-                <div key={index} className="bg-white text-black p-4 rounded-lg shadow-lg w-1/4 text-center">
-                  <h3 className="font-bold text-lg text-blue-600">{player.name}</h3>
-                  <p className="text-gray-600">Money: ${player.money}</p>
-                  <p className="text-gray-600">Position: {boardProperties[player.position].name}</p>
-                  <p className="text-gray-600">Properties: {player.properties.join(", ") || "None"}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-10">
-              <h3 className="text-2xl font-semibold text-yellow-300">Board</h3>
-              <div className="grid grid-cols-5 gap-4 mt-4">
-                {boardProperties.map((square, index) => (
-                  <div
-                    key={index}
-                    className={`p-4 border rounded-lg text-center transition ${
-                      players.some((player) => player.position === index)
-                        ? "bg-yellow-200 border-4 border-yellow-500"
-                        : "bg-gray-700 text-white"
-                    }`}
-                  >
-                    <p className="text-lg">{square.name}</p>
-                    <p className="text-sm text-gray-400">{square.type === "property" ? `$${square.price}` : ""}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )
-      ) : (
-        <div className="bg-white text-black p-6 rounded-lg shadow-lg text-center w-full max-w-md">
-          <h2 className="text-2xl text-blue-600">Instructions</h2>
-          <p className="text-gray-700 mt-4">
-            - Each player starts with $1500.
-            <br />
-            - Players take turns rolling the dice to move along the board.
-            <br />
-            - If you land on an unowned property, you can buy it.
-            <br />
-            - Players collect $200 when they pass GO.
-            <br />
-            - The game ends when only one player remains with money.
-          </p>
-          <button
-            onClick={handleStartGame}
-            className="mt-6 bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 transition"
-          >
-            Start Game
-          </button>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 via-yellow-200 to-blue-300 p-6">
+      <motion.div
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="text-center mb-8"
+      >
+        <h1 className="text-4xl font-bold mb-4 text-white">Financial Word Search</h1>
+        <div className="bg-white/30 backdrop-blur-sm rounded-full px-4 py-1 inline-block">
+          <span className="text-white">Question {currentQuestionIndex + 1} of {questions.length}</span>
         </div>
-      )}
+        
+        <div className="mt-4 flex items-center justify-center gap-2">
+          {[...Array(3)].map((_, i) => (
+            <motion.div
+              key={i}
+              initial={false}
+              animate={{
+                scale: i < retryStars ? 1 : 0.5,
+                opacity: i < retryStars ? 1 : 0.3,
+              }}
+              className={`text-3xl ${i < retryStars ? "text-yellow-400" : "text-gray-400"}`}
+            >
+              ⭐
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentQuestionIndex}
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -100, opacity: 0 }}
+          className="bg-white/70 backdrop-blur-md rounded-2xl p-8 mb-8 shadow-xl"
+        >
+          <p className="text-xl text-gray-700 leading-relaxed">
+            {questions[currentQuestionIndex].definition}
+          </p>
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="grid grid-cols-4 gap-4 mb-6">
+        {generateGrid().map((word, index) => (
+          <motion.button
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-white text-blue-500 font-semibold p-4 rounded-md shadow-lg hover:bg-blue-200 transition-colors"
+            onClick={() => handleWordClick(word)}
+          >
+            {word}
+          </motion.button>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {showFeedback && (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+            className="mt-6 text-center"
+          >
+            {isCorrect ? (
+              <motion.div
+                animate={{
+                  y: [0, -20, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 0.5,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                }}
+              >
+                <div className="text-4xl mb-4">🎉</div>
+                <h3 className="text-2xl font-bold text-green-600 mb-2">
+                  Correct! +{retryStars * 100} points
+                </h3>
+                <button
+                  onClick={nextQuestion}
+                  className="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-600 transition-colors"
+                >
+                  Next Question
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                animate={{
+                  rotate: [0, 10, -10, 0],
+                }}
+                transition={{
+                  duration: 0.5,
+                  repeat: Infinity,
+                }}
+              >
+                <div className="text-4xl mb-4">😢</div>
+                <h3 className="text-2xl font-bold text-red-600 mb-2">
+                  Try Again! ({retryStars} {retryStars === 1 ? 'try' : 'tries'} left)
+                </h3>
+                {retryStars > 0 && (
+                  <button
+                    onClick={() => setShowFeedback(false)}
+                    className="bg-gray-500 text-white px-6 py-2 rounded-full hover:bg-gray-600 transition-colors"
+                  >
+                    Continue
+                  </button>
+                )}
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div 
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="fixed bottom-4 right-4 bg-white/70 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg"
+      >
+        <span className="text-lg font-semibold">Score: {score}</span>
+      </motion.div>
     </div>
   );
 };
 
-export default Monopoly;
+export default FinancialGame;
