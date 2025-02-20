@@ -29,7 +29,7 @@ import MutualFundEssentials from './learn_path_components/MutualFundEssentials';
 import StockMarketBasics from './learn_path_components/StockMarketBasics';
 import Finance_Principles from './learn_path_components/Finance_Principles';
 import Goals_Finance  from './learn_path_components/Goals_Finance';
-
+import GlobalChat from "./learn_path_components/forum_components/GlobalChat"
 
 import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
@@ -43,14 +43,6 @@ import Monopoly from "./GameComponents/Monopoly";
 import DailyChallenges from "./GameComponents/DailyChallenges"
 import ProfilePage  from "./learn_path_components/ProfilePage";
 import GameProfile from "./GameComponents/GameProfile"
-
-
-import ChatContainer from './learn_path_components/forum_components/ChatContainer';
-import ChatLists from './learn_path_components/forum_components/ChatLists';
-import InputText from './learn_path_components/forum_components/InputText';
-import UserLogin from './learn_path_components/forum_components/UserLogin';
-// import style from './learn_path_components/forum_components/UserLogin'
-
 const App = () => {
   return (
     <AuthProvider>
@@ -104,10 +96,7 @@ const App = () => {
 
 
           {/* Forum Page Routes */}
-          <Route path="/ChatContainer" element={<ChatContainer />} />
-          <Route path="/ChatLists" element={<ChatLists />} />
-          <Route path="/InputText" element={<InputText />} />
-          <Route path="/UserLogin" element={<UserLogin />} />
+          <Route path="/GlobalChat" element={<GlobalChat />} />
 
         </Routes>
       </div>

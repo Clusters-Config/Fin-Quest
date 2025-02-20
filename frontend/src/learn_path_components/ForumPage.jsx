@@ -93,7 +93,7 @@ function ForumPage() {
            
             <div className="flex justify-center">
               
-            <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center"><Link to='/ChatContainer'>Join Global Chat</Link></button>
+            <button className="bg-[#002147] text-white rounded p-3 hover:bg-[#F39C12] transition:3s ease justify-center justify-items-center"><Link to='/GlobalChat'>Join Global Chat</Link></button>
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ function ForumPage() {
             Polls
           </h2>
           <div className="bg-[#F4F4F4] p-6 rounded-lg shadow-md dark:bg-[#343a40]">
-            <h3 className="font-bold text-[#3A6A89] dark:text-[#F39C12] text-lg mb-4">
+            <h3 className="font-bold text-[#3A6A89] dark:text-[#F39C12] text-lg mb-4">  
               {poll.question}
             </h3>
             <ul className="space-y-4">
