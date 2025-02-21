@@ -13,6 +13,7 @@ import Communitys from './pages/Communitys';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
 import Financial_Assistant from './pages/Financial_Assistan';
+import StressTracker from './pages/StressTracker';
 import { AuthProvider } from "./pages/AuthContext";
 
 // Learning path components
@@ -64,7 +65,7 @@ const App = () => {
           <Route path="/communitys" element={<Communitys />} />
           <Route path='/chat' element={<Chat />} />
           <Route path="/Financial_Assistant" element={<Financial_Assistant />} />
-
+          <Route path="/StressTracker" element={< StressTracker />} />
           
           <Route path="/TerminologyPage" element={<TerminologyPage />} />
           <Route path="/Credit_Debit" element={<Credit_Debit/>} />
