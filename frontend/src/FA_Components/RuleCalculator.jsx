@@ -113,7 +113,7 @@ const RuleCalculator = () => {
           {Object.entries(result).map(([key, value]) => (
             <div key={key} className="flex justify-between items-center py-1">
               <span className="capitalize">{key}:</span>
-              <span className="font-medium">${value}</span>
+              <span className="font-medium">₹{value.toLocaleString()}</span> {/* Added ₹ and formatted number */}
             </div>
           ))}
         </div>
