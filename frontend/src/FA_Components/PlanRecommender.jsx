@@ -17,25 +17,39 @@ const PlanRecommender = () => {
     const savings = parseFloat(currentSavings);
     const newRecommendations = [];
 
-    // Basic financial health checks
+    // Financial health checks
     const savingsRate = ((income - expenses) / income) * 100;
     const emergencyFundMonths = savings / expenses;
 
+    // Savings & Investments
     if (savingsRate < 20) {
-      newRecommendations.push(
-        "Consider following the 50/30/20 rule to increase your savings rate to at least 20%."
-      );
+      newRecommendations.push("Consider following the 50/30/20 rule to increase your savings rate to at least 20%.");
     }
     if (emergencyFundMonths < 6) {
-      newRecommendations.push(
-        "Build your emergency fund to cover at least 6 months of expenses."
-      );
+      newRecommendations.push("Build your emergency fund to cover at least 6 months of expenses.");
     }
     if (expenses > income * 0.7) {
-      newRecommendations.push(
-        "Your expenses are high relative to income. Review your budget using the 50/30/20 rule."
-      );
+      newRecommendations.push("Your expenses are high relative to income. Review your budget using the 50/30/20 rule.");
     }
+    
+    // Expense Management
+    newRecommendations.push("Use budgeting apps or spreadsheets to track and categorize expenses.");
+    newRecommendations.push("Review your recurring subscriptions and eliminate the ones you rarely use.");
+    if (expenses > income) {
+      newRecommendations.push("Consider cutting down on unnecessary expenses and avoid impulse buying.");
+    }
+
+    // Income Enhancement
+    newRecommendations.push("Explore side gigs or freelancing opportunities to increase your income.");
+    newRecommendations.push("Invest in learning new skills to improve your earning potential.");
+    if (income > 0) {
+      newRecommendations.push("If possible, negotiate a salary raise or promotion based on your contributions at work.");
+    }
+
+    // Long-Term Planning
+    newRecommendations.push("Start saving for retirement early through provident funds or pension schemes.");
+    newRecommendations.push("Ensure you have adequate health and life insurance to protect your finances.");
+    newRecommendations.push("Utilize tax-saving investment options to maximize your post-tax income.");
 
     setRecommendations(newRecommendations);
   };

@@ -33,12 +33,12 @@ const FinancialDashboard = () => {
         </div>
       </div>
 
-      {/* Content Section with Dialog Effect and Theory */}
+      {/* Content Section with Movable Dialog */}
       {activeTab && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-8 rounded-xl shadow-2xl max-w-3xl w-full relative animate-slide-in flex">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 overflow-auto">
+          <div className="bg-white p-8 rounded-xl shadow-2xl max-w-3xl w-full relative animate-slide-in flex flex-col max-h-[90vh] overflow-y-auto">
             <button className="absolute top-4 right-4 text-gray-500 hover:text-gray-800" onClick={() => setActiveTab("")}>✖</button>
-            <div className="w-1/2 p-4">
+            <div className="p-4">
               {activeTab === "calculator" && (
                 <div>
                   <h2 className="text-2xl font-bold mb-4">Rule Calculator</h2>
@@ -58,7 +58,7 @@ const FinancialDashboard = () => {
                 </div>
               )}
             </div>
-            <div className="w-1/2 p-4 flex justify-center items-center">
+            <div className="p-4 flex justify-center items-center">
               {activeTab === "calculator" && <RuleCalculator />}
               {activeTab === "recommender" && <PlanRecommender />}
               {activeTab === "trends" && <Trends />}
@@ -66,8 +66,6 @@ const FinancialDashboard = () => {
           </div>
         </div>
       )}
-
-      
     </div>
   );
 };
