@@ -1,6 +1,5 @@
 import mongoose, { Schema } from "mongoose"
 
-
 const suggesstion  = new Schema({
     comment:{
         type:String
@@ -9,7 +8,6 @@ const suggesstion  = new Schema({
         type:String
     }
 })
-
 
 const discussion = new Schema({
     username:{
@@ -23,6 +21,18 @@ const discussion = new Schema({
     }
 })
 
+
+
+const gobalChat = new Schema({
+    username:{
+        type:String
+    },
+    text:{
+        type:String
+    }
+})
+
 const suggesstionSchema = mongoose.model("suggesstion",suggesstion); 
 const discussionSchema = mongoose.model("discussion",discussion); 
-export {suggesstionSchema , discussionSchema}
+const gobalChatSchema = mongoose.model("gobalChat",gobalChat); 
+export {suggesstionSchema , discussionSchema, gobalChatSchema}

@@ -173,9 +173,8 @@ const Learning_paths = () => {
 
   useEffect(()=>{
     axios.get("http://localhost:4047/finddiscussion")
-    .then(res=>{console.log(res)
+    .then(res=>{
       let path  = res.data
-      console.log(path)
       let data = path.map((element)=>{
         return({
           email:element.comment,
@@ -188,7 +187,6 @@ const Learning_paths = () => {
     })    
   })
 
-  console.log(data)
 
   // Timeline Data with Categories (Accounting and Finance)
   const timelineData = [
@@ -263,9 +261,8 @@ const Learning_paths = () => {
  
 
   const handlePostDiscussion = () => {
-    console.log("h")
     axios.post("http://localhost:4047/discussion",{email,discussion,username})
-    .then(res=>console.log(res))
+    .then()
     .catch((err)=>{
       console.log(err)
     })
