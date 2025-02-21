@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import { FaBook, FaGamepad, FaChartLine, FaRobot, FaUsers, FaCalculator, FaRoute, FaNewspaper, FaBriefcase, FaHome, FaMagic, FaStreetView } from "react-icons/fa"; 
+import ParticleAnimation from "../components/ParticleAnimation";
 
 function FeaturesPage() {
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
-      
+    <>
+    <ParticleAnimation/>  
+    <div className=" min-h-screen flex flex-col relative">
+    
       {/* Navigation Bar */}
       <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
         <div className="text-[#F39C12] text-2xl font-bold">Finance Fusion Paths</div>
@@ -19,15 +22,15 @@ function FeaturesPage() {
           </li>
         </ul>
       </nav>
-
+      
       {/* Page Title & Subtitle */}
       <div className="text-center mt-10">
-        <h1 className="text-4xl font-semibold text-[#F39C12]">Finance Fusion Paths</h1>
-        <p className="text-gray-600 mt-2">
+        <h1 className="text-4xl font-semibold text-[#F39C12]">Fin-Quest</h1>
+        <p className="text-white mt-2">
           Your all-in-one platform for mastering personal finance through interactive learning and real-world applications.
         </p>
       </div>
-
+        
       {/* Features Grid */}
       <section className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 py-10 max-w-6xl mx-auto">
         {[ 
@@ -69,6 +72,7 @@ function FeaturesPage() {
         <p>&copy; 2025 Finance Fusion Paths. All Rights Reserved.</p>
       </footer>
     </div>
+    </>
   );
 }
 
