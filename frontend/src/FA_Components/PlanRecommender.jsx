@@ -84,7 +84,7 @@ const PlanRecommender = () => {
     <div className="space-y-6">
       <div>
         <h2 className="text-2xl font-semibold mb-4">Plan Recommender</h2>
-        <p className="text-gray-600 mb-6">Enter your financial details (in Rupees) to receive customized recommendations.</p>
+        <p className="text-gray-300 mb-6">Enter your financial details (in Rupees) to receive customized recommendations.</p>
       </div>
       <div className="grid gap-4">
         <div className="space-y-2">

@@ -21,7 +21,7 @@ const ChatInterface = () => {
   const handleSendMessage = (e) => {
     e.preventDefault();
     axios.post(" http://localhost:4047/globalchat",{username,text})
-    .then(res=>console.log(res))
+    .then()
     settext("")
   };
 

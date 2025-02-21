@@ -55,7 +55,10 @@
 
     const globalchat = AsyncHandler(async(req,res)=>{
         const{username,text} = req.body;
-
+        if([username,text].some((element)=>!element.trim())){
+            return res.json("All fields")
+            
+        }
         const newtext = new gobalChatSchema({
             username:username,
             text:text

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Check } from "lucide-react";
-import { toast } from "sonner";
+import { ToastContainer, toast } from 'react-toastify';
 import Calendar from 'react-calendar';      
 import 'react-calendar/dist/Calendar.css';
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+
 
 const questions = [
   {
@@ -190,28 +193,20 @@ const questions = [
 
 const Questions = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
-  const [answer, setAnswer] = useState("");
   const [streak, setStreak] = useState(0);
   const [completedDays, setCompletedDays] = useState([]);
   const [showCalendar, setShowCalendar] = useState(false);
   const [showGamesDialog, setShowGamesDialog] = useState(false);
+  const [email,setemail] = useState()
 
-  const handleSubmit = () => {
-    if (!selectedQuestion) return;
+  useEffect(()=>{
 
-    const isCorrect = Number(selectedQuestion.correctAnswer) === Number(answer);
-    if (isCorrect) {
-      setStreak(prev => prev + 1);
-      setCompletedDays(prev => [...prev, new Date()]);
-      toast.success("Correct answer! Great job!");
-      setSelectedQuestion(null);
-      setAnswer("");
-    } else {
-      setStreak(0);
-      toast.error("Not quite right. Try again!");
-    }
-  };
+    axios.get(" http://localhost:4047/verify",{withCredentials:true})
+    .then(res=>setemail(res.data.email))
+  })
 
+
+  console.log(selectedQuestion);
   // Modal for Calendar View
   const CalendarModal = () => {
     return (
@@ -242,6 +237,7 @@ const Questions = () => {
     const navigate = useNavigate();
   
     const handleGameSelect = (gameName) => {
+      // Navigate to the selected game path
       if (gameName === "Profit-Loss-Ladder") {
         navigate("/ProfitLossLadder");
       } else if (gameName === "Stock Prediction") {
@@ -249,7 +245,7 @@ const Questions = () => {
       } else if (gameName === "Word Search") {
         navigate("/Monopoly");
       }
-      setShowGamesDialog(false);
+      setShowGamesDialog(false);  // Close the dialog after selecting a game
     };
   
     return (
@@ -287,11 +283,33 @@ const Questions = () => {
     );
   };
 
-  // Modal for Answer Question
   const QuestionModal = () => {
+  const [answer, setAnswer] = useState();
+  const navigate = useNavigate()
+  const handleSubmit = () => {
+    if (!selectedQuestion) return;
+    const isCorrect = selectedQuestion.correctAnswer == answer;
+    console.log(isCorrect)
+    if (isCorrect) {
+      setStreak(prev => prev + 1);
+      setCompletedDays(prev => [...prev, new Date()]);
+      setSelectedQuestion(null);
+      setAnswer("");
+      toast.success("Correct answer! Great job!");
+     
+    } else {
+      setStreak(0);
+      toast.error("Not quite right. Try again!");
+    }
+
+    useEffect(()=>{
+      axios.post(" http://localhost:4047/streak",{email,streak})
+      .then(res=>console.log(res))
+    })
+  };
     return (
       <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white p-8 rounded-lg shadow-md w-8/ sm:w-[500px] max-h-[80vh] overflow-y-auto">
+        <div className="bg-white p-8 rounded-lg shadow-md w-8/ sm:w-[500px]">
           {selectedQuestion && (
             <>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">
@@ -317,10 +335,12 @@ const Questions = () => {
                   <button
                     onClick={handleSubmit}
                     className="w-full bg-[#002147] text-white py-3 px-6 rounded-lg hover:bg-[#F39C12] transition duration-200 flex items-center justify-center gap-2"
-                  >
+                  > <ToastContainer/>
                     <Check className="w-5 h-5" />
                     Submit Answer
+                    <ToastContainer/>
                   </button>
+                  <button onClick={()=>window.location.reload()} className="w-full bg-[#002147] text-white py-3 px-6 rounded-lg hover:bg-[#F39C12] transition duration-200 flex items-center justify-center gap-2">Close</button>
                 </div>
               </div>
             </>
@@ -343,7 +363,7 @@ const Questions = () => {
           {/* Main Content */}
           <div className="lg:col-span-3 space-y-6">
             {/* Daily Challenges Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 overflow-y-auto max-h-[600px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {questions.map((q) => (
                 <button
                   key={q.day}
@@ -386,16 +406,24 @@ const Questions = () => {
 
             {/* Progress */}
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h3 className="text-xl font-bold text-[#002147] mb-4">Your Progress</h3>
-              <p className="text-gray-600">You're on a roll! Keep up the great work!</p>
+              <h3 className="text-xl font-bold text-[#002147] mb-4">Progress</h3>
+              <div className="h-2 bg-gray-200 rounded-full">
+                <div 
+                  className="h-2 bg-[#F39C12] rounded-full transition-all duration-300"
+                  style={{ width: `${(streak / questions.length) * 100}%` }}
+                />
+              </div>
+              <div className="mt-2 text-gray-600">
+                {streak} of {questions.length} completed
+              </div>
             </div>
           </div>
         </div>
       </main>
 
-      {/* Modals */}
+      {/* Display Modals */}
       {showCalendar && <CalendarModal />}
-      {showGamesDialog && <GamesDialog setShowGamesDialog={setShowGamesDialog} />}
+      {showGamesDialog && <GamesDialog />}
       {selectedQuestion && <QuestionModal />}
     </div>
   );
