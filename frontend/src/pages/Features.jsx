@@ -41,7 +41,7 @@ function FeaturesPage() {
           { path: "/FinFlux", label: "FinFlux", desc: "Stay updated with market trends and analysis", icon: <FaNewspaper className="text-orange-500 w-8 h-8" /> },
           { path: "/SideHustleFinder", label: "Side Hustle", desc: "Discover and manage additional income streams", icon: <FaBriefcase className="text-teal-500 w-8 h-8" /> },
           { path: "/Financial_Assistant", label: "Financial Assistant ", desc: "Uncover and grow multiple income sources ", icon: <FaMagic className="text-teal-500 w-8 h-8" /> },
-          { path: "/StressTracker", label: " Financial Stress Tracker", desc: "Interactive tool for financial stress.", icon: <FaStreetView className="text-blue-500 w-8 h-8" /> },
+          { path: "/StressTracker", label: " Personalized Financial Roadmap", desc: "Interactive tool for financial stress.", icon: <FaStreetView className="text-blue-500 w-8 h-8" /> },
         ].map((feature) => (
           <Link
             key={feature.path}
