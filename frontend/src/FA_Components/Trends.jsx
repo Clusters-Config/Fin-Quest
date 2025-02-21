@@ -3,9 +3,9 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 const Trends = () => {
   const [monthlyInputs, setMonthlyInputs] = useState({
-    Jan: { savings: "", expenses: "", investment: "" },
-    Feb: { savings: "", expenses: "", investment: "" },
-    Mar: { savings: "", expenses: "", investment: "" },
+    MONTH1: { savings: "", expenses: "", investment: "" },
+    MONTH2: { savings: "", expenses: "", investment: "" },
+    MONTH3: { savings: "", expenses: "", investment: "" },
   });
 
   const [data, setData] = useState([]);
@@ -75,7 +75,7 @@ const Trends = () => {
 
       {data.length > 0 && (
         <>
-          <div className="h-[400px] w-full mt-6">
+          <div className="h-[400px] w-[400px] mt-6">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={data} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" />
