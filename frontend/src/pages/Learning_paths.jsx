@@ -5,6 +5,9 @@ import axios, { all } from "axios";
 import { IoCheckmarkDoneSharp } from "react-icons/io5";   
 import { Parentheses } from "lucide-react";
 import { element } from "prop-types";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 
 const Learning_paths = () => {
@@ -293,8 +296,9 @@ const Learning_paths = () => {
         </div>
       </nav>
 
-      {/* Header Section */}
-      <div className="mt-16">
+      <>
+      {progress?
+        <> <div className="mt-16">
         <h1 className="text-center text-2xl sm:text-xl mt-10 pt-10 text-[#002147] font-extrabold">
           {username ? `${username.toUpperCase()}'s` : "Yours"} Learning Path
         </h1>
@@ -304,7 +308,7 @@ const Learning_paths = () => {
         </p>
       </div>
 
-      {/* Progress Tracker */}
+     
       <div className="my-10">
         <h2 className="ml-6 sm:ml-2 text-xl text-[#002147] font-bold transition-all">
           Progress Tracker
@@ -434,9 +438,15 @@ const Learning_paths = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Footer */}
+      </div> </> : <Backdrop
+        sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+        open
+      >
+        <CircularProgress color="inherit" />
+        <h1>{`${" Please wait or login again"}`}</h1>
+      </Backdrop> }
+      </>
+      
       <footer className="bg-[#002147] text-white py-4 px-6 text-center mt-10 w-full">
         <p className="text-sm mt-2">
           &copy; 2025 Fin-Quest. All Rights Reserved.

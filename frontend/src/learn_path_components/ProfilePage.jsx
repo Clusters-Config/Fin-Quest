@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
 
 const ProfilePage = () => {
   const [email, setemail] = useState();
@@ -174,11 +177,13 @@ const ProfilePage = () => {
   ]);
 
   return (
-    <div className="bg-[#F4F4F4] min-h-screen">
-      {/* Navbar */}
-      <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
+    <>
+    <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
         My Learning Path
       </nav>
+    {udob ? <div className="bg-[#F4F4F4] min-h-screen">
+      {/* Navbar */}
+      
       {/* {email ? (
           <div className="flex justify-end p-4">
             <button
@@ -285,7 +290,13 @@ const ProfilePage = () => {
           </p>
         </div>
       </div>
-    </div>
+    </div> : <Backdrop
+  sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+  open
+>
+  <CircularProgress color="inherit" />
+  <h1>Please wait or login again</h1>
+</Backdrop>}</>
   );
 };
 
