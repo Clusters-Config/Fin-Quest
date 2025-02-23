@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Index = () => {
+const Learningpath = () => {
   const [openSection, setOpenSection] = useState(null);
   const [progress, setProgress] = useState(0);
   const [completedModules, setCompletedModules] = useState(0);
@@ -204,4 +204,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Learningpath;
