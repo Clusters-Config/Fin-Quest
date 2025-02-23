@@ -1,449 +1,207 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa"; // Icon for the profile
-import axios, { all } from "axios";
-import { IoCheckmarkDoneSharp } from "react-icons/io5";   
-import { Parentheses } from "lucide-react";
-import { element } from "prop-types";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-
-const Learning_paths = () => {
-  const [openSection, setOpenSection] = useState({}); // Track opened sections by category
-  const [username, setusername] = useState("null");
-  const [uusername, setuusername] = useState("");
-  const [email, setemail] = useState("");
-  const [progress, setprogress] = useState(0);
-
-  // const [modules, setModules] = useState([
-  //     { name: "Module 1: Basic Terminologies", progress: Terminologies },
-  //     { name: "Module 2: Fundamentals of Accounting", progress: 95 },
-  //     { name: "Module 3: Basic Financial Concepts", progress: 30 },
-  //     { name: "Module 4: Understanding Interest Rates", progress: 10 },
-  //     { name: "Module 5: Investment Basics", progress: 0 },
-  //   ]);
-
-  const [Accounting1, setAccounting1] = useState();
-  const [Accounting2, setAccounting2] = useState();
-  const [Accounting, setAccounting] = useState();
-  const [FAccounting1, setFAccounting1] = useState();
-  const [FAccounting2, setFAccounting2] = useState();
-  const [FAccounting, setFAccounting] = useState();
-  const [Financial1, setFinancial1] = useState();
-  const [Financial2, setFinancial2] = useState();
-  const [Financial, setFinancial] = useState();
-  const [Saving1, setSaving1] = useState();
-  const [Saving2, setSaving2] = useState();
-  const [Saving, setSaving] = useState();
-  const [Interest1, setInterest1] = useState();
-  const [Interest2, setInterest2] = useState();
-  const [Interest, setInterest] = useState();
-  const [Investment1, setInvestment1] = useState();
-  const [Investment2, setInvestment2] = useState();
-  const [Investment3, setInvestment3] = useState();
-  const [Investment, setInvestment] = useState();
-  const [discussion, setDiscussion] = useState("");
-  const [discussions, setDiscussions] = useState([]);
-  const [studyGroups, setStudyGroups] = useState([]);
-  const [data ,setdata] = useState([]);
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-    axios.post("http://localhost:4047/finduserlearning").then((res) => {});
-  });
+const Index = () => {
+  const [openSection, setOpenSection] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [completedModules, setCompletedModules] = useState(0);
+  const [discussion, setDiscussion] = useState('');
+  const [discussions, setDiscussions] = useState([
+    {
+      username: 'Username',
+      comment: 'This course has been incredibly helpful in understanding the basics of financial accounting.',
+      timestamp: '2025-02-23 12:00'
+    },
+    // Add more initial discussion objects as needed
+  ]);
 
   const navigate = useNavigate();
 
-  const handleToggle = (category, sectionId) => {
-    setOpenSection((prevState) => ({
-      ...prevState,
-      [category]: prevState[category] === sectionId ? null : sectionId,
-    }));
-  };
+  // Learning path data
+  const learningPaths = [
+    {
+      id: 'accounting',
+      number: 1,
+      title: 'Accounting Essentials',
+      description: 'A comprehensive introduction to fundamental accounting principles and practices.',
+      subtitle: 'Learn about debits, credits, and the basic framework of financial accounting.',
+      modules: [
+        { name: "Accounting Glossary", route: "/TerminologyPage" },
+        { name: "The Concepts Of 'DEBIT' AND 'CREDIT'", route: "/Credit_Debit" },
+        { name: "Accounting Overview", route: "/Accounting" },
+        { name: "Pillars of Accounting", route: "/Pillars_Of_Accounting" }
+      ]
+    },
+    {
+      id: 'finance',
+      number: 2,
+      title: 'Finance Essentials',
+      description: 'Master the core concepts of financial management and analysis.',
+      subtitle: 'Understand financial statements, ratios, and decision-making processes.',
+      modules: [
+        { name: "Finance Principles", route: "/Finance_Principles" },
+        { name: "Goal Of Financial Management", route: "/Goals_Finance" },
+        { name: "Saving Essentials", route: "/Saving_Essentials" },
+        { name: "Budgeting Basics", route: "/Budgeting_Basics" },
+        { name: "Deposit plans", route: "/DepositEssentials" },
+        { name: "Mutual Funds", route: "/MutualFundEssentials" },
+        { name: "Stock Market", route: "/StockMarketBasics" },
+        {
+          name: "Simple vs. Compound Interest",
+          route: "/SimpleVsCompoundInterest",
+        },
+        { name: "Impact on Loans", route: "/LoanImpacts" },
 
-  const handleTopicClick = (route) => {
+
+      ]
+    }
+  ];
+
+  const handleModuleClick = (route) => {
     navigate(route);
   };
 
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
-      setuusername(res.data.username);
-    });
-  });
-
-  useEffect(() => {
-    setusername(uusername);
-  }, [uusername]);
-
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
-      setemail(res.data.email);
-    });
-  });
-
-  useEffect(() => {
-    axios
-      .post("http://localhost:4047/finduserlearning", { email })
-      .then((res) => {
-        setAccounting1(res?.data?.accouting[0]?.mod1.path1);
-        setAccounting2(res?.data?.accouting[0]?.mod1.path2);
-        setFAccounting1(res?.data?.accouting[0]?.mod2.path1);
-        setFAccounting2(res?.data?.accouting[0]?.mod2.path2);
-        setFinancial1(res?.data?.finance[0]?.mod1.path1);
-        setFinancial2(res?.data?.finance[0]?.mod1.path2);
-        setSaving1(res?.data?.finance[0]?.mod2.path1);
-        setSaving2(res?.data?.finance[0]?.mod2.path2);
-        setInterest1(res?.data?.finance[0]?.mod3.path1);
-        setInterest2(res?.data?.finance[0]?.mod3.path2);
-        setInvestment1(res?.data?.finance[0]?.mod4.path1);
-        setInvestment2(res?.data?.finance[0]?.mod4.path2);
-        setInvestment3(res?.data?.finance[0]?.mod4.path3);
-      });
-  });
-
-  useEffect(() => {
-    if (Accounting1 >= 70 && Accounting2 >= 70) {
-      setAccounting(100);
-    } else if (Accounting1 >= 70 || Accounting2 >= 70) {
-      setAccounting(50);
-    } else {
-      setAccounting(0);
-    }
-
-    if (FAccounting1 >= 70 && FAccounting2 >= 70) {
-      setFAccounting(100);
-    } else if (FAccounting1 >= 70 || FAccounting2 >= 70) {
-      setFAccounting(50);
-    } else {
-      setFAccounting(0);
-    }
-
-    if (Financial1 >= 70 && Financial2 >= 70) {
-      setFinancial(100);
-    } else if (Financial1 >= 70 || Financial2 >= 70) {
-      setFinancial(50);
-    } else {
-      setFinancial(0);
-    }
-
-    if (Saving1 >= 70 && Saving2 >= 70) {
-      setSaving(100);
-    } else if (Saving1 >= 70 || Saving2 >= 70) {
-      setSaving(50);
-    } else {
-      setSaving(0);
-    }
-
-    if (Interest1 >= 70 && Interest2 >= 70) {
-      setInterest(100);
-    } else if (Interest1 >= 70 || Interest2 >= 70) {
-      setInterest(50);
-    } else {
-      setInterest(0);
-    }
-
-    if (Investment1 >= 70 && Investment2 >= 70 && Investment3 >= 70) {
-      setInvestment(100);
-    } else if (Investment1 >= 70 && Investment2 >= 70) {
-      setInvestment(66);
-    } else if (Investment1 >= 70 && Investment3 >= 70) {
-      setInvestment(66);
-    } else if (Investment2 >= 70 && Investment3 >= 70) {
-      setInvestment(66);
-    } else if (Investment2 >= 70 || Investment3 >= 70 || Investment1 >= 70) {
-      setInvestment(33);
-    } else {
-      setInvestment(0);
-    }
-  });
-
-  useEffect(() => {
-    setprogress(
-      Math.floor(
-        (Accounting +
-          FAccounting +
-          Financial +
-          Saving +
-          Interest +
-          Investment) /
-          6
-      )
-    );
-  });
-
-  useEffect(()=>{
-    axios.get("http://localhost:4047/finddiscussion")
-    .then(res=>{
-      let path  = res.data
-      let data = path.map((element)=>{
-        return({
-          email:element.comment,
-          username:element.username
-        })
-      })
-      setdata(data)
-    
-     
-    })    
-  })
-
-
-  // Timeline Data with Categories (Accounting and Finance)
-  const timelineData = [
-    {
-      category: "Accounting Essentials",
-      modules: [
-        {
-          id: 1,
-          title: `Accounting for Beginners: Key Terms & Transactions `,
-          topics: [
-            { name: "Accounting Glossary", route: "/TerminologyPage" },
-            {
-              name: "The Concepts Of ‘DEBIT’ AND ‘CREDIT’",
-              route: "/Credit_Debit",
-            },
-          ],
-        },
-        {
-          id: 2,
-          title: `Fundamentals of Accounting `,
-          topics: [
-            { name: "Accounting Overview", route: "/Accounting" },
-            { name: "Pillars of Accounting", route: "/Pillars_Of_Accounting" },
-          ],
-        },
-      ],
-    },
-    {
-      category: "Finance Essentials",
-      modules: [
-        {
-          id: 1,
-          title: "Basic Financial Concepts",
-          topics: [
-            { name: "Finance Principles", route: "/Finance_Principles" },
-            { name: "Goal Of Financial Management", route: "/Goals_Finance" },
-          ],
-        },
-        {
-          id: 2,
-          title: "Practical Finance: Saving & Budgeting",
-          topics: [
-            { name: "Saving Essentials", route: "/Saving_Essentials" },
-            { name: "Budgeting Basics", route: "/Budgeting_Basics" },
-          ],
-        },
-        {
-          id: 3,
-          title: "Understanding Interest Rates",
-          topics: [
-            {
-              name: "Simple vs. Compound Interest",
-              route: "/SimpleVsCompoundInterest",
-            },
-            { name: "Impact on Loans", route: "/LoanImpacts" },
-          ],
-        },
-        {
-          id: 4,
-          title: "Investment Basics",
-          topics: [
-            { name: "Deposit plans", route: "/DepositEssentials" },
-            { name: "Mutual Funds", route: "/MutualFundEssentials" },
-            { name: "Stock Market", route: "/StockMarketBasics" },
-          ],
-        },
-      ],
-    },
-  ];
-
-  // Peer-to-Peer Collaboration section
- 
-
-  const handlePostDiscussion = () => {
-    axios.post("http://localhost:4047/discussion",{email,discussion,username})
-    .then()
-    .catch((err)=>{
-      console.log(err)
-    })
+  const handleDiscussionSubmit = () => {
     if (discussion.trim()) {
-      setDiscussions([...discussions, discussion]);
-      setDiscussion("");
+      setDiscussions([
+        {
+          username: 'You',
+          comment: discussion,
+          timestamp: 'Just now'
+        },
+        ...discussions
+      ]);
+      setDiscussion('');
     }
   };
-
-  const handleJoinGroup = (groupRoute) => {
-    navigate(groupRoute);
-  };
-
-  const sampleGroups = [{ name: "Dive In", route: "/ForumPage" }];
 
   return (
-    <div className="px-4 sm:px-6 lg:px-10">
-      {/* Navbar */}
-      <nav className="bg-[#002147] p-4 w-full fixed top-0 left-0 z-10 flex justify-between items-center">
-        <h1 className="text-white text-lg font-extrabold">Learning Hub</h1>
-        <div className="flex items-center space-x-4">
-          <button
-            onClick={() => navigate("/ProfilePage")}
-            className="text-white text-2xl"
-          >
-            <FaUserCircle />
-          </button>
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-[#002147] text-white py-4 px-6">
+        <h1 className="text-xl font-semibold">Learning Hub</h1>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl font-bold text-[#002147] mb-2">Learning Path</h1>
+          <p className="text-gray-600">
+            Embark on a journey designed to make you a financial expert, step by step!
+          </p>
         </div>
-      </nav>
 
-      {/* Header Section */}
-      <div className="mt-16">
-        <h1 className="text-center text-2xl sm:text-xl mt-10 pt-10 text-[#002147] font-extrabold">
-          {username ? `${username.toUpperCase()}'s` : "Yours"} Learning Path
-        </h1>
-        <p className="text-center text-sm sm:text-base mt-3 text-[#6C757D]">
-          Embark on a journey designed to make you a financial expert, step by
-          step!
-        </p>
-      </div>
-
-      {/* Progress Tracker */}
-      <div className="my-10">
-        <h2 className="ml-6 sm:ml-2 text-xl text-[#002147] font-bold transition-all">
-          Progress Tracker
-        </h2>
-        <div className="bg-white py-6 mt-4 rounded-lg transition-all">
-          <div className="bg-[#e9e7e7] rounded-full transition-all ">
-            <div
-              className={`bg-[#F39C12] h-6 sm:h-7 rounded-full transition-all`}
-              style={{ width: `${progress}%`, transition: "all" }}
-            >
-              <h3 className="text-center text-black text-xs sm:text-sm pt-1 transition-all">{`${progress}% Completed`}</h3>
+        {/* Progress Overview */}
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-[#002147] mb-4">Total Module Completed</h2>
+            <p className="text-4xl font-bold text-[#F39C12]">{completedModules}/6</p>
+          </div>
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <h2 className="text-xl font-semibold text-[#002147] mb-4">Overall Progress</h2>
+            <div className="h-4 bg-gray-200 rounded-full">
+              <div 
+                className="h-4 bg-[#002147] rounded-full transition-all duration-500"
+                style={{ width: `${progress}%` }}
+              ></div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Learning Timeline */}
-      <div>
-        <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold">
-          Learning Timeline
-        </h1>
-        <div className="bg-white w-full max-w-6xl mx-auto rounded-xl mt-6 pb-6 shadow-md">
-          {timelineData.map((category) => (
-            <div
-              key={category.category}
-              className="border border-[#6C757D] rounded-lg mt-4 p-4"
-            >
-              {/* Category Header */}
-              <h2 className="text-xl text-[#002147] font-extrabold">
-                {category.category}
-              </h2>
-              {category.modules.map((section) => (
-                <div key={section.id} className="mt-4">
-                  {/* Section Header */}
-                  <div
-                    className="flex items-center cursor-pointer"
-                    onClick={() => handleToggle(category.category, section.id)}
-                  >
-                    <div
-                      className={`w-9 h-9 ${
-                        openSection[category.category] === section.id
-                          ? "bg-[#002147]"
-                          : "bg-[#6C757D]"
-                      } rounded-full mx-6`}
-                    >
-                      <h1 className="py-1 text-white text-center">
-                        {section.id}
-                      </h1>
-                    </div>
-                    <div className="ml-4">
-                      <div className="text-lg font-extrabold text-[#002147] flex ">
-                        {section.title}
-                      </div>
-                    </div>
+        {/* Learning Timeline */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-[#002147] mb-6">Learning Timeline</h2>
+          
+          <div className="space-y-6">
+            {learningPaths.map((path) => (
+              <div key={path.id} className="bg-white rounded-lg p-6 shadow-sm">
+                <div 
+                  className="flex items-start cursor-pointer"
+                  onClick={() => setOpenSection(openSection === path.id ? null : path.id)}
+                >
+                  <div className="bg-[#002147] text-white w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+                    {path.number}
                   </div>
-
-                  {/* Subtopics Dropdown */}
-                  {openSection[category.category] === section.id && (
-                    <div className="ml-16 mt-4">
-                      {section.topics.map((topic, idx) => (
-                        <div
-                          key={idx}
-                          className="cursor-pointer text-lg text-[#002147] hover:text-[#F39C12] mt-2"
-                          onClick={() => handleTopicClick(topic.route)}
-                        >
-                          <span className="font-bold">--</span> {topic.name}
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  <div className="ml-4">
+                    <h3 className="text-xl font-semibold text-[#002147]">{path.title}</h3>
+                    <p className="text-gray-600 mt-1">{path.description}</p>
+                    <p className="text-gray-500 text-sm mt-2">{path.subtitle}</p>
+                  </div>
                 </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Peer-to-Peer Learning Section */}
-      <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold">
-        Peer-to-Peer Learning & Collaboration
-      </h1>
-      <div className="bg-white w-full max-w-6xl mx-auto rounded-xl mt-6 pb-6 shadow-md">
-        <div className="border border-[#6C757D] rounded-lg mt-4 p-4">
-          {/* Study Groups Section */}
-          <h2 className="text-lg font-bold text-[#002147]">
-            Engage With Peers
-          </h2>
-          <div className="mt-4 space-y-4">
-            {sampleGroups.map((group, index) => (
-              <button
-                key={index}
-                className="bg-[#002147] text-white px-4 py-2 rounded-md w-full hover:bg-[#F39C12]"
-                onClick={() => handleJoinGroup(group.route)}
-              >
-                {group.name}
-              </button>
+                {openSection === path.id && (
+                  <div className="mt-6 ml-14 space-y-3">
+                    {path.modules.map((module, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleModuleClick(module.route)}
+                        className="w-full text-left p-3 rounded-lg hover:bg-gray-50 text-[#002147] transition-colors"
+                      >
+                        {module.name}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </div>
+        </section>
 
-          {/* Discussion Section */}
-          <div className="mt-8">
-            <h2 className="text-lg font-bold text-[#002147]">
-              Discussion Board
-            </h2>
+        {/* Engage With Peers */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-[#002147] mb-6">Engage With Peers</h2>
+          <div className="bg-white rounded-lg p-6 shadow-sm">
+            <p className="text-gray-600 mb-6">
+              The experts in their own experience provide important perspectives and a reality check, 
+              contribute to the development of beliefs and behaviors
+            </p>
+            <button 
+              onClick={() => navigate('/ForumPage')}
+              className="w-full bg-[#002147] text-white py-3 rounded-lg hover:bg-[#001a38] transition-colors"
+            >
+              Dive In
+            </button>
+          </div>
+        </section>
+
+        {/* Discussion Board */}
+        <section>
+          <h2 className="text-2xl font-bold text-[#002147] mb-6">Discussion Board</h2>
+          <div className="bg-white rounded-lg p-6 shadow-sm">
             <textarea
-              className="w-full p-2 border border-[#6C757D] rounded-md mt-4"
-              rows="4"
-              placeholder="Post your thoughts or questions here..."
               value={discussion}
               onChange={(e) => setDiscussion(e.target.value)}
+              placeholder="Post your thoughts or questions here..."
+              className="w-full p-4 border border-gray-200 rounded-lg mb-4 h-32 resize-none"
             />
             <button
-              onClick={handlePostDiscussion}
-              className="bg-[#F39C12] text-[#002147] px-4 py-2 rounded-md mt-4"
+              onClick={handleDiscussionSubmit}
+              className="bg-[#F39C12] text-white px-6 py-2 rounded-lg hover:bg-[#e08e11] transition-colors"
             >
               Post Discussion
             </button>
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold text-[#002147]">Comments</h3>
-              <div className="mt-4 max-h-36 w-6/6 overflow-auto">
-                {data.map((data, idx) => (
-                  <p key={idx} className="text-sm font-bold text-gray-600 ml-5">
-                     {data.username+": "}{data.email}
-                  </p>
-                ))}
-              </div>
+
+            <div className="mt-8 space-y-4">
+              {discussions.map((disc, idx) => (
+                <div key={idx} className="border-b border-gray-100 pb-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <span className="font-semibold text-[#002147]">{disc.username}</span>
+                    <span className="text-sm text-gray-500">{disc.timestamp}</span>
+                  </div>
+                  <p className="text-gray-600">{disc.comment}</p>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
 
       {/* Footer */}
-      <footer className="bg-[#002147] text-white py-4 px-6 text-center mt-10 w-full">
-        <p className="text-sm mt-2">
-          &copy; 2025 Fin-Quest. All Rights Reserved.
-        </p>
+      <footer className="bg-[#002147] text-white py-6 px-4 text-center mt-12">
+        <p className="text-sm">© 2025 Fin-Quest. All Rights Reserved.</p>
       </footer>
     </div>
   );
 };
 
-export default Learning_paths;
+export default Index;
