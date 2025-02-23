@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { CheckCircle, AlertCircle, DollarSign, ArrowRight, Target, Wallet, PiggyBank, LineChart, ShieldCheck } from "lucide-react";
+import ParticleAnimation from "../components/ParticleAnimation";
 
 const StressTracker = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -45,6 +46,7 @@ const StressTracker = () => {
     e.preventDefault();
     if (currentStep < 4) {
       setCurrentStep((prev) => prev + 1);
+      
     } else {
       setShowResults(true);
     }
@@ -74,19 +76,19 @@ const StressTracker = () => {
     switch (currentStep) {
       case 1:
         return (
-          <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className="space-y-4 text-white">
+            <label className="block text-sm font-medium ">
               Age
               <input
                 type="number"
                 name="age"
                 value={formData.age || ""}
                 onChange={handleInputChange}
-                className="mt-1 w-full rounded-lg border border-gray-200 bg-white py-2.5 px-3 text-sm"
+                className="mt-1 w-full rounded-lg border text-black border-gray-200 bg-white py-2.5 px-3 text-sm"
                 placeholder="Enter your age"
               />
             </label>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium">
               Monthly Income
               <div className="mt-1 relative">
                 <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -95,7 +97,7 @@ const StressTracker = () => {
                   name="monthlyIncome"
                   value={formData.monthlyIncome || ""}
                   onChange={handleInputChange}
-                  className="pl-10 w-full rounded-lg border border-gray-200 bg-white py-2.5 text-sm"
+                  className="pl-10 w-full rounded-lg border text-black border-gray-200 bg-white py-2.5 text-sm"
                   placeholder="Enter your monthly income"
                 />
               </div>
@@ -104,8 +106,8 @@ const StressTracker = () => {
         );
       case 2:
         return (
-          <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className="space-y-4 text-white">
+            <label className="block text-sm font-medium ">
               Current Savings
               <div className="mt-1 relative">
                 <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -114,12 +116,12 @@ const StressTracker = () => {
                   name="currentSavings"
                   value={formData.currentSavings || ""}
                   onChange={handleInputChange}
-                  className="pl-10 w-full rounded-lg border border-gray-200 bg-white py-2.5 text-sm"
+                  className="pl-10 w-full rounded-lg border text-black border-gray-200 bg-white py-2.5 text-sm"
                   placeholder="Enter your current savings"
                 />
               </div>
             </label>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium">
               Monthly Expenses
               <div className="mt-1 relative">
                 <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -128,7 +130,7 @@ const StressTracker = () => {
                   name="monthlyExpenses"
                   value={formData.monthlyExpenses || ""}
                   onChange={handleInputChange}
-                  className="pl-10 w-full rounded-lg border border-gray-200 bg-white py-2.5 text-sm"
+                  className="pl-10 w-full rounded-lg border text-black border-gray-200 bg-white py-2.5 text-sm"
                   placeholder="Enter your monthly expenses"
                 />
               </div>
@@ -139,14 +141,14 @@ const StressTracker = () => {
         return (
           <div className="space-y-4">
             <h3 className="font-medium mb-2">Financial Goals</h3>
-            <div className="space-y-2">
+            <div className="space-y-2 text-white">
               <label className="flex items-center space-x-2">
                 <input
                   type="checkbox"
                   name="goals.house"
                   checked={formData.goals.house}
                   onChange={handleInputChange}
-                  className="rounded border-gray-300"
+                  className="rounded  border-gray-300"
                 />
                 <span>Buy a House</span>
               </label>
@@ -187,7 +189,7 @@ const StressTracker = () => {
                   name="goals.other"
                   value={formData.goals.other}
                   onChange={handleInputChange}
-                  className="mt-1 w-full rounded-lg border border-gray-200 bg-white py-2.5 px-3 text-sm"
+                  className="mt-1 w-full rounded-lg border text-black border-gray-200 bg-white py-2.5 px-3 text-sm"
                   placeholder="Specify other financial goals"
                 />
               </label>
@@ -196,8 +198,8 @@ const StressTracker = () => {
         );
       case 4:
         return (
-          <div className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">
+          <div className="space-y-4 text-white">
+            <label className="block text-sm font-medium ">
               Total Debt
               <div className="mt-1 relative">
                 <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
@@ -206,18 +208,18 @@ const StressTracker = () => {
                   name="totalDebt"
                   value={formData.totalDebt || ""}
                   onChange={handleInputChange}
-                  className="pl-10 w-full rounded-lg border border-gray-200 bg-white py-2.5 text-sm"
+                  className="pl-10 w-full rounded-lg border text-black border-gray-200 bg-white py-2.5 text-sm"
                   placeholder="Enter your total debt"
                 />
               </div>
             </label>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium ">
               Risk Tolerance
               <select
                 name="riskTolerance"
                 value={formData.riskTolerance}
                 onChange={handleInputChange}
-                className="mt-1 w-full rounded-lg border border-gray-200 bg-white py-2.5 px-3 text-sm"
+                className="mt-1 w-full rounded-lg border text-black border-gray-200 bg-white py-2.5 px-3 text-sm"
               >
                 <option value="low">Conservative (Low Risk)</option>
                 <option value="medium">Moderate (Medium Risk)</option>
@@ -301,11 +303,12 @@ const StressTracker = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen ">
+      <ParticleAnimation/>
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 text-gray-900">Personalized Financial Roadmap</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4 text-white">Personalized Financial Roadmap</h1>
+          <p className="text-lg text-white max-w-2xl mx-auto">
             Create your customized financial plan based on your goals, income, and risk tolerance.
           </p>
         </div>
@@ -317,7 +320,7 @@ const StressTracker = () => {
                 <div
                   key={step}
                   className={`w-[22%] h-1 rounded-full transition-all duration-300 ${
-                    step <= currentStep ? "bg-primary" : "bg-gray-200"
+                    step <= currentStep ? "bg-primary" : "bg-white"
                   }`}
                 />
               ))}
@@ -346,9 +349,9 @@ const StressTracker = () => {
   
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
                 <div className="p-4 bg-blue-50 rounded-lg">
-                  <PiggyBank className="w-8 h-8 text-blue-500 mb-2" />
+                  <PiggyBank className="w-8 h-8 text-white mb-2" />
                   <h3 className="font-semibold mb-1">Monthly Savings</h3>
-                  <p className="text-2xl font-bold text-blue-600">${recommendations.savings.monthly}</p>
+                  <p className="text-2xl font-bold text-white">${recommendations.savings.monthly}</p>
                 </div>
                 <div className="p-4 bg-green-50 rounded-lg">
                   <LineChart className="w-8 h-8 text-green-500 mb-2" />
