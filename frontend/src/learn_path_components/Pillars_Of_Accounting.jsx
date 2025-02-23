@@ -1,93 +1,233 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import { motion, AnimatePresence } from "framer-motion";
 const PillarsOfAccountingModule = () => {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  
+  // Navigation constants
   const mod = 1;
   const page = "resultpage";
-  const path = "path2"
-  const mods = "mod2"
-  const type = "account"
-
+  const path = "path2";
+  const mods = "mod2";
+  const type = "account";
+  // Content sections for pagination
+  const contentSections = [
+    {
+      title: "The 4 Pillars of Accounting",
+      content: (
+        <>
+          <p className="text-gray-600 leading-relaxed mb-6">
+            Accounting is the backbone of any business, providing essential financial data for decision-making, regulatory compliance, and performance analysis. These four fundamental pillars help shape the accounting practices that ensure accuracy, consistency, and transparency in financial reporting.
+          </p>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <h4 className="font-semibold mb-2">The Four Pillars:</h4>
+            <ul className="list-disc ml-6 text-gray-600 space-y-1">
+              <li>Relevance</li>
+              <li>Reliability</li>
+              <li>Comparability</li>
+              <li>Consistency</li>
+            </ul>
+          </div>
+        </>
+      )
+    },
+    {
+      title: "1. Relevance",
+      content: (
+        <>
+          <p className="text-gray-600 leading-relaxed mb-4">
+            Relevance is one of the key principles behind good accounting. Financial information must be relevant to users who rely on it for decision-making. This means that financial statements should provide information that can influence decisions.
+          </p>
+          <div className="bg-gray-50 p-4 rounded-lg mb-6">
+            <h4 className="font-semibold mb-2">Key Aspects of Relevance:</h4>
+            <ul className="list-disc ml-6 text-gray-600 space-y-1">
+              <li>Information must be timely</li>
+              <li>Capable of influencing decisions</li>
+              <li>Important for predictions and evaluations</li>
+              <li>Must meet materiality threshold</li>
+            </ul>
+          </div>
+          <p className="text-gray-600 leading-relaxed">
+            The materiality concept ensures that only significant information that could affect decision-making is included in financial reports.
+          </p>
+        </>
+      )
+    },
+    {
+      title: "2. Reliability",
+      content: (
+        <>
+          <p className="text-gray-600 leading-relaxed mb-4">
+            Reliability ensures that financial information presented is accurate, complete, and dependable. Users rely on this information to make important decisions.
+          </p>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold text-gray-700">Key Components:</h4>
+              <ul className="list-disc ml-6 text-gray-600">
+                <li>Consistent application of methods</li>
+                <li>Freedom from errors and bias</li>
+                <li>Complete and accurate records</li>
+                <li>Verifiable through documentation</li>
+              </ul>
+            </div>
+            <p className="text-gray-600 italic">
+              "Financial statements should reflect the true financial position without exaggeration or omission."
+            </p>
+          </div>
+        </>
+      )
+    },
+    {
+      title: "3. Comparability",
+      content: (
+        <>
+          <p className="text-gray-600 leading-relaxed mb-4">
+            Comparability is crucial for analyzing financial data across different companies or time periods. It enables meaningful comparison and analysis.
+          </p>
+          <div className="bg-gray-50 p-4 rounded-lg mb-6">
+            <h4 className="font-semibold mb-2">Benefits of Comparability:</h4>
+            <ul className="list-disc ml-6 text-gray-600">
+              <li>Facilitates company-to-company comparison</li>
+              <li>Enables year-over-year analysis</li>
+              <li>Supports better forecasting</li>
+              <li>Helps in strategic planning</li>
+            </ul>
+          </div>
+          <p className="text-gray-600 leading-relaxed">
+            Standardized accounting methods ensure that stakeholders can make informed decisions by comparing like with like.
+          </p>
+        </>
+      )
+    },
+    {
+      title: "4. Consistency",
+      content: (
+        <>
+          <p className="text-gray-600 leading-relaxed mb-4">
+            Consistency refers to using the same accounting methods and procedures across reporting periods, making it easier to identify trends and evaluate performance.
+          </p>
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-semibold text-gray-700">Important Aspects:</h4>
+              <ul className="list-disc ml-6 text-gray-600">
+                <li>Maintaining same methods over time</li>
+                <li>Proper disclosure of changes</li>
+                <li>Clear explanation of effects</li>
+                <li>Transparency in reporting</li>
+              </ul>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <p className="text-gray-600 italic">
+                "When changes are necessary, transparency ensures users can still make meaningful comparisons."
+              </p>
+            </div>
+          </div>
+        </>
+      )
+    },
+    {
+      title: "Conclusion",
+      content: (
+        <>
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">Why These Pillars Matter</h3>
+          <p className="text-gray-600 leading-relaxed mb-4">
+            The four pillars of accounting form the foundation for all sound accounting practices. They ensure that financial information is:
+          </p>
+          <ul className="list-disc ml-6 mb-6 text-gray-600 space-y-2">
+            <li>Useful for decision-making</li>
+            <li>Accurate and reliable</li>
+            <li>Comparable across periods and entities</li>
+            <li>Consistent in application</li>
+          </ul>
+          <p className="text-gray-600 leading-relaxed">
+            When these pillars are applied effectively, they enable businesses to maintain transparency and accountability.
+          </p>
+        </>
+      )
+    }
+  ];
   const handleQuizButtonClick = () => {
-    // Navigate to the quiz page for Pillars of Accounting
-    navigate('/QuizApp/Pillars_Of_Accounting',{state:{mod:mod, page:page,path:path,mods:mods,type:type}});
+    navigate('/QuizApp/Pillars_Of_Accounting', {
+      state: { mod, page, path, mods, type }
+    });
   };
-
   return (
-    <div className="p-6 bg-gradient-to-r from-[#F4F4F4] to-[#F8FAFC] min-h-screen">
-      <h1 className="text-4xl font-extrabold text-[#002147] text-center my-6">
-        The 4 Pillars of Accounting
-      </h1>
-      <div className="bg-white p-8 rounded-lg shadow-2xl max-w-5xl mx-auto">
-        <h2 className="text-3xl font-semibold text-[#002147] mb-6">
-          Understanding the 4 Pillars of Accounting
-        </h2>
-
-        <p className="text-[#6C757D] mb-4">
-          Accounting is the backbone of any business, providing essential financial data for decision-making, regulatory compliance, and performance analysis. These four fundamental pillars help shape the accounting practices that ensure accuracy, consistency, and transparency in financial reporting.
-        </p>
-
-        <h3 className="text-xl font-semibold text-[#002147] mb-4">1. **Relevance**</h3>
-        <p className="text-[#6C757D] mb-4">
-          Relevance is one of the key principles behind good accounting. In order for financial information to be useful, it must be relevant to the users who rely on it for decision-making. This means that financial statements should provide information that can influence decisions, whether that is through predictions about future performance or evaluations of past actions. 
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          For instance, if a company is preparing a financial report for investors, the information included must be timely and capable of guiding decisions, such as whether to invest in the company or not. Relevance ensures that the financial data you’re presenting makes a difference to those who read it.
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          A key aspect of relevance is the materiality concept, which means that only information that is significant enough to influence decisions should be included. For example, very minor discrepancies are generally not considered relevant as they do not affect the users’ decision-making processes.
-        </p>
-
-        <h3 className="text-xl font-semibold text-[#002147] mb-4">2. **Reliability**</h3>
-        <p className="text-[#6C757D] mb-4">
-          Reliability is essential because it ensures that the financial information presented is accurate, complete, and dependable. Users of financial statements rely on the information to make decisions, so if the data is unreliable, it can lead to poor decision-making and financial losses.
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          To ensure reliability, accounting methods must be applied consistently, and financial records should be free from errors, omissions, or bias. For example, in corporate accounting, financial statements should reflect the true financial position of the company without exaggeration or omission.
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          Another key aspect of reliability is verification. It’s important that financial data can be verified through documentation, supporting evidence, and audits. If a company reports an expense, they must have receipts or contracts that justify the entry to provide the necessary level of reliability.
-        </p>
-
-        <h3 className="text-xl font-semibold text-[#002147] mb-4">3. **Comparability**</h3>
-        <p className="text-[#6C757D] mb-4">
-          Comparability is crucial for analyzing and understanding financial data across different companies or over different periods of time. When users look at financial reports, they need to be able to compare one company’s financial health with another’s, or compare the company’s current year with previous years.
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          Consistent accounting practices allow for comparability. For example, if one company uses a different method for depreciation than another company, it could distort comparisons, even if the companies are otherwise similar. By standardizing accounting methods, stakeholders can make more informed decisions by comparing like with like.
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          Comparability also plays a role in forecasting. When stakeholders know that the same principles are applied across periods, they can use historical data to predict future outcomes more accurately. This helps businesses plan and strategize for the future in a more informed way.
-        </p>
-
-        <h3 className="text-xl font-semibold text-[#002147] mb-4">4. **Consistency**</h3>
-        <p className="text-[#6C757D] mb-4">
-          Consistency in accounting refers to the use of the same methods and procedures across reporting periods. The key idea here is that consistency allows users to understand how financial reports relate to each other over time, making it easier to identify trends and evaluate performance.
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          For example, if a company changes its method for calculating depreciation from one year to the next, it can make the financial statements difficult to compare. However, if the company maintains consistency in its accounting practices, stakeholders will be able to more clearly see how the company’s financial position has changed.
-        </p>
-        <p className="text-[#6C757D] mb-4">
-          It’s important to note that if there is a need for change in accounting methods, such as adopting a new accounting standard, the company must disclose the change and explain how it affects the financial statements. This transparency ensures that the users can still make meaningful comparisons, even in the face of changes.
-        </p>
-
-        <h3 className="text-xl font-semibold text-[#002147] mb-6">Conclusion</h3>
-        <p className="text-[#6C757D] mb-6">
-          The four pillars of accounting—relevance, reliability, comparability, and consistency—form the foundation for all sound accounting practices. They ensure that financial information is useful, accurate, and meaningful for those who rely on it. When these pillars are applied effectively, they enable businesses to maintain transparency and accountability, making it easier for investors, managers, and other stakeholders to make well-informed decisions.
-        </p>
-
-        <div className="text-center">
-          <button
-            onClick={handleQuizButtonClick}
-            className="px-6 py-2 bg-[#F39C12] text-white rounded-full font-semibold hover:bg-[#F39C12] transition duration-300"
-          >
-            Take the Pillars of Accounting Quiz
-          </button>
+    <div className="min-h-screen bg-[#F4F4F5] p-8 flex justify-center items-center">
+      <div className="w-full max-w-[1200px] aspect-[3/2] relative">
+        {/* Book Container */}
+        <div className="absolute inset-0 flex bg-white rounded-lg shadow-2xl overflow-hidden">
+          {/* Left Page Edge */}
+          <div className="w-[80px] h-full bg-gradient-to-r from-gray-200 to-white">
+            <div className="h-full w-1/2 bg-gradient-to-r from-gray-300 to-transparent" />
+          </div>
+          {/* Main Content */}
+          <div className="flex-1 p-12 relative">
+            {/* Header */}
+            <div className="text-center mb-8 border-b pb-4">
+              <h1 className="text-3xl font-serif text-gray-800">The Four Pillars</h1>
+              <p className="text-sm text-gray-500 mt-2">Fundamentals of Accounting</p>
+            </div>
+            {/* Page Content with Animation */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPage}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="h-[calc(100%-160px)] overflow-y-auto pr-4"
+              >
+                <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+                  {contentSections[currentPage].title}
+                </h2>
+                {contentSections[currentPage].content}
+              </motion.div>
+            </AnimatePresence>
+            {/* Navigation */}
+            <div className="absolute bottom-8 left-8 right-8 flex justify-between items-center">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(0, p - 1))}
+                disabled={currentPage === 0}
+                className={`px-4 py-2 text-sm rounded ${
+                  currentPage === 0
+                    ? 'text-gray-300 cursor-not-allowed'
+                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                }`}
+              >
+                ← Previous Page
+              </button>
+              <span className="text-sm text-gray-500">
+                Page {currentPage + 1} of {contentSections.length}
+              </span>
+              <button
+                onClick={() => setCurrentPage(p => Math.min(contentSections.length - 1, p + 1))}
+                disabled={currentPage === contentSections.length - 1}
+                className={`px-4 py-2 text-sm rounded ${
+                  currentPage === contentSections.length - 1
+                    ? 'text-gray-300 cursor-not-allowed'
+                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                }`}
+              >
+                Next Page →
+              </button>
+            </div>
+          </div>
+          {/* Right Page Edge */}
+          <div className="w-[40px] h-full bg-gradient-to-l from-gray-200 to-white" />
         </div>
+        {/* Quiz Button */}
+        <button
+          onClick={handleQuizButtonClick}
+          className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 
+                   bg-[#F39C12] text-white px-8 py-3 rounded-full
+                   hover:bg-[#F1C40F] transition-colors duration-200
+                   shadow-lg hover:shadow-xl"
+        >
+          Take the Pillars of Accounting Quiz
+        </button>
       </div>
     </div>
   );
 };
-
 export default PillarsOfAccountingModule;
