@@ -1,16 +1,17 @@
-import React from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
-// import { useLocation } from 'react-router-dom';
-
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 const TerminologyPage = () => {
-    const navigate = useNavigate();
-    const mod = 0;
-    const page = "resultpage";
-    const path = "path1"
-    const mods = "mod1"
-    const type = "account"
-    // const location = useLocation();
-    const terminologyData = [
+  const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(0);
+  
+  // Constants for navigation
+  const mod = 0;
+  const page = "resultpage";
+  const path = "path1";
+  const mods = "mod1";
+  const type = "account";
+  const terminologyData = [
     {
       term: "Assets",
       definition: "Resources owned by an individual or company that are expected to provide future benefits."
@@ -410,39 +411,116 @@ const TerminologyPage = () => {
     
     
   ];
-
-  const handleQuizClick = () => {
-    navigate('/QuizApp/TerminologyPage',{state:{mod:mod, page:page,path:path,mods:mods,type:type}}); // Redirect to the quiz page when the button is clicked
+  // Calculate pages
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(terminologyData.length / itemsPerPage);
+  const getCurrentPageItems = () => {
+    const startIndex = currentPage * itemsPerPage;
+    return terminologyData.slice(startIndex, startIndex + itemsPerPage);
   };
-
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+  const handleQuizClick = () => {
+    navigate('/QuizApp/TerminologyPage', {
+      state: { mod, page, path, mods, type }
+    });
+  };
   return (
-    <div className="p-6 bg-gradient-to-r from-[#F4F4F4] to-[#F8FAFC] min-h-screen">
-      <h1 className="text-4xl font-extrabold text-[#002147] text-center my-6">
-        Basic Accountancy Terminology
-      </h1>
-      <div className="bg-white p-8 rounded-lg shadow-2xl max-w-5xl mx-auto">
-        <h2 className="text-3xl font-semibold text-[#002147] mb-6">Essential Financial Terms You Should Know</h2>
-        <ul>
-          {terminologyData.map((item, index) => (
-            <li key={index} className="mb-6">
-              <h3 className="text-xl font-bold text-[#002147]">{item.term}</h3>
-              <p className="text-[#6C757D] mt-2">{item.definition}</p>
-            </li>
-          ))}
-        </ul>
-
-        {/* Quiz Button */}
-        <div className="mt-8 text-center">
-          <button 
-            onClick={handleQuizClick}
-            className="bg-[#002147] text-white py-2 px-6 rounded-lg text-lg font-semibold hover:bg-[#00458b] transition-all"
-          >
-            Take the Quiz
-          </button>
+    <div className="min-h-screen bg-[#F4F4F5] p-8 flex justify-center items-center">
+      <div className="w-full max-w-[1200px] aspect-[3/2] relative">
+        {/* Book Container */}
+        <div className="absolute inset-0 flex bg-white rounded-lg shadow-2xl overflow-hidden">
+          {/* Left Page */}
+          <div className="w-[80px] h-full bg-gradient-to-r from-gray-200 to-white">
+            {/* Book spine effect */}
+            <div className="h-full w-1/2 bg-gradient-to-r from-gray-300 to-transparent" />
+          </div>
+          {/* Main Content */}
+          <div className="flex-1 p-12 relative">
+            {/* Header */}
+            <div className="text-center mb-8 border-b pb-4">
+              <h1 className="text-3xl font-serif text-gray-800">Basic Accountancy</h1>
+              <p className="text-sm text-gray-500 mt-2">Terminology Guide</p>
+            </div>
+            {/* Page Content with Animation */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPage}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="h-[calc(100%-160px)] overflow-y-auto pr-4"
+              >
+                <div className="grid gap-8">
+                  {getCurrentPageItems().map((item, index) => (
+                    <div 
+                      key={index} 
+                      className="border-b border-gray-100 pb-6 last:border-0"
+                    >
+                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                        {item.term}
+                      </h3>
+                      <p className="text-gray-600 leading-relaxed text-sm">
+                        {item.definition}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+            {/* Navigation */}
+            <div className="absolute bottom-8 left-8 right-8 flex justify-between items-center">
+              <button
+                onClick={handlePrevPage}
+                disabled={currentPage === 0}
+                className={`px-4 py-2 text-sm rounded ${
+                  currentPage === 0
+                    ? 'text-gray-300 cursor-not-allowed'
+                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                }`}
+              >
+                ← Previous Page
+              </button>
+              <span className="text-sm text-gray-500">
+                Page {currentPage + 1} of {totalPages}
+              </span>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages - 1}
+                className={`px-4 py-2 text-sm rounded ${
+                  currentPage === totalPages - 1
+                    ? 'text-gray-300 cursor-not-allowed'
+                    : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                }`}
+              >
+                Next Page →
+              </button>
+            </div>
+          </div>
+          {/* Right Page Edge */}
+          <div className="w-[40px] h-full bg-gradient-to-l from-gray-200 to-white" />
         </div>
+        {/* Quiz Button */}
+        <button
+          onClick={handleQuizClick}
+          className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 
+                   bg-[#002147] text-white px-8 py-3 rounded-full
+                   hover:bg-[#003166] transition-colors duration-200
+                   shadow-lg hover:shadow-xl"
+        >
+          Take the Quiz
+        </button>
       </div>
     </div>
   );
 };
-
 export default TerminologyPage;
