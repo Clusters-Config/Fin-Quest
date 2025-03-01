@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import VideoCard from "../FinFlux_components/VideoCard";
+import VideoCard from "../FinFlux_components/Videocard.jsx";
 
 const FinFlix = () => {
   const [videos] = useState([
