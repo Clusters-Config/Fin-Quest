@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+import { Apierror } from "../utils/Apierror";
+
+
 
 const profile = new Schema({
     firstname:{
@@ -16,7 +19,7 @@ const profile = new Schema({
       
     },
     phone:{
-        type:Number,
+        type:String,
      
     },
     hobbies:{

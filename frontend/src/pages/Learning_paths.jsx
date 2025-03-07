@@ -175,6 +175,12 @@ const Learning_paths = () => {
   });
 
   useEffect(()=>{
+
+    setprogress(0)
+    console.log(progress)
+  },[progress])
+
+  useEffect(()=>{
     axios.get("http://localhost:4047/finddiscussion")
     .then(res=>{
       let path  = res.data
@@ -297,7 +303,8 @@ const Learning_paths = () => {
       </nav>
 
       <>
-      {progress?
+      {console.log}
+      {username ?
         <> <div className="mt-16">
         <h1 className="text-center text-2xl sm:text-xl mt-10 pt-10 text-[#002147] font-extrabold">
           {username ? `${username.toUpperCase()}'s` : "Yours"} Learning Path
