@@ -313,7 +313,14 @@ const Learning_paths = () => {
     navigate(groupRoute);
   };
 
-  const sampleGroups = [{ name: "Dive In", route: "/ForumPage" }];
+  //const sampleGroups = [{ name: "Dive In", route: "/ForumPage" }];
+  const sampleGroups = [
+    { name: "Investment Banking Basics", members: 28, route: "/ForumPage" },
+    { name: "Personal Finance 101", members: 45, route: "/ForumPage" },
+    { name: "Cryptocurrency & DeFi", members: 32, route: "/ForumPage" },
+    { name: "Financial Planning", members: 19, route: "/ForumPage" },
+    { name: "Stock Market Analysis", members: 56, route: "/ForumPage" },
+  ];
 
   return (
     <div className="px-4 sm:px-6 lg:px-10">
@@ -529,69 +536,83 @@ const Learning_paths = () => {
               </div>
             </div>
 
-
-            {/* Peer-to-Peer Learning Section */}
-            <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold">
+            {/* Peer-to-Peer Learning & Collaboration */}
+            <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold text-center">
               Peer-to-Peer Learning & Collaboration
             </h1>
-            <div className="bg-white w-full max-w-6xl mx-auto rounded-xl mt-6 pb-6 shadow-md">
-              <div className="border border-[#6C757D] rounded-lg mt-4 p-4">
-                {/* Study Groups Section */}
-                <h2 className="text-lg font-bold text-[#002147]">
-                  Engage With Peers
-                </h2>
-                <div className="mt-4 space-y-4">
-                  {sampleGroups.map((group, index) => (
-                    <button
-                      key={index}
-                      className="bg-[#002147] text-white px-4 py-2 rounded-md w-full hover:bg-[#F39C12]"
-                      onClick={() => handleJoinGroup(group.route)}
-                    >
-                      {group.name}
-                    </button>
-                  ))}
+
+            <div className="max-w-6xl mx-auto mt-6">
+              <p className="text-center text-sm text-gray-600">
+                Connect with fellow learners, join study groups, and grow together
+              </p>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                {/* Study Groups */}
+                <div className="bg-white rounded-xl shadow p-6 border">
+                  <h2 className="text-lg font-semibold text-[#002147] mb-4">Study Groups</h2>
+                  <ul className="space-y-3">
+                    {sampleGroups.map((group, index) => (
+                      <li
+                        key={index}
+                        className="flex justify-between items-center border px-4 py-3 rounded-md hover:shadow-sm"
+                      >
+                        <div>
+                          <p className="font-medium text-[#002147]">{group.name}</p>
+                          <p className="text-sm text-gray-500">{group.members} members</p>
+                        </div>
+                        <button
+                          onClick={() => handleJoinGroup(group.route)}
+                          className="text-sm px-3 py-1 bg-[#002147] text-white rounded-md hover:bg-[#003366]"
+                        >
+                          Join
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
 
-                {/* Discussion Section */}
-                <div className="mt-8">
-                  <h2 className="text-lg font-bold text-[#002147]">
-                    Discussion Board
-                  </h2>
+                {/* Discussion Board */}
+                <div className="bg-white rounded-xl shadow p-6 border">
+                  <h2 className="text-lg font-semibold text-[#002147] mb-4">Discussion Board</h2>
                   <textarea
-                    className="w-full p-2 border border-[#6C757D] rounded-md mt-4"
+                    className="w-full border border-gray-300 rounded-md p-3 mb-4 resize-none"
                     rows="4"
-                    placeholder="Post your thoughts or questions here..."
+                    placeholder="Share your thoughts, ask questions, or start a discussion..."
                     value={discussion}
                     onChange={(e) => setDiscussion(e.target.value)}
                   />
                   <button
                     onClick={handlePostDiscussion}
-                    className="bg-[#F39C12] text-[#002147] px-4 py-2 rounded-md mt-4"
+                    className="w-full bg-[#6C7A89] text-white py-2 rounded-md hover:bg-[#5a697b]"
                   >
                     Post Discussion
                   </button>
-                  <div className="mt-6">
-                    <h3 className="text-lg font-semibold text-[#002147]">Comments</h3>
-                    <div className="mt-4 max-h-36 w-6/6 overflow-auto">
-                      {data.map((data, idx) => (
-                        <p key={idx} className="text-sm font-bold text-gray-600 ml-5">
-                          {data.username + ": "}{data.email}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
                 </div>
               </div>
-            </div> </> : <Backdrop
-              sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-              open
-            >
+
+              {/* Recent Discussions */}
+              <div className="bg-white rounded-xl shadow p-6 border mt-6">
+                <h2 className="text-lg font-semibold text-[#002147] mb-4">Recent Discussions</h2>
+                <ul className="space-y-4">
+                  {data.map((user, idx) => (
+                    <li key={idx} className="border rounded-lg p-3">
+                      <p className="font-semibold text-[#002147]">{user.username}</p>
+                      <p className="text-sm text-gray-600">{user.email}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </> : <Backdrop
+            sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
+            open
+          >
             <CircularProgress color="inherit" />
             <h1>{`${" Please wait or login again"}`}</h1>
           </Backdrop>}
       </>
 
-      <footer className="bg-[#002147] text-white py-4 px-6 text-center mt-10 w-full">
+      <footer className="bg-[#002147] text-white py-4 px-6 text-center mt-10 w-screen relative right-10 ">
         <p className="text-sm mt-2">
           &copy; 2025 Fin-Quest. All Rights Reserved.
         </p>

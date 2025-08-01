@@ -97,7 +97,7 @@ function Homepage() {
             Interactive learning platform for students and professionals. Learn financial concepts through quizzes, games, and real-world simulators.
           </p>
           <div className="flex space-x-4">
-            <Link to="/features">
+            <Link to="/Learning_paths">
               <button className="bg-green-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-green-500">Start Learning Free</button>
             </Link>
             <button className="border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-black">Watch Demo</button>
