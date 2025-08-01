@@ -5,7 +5,7 @@ import Game from './pages/Game';
 import Login from './pages/Login-signup';
 import Simulations from './pages/Simulations';
 import Features from './pages/Features';
-import TaxPage from './pages/TaxPage';
+//import TaxPage from './pages/TaxPage';
 import Stories from './pages/Stories';
 import FinFlux from './pages/FinFlux';
 import SideHustleFinder from './pages/SideHustleFinder';
@@ -13,7 +13,7 @@ import Communitys from './pages/Communitys';
 import Chat from './pages/Chat';
 import Signup from './pages/Signup';
 import Financial_Assistant from './pages/Financial_Assistan';
-import StressTracker from './pages/StressTracker';
+//import StressTracker from './pages/StressTracker';
 import { AuthProvider } from "./pages/AuthContext";
 
 // Learning path components
@@ -58,14 +58,14 @@ const App = () => {
           <Route path="/learning_paths" element={<Learning_paths />} />
           <Route path="/game" element={<Game />} />
           <Route path="/simulations" element={<Simulations />} />
-          <Route path="/TaxPage" element={<TaxPage />} />
+          {/* <Route path="/TaxPage" element={<TaxPage />} /> */}
           <Route path="/Stories" element={< Stories />} />
           <Route path="/FinFlux" element={< FinFlux />} />
           <Route path="/SideHustleFinder" element={<  SideHustleFinder />} />
           <Route path="/communitys" element={<Communitys />} />
           <Route path='/chat' element={<Chat />} />
           <Route path="/Financial_Assistant" element={<Financial_Assistant />} />
-          <Route path="/StressTracker" element={< StressTracker />} />
+          {/* <Route path="/StressTracker" element={< StressTracker />} /> */}
           
           <Route path="/TerminologyPage" element={<TerminologyPage />} />
           <Route path="/Credit_Debit" element={<Credit_Debit/>} />

@@ -1,143 +1,266 @@
-import { Link } from "react-router-dom"; 
-import { FaUserCircle } from "react-icons/fa";
-import { useEffect ,useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import {
+  BookOpen,
+  Gamepad2,
+  TrendingUp,
+  Brain,
+  Users,
+  Calculator,
+  Route,
+  Newspaper,
+  Briefcase,
+  WandSparkles,
+  MapPinned,
+  UserCircle,
+  Book,
+  HelpCircle,
+  Video,
+} from "lucide-react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "./AuthContext"
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-
-  
-
-// import { useState } from "react";
-
-
+import { useAuth } from "./AuthContext";
 
 function Homepage() {
   const location = useLocation();
-  const[login,setlogin] = useState(location.state||false)
-  // const backgroundImage = `url(${require('../assets/p1.jpg')})`;
-
-
-  useEffect(()=>{
-    if(login){
-      window.location.reload()
-      setlogin(false)
-      navigate({ state: null });
-    }
-  })
-  
-  const {useremail,setuseremail} = useAuth();
-  const [email ,setEmail] = useState("");
-  const [password ,setpassword] = useState("");
+  const [login, setlogin] = useState(location.state || false);
+  const { useremail, setuseremail } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setpassword] = useState("");
   const navigate = useNavigate();
-  const[showtoast , setshowtoast] = useState(false)
-  const[username,setusername] = useState();
-
-  useEffect(()=>{
-    axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify",{withCredentials: true})
-    .then(res=>{
-      setEmail(res.data?.email),
-      setpassword(res.data?.password)
-      setuseremail(res.data?.email) 
-      setusername(res.data?.username)
-    })
-  })
+  const [showtoast, setshowtoast] = useState(false);
+  const [username, setusername] = useState();
 
   useEffect(() => {
-    if(email){
-    axios.post("http://localhost:4047/login",{email,password})
-    .then(res=>{
-      if(res.data.valid){
-        navigate("/")}
-        if(!showtoast){
+    if (login) {
+      window.location.reload();
+      setlogin(false);
+      navigate({ state: null });
+    }
+  }, [login]);
+
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios.get("http://localhost:4047/verify").then((res) => {
+      setEmail(res.data?.email);
+      setpassword(res.data?.password);
+      setuseremail(res.data?.email);
+      setusername(res.data?.username);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (email) {
+      axios.post("http://localhost:4047/login", { email, password }).then((res) => {
+        if (res.data.valid) {
+          navigate("/");
+        }
+        if (!showtoast) {
           setshowtoast(true);
         }
-    })  
-  }});
-
-
+      });
+    }
+  }, [email, password, navigate, showtoast]);
 
   return (
-    <div className="bg-white min-h-screen flex flex-col">
-      {/* Navigation Bar */}
-      <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
-        <div className="text-[#F39C12] text-2xl font-bold">Fin-Quest</div>
-        <ul className="flex space-x-6">
-          <li>
-            <Link to="/features" className="text-white hover:text-[#F39C12] transition duration-300">
-              Features
-            </Link>
-          </li>
-          <li>
-            {
-            useremail? <button className="text-white hover:text-orange-400 transition-all"><Link to="/ProfilePage">{username}</Link></button> : <Link to="/login" id="loginbtn" className="text-white hover:text-[#F39C12] transition duration-300">
-            {username ? username :"Login"}
-            </Link>}
-            
-          </li>
-          <li>
-            <Link to="/Profile" className="text-white hover:text-[#F39C12] transition duration-300">
-              <FaUserCircle size={24} />
-            </Link>
-         
-          </li>
+    <div className="min-h-screen flex flex-col bg-white ">
+      {/* Navbar */}
+      <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
+        <div className="text-[#002147] text-2xl font-bold">FinLearn</div>
+        <ul className="flex justify-center items-center space-x-6 text-[#002147] text-sm font-medium">
+          <li><Link to="/features" className="flex items-center gap-1 hover:text-[#28A745]"><Book /> Learn</Link></li>
+          <li><Link to="/quiz" className="flex items-center gap-1 hover:text-[#28A745]"><HelpCircle /> Quiz</Link></li>
+          <li><Link to="/Game" className="flex items-center gap-1 hover:text-[#28A745]"><Gamepad2 /> Games</Link></li>
+          <li><Link to="/FinFlux" className="flex items-center gap-1 hover:text-[#28A745]"><Video /> Reels</Link></li>
+          <li><Link to="/Simulations" className="flex items-center gap-1 hover:text-[#28A745]"><Calculator /> Simulator</Link></li>
         </ul>
+        <div className="flex items-center gap-4">
+          {useremail ? (
+            <Link to="/ProfilePage" className="text-[#002147] hover:text-[#F39C12]">{username}</Link>
+          ) : (
+            <Link to="/login" className="text-[#002147] hover:text-[#F39C12]">{username ? username : "Login"}</Link>
+          )}
+          <Link to="/Profile" className="text-[#002147] hover:text-[#F39C12]"><UserCircle size={22} /></Link>
+          <Link to="/signup">
+            <button className="bg-[#002147] text-white px-4 py-2 rounded-lg hover:bg-[#001533]">Sign Up</button>
+          </Link>
+        </div>
       </nav>
 
       {/* Hero Section */}
-      <header className="text-center py-40 sm:py-12 space-y-6" id="bg">
-        <h1 className="text-7xl sm:text-4xl font-bold text-[#002147] ">
-          Learn Finance <br /><bv  />Through <span className="text-[#F39C12] ">Play & Strategy!</span>
-        </h1>
-        <p className="text-xlsm:text-lg sm:py-[10px] py-8 text-[] leading-relaxed max-w-4xl mx-auto">
-          A gamified learning experience that makes financial literacy easy, engaging, and fun!
-        </p>
-        <div className="space-x-4">
-          <Link to="/features">
-            <button className="bg-[#F39C12] text-[#002147] px-6 py-3 sm:my-5 rounded-lg shadow-lg hover:bg-[#e67e22] transition duration-300">
-              Start Your Quest
-            </button>
-          </Link>
+      <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-40 px-8 sm:px-16 md:px-32 overflow-hidden">
+        <div className="max-w-3xl z-10">
+          <h1 className="text-5xl font-bold leading-snug mb-6">
+            Master Your <br />
+            <span className="text-yellow-400">Financial Future</span>
+          </h1>
+          <p className="text-lg mb-6">
+            Interactive learning platform for students and professionals. Learn financial concepts through quizzes, games, and real-world simulators.
+          </p>
+          <div className="flex space-x-4">
+            <Link to="/features">
+              <button className="bg-green-400 text-black px-6 py-3 rounded-lg font-semibold hover:bg-green-500">Start Learning Free</button>
+            </Link>
+            <button className="border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-black">Watch Demo</button>
+          </div>
+          <div className="mt-8 flex space-x-8 text-sm text-gray-200">
+            <div>👥 10K+ Students</div>
+            <div>📘 500+ Concepts</div>
+            <div>✅ 95% Success Rate</div>
+          </div>
         </div>
-      </header>
 
-      {/* Why Choose Fin-Quest */}
-      <section className="text-center bg-[#F8FAFC] py-16">
-        <h2 className="text-3xl font-bold text-[#002147] mb-6">Why Choose Fin-Quest?</h2>
-        <p className="text-[#6C757D] max-w-3xl mx-auto mb-12">
-          We make financial literacy engaging, practical, and accessible to everyone.  
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-20">
-          <div className="bg-white shadow-md p-6 rounded-lg text-center border-t-4 border-[#F39C12]">
-            <h3 className="text-xl font-semibold text-[#002147]">Real-Life Scenarios</h3>
-            <p className="text-[#6C757D] mt-2">
-              Learn through real-world finance case studies. Our lessons draw inspiration from actual events, helping you understand complex financial concepts in a relatable way. You'll gain the skills to handle your own financial decisions confidently and wisely.
-            </p>
+        {/* Portfolio Growth Chart */}
+        <div className="absolute top-32 right-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-8 shadow-xl w-[500px] text-white ">
+          <h3 className="text-xl font-semibold mb-5">📈 Portfolio Growth</h3>
+          <div className="h-40 flex items-end gap-3">
+            {[40, 80, 50, 60, 90, 70].map((h, i) => (
+              <div
+                key={i}
+                className="w-10 rounded-t-lg"
+                style={{
+                  height: `${h + 20}px`,
+                  background: "linear-gradient(to top, #F9D423, #4CAF50)"
+                }}
+              ></div>
+            ))}
           </div>
-          <div className="bg-white shadow-md p-6 rounded-lg text-center border-t-4 border-[#F39C12]">
-            <h3 className="text-xl font-semibold text-[#002147]">Engaging Gameplay</h3>
-            <p className="text-[#6C757D] mt-2">
-              Finance lessons designed like interactive quests. Dive into challenges and puzzles that keep you actively engaged as you learn. Whether you're tracking expenses or building investment strategies, you'll find every task both fun and educational.
-            </p>
+          <div className="mt-5 text-base">
+            <div className="flex justify-between">
+              <span>Progress</span>
+              <span className="text-green-300">Milestone</span>
+              <span className="text-green-500 font-bold">Level Up</span>
+            </div>
           </div>
-          <div className="bg-white shadow-md p-6 rounded-lg text-center border-t-4 border-[#F39C12]">
-            <h3 className="text-xl font-semibold text-[#002147]">Gamified Rewards</h3>
-            <p className="text-[#6C757D] mt-2">
-              Earn badges and points as you learn. Celebrate your milestones and progress with rewards that motivate you to keep learning. The more you complete, the higher your achievements, and the more confident you become in your financial knowledge.
-            </p>
-          </div>
+        </div>
+      </div>
+
+      {/* Powerful Learning Features Section */}
+      <section className="py-16 px-6 bg-white">
+        <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
+          🎯 Powerful Learning Features
+        </h2>
+        <h3 className="text-lg text-center text-gray-600 mb-7">
+          Everything you need to master financial literacy — from basics to advanced concepts.
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {[
+            { path: "/Learning_paths", label: "Learning Path", desc: "Master financial concepts through structured learning paths", icon: <BookOpen className="text-blue-500 w-8 h-8" /> },
+            { path: "/Game", label: "Gamification", desc: "Learn while earning points and badges", icon: <Gamepad2 className="text-purple-500 w-8 h-8" /> },
+            { path: "/Simulations", label: "Real World Simulation", desc: "Practice with real market scenarios", icon: <TrendingUp className="text-green-500 w-8 h-8" /> },
+            { path: "/Chat", label: "AI Driven", desc: "Get personalized financial insights powered by AI", icon: <Brain className="text-red-500 w-8 h-8" /> },
+            { path: "/Communitys", label: "Community", desc: "Connect with fellow finance enthusiasts", icon: <Users className="text-yellow-500 w-8 h-8" /> },
+            // { path: "/TaxPage", label: "Taxes", desc: "Understand and optimize your tax planning", icon: <Calculator className="text-pink-500 w-8 h-8" /> },
+            { path: "/Stories", label: "Financial Journeys", desc: "Track your progress and set financial goals", icon: <Route className="text-blue-500 w-8 h-8" /> },
+            { path: "/FinFlux", label: "FinFlux", desc: "Stay updated with market trends and analysis", icon: <Newspaper className="text-orange-500 w-8 h-8" /> },
+            { path: "/SideHustleFinder", label: "Side Hustle", desc: "Discover and manage additional income streams", icon: <Briefcase className="text-teal-500 w-8 h-8" /> },
+            { path: "/Financial_Assistant", label: "Financial Assistant", desc: "Uncover and grow multiple income sources", icon: <WandSparkles className="text-teal-500 w-8 h-8" /> },
+            // { path: "/StressTracker", label: "Personalized Financial Roadmap", desc: "Interactive tool for financial stress.", icon: <MapPinned className="text-blue-500 w-8 h-8" /> },
+          ].map((feature, index) => (
+            <Link key={index} to={feature.path} className="block bg-white text-black py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300 text-center border border-gray-300">
+              <div className="flex flex-col items-center">
+                {feature.icon}
+                <h3 className="text-lg font-semibold mt-3">{feature.label}</h3>
+                <p className="text-gray-600 text-sm mt-2">{feature.desc}</p>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
+       <section className="py-20 px-6 bg-gray-50">
+  <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
+    👥 Learning Paths for Everyone
+  </h2>
+  <p className="text-lg text-center text-gray-600 mb-10">
+    Tailored content and experiences designed for different life stages and financial goals
+  </p>
+
+  <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    
+    {/* School Students (Blue Theme) */}
+    <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#002147] to-[#1a3a75] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
+      <div className="relative">
+        <div className="flex items-center mb-4">
+          <div className="bg-gradient-to-br from-[#002147] to-[#1a3a75] text-white p-3 rounded-full">
+            📘
+          </div>
+          <h3 className="ml-4 text-xl font-semibold text-[#002147]">School Students</h3>
+        </div>
+        <p className="text-gray-600 mb-4">
+          Build a strong foundation in financial literacy with age-appropriate content and interactive learning modules.
+        </p>
+        <ul className="text-sm text-gray-700 space-y-2 mb-4">
+          <li>📌 Basic Money Management</li>
+          <li>📌 Savings & Budgeting</li>
+          <li>📌 Investment Basics</li>
+          <li>📌 Financial Goal Setting</li>
+        </ul>
+        <button className="mt-2 w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#001533]">
+          Start Learning Path →
+        </button>
+      </div>
+    </div>
+
+    {/* College Students (Green to Gold Theme) */}
+    <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
+      <div className="relative">
+        <div className="flex items-center mb-4">
+          <div className="bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] text-white p-3 rounded-full">
+            🎓
+          </div>
+          <h3 className="ml-4 text-xl font-semibold text-[#1e7d4d]">College Students</h3>
+        </div>
+        <p className="text-gray-600 mb-4">
+          Prepare for financial independence with advanced concepts, real-world scenarios, and career-focused learning.
+        </p>
+        <ul className="text-sm text-gray-700 space-y-2 mb-4">
+          <li>📌 Student Loans</li>
+          <li>📌 Credit Management</li>
+          <li>📌 Career Planning</li>
+          <li>📌 Advanced Investing</li>
+        </ul>
+        <button className="mt-2 w-full bg-[#1e7d4d] text-white py-2 rounded-lg hover:bg-[#15663e]">
+          Start Learning Path →
+        </button>
+      </div>
+    </div>
+
+    {/* Working Professionals (Gold to Green Theme) */}
+    <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
+      <div className="relative">
+        <div className="flex items-center mb-4">
+          <div className="bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] text-white p-3 rounded-full">
+            💼
+          </div>
+          <h3 className="ml-4 text-xl font-semibold text-[#ffcc00]">Working Professionals</h3>
+        </div>
+        <p className="text-gray-600 mb-4">
+          Enhance your financial expertise with sophisticated tools, market analysis, and wealth-building strategies.
+        </p>
+        <ul className="text-sm text-gray-700 space-y-2 mb-4">
+          <li>📌 Portfolio Management</li>
+          <li>📌 Tax Optimization</li>
+          <li>📌 Retirement Planning</li>
+          <li>📌 Risk Assessment</li>
+        </ul>
+        <button className="mt-2 w-full bg-[#ffcc00] text-black py-2 rounded-lg hover:bg-[#e6b800]">
+          Start Learning Path →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
       {/* Footer */}
-      <footer className="bg-[#002147] text-white py-4 px-6 text-center">
-        <p className="text-lg italic">"Empowering financial literacy through gamification."</p>
-        <p className="text-sm mt-2">&copy; 2025 Fin-Quest. All Rights Reserved.</p>
+      <footer className="bg-[#002147] text-white text-center py-4">
+        <p className="italic">"Empowering financial literacy through gamification."</p>
+        <p className="text-sm mt-1">&copy; 2025 FinQuest. All Rights Reserved.</p>
       </footer>
-
-      
     </div>
   );
 }
