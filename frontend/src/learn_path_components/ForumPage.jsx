@@ -89,6 +89,7 @@ function ForumPage() {
             { name: "Webinars", path: "/Webinar" },
             { name: "Experts", path: "/Experts" },
             { name: "Tools", path: "/Tools" },
+            { name: "Discussionboard", path: "/Discussionboard" },
 
           ].map((tab) => (
             <button
