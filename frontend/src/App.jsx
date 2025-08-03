@@ -6,7 +6,7 @@ import Login from './pages/Login-signup';
 import Simulations from './pages/Simulations';
 import Features from './pages/Features';
 //import TaxPage from './pages/TaxPage';
-import Stories from './pages/Stories';
+//import Stories from './pages/Stories';
 import FinFlux from './pages/FinFlux';
 import SideHustleFinder from './pages/SideHustleFinder';
 import Communitys from './pages/Communitys';
@@ -16,6 +16,7 @@ import Financial_Assistant from './pages/Financial_Assistan';
 import Webinar from './learn_path_components/forum_components/Webinar';
 import Experts from './learn_path_components/forum_components/Experts';
 import Tools from './learn_path_components/forum_components/Tools';
+import Discussionboard from './learn_path_components/forum_components/Discussionboard';
 import { AuthProvider } from "./pages/AuthContext";
 
 // Learning path components
@@ -61,7 +62,7 @@ const App = () => {
             <Route path="/game" element={<Game />} />
             <Route path="/simulations" element={<Simulations />} />
             <Route path="/Webinar" element={<Webinar />} />
-            <Route path="/Stories" element={< Stories />} />
+            {/* <Route path="/Stories" element={< Stories />} /> */}
             <Route path="/FinFlux" element={< FinFlux />} />
             <Route path="/SideHustleFinder" element={<  SideHustleFinder />} />
             <Route path="/communitys" element={<Communitys />} />
@@ -82,7 +83,7 @@ const App = () => {
             <Route path="/StockMarketBasics" element={<StockMarketBasics />} />
             <Route path="/Finance_Principles" element={<Finance_Principles />} />
             <Route path="/Goals_Finance" element={<Goals_Finance />} />
-
+            <Route path="/Discussionboard" element={<Discussionboard/>} />
 
             <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}
             <Route path="/result" element={<ResultPage />} />

@@ -151,7 +151,7 @@ function Homepage() {
             { path: "/Chat", label: "AI Driven", desc: "Get personalized financial insights powered by AI", icon: <Brain className="text-red-500 w-8 h-8" /> },
             { path: "/Communitys", label: "Community", desc: "Connect with fellow finance enthusiasts", icon: <Users className="text-yellow-500 w-8 h-8" /> },
             // { path: "/TaxPage", label: "Taxes", desc: "Understand and optimize your tax planning", icon: <Calculator className="text-pink-500 w-8 h-8" /> },
-            { path: "/Stories", label: "Financial Journeys", desc: "Track your progress and set financial goals", icon: <Route className="text-blue-500 w-8 h-8" /> },
+            { path: "/ForumPage", label: "Finance Forum", desc: "Professional peer-to-peer collaboration platform for finance enthusiasts", icon: <Route className="text-blue-500 w-8 h-8" /> },
             { path: "/FinFlux", label: "FinFlux", desc: "Stay updated with market trends and analysis", icon: <Newspaper className="text-orange-500 w-8 h-8" /> },
             { path: "/SideHustleFinder", label: "Side Hustle", desc: "Discover and manage additional income streams", icon: <Briefcase className="text-teal-500 w-8 h-8" /> },
             { path: "/Financial_Assistant", label: "Financial Assistant", desc: "Uncover and grow multiple income sources", icon: <WandSparkles className="text-teal-500 w-8 h-8" /> },
