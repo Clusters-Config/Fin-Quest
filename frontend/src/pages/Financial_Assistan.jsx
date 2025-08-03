@@ -19,7 +19,7 @@ import {
   Legend,
   ResponsiveContainer
 } from 'recharts';
-import { marked } from "marked";
+import {marked} from 'marked';
 
 // New functional Rule Calculator component with AI
 const RuleCalculator = () => {
@@ -216,20 +216,21 @@ const RuleCalculator = () => {
 // New Trends Analysis component with Charts
 const Trends = () => {
   const [data, setData] = useState("");
-  const [parsedData, setParsedData] = useState([]);
+  const [parsedData, setParsedData] = useState(null);
   const [error, setError] = useState(null);
 
   // Parse the raw text data into a format for the charts
   const parseData = () => {
-    if (!data) {
+    if (!data.trim()) {
       setError("Please paste your financial data to analyze.");
-      setParsedData([]);
+      setParsedData(null);
       return;
     }
     setError(null);
-    const lines = data.split('\n');
-    const parsed = [];
+    const lines = data.split('\n').filter(line => line.trim() !== '');
+    const spendingOverTime = [];
     const categoryTotals = {};
+    let hasValidData = false;
 
     lines.forEach(line => {
       const parts = line.split(' - ');
@@ -237,18 +238,25 @@ const Trends = () => {
         const [date, category, amountStr] = parts;
         const amount = parseFloat(amountStr.replace(/[$,]/g, ''));
         if (!isNaN(amount)) {
-          parsed.push({ date, category, amount });
+          spendingOverTime.push({ date, category, amount });
           categoryTotals[category] = (categoryTotals[category] || 0) + amount;
+          hasValidData = true;
         }
       }
     });
 
-    const categories = Object.keys(categoryTotals).map(category => ({
+    if (!hasValidData) {
+      setError("The data format is incorrect. Please use 'Date - Category - Amount' for each line.");
+      setParsedData(null);
+      return;
+    }
+
+    const spendingByCategory = Object.keys(categoryTotals).map(category => ({
       name: category,
       value: categoryTotals[category]
     }));
 
-    setParsedData({ spendingOverTime: parsed, spendingByCategory: categories });
+    setParsedData({ spendingOverTime, spendingByCategory });
   };
 
   return (
@@ -286,7 +294,7 @@ const Trends = () => {
         </div>
       )}
 
-      {parsedData.spendingOverTime && parsedData.spendingOverTime.length > 0 && (
+      {parsedData && parsedData.spendingOverTime.length > 0 && (
         <div className="mt-6 p-6 bg-white rounded-lg border border-gray-200 shadow-inner">
           <h3 className="text-xl font-bold mb-4 text-gray-800">Spending Over Time</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -562,6 +570,7 @@ const FinancialDashboard = () => {
           </div>
         </div>
       )}
+      {/* <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> */}
       <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
     </div>
   );
