@@ -96,8 +96,8 @@ function ForumPage() {
               key={tab.name}
               onClick={() => navigate(tab.path)}
               className={`px-4 py-2 rounded-md border text-gray-600 bg-gray-50 hover:border-b-2 hover:border-blue-600 transition duration-200 ${window.location.pathname === tab.path
-                  ? "border-b-2 border-blue-900 text-blue-900 bg-gray-100"
-                  : ""
+                ? "border-b-2 border-blue-900 text-blue-900 bg-gray-100"
+                : ""
                 }`}
             >
               {tab.name}
@@ -133,10 +133,10 @@ function ForumPage() {
                 </div>
                 <span
                   className={`text-xs font-semibold px-2 py-1 rounded-full ${group.tag === "High"
-                      ? "bg-green-100 text-green-600"
-                      : group.tag === "Very High"
-                        ? "bg-red-100 text-red-500"
-                        : "bg-yellow-100 text-yellow-600"
+                    ? "bg-green-100 text-green-600"
+                    : group.tag === "Very High"
+                      ? "bg-red-100 text-red-500"
+                      : "bg-yellow-100 text-yellow-600"
                     }`}
                 >
                   {group.tag}
@@ -150,9 +150,13 @@ function ForumPage() {
               <p className="text-sm text-gray-500 mb-4">
                 {group.experts} experts available
               </p>
-              <button className="w-full py-2 bg-blue-900 text-white rounded hover:bg-blue-700 transition">
+              <button
+                className="w-full py-2 bg-blue-900 text-white rounded hover:bg-blue-700 transition"
+                onClick={() => navigate("/Group")}
+              >
                 Join Group
               </button>
+
             </div>
           ))}
         </div>

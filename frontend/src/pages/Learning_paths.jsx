@@ -315,7 +315,7 @@ const Learning_paths = () => {
 
   //const sampleGroups = [{ name: "Dive In", route: "/ForumPage" }];
   const sampleGroups = [
-    { name: "Investment Banking Basics", members: 28, route: "/ForumPage" },
+    { name: "Investment Banking Basics", members: 28, route: "/Group" },
     { name: "Personal Finance 101", members: 45, route: "/ForumPage" },
     { name: "Cryptocurrency & DeFi", members: 32, route: "/ForumPage" },
     { name: "Financial Planning", members: 19, route: "/ForumPage" },
