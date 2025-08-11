@@ -18,7 +18,7 @@ import Experts from './learn_path_components/forum_components/Experts';
 import Tools from './learn_path_components/forum_components/Tools';
 import Discussionboard from './learn_path_components/forum_components/Discussionboard';
 import { AuthProvider } from "./pages/AuthContext";
-
+import Group from './learn_path_components/forum_components/Group';
 // Learning path components
 import TerminologyPage from './learn_path_components/TerminologyPage';
 import Credit_Debit from './learn_path_components/Credit_Debit';
@@ -34,7 +34,7 @@ import StockMarketBasics from './learn_path_components/StockMarketBasics';
 import Finance_Principles from './learn_path_components/Finance_Principles';
 import Goals_Finance from './learn_path_components/Goals_Finance';
 import GlobalChat from "./learn_path_components/forum_components/GlobalChat"
-
+import Quiz from './pages/Quiz';
 import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
 import ForumPage from "./learn_path_components/ForumPage";
@@ -62,7 +62,7 @@ const App = () => {
             <Route path="/game" element={<Game />} />
             <Route path="/simulations" element={<Simulations />} />
             <Route path="/Webinar" element={<Webinar />} />
-            {/* <Route path="/Stories" element={< Stories />} /> */}
+            <Route path="/Group" element={< Group />} />
             <Route path="/FinFlux" element={< FinFlux />} />
             <Route path="/SideHustleFinder" element={<  SideHustleFinder />} />
             <Route path="/communitys" element={<Communitys />} />
@@ -84,12 +84,11 @@ const App = () => {
             <Route path="/Finance_Principles" element={<Finance_Principles />} />
             <Route path="/Goals_Finance" element={<Goals_Finance />} />
             <Route path="/Discussionboard" element={<Discussionboard/>} />
-
             <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}
             <Route path="/result" element={<ResultPage />} />
             <Route path="/ForumPage" element={<ForumPage />} />
             <Route path="/Profile" element={<Profile />} />
-
+            <Route path="/Quiz" element={< Quiz />} />
 
             <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
             <Route path="/Stock" element={<Stock />} />

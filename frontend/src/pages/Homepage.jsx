@@ -67,8 +67,8 @@ function Homepage() {
       <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
         <div className="text-[#002147] text-2xl font-bold">FinLearn</div>
         <ul className="flex justify-center items-center space-x-6 text-[#002147] text-sm font-medium">
-          <li><Link to="/features" className="flex items-center gap-1 hover:text-[#28A745]"><Book /> Learn</Link></li>
-          <li><Link to="/quiz" className="flex items-center gap-1 hover:text-[#28A745]"><HelpCircle /> Quiz</Link></li>
+          <li><Link to="/Learning_Paths" className="flex items-center gap-1 hover:text-[#28A745]"><Book /> Learn</Link></li>
+          <li><Link to="/Quiz" className="flex items-center gap-1 hover:text-[#28A745]"><HelpCircle /> Quiz</Link></li>
           <li><Link to="/Game" className="flex items-center gap-1 hover:text-[#28A745]"><Gamepad2 /> Games</Link></li>
           <li><Link to="/FinFlux" className="flex items-center gap-1 hover:text-[#28A745]"><Video /> Reels</Link></li>
           <li><Link to="/Simulations" className="flex items-center gap-1 hover:text-[#28A745]"><Calculator /> Simulator</Link></li>

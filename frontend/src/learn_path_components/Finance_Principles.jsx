@@ -1,170 +1,215 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const FinancePrinciple = () => {
   const [cashOutlay, setCashOutlay] = useState("");
   const [cashBenefits, setCashBenefits] = useState("");
   const [discountRate, setDiscountRate] = useState("");
-  const [years, setYears] = useState("");  // Missing semicolon here
+  const [years, setYears] = useState("");
   const [npv, setNpv] = useState(null);
 
   const page = "resultpage";
-  const path = "path1"
-  const mods = "mod1"
-  const type = "finance"
+  const path = "path1";
+  const mods = "mod1";
+  const type = "finance";
 
-  // Calculate NPV using the provided formula
+  const navigate = useNavigate();
+
+  // Calculate NPV
   const calculateNPV = () => {
     if (cashOutlay && cashBenefits && discountRate && years) {
-      const cashBenefitsArray = cashBenefits.split(",").map(Number); // Convert string to an array of numbers
-
+      const cashBenefitsArray = cashBenefits.split(",").map(Number);
       let presentValue = 0;
       for (let i = 0; i < cashBenefitsArray.length; i++) {
         presentValue += cashBenefitsArray[i] / Math.pow(1 + discountRate / 100, i + 1);
       }
-
       const npvResult = presentValue - parseFloat(cashOutlay);
       setNpv(npvResult);
     }
   };
 
-  const navigate = useNavigate();
-
   const handleQuizRedirect = () => {
-    navigate("/QuizApp/Finance_Principles",{state:{page:page,path:path,mods:mods,type:type}}); // Replace with your actual quiz route
+    navigate("/QuizApp/Finance_Principles", {
+      state: { page, path, mods, type }
+    });
   };
 
-  return (
-    <div className="p-6 bg-gradient-to-r from-[#F4F4F4] to-[#F8FAFC] min-h-screen">
-      {/* Page Title */}
-      <h1 className="text-4xl font-extrabold text-[#002147] text-center my-6">
-        The Fundamental Principle of Finance
-      </h1>
-
-      {/* Content Section */}
-      <div className="bg-white p-8 rounded-lg shadow-2xl max-w-5xl mx-auto">
-        {/* Introduction */}
-        <section className="mb-8">
-          <h2 className="text-3xl font-semibold text-[#002147]">Understanding the NPV Calculation</h2>
-          <p className="text-[#6C757D] mt-3">
+  // Content pages (book style)
+  const contentSections = [
+    {
+      title: "The Fundamental Principle of Finance",
+      content: (
+        <>
+          <p className="text-gray-600 leading-relaxed mb-6">
             A business proposal raises the value of the firm only if the present value of the future stream of net cash benefits
             exceeds the initial outlay. The Net Present Value (NPV) helps determine this by comparing the present value of future
             cash inflows with the initial investment required.
           </p>
-
-          {/* Additional Information */}
-          <p className="text-[#6C757D] mt-6">
-            The key question that you must ask before making a business decision is: will this decision raise the market value of the firm? 
-            To answer this, we turn to the fundamental principle of finance. A business proposal—whether it is a new investment, an acquisition of another company, 
-            or a restructuring initiative—raises the value of the firm only if the present value of the future stream of net cash benefits expected from the proposal 
-            is greater than the initial cash outlay required to implement the proposal.
+          <p className="text-gray-600 leading-relaxed mb-6">
+            The key question to ask before making a business decision is: will this decision raise the market value of the firm?
+            This principle applies whether it’s a new investment, acquisition, or restructuring. The value increases if the present
+            value of benefits exceeds the cost.
           </p>
-
-          <p className="text-[#6C757D] mt-3">
-            The difference between the present value of future cash benefits and the initial outlay represents the <strong>Net Present Value (NPV)</strong> of the proposal:
-            <br />
-            <code className="bg-[#f1f1f1] p-2 rounded-md">NPV = Present Value of Future Cash Benefits − Initial Cash Outlay</code>
-          </p>
-
-          <p className="text-[#6C757D] mt-3">
-            Note that the costs and benefits of a business proposal must be measured in cash. Investors, who finance a proposal, invest cash and are interested in receiving cash returns.
-          </p>
-
-          <p className="text-[#6C757D] mt-3">
-            Understanding this principle helps guide business decisions to ensure that investments will contribute positively to the firm’s value.
-          </p>
-
-          <p className="text-[#6C757D] mt-3">
+        </>
+      )
+    },
+    {
+      title: "NPV Formula and Meaning",
+      content: (
+        <>
+          <p className="text-gray-600 leading-relaxed mb-4">
             The formula for NPV is:
-            <br />
-            <code className="bg-[#f1f1f1] p-2 rounded-md">NPV = ∑(Cash Benefit / (1 + Discount Rate) ^ Year) - Initial Outlay</code>
-            <br />
-            Where:
-            <ul className="list-disc list-inside mt-3 text-[#6C757D]">
-              <li><strong>Cash Benefits</strong>: The expected cash inflows from the project over the years.</li>
-              <li><strong>Discount Rate</strong>: The rate used to discount future cash inflows to their present value. This reflects the time value of money and risk.</li>
-              <li><strong>Initial Outlay</strong>: The upfront investment required to start the project.</li>
-            </ul>
-            <p className="mt-3">
-              If the NPV is positive, the proposal is expected to increase the firm’s value. If it’s negative, it’s expected to decrease the value.
-            </p>
-        </p>
-        </section>
-
-        {/* NPV Input Fields */}
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold text-[#002147]">Enter Proposal Details</h2>
-          
-          {/* Cash Outlay */}
-          <div className="mt-4">
-            <label className="text-[#6C757D]">Initial Cash Outlay (₹):</label>
-            <input
-              type="number"
-              value={cashOutlay}
-              onChange={(e) => setCashOutlay(e.target.value)}
-              className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
-            />
+          </p>
+          <pre className="bg-gray-50 p-4 rounded-lg mb-6 overflow-x-auto text-sm font-mono">
+{`NPV = ∑(Cash Benefit / (1 + Discount Rate) ^ Year) - Initial Outlay`}
+          </pre>
+          <ul className="list-disc ml-6 mb-6 text-gray-600 space-y-2">
+            <li><strong>Cash Benefits</strong>: Expected inflows from the project.</li>
+            <li><strong>Discount Rate</strong>: Rate to discount future inflows to present value.</li>
+            <li><strong>Initial Outlay</strong>: Upfront investment required.</li>
+          </ul>
+          <p className="text-gray-600 leading-relaxed">
+            If the NPV is positive, the proposal is expected to increase the firm’s value. A negative NPV indicates a potential decrease.
+          </p>
+        </>
+      )
+    },
+    {
+      title: "Calculate Your NPV",
+      content: (
+        <>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-gray-600">Initial Cash Outlay (₹):</label>
+              <input
+                type="number"
+                value={cashOutlay}
+                onChange={(e) => setCashOutlay(e.target.value)}
+                className="border border-gray-300 p-2 rounded-lg w-full"
+              />
+            </div>
+            <div>
+              <label className="block text-gray-600">Future Cash Benefits (comma separated):</label>
+              <input
+                type="text"
+                value={cashBenefits}
+                onChange={(e) => setCashBenefits(e.target.value)}
+                className="border border-gray-300 p-2 rounded-lg w-full"
+                placeholder="e.g. 5000, 6000, 7000, 8000"
+              />
+            </div>
+            <div>
+              <label className="block text-gray-600">Discount Rate (%):</label>
+              <input
+                type="number"
+                value={discountRate}
+                onChange={(e) => setDiscountRate(e.target.value)}
+                className="border border-gray-300 p-2 rounded-lg w-full"
+              />
+            </div>
+            <div>
+              <label className="block text-gray-600">Number of Years:</label>
+              <input
+                type="number"
+                value={years}
+                onChange={(e) => setYears(e.target.value)}
+                className="border border-gray-300 p-2 rounded-lg w-full"
+              />
+            </div>
+            <button
+              onClick={calculateNPV}
+              className="bg-[#F39C12] text-white px-6 py-2 rounded-lg hover:bg-[#F1C40F] transition-colors duration-200"
+            >
+              Calculate NPV
+            </button>
+            {npv !== null && (
+              <div className="mt-4 text-lg text-gray-600">
+                Net Present Value (NPV): ₹{npv.toFixed(2)}
+              </div>
+            )}
           </div>
+        </>
+      )
+    }
+  ];
 
-          {/* Cash Benefits */}
-          <div className="mt-4">
-            <label className="text-[#6C757D]">Future Cash Benefits (Comma Separated):</label>
-            <input
-              type="text"
-              value={cashBenefits}
-              onChange={(e) => setCashBenefits(e.target.value)}
-              className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
-              placeholder="e.g. 5000, 6000, 7000, 8000"
-            />
+  const [currentPage, setCurrentPage] = useState(0);
+
+  return (
+    <div className="min-h-screen bg-[#F4F4F5] p-8 flex justify-center items-center">
+      <div className="w-full max-w-[1200px] aspect-[3/2] relative">
+        {/* Book Container */}
+        <div className="absolute inset-0 flex bg-white rounded-lg shadow-2xl overflow-hidden">
+          {/* Left Page Edge */}
+          <div className="w-[80px] h-full bg-gradient-to-r from-gray-200 to-white">
+            <div className="h-full w-1/2 bg-gradient-to-r from-gray-300 to-transparent" />
           </div>
-
-          {/* Discount Rate */}
-          <div className="mt-4">
-            <label className="text-[#6C757D]">Discount Rate (%):</label>
-            <input
-              type="number"
-              value={discountRate}
-              onChange={(e) => setDiscountRate(e.target.value)}
-              className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
-            />
+          {/* Main Content */}
+          <div className="flex-1 p-12 relative">
+            {/* Header */}
+            <div className="text-center mb-8 border-b pb-4">
+              <h1 className="text-3xl font-serif text-gray-800">Fundamental Principle of Finance</h1>
+              <p className="text-sm text-gray-500 mt-2">Understanding NPV</p>
+            </div>
+            {/* Page Content with Animation */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPage}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="h-[calc(100%-160px)] overflow-y-auto pr-4"
+              >
+                <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+                  {contentSections[currentPage].title}
+                </h2>
+                {contentSections[currentPage].content}
+              </motion.div>
+            </AnimatePresence>
+            {/* Navigation */}
+            <div className="absolute bottom-8 left-8 right-8 flex justify-between items-center">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
+                disabled={currentPage === 0}
+                className={`px-4 py-2 text-sm rounded ${
+                  currentPage === 0
+                    ? "text-gray-300 cursor-not-allowed"
+                    : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                }`}
+              >
+                ← Previous Page
+              </button>
+              <span className="text-sm text-gray-500">
+                Page {currentPage + 1} of {contentSections.length}
+              </span>
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(contentSections.length - 1, p + 1))}
+                disabled={currentPage === contentSections.length - 1}
+                className={`px-4 py-2 text-sm rounded ${
+                  currentPage === contentSections.length - 1
+                    ? "text-gray-300 cursor-not-allowed"
+                    : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                }`}
+              >
+                Next Page →
+              </button>
+            </div>
           </div>
-
-          {/* Years */}
-          <div className="mt-4">
-            <label className="text-[#6C757D]">Number of Years:</label>
-            <input
-              type="number"
-              value={years}
-              onChange={(e) => setYears(e.target.value)}
-              className="border-2 border-[#6C757D] p-2 rounded-lg w-full mt-2"
-            />
-          </div>
-
-          {/* Calculate NPV */}
-          <button
-            onClick={calculateNPV}
-            className="mt-4 bg-[#F39C12] hover:bg-[#A8DADC] text-white px-6 py-2 rounded-lg font-bold"
-          >
-            Calculate NPV
-          </button>
-        </section>
-
-        {/* Display NPV */}
-        {npv !== null && (
-          <div className="mt-4 text-lg text-[#6C757D]">
-            Net Present Value (NPV): ₹{npv.toFixed(2)}
-          </div>
-        )}
-
-        {/* Quiz Button */}
-        <div className="text-center mt-8">
-          <button
-            onClick={handleQuizRedirect}
-            className="bg-[#F39C12] hover:bg-[#A8DADC] text-white px-6 py-3 rounded-lg font-bold text-xl"
-          >
-            Take the Quiz to Test Your Knowledge!
-          </button>
+          {/* Right Page Edge */}
+          <div className="w-[40px] h-full bg-gradient-to-l from-gray-200 to-white" />
         </div>
+        {/* Quiz Button */}
+        <button
+          onClick={handleQuizRedirect}
+          className="absolute -bottom-16 left-1/2 transform -translate-x-1/2 
+                   bg-[#F39C12] text-white px-8 py-3 rounded-full
+                   hover:bg-[#F1C40F] transition-colors duration-200
+                   shadow-lg hover:shadow-xl"
+        >
+          Take the Finance Principles Quiz
+        </button>
       </div>
     </div>
   );
