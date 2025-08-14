@@ -177,11 +177,11 @@ const Learning_paths = () => {
     );
   });
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    setprogress(0)
-    console.log(progress)
-  }, [progress])
+  //   setprogress(0)
+  //   console.log(progress)
+  // }, [progress])
 
   useEffect(() => {
     axios.get("http://localhost:4047/finddiscussion")
