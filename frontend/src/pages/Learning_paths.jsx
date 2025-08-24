@@ -345,7 +345,7 @@ const Learning_paths = () => {
         </div>
       </div>
       <>
-        {console.log}
+        {/* {console.log} */}
         {username ?
           <> <div className="mt-16">
             <h1 className="text-center text-2xl sm:text-xl mt- pt-6 text-[#002147] font-extrabold">

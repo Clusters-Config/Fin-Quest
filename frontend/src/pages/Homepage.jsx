@@ -71,7 +71,6 @@ function Homepage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white ">
-      {/* Navbar */}
       <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
          <div className="flex items-center space-x-2 text-[#002147]">
           <img 

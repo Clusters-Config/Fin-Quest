@@ -35,7 +35,7 @@ const userlogin = AsyncHandler(async (req, res) => {
   const dob = finduser?.profile[0]?.dob;
   const phone = finduser?.profile[0]?.phone;
   const hobbies = finduser?.profile[0]?.hobbies;
-  console.log(_id)
+  // console.log(_id)
   const accessToken = jwt.sign(
     { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies, id:_id},
     "json-access-token",
