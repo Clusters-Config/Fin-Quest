@@ -73,7 +73,14 @@ function Homepage() {
     <div className="min-h-screen flex flex-col bg-white ">
       {/* Navbar */}
       <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
-        <div className="text-[#002147] text-2xl font-bold">FinQuest</div>
+         <div className="flex items-center space-x-2 text-[#002147]">
+          <img 
+            src={logo}
+            alt="FinQuest Logo"
+            className="w-12 h-12 rounded-full drop-shadow-lg"
+          />
+          <span className="text-2xl font-bold">FinQuest</span>
+        </div>
         <ul className="flex justify-center items-center space-x-6 text-[#002147] text-sm font-medium">
           <li><Link to="/Learning_Paths" className="flex items-center gap-1 hover:text-[#28A745]"><Book /> Learn</Link></li>
           <li><Link to="/Quiz" className="flex items-center gap-1 hover:text-[#28A745]"><HelpCircle /> Quiz</Link></li>
