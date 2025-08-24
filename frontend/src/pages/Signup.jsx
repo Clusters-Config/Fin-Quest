@@ -163,12 +163,15 @@ function Signup() {
                          bg-white/80 shadow-sm outline-none transition"
               defaultValue="Student"
             >
-              <option value="Financial Analyst">Financial Analyst</option>
-              <option value="Investment Banker">Investment Banker</option>
-              <option value="Risk Manager">Risk Manager</option>
-              <option value="Financial Software Developer">Financial Software Developer</option>
-              <option value="Quantitative Analyst">Quantitative Analyst</option>
+              <option value="Student">Student</option>
+              <option value="Financial-Analyst">Financial Analyst</option>
+              <option value="Investment-Banker">Investment Banker</option>
+              <option value="Risk-Manager">Risk Manager</option>
+              <option value="Financial-Software-Developer">Financial Software Developer</option>
+              <option value="Quantitative-Analyst">Quantitative Analyst</option>
               <option value="Accountant">Accountant</option>
+              <option value="Other">Other</option>
+
             </select>
 
             {/* CTA */}
