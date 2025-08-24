@@ -3,6 +3,8 @@ import ChatForm from "../components/ChatForm.jsx";
 import { useEffect, useRef, useState } from "react";
 import ChatMessage from "../components/ChatMessage.jsx";
 import React from "react";
+// import {Bot} from "lucide-react";
+
 
 function Chat() {
     const [chatHistory, setChatHistory] = useState([]);
@@ -47,7 +49,10 @@ function Chat() {
   
   
     return (
+
       <div className="container">
+              {/* <a href="#" aria-label="Twitter"><Bot size={20} className="hover:text-green-400 transition-colors" /></a> */}
+
         <div className="chatbot-popup">
           {/* Chatbot Header */}
           <div className="chat-header">

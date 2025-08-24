@@ -19,11 +19,13 @@ import {
   Linkedin,
   Twitter,
   Youtube,
+  Bot,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
+
 
 
 function Homepage() {
@@ -260,7 +262,17 @@ function Homepage() {
   </div>
 </section>
 
+ <a href="#" className="fixed bottom-6 right-6 z-50 transition-transform duration-300 transform hover:scale-110">
 
+        <Bot 
+
+          size={56} 
+
+          className="bg-[#002147] text-white rounded-full p-3 shadow-lg hover:bg-[#001533] transition-colors" 
+
+        />
+
+      </a>
 
       {/* Footer */}
       <footer className="bg-[#002147] text-gray-300 py-12 px-6">
@@ -324,6 +336,8 @@ function Homepage() {
           
         </div>
       </footer>
+
+
     </div>
   );
 }
