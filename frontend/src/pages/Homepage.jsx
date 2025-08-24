@@ -277,7 +277,7 @@ function Homepage() {
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">FinQuest</h3>
             <p className="text-sm text-justify">
-              Empowering financial literacy through interactive and engaging educational experiences for all students by applying through Personalized Learning Paths.
+              FinQuest brings financial wisdom alive through personalized learning paths for students, turning money skills into lifelong confidence.
             </p>
             <div className="flex space-x-4 mt-4 text-white">
               <a href="#" aria-label="Github"><Youtube size={20} className="hover:text-green-400 transition-colors" /></a>
