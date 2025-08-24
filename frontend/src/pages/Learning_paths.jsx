@@ -540,13 +540,13 @@ const Learning_paths = () => {
             <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold text-center">
               Peer-to-Peer Learning & Collaboration
             </h1>
-             
+
             <div className="max-w-6xl mx-auto mt-6">
               <p className="text-center text-sm text-gray-600">
                 Connect with fellow learners, join study groups, and grow together
               </p>
-              
-              
+
+
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
                 {/* Study Groups */}

@@ -3,7 +3,7 @@ import { Apierror } from "../utils/Apierror.js";
 import { AsyncHandler } from "../utils/AsyncHandler.js";
 
 const Signup = AsyncHandler(async (req,res)=>{
-    const{username,email,password} = req.body;
+    const{username,email,password, role} = req.body;
 
     if([username,email,password].some((exist)=> exist.trim() === ""))
         throw new Apierror(404,"All fields required");
@@ -16,7 +16,8 @@ const Signup = AsyncHandler(async (req,res)=>{
     let newSignup = await  new SignupSchema({
         username,
         email,
-        password
+        password,
+        role:role
     });
 
     await newSignup.save();
@@ -24,7 +25,6 @@ const Signup = AsyncHandler(async (req,res)=>{
     
 
 console.log(username+" Created successfully");
-
 res.json(newSignup);
 
 });

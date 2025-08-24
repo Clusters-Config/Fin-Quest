@@ -15,6 +15,7 @@ import { finddiscussion } from "../controllers/suggesstion.js";
 import { globalchat } from "../controllers/suggesstion.js";
 import { findglobalchat } from "../controllers/suggesstion.js";
 import {streak} from "../controllers/streak.js";
+import { getmessages, getusers, sendmessage } from "../controllers/Community.js";
 const router = Router();
 
 router.route("/login").post(userlogin);
@@ -33,5 +34,10 @@ router.route("/finddiscussion").get(finddiscussion)
 router.route("/globalchat").post(globalchat)
 router.route("/findglobalchat").get(findglobalchat)
 router.route("/streak").post(streak)
+router.route("/communitychat/send").post(sendmessage)
+router.route("/communitychat/getmessages").post(getmessages)
+router.route("/communitychat/getuser").get(getusers)
+
+
 
 export {router};

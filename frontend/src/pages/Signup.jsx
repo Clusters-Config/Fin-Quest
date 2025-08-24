@@ -86,11 +86,12 @@ function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
+  const[role, setrole] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4047/signup", { username, email, password })
+      .post("http://localhost:4047/signup", { username, email, password , role})
       .then((res) => {
         if (res.status === 200) {
           navigate("/login");
@@ -162,6 +163,9 @@ function Signup() {
                          border border-gray-300 focus:border-[#F39C12] 
                          bg-white/80 shadow-sm outline-none transition"
               defaultValue="Student"
+              value={role}
+
+              onChange={(e)=>setrole(e.target.value)}
             >
               <option value="Student">Student</option>
               <option value="Financial-Analyst">Financial Analyst</option>
