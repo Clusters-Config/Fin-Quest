@@ -15,14 +15,14 @@ import { finddiscussion } from "../controllers/suggesstion.js";
 import { globalchat } from "../controllers/suggesstion.js";
 import { findglobalchat } from "../controllers/suggesstion.js";
 import {streak} from "../controllers/streak.js";
-import { getmessages, getusers, sendmessage } from "../controllers/Community.js";
+import { addconnection, getconnections, getmessages, getusers, sendmessage } from "../controllers/Community.js";
 const router = Router();
 
 router.route("/login").post(userlogin);
 router.route("/signup").post(Signup);
 router.route("/profile").post(profile_user);
 router.route("/finduser").post(finduser);
-router.route('/verify').get(VerifyUser);
+router.route("/verify").get(VerifyUser);
 router.route("/resultpage").post(TerminologyPage)
 router.route("/finduserlearning").post(finduserlearning)
 router.route("/clearcookies").get(clearcookies)
@@ -37,7 +37,8 @@ router.route("/streak").post(streak)
 router.route("/communitychat/send").post(sendmessage)
 router.route("/communitychat/getmessages").post(getmessages)
 router.route("/communitychat/getuser").get(getusers)
-
+router.route("/communitychat/addconnection").post(addconnection)
+router.route("/communitychat/getconnections").post(getconnections)
 
 
 export {router};

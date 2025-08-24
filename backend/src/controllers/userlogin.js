@@ -4,6 +4,7 @@ import { SignupSchema } from "../models/signup.js";
 import jwt from "jsonwebtoken";
 
 import { app } from "../app.js";
+import mongoose from "mongoose";
 
 const userlogin = AsyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -27,22 +28,23 @@ const userlogin = AsyncHandler(async (req, res) => {
     res.json({ valid: true });
     throw new Apierror(404, "Password incorrect");
   }
-
+  const _id = finduser?._id.toString();
   const username = finduser?.username;
   const firstname = finduser?.profile[0]?.firstname;
   const lastname = finduser?.profile[0]?.lastname;
   const dob = finduser?.profile[0]?.dob;
   const phone = finduser?.profile[0]?.phone;
   const hobbies = finduser?.profile[0]?.hobbies;
+  console.log(_id)
   const accessToken = jwt.sign(
-    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
+    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies, id:_id},
     "json-access-token",
     {
       expiresIn: "30m",
     },
   );
   const refreshToken = jwt.sign(
-    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies},
+    { firstname:firstname, lastname:lastname, dob:dob,phone:phone,username:username ,email: email, password: password ,hobbies:hobbies, id:_id},
     "json-refresh-token",
     {
       expiresIn: "60m",

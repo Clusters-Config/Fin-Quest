@@ -7,12 +7,13 @@ const Communitys = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState(null);
   const [isConnectDialogOpen, setIsConnectDialogOpen] = useState(false);
-  const [connections, setConnections] = useState(new Set());
+  const [connections, setConnections] = useState(new Set()); // store emails
   const [financialUpdates, setFinancialUpdates] = useState([]);
   const [likes, setLikes] = useState({});
   const [users, setusers] = useState([]);
   const [messages, setmessages] = useState([]);
   const [user, setuser] = useState("");
+  const [wholeuser, setwholeuser] = useState('');
   const [message, setmessage] = useState("");
   let BASE_URL = "http://localhost:4047";
 
@@ -25,7 +26,8 @@ const Communitys = () => {
   const filteredData = uniqueNetworkData.filter((person) => {
     const matchesRole = selectedRole === "All" || person.role === selectedRole;
     const matchesSearch = person.username.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesRole && matchesSearch;
+    const isNotLoggedInUser = person.email !== wholeuser; // exclude logged-in user
+    return matchesRole && matchesSearch && isNotLoggedInUser;
   });
 
   useEffect(() => {
@@ -37,21 +39,27 @@ const Communitys = () => {
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios.get("http://localhost:4047/verify").then((res) => {
+      setwholeuser(res.data.email);
       setuser(res.data.email);
     });
   }, []);
+
+
+  useEffect(() => {
+    if (wholeuser) {
+      axios.post(`${BASE_URL}/communitychat/getconnections`, { user: wholeuser })
+        .then(res => {
+          setConnections(new Set(res.data));
+        });
+    }
+  }, [wholeuser]);
 
   const api = "pub_668680cb7f49ae92853a14cd9534d380d7b80";
   useEffect(() => {
     const fetchFinancialUpdates = async () => {
       try {
         const response = await fetch(
-          `https://newsdata.io/api/1/news?apikey=pub_66696cd93cb944d498af66a299cc4fbf91308&q=finance%20news&country=in&language=en`,
-          {
-            headers: {
-              apikey: api,
-            },
-          }
+          `https://newsdata.io/api/1/news?apikey=pub_66696cd93cb944d498af66a299cc4fbf91308&q=finance%20news&country=in&language=en`
         );
         const data = await response.json();
         const result = data.results.slice(0, 5);
@@ -86,13 +94,16 @@ const Communitys = () => {
   };
 
   const handleConnect = (person) => {
-    if (connections.has(person._id)) {
-      alert(`${person.name} is already connected.`);
+    if (connections.has(person.email)) {
+      alert(`${person.username} is already connected.`);
       return;
     }
-    setConnections((prev) => new Set(prev.add(person._id)));
-    setSelectedPerson(person);
-    setIsConnectDialogOpen(true);
+    axios.post(`${BASE_URL}/communitychat/addconnection`, { user: wholeuser, connector: person.email })
+      .then(() => {
+        setConnections(prev => new Set([...prev, person.email]));
+        setSelectedPerson(person);
+        setIsConnectDialogOpen(true);
+      });
   };
 
   const closeConnectDialog = () => {
@@ -111,12 +122,11 @@ const Communitys = () => {
     alert(`Shared: ${update}`);
   };
 
-  // 🔄 Auto-refresh messages when modal is open
   useEffect(() => {
     if (isModalOpen && selectedPerson) {
       const interval = setInterval(() => {
         setmsg(selectedPerson);
-      }, 1000); // refresh every 3 seconds
+      }, 1000);
       return () => clearInterval(interval);
     }
   }, [isModalOpen, selectedPerson, user]);
@@ -128,7 +138,6 @@ const Communitys = () => {
       </h1>
 
       <div className="flex flex-col lg:flex-row">
-        {/* Roles */}
         <div className="w-full lg:w-64 bg-[#E1F5FE] p-5 rounded-lg shadow-md">
           <h2 className="text-xl font-bold mb-5">Roles</h2>
           <ul className="space-y-2">
@@ -146,8 +155,8 @@ const Communitys = () => {
                 <label
                   htmlFor={role}
                   className={`cursor-pointer p-2 rounded-md ${selectedRole === role
-                      ? "bg-[#0288D1] text-white"
-                      : "bg-[#E1F5FE] text-[#01579B]"
+                    ? "bg-[#0288D1] text-white"
+                    : "bg-[#E1F5FE] text-[#01579B]"
                     } hover:bg-[#0288D1] hover:text-white transition-colors`}
                 >
                   {role}
@@ -156,8 +165,6 @@ const Communitys = () => {
             ))}
           </ul>
         </div>
-
-     
         <div className="flex-grow p-5 flex flex-col lg:flex-row">
           <div className="w-full lg:w-3/4 pr-0 lg:pr-5">
             <div className="flex justify-center mb-5">
@@ -169,11 +176,11 @@ const Communitys = () => {
                 className="border border-gray-300 rounded-md px-4 py-2 w-full lg:w-80 text-sm focus:outline-none focus:ring-2 focus:ring-[#0288D1]"
               />
             </div>
-
-            
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 justify-center">
               {filteredData.length > 0 ? (
                 filteredData.map((person) => (
+                  
+                  
                   <div
                     key={person._id}
                     className="bg-[#FFFFFF] border border-gray-300 rounded-lg p-5 text-center shadow-sm transition-transform transform hover:translate-y-1 hover:shadow-lg"
@@ -201,12 +208,12 @@ const Communitys = () => {
                       </button>
                       <button
                         onClick={() => handleConnect(person)}
-                        className={`py-2 px-4 rounded-md text-sm transition-colors ${connections.has(person._id)
-                            ? "bg-gray-400 text-gray-800 cursor-not-allowed"
-                            : "bg-[#0288D1] text-white hover:bg-[#01579B]"
+                        className={`py-2 px-4 rounded-md text-sm transition-colors ${connections.has(person.email)
+                          ? "bg-gray-400 text-gray-800 cursor-not-allowed"
+                          : "bg-[#0288D1] text-white hover:bg-[#01579B]"
                           }`}
                       >
-                        {connections.has(person._id) ? "Connected" : "Connect"}
+                        {connections.has(person.email) ? "Connected" : "Connect"}
                       </button>
                     </div>
                   </div>
@@ -216,8 +223,6 @@ const Communitys = () => {
               )}
             </div>
           </div>
-
-         
           <div className="w-full lg:w-1/4 bg-[#E1F5FE] border-t lg:border-t-0 lg:border-l border-gray-300 p-5 mt-5 lg:mt-0">
             <h2 className="text-2xl font-bold mb-5">Latest Financial News</h2>
             <ul className="space-y-3">
@@ -231,8 +236,8 @@ const Communitys = () => {
                     <button
                       onClick={() => handleLike(index)}
                       className={`py-1 px-3 rounded-md text-sm transition-colors ${likes[index]
-                          ? "bg-red-500 text-white"
-                          : "bg-gray-300 text-gray-800"
+                        ? "bg-red-500 text-white"
+                        : "bg-gray-300 text-gray-800"
                         } hover:bg-red-500 hover:text-white`}
                     >
                       {likes[index] ? "Liked" : "Like"}
@@ -249,8 +254,6 @@ const Communitys = () => {
             </ul>
           </div>
         </div>
-
-       
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-5 rounded-lg shadow-lg w-96">
@@ -271,7 +274,7 @@ const Communitys = () => {
                     }}
                     className="rounded-md px-2 py-1 mb-2"
                   >
-                    <p className="text-black" style={{ color :mess.sender === user ? "white" : "black"}}>{mess.message}</p>
+                    <p className="text-black" style={{ color: mess.sender === user ? "white" : "black" }}>{mess.message}</p>
                   </li>
                 ))}
               </ul>
@@ -306,8 +309,6 @@ const Communitys = () => {
             </div>
           </div>
         )}
-
-     
         {isConnectDialogOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-white p-5 rounded-lg shadow-lg w-80">
