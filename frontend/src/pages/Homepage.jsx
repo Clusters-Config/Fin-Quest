@@ -165,7 +165,7 @@ function Homepage() {
             { path: "/Learning_paths", label: "Learning Path", desc: "Master financial concepts through structured learning paths", icon: <BookOpen className="text-blue-500 w-8 h-8" /> },
             { path: "/Game", label: "Gamification", desc: "Learn while earning points and badges", icon: <Gamepad2 className="text-purple-500 w-8 h-8" /> },
             { path: "/Simulations", label: "Real World Simulation", desc: "Practice with real market scenarios", icon: <TrendingUp className="text-green-500 w-8 h-8" /> },
-            { path: "/Chat", label: "AI Driven", desc: "Get personalized financial insights powered by AI", icon: <Brain className="text-red-500 w-8 h-8" /> },
+            // { path: "/Chat", label: "AI Driven", desc: "Get personalized financial insights powered by AI", icon: <Brain className="text-red-500 w-8 h-8" /> },
             { path: "/Communitys", label: "Community", desc: "Connect with fellow finance enthusiasts", icon: <Users className="text-yellow-500 w-8 h-8" /> },
             // { path: "/TaxPage", label: "Taxes", desc: "Understand and optimize your tax planning", icon: <Calculator className="text-pink-500 w-8 h-8" /> },
             { path: "/ForumPage", label: "Finance Forum", desc: "Professional peer-to-peer collaboration platform for finance enthusiasts", icon: <Route className="text-blue-500 w-8 h-8" /> },
