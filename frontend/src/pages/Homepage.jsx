@@ -27,6 +27,8 @@ import { useAuth } from "./AuthContext";
 import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
 import Index from "../Services/Chat";
 import Chat from "../Services/Chat";
+import { motion } from "framer-motion";
+
 
 
 
@@ -83,13 +85,13 @@ function Homepage() {
           />
           <span className="text-2xl font-bold">FinQuest</span>
         </div>
-        <ul className="flex justify-center items-center space-x-6 text-[#002147] text-sm font-medium">
+        {/* <ul className="flex justify-center items-center space-x-6 text-[#002147] text-sm font-medium">
           <li><Link to="/Learning_Paths" className="flex items-center gap-1 hover:text-[#28A745]"><Book /> Learn</Link></li>
           <li><Link to="/Quiz" className="flex items-center gap-1 hover:text-[#28A745]"><HelpCircle /> Quiz</Link></li>
           <li><Link to="/Game" className="flex items-center gap-1 hover:text-[#28A745]"><Gamepad2 /> Games</Link></li>
           <li><Link to="/FinFlux" className="flex items-center gap-1 hover:text-[#28A745]"><Video /> Reels</Link></li>
           <li><Link to="/Simulations" className="flex items-center gap-1 hover:text-[#28A745]"><Calculator /> Simulator</Link></li>
-        </ul>
+        </ul> */}
         <div className="flex items-center gap-4">
           {useremail ? (
             <Link to="/ProfilePage" className="text-[#002147] hover:text-[#F39C12]">{username}</Link>
@@ -108,7 +110,20 @@ function Homepage() {
         <div className="max-w-3xl z-10">
           <h1 className="text-5xl font-bold leading-snug mb-6">
             Master Your <br />
-            <span className="text-yellow-400">Financial Future</span>
+            {/* <span className="text-yellow-400">Financial Future</span> */}
+            <motion.span
+      className="text-yellow-400 font-bold"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.1,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatType: "reverse",
+      }}
+    >
+      Financial Future
+    </motion.span>
           </h1>
           <p className="text-lg mb-6">
             Interactive learning platform for students and professionals. Learn financial concepts through quizzes, games, and real-world simulators.
