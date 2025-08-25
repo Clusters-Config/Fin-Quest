@@ -116,8 +116,8 @@ function Homepage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.1,
-        ease: "easeInOut",
+        duration: 0.8,
+        ease: "easeOut",
         repeat: Infinity,
         repeatType: "reverse",
       }}
