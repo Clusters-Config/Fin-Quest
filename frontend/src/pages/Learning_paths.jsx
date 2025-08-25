@@ -9,6 +9,8 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 //import { FaUserCircle } from "react-icons/fa";
 import { BookOpen } from "lucide-react";
+import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
+import { Youtube, Twitter, Linkedin } from "lucide-react";
 
 
 
@@ -460,7 +462,7 @@ const Learning_paths = () => {
                         <img
                           src="https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg"
                           alt="Video Thumbnail"
-                          className="rounded-lg w-full h-full object-cover"
+                          className="rounded-lg w-full h-full object-c</li>over"
                         />
                         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 rounded-lg">
                           <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -537,19 +539,22 @@ const Learning_paths = () => {
             </div>
 
             {/* Peer-to-Peer Learning & Collaboration */}
-            <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold text-center">
+
+
+            {/* <h1 className="ml-6 sm:ml-2 mt-12 text-xl text-[#002147] font-bold text-center">
               Peer-to-Peer Learning & Collaboration
-            </h1>
+            </h1> */}
 
             <div className="max-w-6xl mx-auto mt-6">
-              <p className="text-center text-sm text-gray-600">
+              {/* <p className="text-center text-sm text-gray-600">
                 Connect with fellow learners, join study groups, and grow together
-              </p>
+              </p> */}
 
 
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
                 {/* Study Groups */}
+                {/*
                 <div className="bg-white rounded-xl shadow p-6 border">
                   <h2 className="text-lg font-semibold text-[#002147] mb-4">Study Groups</h2>
                   <ul className="space-y-3">
@@ -572,9 +577,10 @@ const Learning_paths = () => {
                     ))}
                   </ul>
                 </div>
-
+*/}
                 {/* Discussion Board */}
-                <div className="bg-white rounded-xl shadow p-6 border">
+                
+                {/* <div className="bg-white rounded-xl shadow p-6 border">
                   <h2 className="text-lg font-semibold text-[#002147] mb-4">Discussion Board</h2>
                   <textarea
                     className="w-full border border-gray-300 rounded-md p-3 mb-4 resize-none"
@@ -589,11 +595,11 @@ const Learning_paths = () => {
                   >
                     Post Discussion
                   </button>
-                </div>
+                </div> */}
               </div>
 
               {/* Recent Discussions */}
-              <div className="bg-white rounded-xl shadow p-6 border mt-6">
+              {/* <div className="bg-white rounded-xl shadow p-6 border mt-6">
                 <h2 className="text-lg font-semibold text-[#002147] mb-4">Recent Discussions</h2>
                 <ul className="space-y-4">
                   {data.map((user, idx) => (
@@ -603,7 +609,7 @@ const Learning_paths = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
+              </div> */}
             </div>
           </> : <Backdrop
             sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
@@ -613,13 +619,70 @@ const Learning_paths = () => {
             <h1>{`${" Please wait or login again"}`}</h1>
           </Backdrop>}
       </>
+       <footer className="bg-[#002147] text-gray-300 py-12 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
 
-      <footer className="bg-[#002147] text-white py-4 px-6 text-center mt-10 w-screen relative right-10 ">
-        <p className="text-sm mt-2">
-          &copy; 2025 Fin-Quest. All Rights Reserved.
-        </p>
+          <div>
+            <img
+                      src={logo}
+                      alt="FinQuest Logo"
+                      className="w-32 h-32 mb-6 drop-shadow-lg   border-white/30"
+                    />
+          </div>
+          {/* About Section */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4">FinQuest</h3>
+            <p className="text-sm text-justify">
+              FinQuest brings financial wisdom alive through personalized learning paths for students, turning money skills into lifelong confidence.
+            </p>
+            <div className="flex space-x-4 mt-4 text-white">
+              <a href="#" aria-label="Github"><Youtube size={20} className="hover:text-green-400 transition-colors" /></a>
+              <a href="#" aria-label="LinkedIn"><Linkedin size={20} className="hover:text-green-400 transition-colors" /></a>
+              <a href="#" aria-label="Twitter"><Twitter size={20} className="hover:text-green-400 transition-colors" /></a>
+            </div>
+          </div>
+          
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="hover:text-white transition-colors">Learning Paths</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Games</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Simulations</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">FinFlux</a></li>
+            </ul>
+          </div>
+
+          {/* Support */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4">Support</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+            </ul>
+          </div>
+          
+          {/* Contact */}
+          <div>
+            <h3 className="text-white text-lg font-semibold mb-4">Contact</h3>
+            {/* <p className="text-sm">123 Financial Way<br/>Wealthy City, 54321<br/>Financia</p> */}
+            <p className="text-sm mt-2">Email: finquest@gmail.com<br/></p>
+            
+          </div>
+        </div>
+        
+        {/* Copyright */}
+        <div className="text-center text-sm text-gray-500 mt-8 pt-6 border-t border-gray-700">
+          <p className="italic">"Empowering financial literacy through gamification."</p>
+          <p className="mt-2">&copy; 2025 FinQuest. All Rights Reserved.</p>
+          
+        </div>
       </footer>
+     
     </div>
+    
   );
 };
 
