@@ -16,6 +16,8 @@
     "@fortawesome/fontawesome-svg-core": "^7.0.0",
     "@fortawesome/free-solid-svg-icons": "^7.0.0",
     "@fortawesome/react-fontawesome": "^0.2.3",
+    "@google/genai": "^1.15.0",
+    "@google/generative-ai": "^0.24.1",
     "@mui/material": "^6.4.5",
     "@react-spring/web": "^9.7.5",
     "axios": "^1.7.9",

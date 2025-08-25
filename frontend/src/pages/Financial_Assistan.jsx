@@ -20,6 +20,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import {marked} from 'marked';
+import Chat from "../Services/Chat";
 
 // New functional Rule Calculator component with AI
 const RuleCalculator = () => {
@@ -496,6 +497,7 @@ const FinancialDashboard = () => {
 
   return (
     <div className="w-full min-h-screen bg-gray-100 font-sans flex flex-col items-center p-6">
+      <Chat/>
       {/* Header */}
       <div className="text-center my-12 max-w-4xl px-4">
         <h1 className="text-5xl font-extrabold text-gray-900 mb-4 tracking-tight">

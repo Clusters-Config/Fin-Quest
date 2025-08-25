@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Chat from "../Services/Chat";
+
 
 const Communitys = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -133,6 +135,7 @@ const Communitys = () => {
 
   return (
     <div className="bg-[rgb(224,247,250,0.1)] text-[rgb(1,87,155)] min-h-screen">
+      <Chat/>
       <h1 className="text-4xl font-bold text-center text-[#01579B] mb-6 pt-5">
         Community Engagement
       </h1>

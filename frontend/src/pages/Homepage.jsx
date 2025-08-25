@@ -25,6 +25,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
+import Index from "../Services/Chat";
+import Chat from "../Services/Chat";
 
 
 
@@ -71,9 +73,10 @@ function Homepage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white ">
+      <Chat />
       <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
-         <div className="flex items-center space-x-2 text-[#002147]">
-          <img 
+        <div className="flex items-center space-x-2 text-[#002147]">
+          <img
             src={logo}
             alt="FinQuest Logo"
             className="w-12 h-12 rounded-full drop-shadow-lg"
@@ -181,96 +184,92 @@ function Homepage() {
           ))}
         </div>
       </section>
-       <section className="py-20 px-6 bg-gray-50">
-  <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
-    👥 Learning Paths for Everyone
-  </h2>
-  <p className="text-lg text-center text-gray-600 mb-10">
-    Tailored content and experiences designed for different life stages and financial goals
-  </p>
-
-  <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-    
-    {/* School Students (Blue Theme) */}
-    <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#002147] to-[#1a3a75] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
-      <div className="relative">
-        <div className="flex items-center mb-4">
-          <div className="bg-gradient-to-br from-[#002147] to-[#1a3a75] text-white p-3 rounded-full">
-            📘
-          </div>
-          <h3 className="ml-4 text-xl font-semibold text-[#002147]">School Students</h3>
-        </div>
-        <p className="text-gray-600 mb-4">
-          Build a strong foundation in financial literacy with age-appropriate content and interactive learning modules.
+      <section className="py-20 px-6 bg-gray-50">
+        <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
+          👥 Learning Paths for Everyone
+        </h2>
+        <p className="text-lg text-center text-gray-600 mb-10">
+          Tailored content and experiences designed for different life stages and financial goals
         </p>
-        <ul className="text-sm text-gray-700 space-y-2 mb-4">
-          <li>📌 Basic Money Management</li>
-          <li>📌 Savings & Budgeting</li>
-          <li>📌 Investment Basics</li>
-          <li>📌 Financial Goal Setting</li>
-        </ul>
-        <button className="mt-2 w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#001533]">
-          Start Learning Path →
-        </button>
-      </div>
-    </div>
 
-    {/* College Students (Green to Gold Theme) */}
-    <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
-      <div className="relative">
-        <div className="flex items-center mb-4">
-          <div className="bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] text-white p-3 rounded-full">
-            🎓
+        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto z-10">
+
+          {/* School Students (Blue Theme) */}
+          <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#002147] to-[#1a3a75] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
+            <div className="relative">
+              <div className="flex items-center mb-4">
+                <div className="bg-gradient-to-br from-[#002147] to-[#1a3a75] text-white p-3 rounded-full">
+                  📘
+                </div>
+                <h3 className="ml-4 text-xl font-semibold text-[#002147]">School Students</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Build a strong foundation in financial literacy with age-appropriate content and interactive learning modules.
+              </p>
+              <ul className="text-sm text-gray-700 space-y-2 mb-4">
+                <li>📌 Basic Money Management</li>
+                <li>📌 Savings & Budgeting</li>
+                <li>📌 Investment Basics</li>
+                <li>📌 Financial Goal Setting</li>
+              </ul>
+              <button className="mt-2 w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#001533]">
+                Start Learning Path →
+              </button>
+            </div>
           </div>
-          <h3 className="ml-4 text-xl font-semibold text-[#1e7d4d]">College Students</h3>
-        </div>
-        <p className="text-gray-600 mb-4">
-          Prepare for financial independence with advanced concepts, real-world scenarios, and career-focused learning.
-        </p>
-        <ul className="text-sm text-gray-700 space-y-2 mb-4">
-          <li>📌 Student Loans</li>
-          <li>📌 Credit Management</li>
-          <li>📌 Career Planning</li>
-          <li>📌 Advanced Investing</li>
-        </ul>
-        <button className="mt-2 w-full bg-[#1e7d4d] text-white py-2 rounded-lg hover:bg-[#15663e]">
-          Start Learning Path →
-        </button>
-      </div>
-    </div>
 
-    {/* Working Professionals (Gold to Green Theme) */}
-    <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
-      <div className="relative">
-        <div className="flex items-center mb-4">
-          <div className="bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] text-white p-3 rounded-full">
-            💼
+          {/* College Students (Green to Gold Theme) */}
+          <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
+            <div className="relative">
+              <div className="flex items-center mb-4">
+                <div className="bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] text-white p-3 rounded-full">
+                  🎓
+                </div>
+                <h3 className="ml-4 text-xl font-semibold text-[#1e7d4d]">College Students</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Prepare for financial independence with advanced concepts, real-world scenarios, and career-focused learning.
+              </p>
+              <ul className="text-sm text-gray-700 space-y-2 mb-4">
+                <li>📌 Student Loans</li>
+                <li>📌 Credit Management</li>
+                <li>📌 Career Planning</li>
+                <li>📌 Advanced Investing</li>
+              </ul>
+              <button className="mt-2 w-full bg-[#1e7d4d] text-white py-2 rounded-lg hover:bg-[#15663e]">
+                Start Learning Path →
+              </button>
+            </div>
           </div>
-          <h3 className="ml-4 text-xl font-semibold text-[#ffcc00]">Working Professionals</h3>
-        </div>
-        <p className="text-gray-600 mb-4">
-          Enhance your financial expertise with sophisticated tools, market analysis, and wealth-building strategies.
-        </p>
-        <ul className="text-sm text-gray-700 space-y-2 mb-4">
-          <li>📌 Portfolio Management</li>
-          <li>📌 Tax Optimization</li>
-          <li>📌 Retirement Planning</li>
-          <li>📌 Risk Assessment</li>
-        </ul>
-        <button className="mt-2 w-full bg-[#ffcc00] text-black py-2 rounded-lg hover:bg-[#e6b800]">
-          Start Learning Path →
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
 
-<a href="#" className="fixed bottom-6 right-6 z-50 transition-transform duration-300 transform hover:scale-110">
-<Bot size={56} className="bg-[#002147] text-white rounded-full p-3 shadow-lg hover:bg-[#001533] transition-colors" />
-</a>
+          {/* Working Professionals (Gold to Green Theme) */}
+          <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
+            <div className="relative">
+              <div className="flex items-center mb-4">
+                <div className="bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] text-white p-3 rounded-full">
+                  💼
+                </div>
+                <h3 className="ml-4 text-xl font-semibold text-[#ffcc00]">Working Professionals</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Enhance your financial expertise with sophisticated tools, market analysis, and wealth-building strategies.
+              </p>
+              <ul className="text-sm text-gray-700 space-y-2 mb-4">
+                <li>📌 Portfolio Management</li>
+                <li>📌 Tax Optimization</li>
+                <li>📌 Retirement Planning</li>
+                <li>📌 Risk Assessment</li>
+              </ul>
+              <button className="mt-2 w-full bg-[#ffcc00] text-black py-2 rounded-lg hover:bg-[#e6b800]">
+                Start Learning Path →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-[#002147] text-gray-300 py-12 px-6">
@@ -278,10 +277,10 @@ function Homepage() {
 
           <div>
             <img
-                      src={logo}
-                      alt="FinQuest Logo"
-                      className="w-32 h-32 mb-6 drop-shadow-lg   border-white/30"
-                    />
+              src={logo}
+              alt="FinQuest Logo"
+              className="w-32 h-32 mb-6 drop-shadow-lg   border-white/30"
+            />
           </div>
           {/* About Section */}
           <div>
@@ -295,7 +294,7 @@ function Homepage() {
               <a href="#" aria-label="Twitter"><Twitter size={20} className="hover:text-green-400 transition-colors" /></a>
             </div>
           </div>
-          
+
           {/* Quick Links */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
@@ -317,21 +316,21 @@ function Homepage() {
               <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
             </ul>
           </div>
-          
+
           {/* Contact */}
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Contact</h3>
             {/* <p className="text-sm">123 Financial Way<br/>Wealthy City, 54321<br/>Financia</p> */}
-            <p className="text-sm mt-2">Email: finquest@gmail.com<br/></p>
-            
+            <p className="text-sm mt-2">Email: finquest@gmail.com<br /></p>
+
           </div>
         </div>
-        
+
         {/* Copyright */}
         <div className="text-center text-sm text-gray-500 mt-8 pt-6 border-t border-gray-700">
           <p className="italic">"Empowering financial literacy through gamification."</p>
           <p className="mt-2">&copy; 2025 FinQuest. All Rights Reserved.</p>
-          
+
         </div>
       </footer>
 

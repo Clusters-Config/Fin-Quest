@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Chat from "../Services/Chat";
 
 export default function FinFlux() {
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || "NO_API_KEY";
@@ -146,6 +147,7 @@ export default function FinFlux() {
           fontFamily: "Arial, sans-serif", // 👈 now everything is Arial
         }}
       >
+        <Chat/>
         {/* Featured Section */}
         {featuredVideo && (
           <div

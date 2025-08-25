@@ -11,6 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { BookOpen } from "lucide-react";
 import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
 import { Youtube, Twitter, Linkedin } from "lucide-react";
+import Chat from "../Services/Chat";
 
 
 
@@ -326,6 +327,7 @@ const Learning_paths = () => {
 
   return (
     <div className="px-4 sm:px-6 lg:px-10">
+      <Chat/>
       <div className="w-screen bg-gradient-to-r from-[#002147] to-[#003366] py-12 relative right-10">
         {/* Profile Button */}
         <div className="absolute top-4 right-6 z-10">

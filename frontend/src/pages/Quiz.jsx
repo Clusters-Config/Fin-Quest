@@ -12,6 +12,7 @@ const QuizDashboard = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
+      <Chat/>
       {/* Header */}
       <div className="bg-green-500 text-white py-8 text-center">
         <FaTrophy className="mx-auto text-5xl mb-3" />

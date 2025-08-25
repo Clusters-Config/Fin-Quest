@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import { FaBook, FaGamepad, FaChartLine, FaRobot, FaUsers, FaCalculator, FaRoute, FaNewspaper, FaBriefcase, FaHome, FaMagic, FaStreetView } from "react-icons/fa"; 
 import ParticleAnimation from "../components/ParticleAnimation";
+import Chat from "../Services/Chat";
 
 function FeaturesPage() {
   return (
     <>
     <ParticleAnimation/>  
     <div className=" min-h-screen flex flex-col relative">
-    
+    <Chat/>
       {/* Navigation Bar */}
       <nav className="bg-[#002147] shadow-lg px-6 py-4 flex justify-between items-center">
         <div className="text-[#F39C12] text-2xl font-bold">Finance Fusion Paths</div>

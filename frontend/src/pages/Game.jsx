@@ -5,6 +5,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Chat from "../Services/Chat";
 
 
 
@@ -250,6 +251,7 @@ const Questions = () => {
   
     return (
       <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+        <Chat/>
         <div className="bg-white p-8 rounded-lg shadow-lg w-8/10 sm:w-[300px]">
           <h3 className="text-2xl font-bold text-gray-800 mb-6">Choose a Game</h3>
           <div className="space-y-4">

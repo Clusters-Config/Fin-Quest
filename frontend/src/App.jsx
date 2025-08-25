@@ -39,6 +39,7 @@ import QuizApp from './learn_path_components/QuizApp';
 import ResultPage from './learn_path_components/ResultPage';
 import ForumPage from "./learn_path_components/ForumPage";
 import Profile from "./pages/Profile";
+import Index from './Services/Chat';
 
 
 import ProfitLossLadder from "./GameComponents/ProfitLossLadder";
@@ -47,6 +48,7 @@ import Monopoly from "./GameComponents/Monopoly";
 import DailyChallenges from "./GameComponents/DailyChallenges"
 import ProfilePage from "./learn_path_components/ProfilePage";
 import GameProfile from "./GameComponents/GameProfile"
+import { Indent } from 'lucide-react';
 const App = () => {
   return (
     <AuthProvider>
@@ -83,7 +85,7 @@ const App = () => {
             <Route path="/StockMarketBasics" element={<StockMarketBasics />} />
             <Route path="/Finance_Principles" element={<Finance_Principles />} />
             <Route path="/Goals_Finance" element={<Goals_Finance />} />
-            <Route path="/Discussionboard" element={<Discussionboard/>} />
+            <Route path="/Discussionboard" element={<Discussionboard />} />
             <Route path="/QuizApp/:quizId" element={<QuizApp />} /> {/* Updated route */}
             <Route path="/result" element={<ResultPage />} />
             <Route path="/ForumPage" element={<ForumPage />} />
@@ -96,6 +98,8 @@ const App = () => {
             <Route path="/DailyChallenges" element={<DailyChallenges />} />
             <Route path="/ProfilePage" element={<ProfilePage />} />
             <Route path="/GameProfile" element={<GameProfile />} />
+            <Route path="/service/chat" element={<Index />} />
+
 
 
             {/* Forum Page Routes */}
