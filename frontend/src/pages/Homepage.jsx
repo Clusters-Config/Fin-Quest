@@ -63,12 +63,23 @@ function Homepage() {
   useEffect(() => {
     if (email) {
       axios.post("http://localhost:4047/login", { email, password }).then((res) => {
-        if (res.data.valid) {
-          navigate("/");
-        }
-        if (!showtoast) {
-          setshowtoast(true);
-        }
+
+//         axios.get("http://localhost:4047/verify")
+//     .then(res=>{
+//       if(!res.data.lastname)
+//       {
+//         navigate('/Profile')
+//       }
+      
+//       else{
+// if (res.data.valid) {
+//           navigate("/");
+//         }
+//         if (!showtoast) {
+//           setshowtoast(true);
+//         }
+//       }
+//       } ) 
       });
     }
   }, [email, password, navigate, showtoast]);
@@ -142,7 +153,7 @@ function Homepage() {
         </div>
 
         {/* Portfolio Growth Chart */}
-        <div className="absolute top-32 right-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-8 shadow-xl w-[500px] text-white ">
+        <div className="absolute top-32 right-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-8 shadow-xl w-[500px] text-white sm:hidden ">
           <h3 className="text-xl font-semibold mb-5">📈 Portfolio Growth</h3>
           <div className="h-40 flex items-end gap-3">
             {[40, 80, 50, 60, 90, 70].map((h, i) => (

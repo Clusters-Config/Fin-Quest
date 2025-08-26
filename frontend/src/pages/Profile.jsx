@@ -57,7 +57,7 @@ function ProfilePage() {
         hobbies,
       })
       .then(
-       await naviage("/")
+       await naviage("/profile")
       )
       .catch((err) => console.log(err));
   };
