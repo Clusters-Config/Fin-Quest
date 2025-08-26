@@ -123,13 +123,7 @@ function Login_signup() {
       {
         navigate('/Profile')
       }
-      else{
-        if (valid) {
-          navigate("/login");
-          navi = false;
-          toast.error("Email or password incorrect ❌");
-        }
-      }
+     
 
     })
         

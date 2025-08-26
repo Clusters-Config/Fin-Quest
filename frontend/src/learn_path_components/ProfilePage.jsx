@@ -295,7 +295,7 @@ const ProfilePage = () => {
   open
 >
   <CircularProgress color="inherit" />
-  <h1>Please wait or login again</h1>
+  <h1>Please wait or Update your profile</h1>
 </Backdrop>}</>
   );
 };
