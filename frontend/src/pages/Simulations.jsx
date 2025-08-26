@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaMoneyBillWave, FaPiggyBank, FaCoins, FaCalculator, FaExchangeAlt, FaTag, FaSalesforce, FaSave, FaWeightHanging, FaUserFriends, FaMoneyCheck } from "react-icons/fa";
 import { useSpring, animated } from "@react-spring/web";
 import { SparklesIcon, FilePieChart, Lightbulb, TrendingUp } from 'lucide-react';
+import Chat from "../Services/Chat";
 
 // Reusable Modal Component with consistent styling
 const Modal = ({ isOpen, onClose, title, children }) => {
@@ -9,6 +10,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 font-inter">
+      <Chat/>
       <div className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-lg max-h-[95vh] overflow-y-auto transform transition-all duration-300 scale-100 opacity-100">
         <h2 className="text-2xl font-bold text-[#002147] mb-4 text-center border-b pb-2">
           {title}

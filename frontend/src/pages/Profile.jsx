@@ -3,7 +3,8 @@ import axios from "axios";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast  ,Bounce} from 'react-toastify';
-
+// import { useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
 
 
 function ProfilePage() {
@@ -22,7 +23,8 @@ function ProfilePage() {
       setudob(res.data.dob)
       setuphonenumber(res.data.phone)
       setuhobbies(res.data.hobbies) 
-     }
+    }
+      
    )  
   })
  
@@ -46,6 +48,7 @@ function ProfilePage() {
   const [showTermsModal, setShowTermsModal] = useState(false);
   const {useremail} = useAuth(); 
   const naviage = useNavigate()// State to manage terms modal visibility
+  // let naviage = useNavigate()
   
   const handleSubmit = async() => {
      const user =  axios.post("http://127.0.0.1:4047/profile", {
@@ -57,7 +60,8 @@ function ProfilePage() {
         hobbies,
       })
       .then(
-       await naviage("/")
+        await naviage("/profile"),
+        naviage("/")
       )
       .catch((err) => console.log(err));
   };

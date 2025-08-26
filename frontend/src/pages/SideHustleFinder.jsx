@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Chat from "../Services/Chat";
 
 const SideHustleFinder = () => {
   const financeRoles = {
@@ -19,6 +20,7 @@ const SideHustleFinder = () => {
   return (
     
     <div className="min-h-screen bg-gradient-to-r from-white via-purple-100 to-pink-100 px-6 py-10 text-[#2d1b69] font-sans">
+      <Chat/>
 
 
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">

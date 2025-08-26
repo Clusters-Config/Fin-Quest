@@ -115,12 +115,18 @@ function Login_signup() {
     await axios
       .post("http://localhost:4047/login", { email, password })
       .then((res) => {
+        console.log(res)
         valid = res.data.valid;
-        if (valid) {
-          navigate("/login");
-          navi = false;
-          toast.error("Email or password incorrect ❌");
-        }
+        axios.get("http://localhost:4047/verify")
+    .then(res=>{
+      if(!res.data.lastname)
+      {
+        navigate('/Profile')
+      }
+     
+
+    })
+        
       });
 
     await axios

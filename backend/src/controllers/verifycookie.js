@@ -55,7 +55,7 @@
         // console.log(id)
     try {
         const decoded = jwt.verify(accessToken, "json-access-token");
-        console.log(decoded)
+        // console.log(decoded)
         res
         .status(202)
         .json({
