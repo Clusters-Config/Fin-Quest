@@ -196,7 +196,7 @@ const Communities = () => {
                       <img
                         src={
                           person.image ||
-                          "https://www.vectorstock.com/royalty-free-vectors/default-profile-vectors"
+                          "https://imgs.search.brave.com/NtTRFFwJ8zSGZUC4Cz-r4LLSAq5wWjfCbrONBxaPW2M/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly9iLnRo/dW1icy5yZWRkaXRt/ZWRpYS5jb20vRmJu/bkxfMHN5ZllSSlFQ/V3dYQ243MVhEekpB/cHhDc3hjLTZtaDVM/SUVTZy5qcGc"
                         }
                         alt={`${person.username}'s profile`}
                         className="rounded-full w-28 h-28 object-cover border-4 border-gray-100"

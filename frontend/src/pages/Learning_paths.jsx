@@ -621,7 +621,7 @@ const Learning_paths = () => {
             <h1>{`${" Please wait or login again"}`}</h1>
           </Backdrop>}
       </>
-       <footer className="bg-[#002147] text-gray-300 py-12 px-6">
+       <footer className="bg-[#002147] text-gray-300 py-12  w-screen">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
 
           <div>
