@@ -574,6 +574,8 @@ const FinancialDashboard = () => {
       )}
       {/* <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> */}
       <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
+
+      
     </div>
   );
 };

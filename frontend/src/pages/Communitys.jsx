@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Chat from "../Services/Chat";
 import { FaUserCircle, FaSearch, FaCommentDots, FaLink, FaThumbsUp, FaShareAlt } from 'react-icons/fa';
 import Contatos from "../assets/Tik tok profile picture.jpeg"
+import Footer from "../Services/Footer";
 
 const Communities = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -334,6 +335,8 @@ const Communities = () => {
           </div>
         )}
       </div>
+
+      <Footer />
     </div>
   );
 };
