@@ -23,6 +23,22 @@ export default function FinFlux() {
 
   const categories = ["ALL", "VIDEOS", "SHORTS"];
 
+  // Helper to decode HTML entities
+  function decodeHtmlEntities(text) {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = text;
+    return textarea.value;
+  }
+
+  // Helper: parse ISO 8601 duration to seconds
+  function parseDuration(isoDuration) {
+    if (!isoDuration) return 0;
+    const match = isoDuration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
+    const minutes = parseInt(match?.[1] || 0);
+    const seconds = parseInt(match?.[2] || 0);
+    return minutes * 60 + seconds;
+  }
+
   useEffect(() => {
     async function fetchVideos() {
       try {
@@ -39,21 +55,34 @@ export default function FinFlux() {
           `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=12`
         );
 
-        console.log("Fetch response status:", res.status);
-
         if (!res.ok) {
           const errorData = await res.json();
           throw new Error(errorData.error.message || "Failed to fetch videos");
         }
 
         const data = await res.json();
-        console.log("API response data:", data);
 
         if (data.items) {
           const onlyVideos = data.items.filter(
             (item) => item.id.kind === "youtube#video"
           );
-          setVideos(onlyVideos);
+          const videoIds = onlyVideos.map((v) => v.id.videoId).join(",");
+
+          // fetch details for durations
+          const detailsRes = await fetch(
+            `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=contentDetails`
+          );
+          const detailsData = await detailsRes.json();
+
+          const withDurations = onlyVideos.map((video) => {
+            const details = detailsData.items.find(
+              (d) => d.id === video.id.videoId
+            );
+            let duration = details?.contentDetails?.duration || "PT0M0S";
+            return { ...video, duration };
+          });
+
+          setVideos(withDurations);
         }
       } catch (err) {
         console.error("Error fetching videos:", err.message);
@@ -76,20 +105,29 @@ export default function FinFlux() {
   }, []);
 
   if (loading)
-    return <p style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>Loading videos...</p>;
+    return (
+      <p style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
+        Loading videos...
+      </p>
+    );
   if (videos.length === 0)
-    return <p style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>No videos found.</p>;
+    return (
+      <p style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
+        No videos found.
+      </p>
+    );
 
-  // Filtering logic
+  // Filtering logic (SHORTS based on duration <= 60s)
   const filteredVideos = videos.filter((video) => {
     const text = `${video.snippet.title} ${video.snippet.description}`.toLowerCase();
     const matchesSearch = text.includes(searchTerm.toLowerCase());
 
+    const durationInSec = parseDuration(video.duration);
+    const isShort = durationInSec > 0 && durationInSec <= 60;
+
     if (selectedCategory === "ALL") return matchesSearch;
-    if (selectedCategory === "VIDEOS")
-      return matchesSearch && !video.snippet.title.toLowerCase().includes("short");
-    if (selectedCategory === "SHORTS")
-      return matchesSearch && video.snippet.title.toLowerCase().includes("short");
+    if (selectedCategory === "VIDEOS") return matchesSearch && !isShort;
+    if (selectedCategory === "SHORTS") return matchesSearch && isShort;
 
     return matchesSearch;
   });
@@ -100,7 +138,6 @@ export default function FinFlux() {
   return (
     <>
       <style>{`
-        /* Responsive styles */
         @media (max-width: 768px) {
           .featured-container {
             flex-direction: column !important;
@@ -143,7 +180,7 @@ export default function FinFlux() {
           color: "#fff",
           minHeight: "100vh",
           padding: "20px",
-          fontFamily: "Arial, sans-serif", // 👈 now everything is Arial
+          fontFamily: "Arial, sans-serif",
         }}
       >
         {/* Featured Section */}
@@ -180,7 +217,7 @@ export default function FinFlux() {
               </h1>
 
               <p style={{ fontSize: "14px" }}>
-                {featuredVideo.snippet.description}
+                {decodeHtmlEntities(featuredVideo.snippet.description)}
               </p>
               <a
                 href={`https://www.youtube.com/watch?v=${featuredVideo.id.videoId}`}
@@ -212,7 +249,7 @@ export default function FinFlux() {
               }}
             >
               <img
-                src="https://plus.unsplash.com/premium_photo-1679923813998-6603ee2466c5?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8ZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D"
+                src="https://mtr-cdn.com/images/financial_literacy.width-648.jpg"
                 alt={`${line1} ${line2} ${line3}`}
                 style={{
                   width: "70%",
@@ -261,8 +298,7 @@ export default function FinFlux() {
                 border: "none",
                 cursor: "pointer",
                 fontSize: "14px",
-                backgroundColor:
-                  selectedCategory === cat ? "#d63384" : "#444",
+                backgroundColor: selectedCategory === cat ? "#d63384" : "#444",
                 color: "white",
                 transition: "background 0.2s ease",
                 fontFamily: "Arial, sans-serif",
@@ -328,7 +364,7 @@ export default function FinFlux() {
                   ></iframe>
                   <div style={{ padding: "10px" }}>
                     <h3 style={{ fontSize: "16px", margin: 0 }}>
-                      {video.snippet.title}
+                      {decodeHtmlEntities(video.snippet.title)}
                     </h3>
                   </div>
                 </div>
