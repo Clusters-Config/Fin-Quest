@@ -97,7 +97,7 @@ function Homepage() {
             alt="FinQuest Logo"
             className="w-12 h-12 rounded-full drop-shadow-lg"
           />
-          <span className="text-2xl font-bold">FinQuest</span>
+          <span className="text-2xl font-bold sm:hidden">FinQuest</span>
         </div>
         {/* <ul className="flex justify-center items-center space-x-6 text-[#002147] text-sm font-medium">
           <li><Link to="/Learning_Paths" className="flex items-center gap-1 hover:text-[#28A745]"><Book /> Learn</Link></li>
