@@ -2,7 +2,7 @@
 
 **If the error: Port already in use occur, run this**
 ```
-Get-Process -Id (Get-NetTCPConnection -LocalPort 5173).OwningProcess | Stop-Process -Force
+npx kill-port 5173
 ```
 - Change the port you want to kill, here it is default as 5173
 
