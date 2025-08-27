@@ -52,9 +52,10 @@ const Testimonials = () => (
         fontSize: "2rem",
         fontWeight: "700",
         color: "#333",
+        
       }}
     >
-      What Our Users Say
+      TESTIMONIALS
     </h2>
     <div
       style={{

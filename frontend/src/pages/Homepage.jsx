@@ -30,6 +30,7 @@ import Chat from "../Services/Chat";
 import { motion } from "framer-motion";
 import Testimonials from "../components/testimonials";
 import FAQ from "../components/FAQ";
+import Testi from "../components/Testi";
 
 
 
@@ -169,6 +170,7 @@ function Homepage() {
               ></div>
             ))}
           </div>
+          {/* <Testi /> */}
           <div className="mt-5 text-base">
             <div className="flex justify-between">
               <span>Progress</span>
