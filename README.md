@@ -59,8 +59,8 @@ npx kill-port 5173
    │ ├── public/
    │ └── src/
    │ ├── components/
-   | ├── pages/
-   | ├── service/
+   │ ├── pages/
+   │ ├── service/
    │ ├── App.js
    │ └── ...
    ├── server/ # Node.js/Express backend
