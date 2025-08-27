@@ -28,6 +28,8 @@ import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
 import Index from "../Services/Chat";
 import Chat from "../Services/Chat";
 import { motion } from "framer-motion";
+import Testimonials from "../components/testimonials";
+import FAQ from "../components/FAQ";
 
 
 
@@ -210,6 +212,8 @@ function Homepage() {
           ))}
         </div>
       </section>
+               <Testimonials />
+
       <section className="py-20 px-6 bg-gray-50">
         <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
           👥 Learning Paths for Everyone
@@ -217,6 +221,7 @@ function Homepage() {
         <p className="text-lg text-center text-gray-600 mb-10">
           Tailored content and experiences designed for different life stages and financial goals
         </p>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto z-10">
 
@@ -244,6 +249,8 @@ function Homepage() {
               </button>
             </div>
           </div>
+
+        
 
           {/* College Students (Green to Gold Theme) */}
           <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
@@ -296,6 +303,8 @@ function Homepage() {
           </div>
         </div>
       </section>
+
+      <FAQ />
 
       {/* Footer */}
       <footer className="bg-[#002147] text-gray-300 py-12 px-6">
