@@ -13,6 +13,7 @@ import {
   Star,
   Target,
 } from "lucide-react";
+import Footer from "../Services/Footer";
 
 export default function FinanceQuest() {
   const navigate = useNavigate();
@@ -166,6 +167,7 @@ export default function FinanceQuest() {
           </button>
         </div>
       </section>
+      <Footer />
     </div>
   );
 }
