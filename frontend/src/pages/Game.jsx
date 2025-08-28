@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   TrendingUp,
   Bitcoin,
-  PiggyBank,
+  Search,
   Calendar,
   LineChart,
   BookOpen,
@@ -26,7 +26,7 @@ export default function FinanceQuest() {
               <Target className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold">FinanceQuest</h1>
+              <h1 className="text-xl font-bold">FinQuest</h1>
               <p className="text-xs text-gray-500">Gamified Financial Learning</p>
             </div>
           </div>
@@ -106,23 +106,23 @@ export default function FinanceQuest() {
           </button>
         </div>
 
-        {/* Personal Finance */}
-        <div className="bg-white shadow rounded-lg p-6 border-t-4 border-purple-600">
+        {/* Financial Word Search */}
+        <div className="bg-white shadow rounded-lg p-6 border-t-4 border-indigo-600">
           <div className="flex items-center justify-between mb-3">
-            <PiggyBank className="w-6 h-6 text-purple-600" />
-            <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">New</span>
+            <Search className="w-6 h-6 text-indigo-600" />
+            <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">Popular</span>
           </div>
-          <h3 className="text-lg font-bold mb-2">Personal Finance Challenge</h3>
+          <h3 className="text-lg font-bold mb-2">Financial Word Search</h3>
           <p className="text-sm text-gray-600 mb-4">
-            Master your skills and learn to manage money like a financial expert.
+            Test your financial knowledge by finding the correct terms in an interactive word grid.
           </p>
           <ul className="text-sm text-gray-700 space-y-1 mb-4">
-            <li>📊 Budget Planning</li>
-            <li>🎯 Savings Goals</li>
-            <li>💡 Smart Decisions</li>
+            <li>🎯 10 Financial Challenges</li>
+            <li>⭐ Star-Based Scoring</li>
+            <li>🏆 Performance Tracking</li>
           </ul>
-          <button onClick={() => navigate("/Monopoly")}className="w-full bg-purple-600 text-white py-2 rounded-md font-medium hover:bg-purple-700">
-            Start Challenge
+          <button onClick={() => navigate("/WordSearch")} className="w-full bg-indigo-600 text-white py-2 rounded-md font-medium hover:bg-indigo-700">
+            Start Word Search
           </button>
         </div>
 
@@ -141,7 +141,7 @@ export default function FinanceQuest() {
             <li>📚 Knowledge Testing</li>
             <li>🔥 Streak Building</li>
           </ul>
-          <button onClick={() => navigate("/DailyChallenges")}className="w-full bg-pink-600 text-white py-2 rounded-md font-medium hover:bg-pink-700">
+          <button onClick={() => navigate("/DailyChallenges")} className="w-full bg-pink-600 text-white py-2 rounded-md font-medium hover:bg-pink-700">
             Start Quest
           </button>
         </div>

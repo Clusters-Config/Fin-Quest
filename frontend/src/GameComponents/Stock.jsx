@@ -22,7 +22,7 @@ function generateInitialData() {
   for (let i = -119; i <= 0; i++) {
     price += (Math.random() - 0.48) * (0.6 + Math.random() * 0.9);
     data.push({
-      time: now + i * 30000, // 30 seconds intervals
+      time: now + i * 30000,
       value: +price.toFixed(2),
     });
   }
@@ -33,16 +33,19 @@ function confettiAnimation(canvas) {
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
   const particles = [];
-  const particleCount = 200;
+  const particleCount = 50;
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
   for (let i = 0; i < particleCount; i++) {
     particles.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      size: Math.random() * 5 + 2,
-      speedX: Math.random() * 6 - 3,
-      speedY: Math.random() * 3 + 2,
-      color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+      size: Math.random() * 3 + 2,
+      speedX: Math.random() * 4 - 2,
+      speedY: Math.random() * 2 + 1,
+      color: `hsl(${Math.random() * 360}, 70%, 60%)`,
     });
   }
 
@@ -52,7 +55,7 @@ function confettiAnimation(canvas) {
     particles.forEach((p) => {
       p.x += p.speedX;
       p.y += p.speedY;
-      p.speedY += 0.1; // gravity
+      p.speedY += 0.05;
 
       if (p.y < canvas.height) stillActive = true;
 
@@ -79,19 +82,19 @@ export default function StockPredictionGame() {
   const [direction, setDirection] = useState("up");
   const [streak, setStreak] = useState(0);
   const [score, setScore] = useState(0);
+  const [correctPredictions, setCorrectPredictions] = useState(0);
   const [ticker, setTicker] = useState([...TICKER_MESSAGES]);
   const [loading, setLoading] = useState(false);
   const [lastResult, setLastResult] = useState(null);
   const [showResult, setShowResult] = useState(false);
 
-  // Resize canvas to container width
   useEffect(() => {
     function resize() {
       if (!chartRef.current) return;
       const canvas = chartRef.current;
       const parent = canvas.parentElement;
       canvas.width = parent.clientWidth;
-      canvas.height = 400;
+      canvas.height = 280;
       drawChart();
     }
     resize();
@@ -99,7 +102,6 @@ export default function StockPredictionGame() {
     return () => window.removeEventListener("resize", resize);
   }, [data]);
 
-  // Update chart every 2 seconds with new data point
   useEffect(() => {
     if (loading) return;
     const interval = setInterval(() => {
@@ -115,18 +117,16 @@ export default function StockPredictionGame() {
     return () => clearInterval(interval);
   }, [loading]);
 
-  // Rotate ticker messages every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setTicker((t) => {
         const nextMsg = TICKER_MESSAGES[Math.floor(Math.random() * TICKER_MESSAGES.length)];
-        return [nextMsg, ...t].slice(0, 8);
+        return [nextMsg, ...t].slice(0, 4);
       });
-    }, 5000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
-  // Draw chart function with requested colors and shaded area
   function drawChart() {
     if (!chartRef.current) return;
     const canvas = chartRef.current;
@@ -137,32 +137,27 @@ export default function StockPredictionGame() {
 
     ctx.clearRect(0, 0, width, height);
 
-    // Draw grid lines (light bluish overlay)
-    ctx.strokeStyle = "rgba(173, 216, 230, 0.15)"; // light blue, faint
+    // Grid
+    ctx.strokeStyle = "rgba(156, 163, 175, 0.2)";
     ctx.lineWidth = 1;
-    for (let i = 0; i <= 5; i++) {
-      // vertical
-      const x = padding + ((width - 2 * padding) * i) / 5;
-      ctx.beginPath();
-      ctx.moveTo(x, padding);
-      ctx.lineTo(x, height - padding);
-      ctx.stroke();
-
-      // horizontal
-      const y = padding + ((height - 2 * padding) * i) / 5;
+    for (let i = 1; i <= 4; i++) {
+      const y = (height * i) / 5;
       ctx.beginPath();
       ctx.moveTo(padding, y);
       ctx.lineTo(width - padding, y);
       ctx.stroke();
     }
 
-    // Scale data
     const values = data.map((d) => d.value);
     const minVal = Math.min(...values);
     const maxVal = Math.max(...values);
     const range = maxVal - minVal || 1;
 
-    // Draw shaded area under line (light blue fill)
+    // Gradient fill
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
+    gradient.addColorStop(0, "rgba(59, 130, 246, 0.3)");
+    gradient.addColorStop(1, "rgba(59, 130, 246, 0.05)");
+
     ctx.beginPath();
     data.forEach((point, i) => {
       const x = padding + ((width - 2 * padding) * i) / (data.length - 1);
@@ -170,17 +165,16 @@ export default function StockPredictionGame() {
       if (i === 0) ctx.moveTo(x, y);
       else ctx.lineTo(x, y);
     });
-    // Close path to bottom right and bottom left
     ctx.lineTo(width - padding, height - padding);
     ctx.lineTo(padding, height - padding);
     ctx.closePath();
-    ctx.fillStyle = "rgba(173, 216, 230, 0.3)"; // light blue fill
+    ctx.fillStyle = gradient;
     ctx.fill();
 
-    // Draw line (blue)
+    // Line
     ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = "#1D4ED8"; // blue line
+    ctx.lineWidth = 2.5;
+    ctx.strokeStyle = "#3B82F6";
     data.forEach((point, i) => {
       const x = padding + ((width - 2 * padding) * i) / (data.length - 1);
       const y = height - padding - ((point.value - minVal) / range) * (height - 2 * padding);
@@ -189,37 +183,35 @@ export default function StockPredictionGame() {
     });
     ctx.stroke();
 
-    // Draw circular points on line (blue)
-    data.forEach((point, i) => {
-      const x = padding + ((width - 2 * padding) * i) / (data.length - 1);
-      const y = height - padding - ((point.value - minVal) / range) * (height - 2 * padding);
-      ctx.beginPath();
-      ctx.fillStyle = "#1D4ED8";
-      ctx.arc(x, y, 3, 0, 2 * Math.PI);
-      ctx.fill();
-    });
-
-    // Draw last point circle bigger (blue)
+    // Current price point
     const lastPoint = data[data.length - 1];
     const lastX = width - padding;
     const lastY = height - padding - ((lastPoint.value - minVal) / range) * (height - 2 * padding);
-    ctx.fillStyle = "#1D4ED8";
+    
+    ctx.fillStyle = "#3B82F6";
     ctx.beginPath();
-    ctx.arc(lastX, lastY, 6, 0, 2 * Math.PI);
+    ctx.arc(lastX, lastY, 5, 0, 2 * Math.PI);
     ctx.fill();
+    
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 2;
+    ctx.stroke();
 
-    // Draw current price label (purple text)
-    ctx.fillStyle = "#7C3AED"; // purple
-    ctx.font = "bold 14px monospace";
-    ctx.fillText(`$${lastPoint.value.toFixed(2)}`, lastX - 40, lastY - 15);
+    // Price label
+    ctx.fillStyle = "#1F2937";
+    ctx.font = "bold 14px -apple-system, system-ui, sans-serif";
+    const priceText = `$${lastPoint.value.toFixed(2)}`;
+    const textWidth = ctx.measureText(priceText).width;
+    ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
+    ctx.fillRect(lastX - textWidth/2 - 8, lastY - 25, textWidth + 16, 20);
+    ctx.fillStyle = "#1F2937";
+    ctx.fillText(priceText, lastX - textWidth/2, lastY - 10);
   }
 
-  // Redraw chart on data change
   useEffect(() => {
     drawChart();
   }, [data]);
 
-  // Handle prediction submit
   function submitPrediction() {
     if (loading || round > INITIAL_ROUNDS) return;
     setLoading(true);
@@ -244,18 +236,10 @@ export default function StockPredictionGame() {
 
       setScore((s) => (correct ? s + points : Math.max(0, s - penalty)));
       setStreak((st) => (correct ? st + 1 : 0));
+      setCorrectPredictions(prev => correct ? prev + 1 : prev);
       setLastResult({ correct, currentPrice, futurePrice, points, penalty });
       setShowResult(true);
 
-      // Update ticker
-      setTicker((t) => {
-        const resultMsg = `${correct ? "✅ WIN" : "❌ LOSS"}: ${
-          correct ? "+" + points : "-" + penalty
-        } points`;
-        return [resultMsg, ...t].slice(0, 8);
-      });
-
-      // Add future price to data
       setData((prev) => {
         const newData = [...prev.slice(1), { time: Date.now(), value: futurePrice }];
         return newData;
@@ -274,6 +258,7 @@ export default function StockPredictionGame() {
     setRound(1);
     setStreak(0);
     setScore(0);
+    setCorrectPredictions(0);
     setConfidence(50);
     setDirection("up");
     setLastResult(null);
@@ -281,175 +266,63 @@ export default function StockPredictionGame() {
     setData(generateInitialData());
   }
 
+  const accuracy = round > 1 ? Math.round((correctPredictions / (round - 1)) * 100) : 0;
+
   return (
-    <div
-      style={{
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-        background:
-          "linear-gradient(135deg, #f0f4f8 0%, #dbeafe 100%)", // light gray to pale blue gradient
-        minHeight: "100vh",
-        color: "#333333", // dark gray subtitle text
-        padding: 20,
-        maxWidth: 1400,
-        margin: "0 auto",
-        position: "relative",
-        overflowX: "hidden",
-      }}
-    >
-      {/* Faint candlestick pattern overlay */}
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          pointerEvents: "none",
-          backgroundImage:
-            "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05) 1px, transparent 1px), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.05) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
-          zIndex: 0,
-        }}
-      />
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Stock Prediction Challenge</h1>
+          <p className="text-gray-600">Predict market movements and test your trading skills</p>
+        </div>
 
-      <header
-        style={{
-          textAlign: "center",
-          marginBottom: 30,
-          padding: 20,
-          background: "rgba(255, 255, 255, 0.8)", // light gray/white overlay
-          borderRadius: 20,
-          border: "1px solid #cbd5e1", // faint bluish border
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: "2.5rem",
-            color: "#2EAD68", // green title text
-            marginBottom: 10,
-            fontWeight: "bold",
-          }}
-        >
-          Interactive Stock Prediction Challenge
-        </h1>
-        <p style={{ color: "#333333", fontSize: "1.1rem" }}>
-          Predict market movements and test your trading skills
-        </p>
-      </header>
+        {/* Main Grid */}
+        <div className="grid lg:grid-cols-4 gap-6">
+          {/* Chart Section - Takes up 3 columns */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Chart */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-lg font-semibold text-gray-900">Live Price Chart</h2>
+                <div className="text-2xl font-bold text-blue-600">
+                  ${data[data.length - 1]?.value.toFixed(2)}
+                </div>
+              </div>
+              <canvas ref={chartRef} className="w-full" style={{ height: '280px' }} />
+            </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: 20,
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <main>
-          <div
-            style={{
-              background: "white",
-              borderRadius: 20,
-              padding: 20,
-              border: "1px solid #cbd5e1",
-              position: "relative",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-            }}
-          >
-            <canvas
-              ref={chartRef}
-              style={{
-                width: "100%",
-                height: 400,
-                borderRadius: 12,
-                display: "block",
-              }}
-            />
-
-            <div
-              style={{
-                background: "white",
-                borderRadius: 16,
-                padding: 20,
-                marginTop: 20,
-                border: "1px solid #cbd5e1",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  gap: 10,
-                  marginBottom: 20,
-                }}
-              >
+            {/* Prediction Controls */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Make Your Prediction</h3>
+              
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
                 <button
                   onClick={() => setDirection("up")}
-                  className={direction === "up" ? "active" : ""}
-                  style={{
-                    flex: 1,
-                    padding: 15,
-                    borderRadius: 12,
-                    backgroundColor: direction === "up" ? "#2EAD68" : "#d1fae5", // green bg or light green
-                    border: "none",
-                    color: direction === "up" ? "white" : "#065f46",
-                    fontWeight: "bold",
-                    fontSize: 16,
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 8,
-                    userSelect: "none",
-                    transition: "background-color 0.3s",
-                  }}
+                  className={`p-4 rounded-lg border-2 font-semibold transition-all ${
+                    direction === "up"
+                      ? "bg-green-50 border-green-500 text-green-700"
+                      : "bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300"
+                  }`}
                 >
-                  ↗️ Up
+                  📈 Price Will Go Up
                 </button>
                 <button
                   onClick={() => setDirection("down")}
-                  className={direction === "down" ? "active" : ""}
-                  style={{
-                    flex: 1,
-                    padding: 15,
-                    borderRadius: 12,
-                    backgroundColor: direction === "down" ? "#ef4444" : "#fee2e2", // red bg or light red
-                    border: "none",
-                    color: direction === "down" ? "white" : "#991b1b",
-                    fontWeight: "bold",
-                    fontSize: 16,
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: 8,
-                    userSelect: "none",
-                    transition: "background-color 0.3s",
-                  }}
+                  className={`p-4 rounded-lg border-2 font-semibold transition-all ${
+                    direction === "down"
+                      ? "bg-red-50 border-red-500 text-red-700"
+                      : "bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300"
+                  }`}
                 >
-                  ↘️ Down
+                  📉 Price Will Go Down
                 </button>
               </div>
 
-              <div style={{ marginBottom: 10, color: "#9ca3af", fontSize: 14 }}>
-                Select Up or Down and adjust your confidence level
-              </div>
-
-              <div style={{ marginBottom: 20 }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: 10,
-                    color: "#6b7280",
-                    fontWeight: "600",
-                  }}
-                >
-                  <span>Confidence Level</span>
-                  <span>{confidence}%</span>
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-sm font-medium text-gray-700">Confidence Level</label>
+                  <span className="text-sm font-semibold text-gray-900">{confidence}%</span>
                 </div>
                 <input
                   type="range"
@@ -457,326 +330,133 @@ export default function StockPredictionGame() {
                   max={MAX_CONF}
                   value={confidence}
                   onChange={(e) => setConfidence(Number(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                   style={{
-                    width: "100%",
-                    height: 8,
-                    borderRadius: 10,
-                    background: "#bfdbfe", // light blue track
-                    outline: "none",
-                    WebkitAppearance: "none",
-                    cursor: "pointer",
+                    background: `linear-gradient(to right, #3B82F6 0%, #3B82F6 ${confidence}%, #E5E7EB ${confidence}%, #E5E7EB 100%)`
                   }}
                 />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>Low Risk</span>
+                  <span>High Risk</span>
+                </div>
               </div>
 
-              <div style={{ display: "flex", gap: 10 }}>
+              <div className="flex gap-3">
                 <button
                   onClick={submitPrediction}
                   disabled={loading || round > INITIAL_ROUNDS}
-                  style={{
-                    flex: 2,
-                    padding: 15,
-                    background: "#1D4ED8", // blue button
-                    color: "white",
-                    border: "none",
-                    borderRadius: 12,
-                    fontWeight: "bold",
-                    fontSize: 16,
-                    cursor: loading || round > INITIAL_ROUNDS ? "not-allowed" : "pointer",
-                    opacity: loading || round > INITIAL_ROUNDS ? 0.6 : 1,
-                    transition: "all 0.3s ease",
-                    userSelect: "none",
-                  }}
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
                 >
-                  {loading ? "⏳ Evaluating..." : "🎯 Place Prediction"}
+                  {loading ? "Evaluating..." : "Submit Prediction"}
                 </button>
                 <button
                   onClick={resetGame}
-                  style={{
-                    padding: "15px 20px",
-                    background: "#f3f4f6", // light gray
-                    color: "#374151", // dark gray text
-                                        border: "1px solid #d1d5db", // gray border
-                    borderRadius: 12,
-                    cursor: "pointer",
-                    userSelect: "none",
-                    transition: "background-color 0.3s",
-                  }}
-                  onMouseEnter={e => e.currentTarget.style.backgroundColor = "#e5e7eb"}
-                  onMouseLeave={e => e.currentTarget.style.backgroundColor = "#f3f4f6"}
+                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-lg transition-colors"
                 >
-                  🔄 Reset
+                  Reset Game
                 </button>
               </div>
             </div>
           </div>
-        </main>
 
-        <aside
-          style={{
-            marginTop: 20,
-            display: "flex",
-            flexDirection: "column",
-            gap: 20,
-          }}
-        >
-          <section
-            style={{
-              background: "white",
-              borderRadius: 20,
-              padding: 20,
-              border: "1px solid #cbd5e1",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-            }}
-          >
-            <h2 style={{ fontSize: 20, fontWeight: "bold", marginBottom: 15, color: "#374151" }}>
-              Game Stats
-            </h2>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: 10,
-              }}
-            >
-              {[
-                { label: "Round", value: `${round}/${INITIAL_ROUNDS}`, color: "#60a5fa" }, // light blue progress bar color
-                { label: "Score", value: score, color: "#2EAD68" }, // green
-                { label: "Accuracy", value: "0%", color: "#1D4ED8" }, // blue (placeholder)
-                { label: "Streak", value: streak, color: "#bfdbfe", textColor: "#1e40af" }, // light blue bg, dark blue text
-              ].map(({ label, value, color, textColor }) => (
-                <div
-                  key={label}
-                  style={{
-                    background: label === "Streak" ? color : "rgba(30, 41, 59, 0.1)",
-                    padding: 12,
-                    borderRadius: 12,
-                    textAlign: "center",
-                    color: label === "Streak" ? textColor : "#374151",
-                    fontWeight: label === "Score" ? "bold" : "normal",
-                    fontSize: label === "Score" ? 24 : 16,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div style={{ fontSize: 14, marginBottom: 5, fontWeight: "600" }}>{label}</div>
-                  <div style={{ fontSize: 20 }}>{value}</div>
-                  {label === "Round" && (
+          {/* Sidebar */}
+          <div className="space-y-6">
+            {/* Game Stats */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+              <h3 className="font-semibold text-gray-900 mb-3">Game Progress</h3>
+              <div className="space-y-3">
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-600">Round</span>
+                    <span className="font-medium">{round}/{INITIAL_ROUNDS}</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
                     <div
-                      style={{
-                        marginTop: 6,
-                        height: 6,
-                        width: "100%",
-                        backgroundColor: "#dbeafe",
-                        borderRadius: 3,
-                        overflow: "hidden",
-                      }}
-                    >
-                      <div
-                        style={{
-                          width: `${(round / INITIAL_ROUNDS) * 100}%`,
-                          height: "100%",
-                          backgroundColor: "#60a5fa",
-                          borderRadius: 3,
-                          transition: "width 0.3s ease",
-                        }}
-                      />
-                    </div>
-                  )}
+                      className="bg-blue-600 h-2 rounded-full transition-all"
+                      style={{ width: `${(round / INITIAL_ROUNDS) * 100}%` }}
+                    />
+                  </div>
                 </div>
-              ))}
+                
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-600">Score</span>
+                  <span className="font-bold text-lg text-green-600">{score}</span>
+                </div>
+                
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-600">Accuracy</span>
+                  <span className="font-medium">{accuracy}%</span>
+                </div>
+                
+                <div className="flex justify-between">
+                  <span className="text-sm text-gray-600">Streak</span>
+                  <span className="font-medium">{streak}</span>
+                </div>
+              </div>
             </div>
-          </section>
 
-          <section
-            style={{
-              background: "white",
-              borderRadius: 20,
-              padding: 20,
-              border: "1px solid #cbd5e1",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-            }}
-          >
-            <h2 style={{ fontSize: 20, fontWeight: "bold", marginBottom: 15, color: "#374151" }}>
-              Market News
-            </h2>
-            <div
-              style={{
-                height: 120,
-                overflow: "hidden",
-                position: "relative",
-                color: "#6b7280",
-                fontSize: 14,
-                whiteSpace: "nowrap",
-              }}
-            >
-              <div
-                style={{
-                  position: "absolute",
-                  animation: "ticker-scroll 25s linear infinite",
-                }}
-              >
-                {ticker.map((msg, i) => (
-                  <span key={i} style={{ marginRight: 40 }}>
-                    {msg} •
-                  </span>
+            {/* Market News Ticker */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+              <h3 className="font-semibold text-gray-900 mb-3">Market News</h3>
+              <div className="space-y-2 text-sm text-gray-600 max-h-32 overflow-hidden">
+                {ticker.slice(0, 3).map((msg, i) => (
+                  <div key={i} className="py-1 border-l-2 border-blue-500 pl-2">
+                    {msg}
+                  </div>
                 ))}
               </div>
-              <style>{`
-                @keyframes ticker-scroll {
-                  0% { transform: translateX(100%); }
-                  100% { transform: translateX(-100%); }
-                }
-              `}</style>
             </div>
-          </section>
 
-          <section
-            style={{
-              background: "white",
-              borderRadius: 20,
-              padding: 20,
-              border: "1px solid #cbd5e1",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
-            }}
-          >
-            <h2 style={{ fontSize: 20, fontWeight: "bold", marginBottom: 15, color: "#374151" }}>
-              Trading Tips
-            </h2>
-            <div style={{ display: "grid", gap: 12 }}>
-              <div
-                style={{
-                  background: "#dbeafe",
-                  padding: 12,
-                  borderRadius: 12,
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: "bold",
-                    color: "#1e40af",
-                    marginBottom: 5,
-                  }}
-                >
-                  Trend Analysis
+            {/* Trading Tips */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
+              <h3 className="font-semibold text-gray-900 mb-3">Quick Tips</h3>
+              <div className="space-y-2 text-xs text-gray-600">
+                <div className="bg-blue-50 p-2 rounded">
+                  <span className="font-medium text-blue-700">Trend:</span> Look for patterns in recent price movements
                 </div>
-                <div style={{ color: "#374151", fontSize: 14 }}>
-                  Look for consistent higher highs and lower lows to identify trends.
+                <div className="bg-green-50 p-2 rounded">
+                  <span className="font-medium text-green-700">Risk:</span> Higher confidence = higher reward/penalty
                 </div>
-              </div>
-              <div
-                style={{
-                  background: "#d1fae5",
-                  padding: 12,
-                  borderRadius: 12,
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: "bold",
-                    color: "#065f46",
-                    marginBottom: 5,
-                  }}
-                >
-                  Risk Management
-                </div>
-                <div style={{ color: "#374151", fontSize: 14 }}>
-                  Higher confidence increases both potential rewards and risks.
-                </div>
-              </div>
-              <div
-                style={{
-                  background: "#fee2e2",
-                  padding: 12,
-                  borderRadius: 12,
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: "bold",
-                    color: "#991b1b",
-                    marginBottom: 5,
-                  }}
-                >
-                  Psychology
-                </div>
-                <div style={{ color: "#374151", fontSize: 14 }}>
-                  Stay disciplined and avoid emotional trading decisions.
+                <div className="bg-yellow-50 p-2 rounded">
+                  <span className="font-medium text-yellow-700">Streak:</span> Consecutive wins boost your score
                 </div>
               </div>
             </div>
-          </section>
-        </aside>
+          </div>
+        </div>
       </div>
 
-      {/* Confetti canvas */}
+      {/* Confetti Canvas */}
       <canvas
         ref={confettiRef}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          pointerEvents: "none",
-          zIndex: 999,
-        }}
+        className="fixed inset-0 pointer-events-none z-50"
       />
 
       {/* Result Modal */}
       {showResult && lastResult && (
-        <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            background: "white",
-            padding: 30,
-            borderRadius: 20,
-            border: "1px solid #cbd5e1",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-            zIndex: 1000,
-            textAlign: "center",
-            minWidth: 300,
-            color: lastResult.correct ? "#2EAD68" : "#ef4444",
-            animation: "fade-in 0.3s ease-out",
-          }}
-        >
-          <h3 style={{ marginBottom: 20 }}>
-            {lastResult.correct ? "✅ Correct Prediction!" : "❌ Prediction Missed"}
-          </h3>
-          <p style={{ marginBottom: 10, color: "#6b7280" }}>
-            ${lastResult.currentPrice.toFixed(2)} → ${lastResult.futurePrice.toFixed(2)}
-          </p>
-          <p style={{ fontSize: 24, fontWeight: "bold", marginBottom: 20 }}>
-            {lastResult.correct ? `+${lastResult.points}` : `-${lastResult.penalty || 0}`}
-          </p>
-          <button
-            onClick={() => setShowResult(false)}
-            style={{
-              padding: "10px 20px",
-              background: lastResult.correct ? "#2EAD68" : "#ef4444",
-              color: "white",
-              border: "none",
-              borderRadius: 8,
-              cursor: "pointer",
-              userSelect: "none",
-              fontWeight: "bold",
-              transition: "background-color 0.3s",
-            }}
-            onMouseEnter={e => e.currentTarget.style.backgroundColor = lastResult.correct ? "#249a5a" : "#dc2626"}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = lastResult.correct ? "#2EAD68" : "#ef4444"}
-          >
-            Continue
-          </button>
-          <style>{`
-            @keyframes fade-in {
-              from { opacity: 0; transform: translateY(20px); }
-              to { opacity: 1; transform: translateY(0); }
-            }
-          `}</style>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-sm w-full mx-4 text-center">
+            <div className={`text-4xl mb-3 ${lastResult.correct ? 'text-green-600' : 'text-red-600'}`}>
+              {lastResult.correct ? '🎉' : '😞'}
+            </div>
+            <h3 className={`text-xl font-bold mb-2 ${lastResult.correct ? 'text-green-600' : 'text-red-600'}`}>
+              {lastResult.correct ? 'Correct!' : 'Wrong Prediction'}
+            </h3>
+            <p className="text-gray-600 mb-2">
+              ${lastResult.currentPrice.toFixed(2)} → ${lastResult.futurePrice.toFixed(2)}
+            </p>
+            <p className={`text-2xl font-bold mb-4 ${lastResult.correct ? 'text-green-600' : 'text-red-600'}`}>
+              {lastResult.correct ? `+${lastResult.points}` : `-${lastResult.penalty || 0}`} points
+            </p>
+            <button
+              onClick={() => setShowResult(false)}
+              className={`w-full py-2 px-4 rounded-lg text-white font-semibold ${
+                lastResult.correct ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'
+              }`}
+            >
+              Continue
+            </button>
+          </div>
         </div>
       )}
     </div>
