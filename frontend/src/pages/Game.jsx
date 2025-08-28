@@ -81,7 +81,7 @@ export default function FinanceQuest() {
             <li>📈 Technical Analysis</li>
             <li>🏆 Score & Streak System</li>
           </ul>
-          <button  className="w-full bg-green-600 text-white py-2 rounded-md font-medium hover:bg-green-700">
+          <button onClick={() => navigate("/Stock")} className="w-full bg-green-600 text-white py-2 rounded-md font-medium hover:bg-green-700">
             Play Now
           </button>
         </div>
@@ -101,7 +101,7 @@ export default function FinanceQuest() {
             <li>📂 Portfolio Management</li>
             <li>⚡ Fast-paced Trading</li>
           </ul>
-          <button onClick={() => navigate("/ProfitLossLadder")} className="w-full bg-blue-600 text-white py-2 rounded-md font-medium hover:bg-blue-700">
+          <button onClick={() => navigate("/CryptoTrade")} className="w-full bg-blue-600 text-white py-2 rounded-md font-medium hover:bg-blue-700">
             Start Trading
           </button>
         </div>
@@ -114,15 +114,15 @@ export default function FinanceQuest() {
           </div>
           <h3 className="text-lg font-bold mb-2">Personal Finance Challenge</h3>
           <p className="text-sm text-gray-600 mb-4">
-            Master budgeting skills and learn to manage money like a financial expert.
+            Master your skills and learn to manage money like a financial expert.
           </p>
           <ul className="text-sm text-gray-700 space-y-1 mb-4">
             <li>📊 Budget Planning</li>
             <li>🎯 Savings Goals</li>
             <li>💡 Smart Decisions</li>
           </ul>
-          <button className="w-full bg-purple-600 text-white py-2 rounded-md font-medium hover:bg-purple-700">
-            Start Budgeting
+          <button onClick={() => navigate("/Monopoly")}className="w-full bg-purple-600 text-white py-2 rounded-md font-medium hover:bg-purple-700">
+            Start Challenge
           </button>
         </div>
 
@@ -141,7 +141,7 @@ export default function FinanceQuest() {
             <li>📚 Knowledge Testing</li>
             <li>🔥 Streak Building</li>
           </ul>
-          <button className="w-full bg-pink-600 text-white py-2 rounded-md font-medium hover:bg-pink-700">
+          <button onClick={() => navigate("/DailyChallenges")}className="w-full bg-pink-600 text-white py-2 rounded-md font-medium hover:bg-pink-700">
             Start Quest
           </button>
         </div>

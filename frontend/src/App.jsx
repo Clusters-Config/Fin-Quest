@@ -42,7 +42,7 @@ import Profile from "./pages/Profile";
 import Index from './Services/Chat';
 
 
-import ProfitLossLadder from "./GameComponents/ProfitLossLadder";
+import CryptoTrade from "./GameComponents/CryptoTrade";
 import Stock from "./GameComponents/Stock";
 import Monopoly from "./GameComponents/Monopoly";
 import DailyChallenges from "./GameComponents/DailyChallenges"
@@ -92,7 +92,7 @@ const App = () => {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/Quiz" element={< Quiz />} />
 
-            <Route path="/ProfitLossLadder" element={<ProfitLossLadder />} />
+            <Route path="/CryptoTrade" element={<CryptoTrade />} />
             <Route path="/Stock" element={<Stock />} />
             <Route path="/Monopoly" element={<Monopoly />} />
             <Route path="/DailyChallenges" element={<DailyChallenges />} />

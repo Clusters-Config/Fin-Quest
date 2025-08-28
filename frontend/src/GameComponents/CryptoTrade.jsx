@@ -25,6 +25,7 @@ export default function CryptoTradingGame() {
   const [trades, setTrades] = useState([]);
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [tradeAmount, setTradeAmount] = useState(1000);
+  const [gameOver, setGameOver] = useState(false); // 🆕 new state for result screen
 
   // 🎯 difficulty settings
   const difficultySettings = {
@@ -35,7 +36,7 @@ export default function CryptoTradingGame() {
 
   // 📈 simulate price changes
   useEffect(() => {
-    if (!gameStarted || !difficulty) return;
+    if (!gameStarted || !difficulty || gameOver) return;
     const interval = setInterval(() => {
       const volatility = difficultySettings[difficulty];
       setCryptos((prev) =>
@@ -50,13 +51,15 @@ export default function CryptoTradingGame() {
       );
     }, 3000);
     return () => clearInterval(interval);
-  }, [gameStarted, difficulty]);
+  }, [gameStarted, difficulty, gameOver]);
 
   // ⏳ countdown timer
   useEffect(() => {
     if (gameStarted && timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
+    } else if (gameStarted && timeLeft === 0) {
+      setGameOver(true); // 🆕 show result when time ends
     }
   }, [timeLeft, gameStarted]);
 
@@ -145,6 +148,52 @@ export default function CryptoTradingGame() {
           className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-400"
         >
           Start Game
+        </button>
+      </div>
+    );
+  }
+
+  // 🏆 RESULT SCREEN AFTER GAME OVER
+  if (gameOver) {
+    return (
+      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-8 text-center">
+        <h2 className="text-3xl font-bold mb-4">🏆 Game Over!</h2>
+        <p className="text-gray-600 mb-6">Here’s your trading performance:</p>
+
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Final Balance</p>
+            <p className="text-lg font-bold">${balance.toFixed(2)}</p>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Portfolio Value</p>
+            <p className="text-lg font-bold">${(totalValue - balance).toFixed(2)}</p>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Total Value</p>
+            <p className="text-lg font-bold">${totalValue.toFixed(2)}</p>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <p className="text-sm text-gray-500">Profit / Loss</p>
+            <p className={`text-lg font-bold ${profit >= 0 ? "text-green-600" : "text-red-600"}`}>
+              {profit >= 0 ? "+" : ""}${profit.toFixed(2)} ({profitPercentage.toFixed(1)}%)
+            </p>
+          </div>
+        </div>
+
+        <button
+          onClick={() => {
+            setCryptos(initialCryptos);
+            setBalance(10000);
+            setTrades([]);
+            setSelectedCrypto(null);
+            setGameStarted(false);
+            setGameOver(false);
+            setDifficulty(null);
+          }}
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+        >
+          Play Again
         </button>
       </div>
     );
