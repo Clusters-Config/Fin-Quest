@@ -931,7 +931,7 @@ const Learning_paths = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {username !== "null" ? (
+      {username  ? (
         <>
           {/* Enhanced Header */}
           <div className="relative overflow-hidden bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900">
