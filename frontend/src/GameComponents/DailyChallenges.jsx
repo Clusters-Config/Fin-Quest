@@ -371,7 +371,7 @@ const DailyQuiz = () => {
               </div>
             </div>
           </div>
-          <main className=" mx-auto px-4 py-6">
+          <main className=" mx-auto px-4 py-6 mt-4">
             <div className="max-w-3xl mx-auto">
               {/* Progress Section */}
               <div className="bg-white rounded-2xl shadow-md p-4 mb-6 border border-gray-100">
