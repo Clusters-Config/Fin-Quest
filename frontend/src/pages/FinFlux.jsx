@@ -325,62 +325,108 @@ export default function FinFlux() {
             {typedText}
           </h2>
 
-          <div
-            className="video-grid"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "20px",
-            }}
-          >
-            {otherVideos.length > 0 ? (
-              otherVideos.map((video) => (
-                <div
-                  key={video.id.videoId}
-                  className="video-card"
-                  style={{
-                    background: "#1a1f2e",
-                    borderRadius: "10px",
-                    overflow: "hidden",
-                    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-                    transition: "transform 0.2s ease",
-                    cursor: "pointer",
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.transform = "scale(1.03)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.transform = "scale(1)")
-                  }
-                >
-                  <iframe
-                    width="100%"
-                    height="180"
-                    src={`https://www.youtube.com/embed/${video.id.videoId}`}
-                    title={video.snippet.title}
-                    frameBorder="0"
-                    allowFullScreen
-                    loading="lazy"
-                  ></iframe>
-                  <div style={{ padding: "10px" }}>
-                    <h3 style={{ fontSize: "16px", margin: 0 }}>
-                      {decodeHtmlEntities(video.snippet.title)}
-                    </h3>
+          {selectedCategory === "SHORTS" ? (
+            // 🔥 Shorts Mode (Reels Style)
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "20px",
+              }}
+            >
+              {otherVideos.length > 0 ? (
+                otherVideos.map((video) => (
+                  <div
+                    key={video.id.videoId}
+                    style={{
+                      width: "100%",
+                      maxWidth: "400px",
+                      height: "80vh",
+                      background: "#000",
+                      borderRadius: "12px",
+                      overflow: "hidden",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <iframe
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                      title={video.snippet.title}
+                      frameBorder="0"
+                      allowFullScreen
+                      loading="lazy"
+                      style={{ objectFit: "cover" }}
+                    ></iframe>
                   </div>
-                </div>
-              ))
-            ) : (
-              <p
-                style={{
-                  color: "#ccc",
-                  gridColumn: "1 / -1",
-                  textAlign: "center",
-                }}
-              >
-                No videos match your search.
-              </p>
-            )}
-          </div>
+                ))
+              ) : (
+                <p style={{ color: "#ccc" }}>No shorts match your search.</p>
+              )}
+            </div>
+          ) : (
+            // 🎥 Normal Grid for Videos
+            <div
+              className="video-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                gap: "20px",
+              }}
+            >
+              {otherVideos.length > 0 ? (
+                otherVideos.map((video) => (
+                  <div
+                    key={video.id.videoId}
+                    className="video-card"
+                    style={{
+                      background: "#1a1f2e",
+                      borderRadius: "10px",
+                      overflow: "hidden",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+                      transition: "transform 0.2s ease",
+                      cursor: "pointer",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.transform = "scale(1.03)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.transform = "scale(1)")
+                    }
+                  >
+                    <iframe
+                      width="100%"
+                      height="180"
+                      src={`https://www.youtube.com/embed/${video.id.videoId}`}
+                      title={video.snippet.title}
+                      frameBorder="0"
+                      allowFullScreen
+                      loading="lazy"
+                    ></iframe>
+                    <div style={{ padding: "10px" }}>
+                      <h3 style={{ fontSize: "16px", margin: 0 }}>
+                        {decodeHtmlEntities(video.snippet.title)}
+                      </h3>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p
+                  style={{
+                    color: "#ccc",
+                    gridColumn: "1 / -1",
+                    textAlign: "center",
+                  }}
+                >
+                  No videos match your search.
+                </p>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>
