@@ -21,6 +21,7 @@ import {
 } from 'recharts';
 import {marked} from 'marked';
 import Chat from "../Services/Chat";
+import Footer from "../Services/Footer";
 
 // New functional Rule Calculator component with AI
 const RuleCalculator = () => {
@@ -496,6 +497,7 @@ const FinancialDashboard = () => {
   };
 
   return (
+    <div className="flex flex-col gap-6">
     <div className="w-full min-h-screen bg-gray-100 font-sans flex flex-col items-center p-6">
       <Chat/>
       {/* Header */}
@@ -576,6 +578,7 @@ const FinancialDashboard = () => {
       <script src="https://unpkg.com/recharts/umd/Recharts.min.js"></script>
 
       
+    </div>  <Footer/>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { FaMoneyBillWave, FaPiggyBank, FaCoins, FaCalculator, FaExchangeAlt, FaT
 import { useSpring, animated } from "@react-spring/web";
 import { SparklesIcon, FilePieChart, Lightbulb, TrendingUp } from 'lucide-react';
 import Chat from "../Services/Chat";
-
+import Footer from "../Services/Footer";
 // Reusable Modal Component with consistent styling
 const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
@@ -300,6 +300,7 @@ const Simulations = () => {
   );
 
   return (
+    <div className="flex flex-col min-h-screen">
     <div className="bg-white min-h-screen flex items-start justify-center p-4 sm:p-6 font-inter text-gray-800">
       <div className="bg-[#F8FAFC] shadow-2xl rounded-2xl w-full max-w-6xl p-6 sm:p-10">
         <header className="text-center py-8 mb-8">
@@ -899,6 +900,10 @@ const Simulations = () => {
           message={messageBoxMessage}
         />
       </div>
+      
+    </div>
+    <Chat />
+<Footer/>
     </div>
   );
 };
