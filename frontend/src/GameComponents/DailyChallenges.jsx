@@ -350,7 +350,7 @@ const DailyQuiz = () => {
     <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
       {/* Header */}
       <header className="bg-white shadow-md border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto px-4 py-4 flex-col mb-4">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -371,122 +371,123 @@ const DailyQuiz = () => {
               </div>
             </div>
           </div>
+          <main className=" mx-auto px-4 py-6">
+            <div className="max-w-3xl mx-auto">
+              {/* Progress Section */}
+              <div className="bg-white rounded-2xl shadow-md p-4 mb-6 border border-gray-100">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-semibold text-gray-600">PROGRESS</span>
+                  <span className="text-xs font-semibold text-gray-600">
+                    Day {currentDay} of {questions.length}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
+                  <div
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500 ease-out"
+                    style={{ width: `${progress}%` }}
+                  ></div>
+                </div>
+                <div className="text-right text-xs text-gray-500">{Math.round(progress)}% complete</div>
+              </div>
+
+
+              {/* Question Card */}
+              <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+                {hasAnsweredToday ? (
+                  <div className="p-12 text-center">
+                    <Clock className="w-16 h-16 text-blue-500 mx-auto mb-6" />
+                    <h2 className="text-2xl font-bold text-gray-800 mb-4">Come back tomorrow!</h2>
+                    <p className="text-gray-600 mb-6">
+                      You've already answered today's question. Next question available in:
+                    </p>
+                    <div className="inline-flex items-center space-x-2 bg-blue-50 px-6 py-3 rounded-full border border-blue-200">
+                      <Calendar className="w-5 h-5 text-blue-500" />
+                      <span className="font-bold text-blue-700 text-xl">{timeUntilNext}</span>
+                    </div>
+                    {showFeedback && (
+                      <div className={`mt-6 p-4 rounded-2xl ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
+                        <p className={`font-semibold ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+                          {isCorrect ? '✅ Correct! Great job!' : '❌ Not quite right, but keep learning!'}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="p-8">
+                    <div className="mb-8">
+                      <div className="flex items-center space-x-3 mb-4">
+                        <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                          {currentQuestion?.day}
+                        </div>
+                        <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                          Daily Challenge
+                        </span>
+                      </div>
+                      <h2 className="text-3xl font-bold text-gray-800 mb-4">
+                        {currentQuestion?.question}
+                      </h2>
+                      <p className="text-gray-600 text-lg leading-relaxed">
+                        {currentQuestion?.description}
+                      </p>
+                    </div>
+
+                    <div className="space-y-6">
+                      <div>
+                        <input
+                          type={currentQuestion?.type === 'number' ? 'number' : 'text'}
+                          value={answer}
+                          onChange={(e) => setAnswer(e.target.value)}
+                          placeholder="Type your answer here..."
+                          className="w-full p-4 border-2 border-gray-200 rounded-2xl text-lg focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
+                          onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
+                        />
+                      </div>
+
+                      <button
+                        onClick={handleSubmit}
+                        disabled={!answer.trim()}
+                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100 shadow-lg disabled:shadow-none flex items-center justify-center space-x-3 text-lg"
+                      >
+                        <Check className="w-6 h-6" />
+                        <span>Submit Answer</span>
+                      </button>
+
+                      {showFeedback && (
+                        <div className={`p-6 rounded-2xl border-2 transition-all duration-300 ${isCorrect
+                          ? 'bg-green-50 border-green-200 text-green-800'
+                          : 'bg-red-50 border-red-200 text-red-800'
+                          }`}>
+                          <p className="font-semibold text-lg mb-2">
+                            {isCorrect ? '🎉 Excellent work!' : '💪 Keep learning!'}
+                          </p>
+                          <p className="text-sm opacity-80">
+                            {isCorrect ? 'You\'re building great financial knowledge!' : 'Every mistake is a step toward mastery.'}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Stats Footer */}
+              <div className="mt-8 text-center">
+                <p className="text-gray-500 text-sm">
+                  Accuracy: <span className="font-semibold text-gray-700">{completionRate}%</span>
+                  {streak > 0 && (
+                    <span className="ml-4">
+                      🔥 You're on fire with a {streak}-day streak!
+                    </span>
+                  )}
+                </p>
+              </div>
+            </div>
+          </main>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-6">
-        <div className="max-w-3xl mx-auto">
-          {/* Progress Section */}
-          <div className="bg-white rounded-2xl shadow-md p-4 mb-6 border border-gray-100">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-semibold text-gray-600">PROGRESS</span>
-              <span className="text-xs font-semibold text-gray-600">
-                Day {currentDay} of {questions.length}
-              </span>
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
-              <div
-                className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500 ease-out"
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            <div className="text-right text-xs text-gray-500">{Math.round(progress)}% complete</div>
-          </div>
-
-
-          {/* Question Card */}
-          <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
-            {hasAnsweredToday ? (
-              <div className="p-12 text-center">
-                <Clock className="w-16 h-16 text-blue-500 mx-auto mb-6" />
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">Come back tomorrow!</h2>
-                <p className="text-gray-600 mb-6">
-                  You've already answered today's question. Next question available in:
-                </p>
-                <div className="inline-flex items-center space-x-2 bg-blue-50 px-6 py-3 rounded-full border border-blue-200">
-                  <Calendar className="w-5 h-5 text-blue-500" />
-                  <span className="font-bold text-blue-700 text-xl">{timeUntilNext}</span>
-                </div>
-                {showFeedback && (
-                  <div className={`mt-6 p-4 rounded-2xl ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}>
-                    <p className={`font-semibold ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
-                      {isCorrect ? '✅ Correct! Great job!' : '❌ Not quite right, but keep learning!'}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div className="p-8">
-                <div className="mb-8">
-                  <div className="flex items-center space-x-3 mb-4">
-                    <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
-                      {currentQuestion?.day}
-                    </div>
-                    <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
-                      Daily Challenge
-                    </span>
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                    {currentQuestion?.question}
-                  </h2>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    {currentQuestion?.description}
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <input
-                      type={currentQuestion?.type === 'number' ? 'number' : 'text'}
-                      value={answer}
-                      onChange={(e) => setAnswer(e.target.value)}
-                      placeholder="Type your answer here..."
-                      className="w-full p-4 border-2 border-gray-200 rounded-2xl text-lg focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
-                      onKeyPress={(e) => e.key === 'Enter' && handleSubmit()}
-                    />
-                  </div>
-
-                  <button
-                    onClick={handleSubmit}
-                    disabled={!answer.trim()}
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-semibold py-4 px-6 rounded-2xl transition-all duration-300 transform hover:scale-105 disabled:hover:scale-100 shadow-lg disabled:shadow-none flex items-center justify-center space-x-3 text-lg"
-                  >
-                    <Check className="w-6 h-6" />
-                    <span>Submit Answer</span>
-                  </button>
-
-                  {showFeedback && (
-                    <div className={`p-6 rounded-2xl border-2 transition-all duration-300 ${isCorrect
-                        ? 'bg-green-50 border-green-200 text-green-800'
-                        : 'bg-red-50 border-red-200 text-red-800'
-                      }`}>
-                      <p className="font-semibold text-lg mb-2">
-                        {isCorrect ? '🎉 Excellent work!' : '💪 Keep learning!'}
-                      </p>
-                      <p className="text-sm opacity-80">
-                        {isCorrect ? 'You\'re building great financial knowledge!' : 'Every mistake is a step toward mastery.'}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Stats Footer */}
-          <div className="mt-8 text-center">
-            <p className="text-gray-500 text-sm">
-              Accuracy: <span className="font-semibold text-gray-700">{completionRate}%</span>
-              {streak > 0 && (
-                <span className="ml-4">
-                  🔥 You're on fire with a {streak}-day streak!
-                </span>
-              )}
-            </p>
-          </div>
-        </div>
-      </main>
+  
     </div>
   );
 };
