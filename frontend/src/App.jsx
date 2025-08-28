@@ -44,7 +44,7 @@ import Index from './Services/Chat';
 
 import CryptoTrade from "./GameComponents/CryptoTrade";
 import Stock from "./GameComponents/Stock";
-import Monopoly from "./GameComponents/Monopoly";
+import WordSearch from "./GameComponents/WordSearch";
 import DailyChallenges from "./GameComponents/DailyChallenges"
 import ProfilePage from "./learn_path_components/ProfilePage";
 import GameProfile from "./GameComponents/GameProfile"
@@ -94,7 +94,7 @@ const App = () => {
 
             <Route path="/CryptoTrade" element={<CryptoTrade />} />
             <Route path="/Stock" element={<Stock />} />
-            <Route path="/Monopoly" element={<Monopoly />} />
+            <Route path="/WordSearch" element={<WordSearch />} />
             <Route path="/DailyChallenges" element={<DailyChallenges />} />
             <Route path="/ProfilePage" element={<ProfilePage />} />
             <Route path="/GameProfile" element={<GameProfile />} />
