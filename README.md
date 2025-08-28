@@ -2,7 +2,7 @@
 
 **If the error: Port already in use occur, run this**
 ```
-Get-Process -Id (Get-NetTCPConnection -LocalPort 5173).OwningProcess | Stop-Process -Force
+npx kill-port 5173
 ```
 - Change the port you want to kill, here it is default as 5173
 
@@ -59,6 +59,8 @@ Get-Process -Id (Get-NetTCPConnection -LocalPort 5173).OwningProcess | Stop-Proc
    │ ├── public/
    │ └── src/
    │ ├── components/
+   │ ├── pages/
+   │ ├── service/
    │ ├── App.js
    │ └── ...
    ├── server/ # Node.js/Express backend
@@ -201,8 +203,8 @@ Get-Process -Id (Get-NetTCPConnection -LocalPort 5173).OwningProcess | Stop-Proc
 
 ## V. Deployment
 
-- **Backend:** Deploy your Node.js/Express.js backend to a platform like Heroku, AWS, or Google Cloud.
-- **Frontend:** Build the React app (`npm run build` in the client directory) and deploy the static files to a platform like Netlify, Vercel, or AWS S3.
+- **Backend:** Deploying Node.js/Express.js backend to a platform AWS.
+- **Frontend:** Build the React app (`npm run build` in the client directory) and deploy the static files to a platform Render.
 
-This detailed breakdown should give you a solid foundation for building your talent matching and training platform. Remember to break down the project into smaller, manageable tasks and test your code thoroughly throughout the development process.
+This detailed breakdown should give you a solid foundation for building your FinQuest. Remember to break down the project into smaller, manageable tasks and test your code thoroughly throughout the development process.
 
