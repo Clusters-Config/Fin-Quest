@@ -4,6 +4,7 @@ import { useSpring, animated } from "@react-spring/web";
 import { SparklesIcon, FilePieChart, Lightbulb, TrendingUp } from 'lucide-react';
 import Chat from "../Services/Chat";
 import Footer from "../Services/Footer";
+import Header from "../Services/Header";
 // Reusable Modal Component with consistent styling
 const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
@@ -11,6 +12,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 font-inter">
       <Chat/>
+      <Header />
       <div className="bg-white p-6 rounded-xl shadow-2xl w-full max-w-lg max-h-[95vh] overflow-y-auto transform transition-all duration-300 scale-100 opacity-100">
         <h2 className="text-2xl font-bold text-[#002147] mb-4 text-center border-b pb-2">
           {title}
@@ -301,7 +303,8 @@ const Simulations = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-    <div className="bg-white min-h-screen flex items-start justify-center p-4 sm:p-6 font-inter text-gray-800">
+      <Header />
+    <div className="bg-white min-h-screen flex items-start justify-center p-4 sm:p-6 font-inter text-gray-800 mt-40 mb-40">
       <div className="bg-[#F8FAFC] shadow-2xl rounded-2xl w-full max-w-6xl p-6 sm:p-10">
         <header className="text-center py-8 mb-8">
           <animated.h1 style={headerSpring} className="text-4xl sm:text-5xl font-extrabold text-[#002147]">

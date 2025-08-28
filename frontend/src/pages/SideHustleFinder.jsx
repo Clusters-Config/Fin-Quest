@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Chat from "../Services/Chat";
 import Footer from "../Services/Footer";
+import Header from "../Services/Header";
 
 const SideHustleFinder = () => {
   const financeRoles = {
@@ -274,7 +275,9 @@ const SideHustleFinder = () => {
 
   return (
 <div>
-    <div className="min-h-screen bg-gradient-to-r from-white via-purple-100 to-pink-100 px-6 py-10 text-[#2d1b69] font-sans">
+        <Header/>
+
+    <div className="min-h-screen bg-gradient-to-r from-white via-purple-100 to-pink-100 px-6 py-10 text-[#2d1b69] font-sans mt-40">
       <Chat/>
 
 

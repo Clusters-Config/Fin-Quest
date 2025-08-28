@@ -22,6 +22,7 @@ import {
 import {marked} from 'marked';
 import Chat from "../Services/Chat";
 import Footer from "../Services/Footer";
+import Header from "../Services/Header";
 
 // New functional Rule Calculator component with AI
 const RuleCalculator = () => {
@@ -395,6 +396,8 @@ const PlanRecommender = () => {
 
   return (
     <div className="flex flex-col gap-6">
+            <Header />
+
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
           <label htmlFor="income" className="font-medium text-gray-700">Monthly Income ($)</label>
@@ -498,7 +501,9 @@ const FinancialDashboard = () => {
 
   return (
     <div className="flex flex-col gap-6">
-    <div className="w-full min-h-screen bg-gray-100 font-sans flex flex-col items-center p-6">
+            <Header />
+
+    <div className="w-full min-h-screen bg-gray-100 font-sans flex flex-col items-center p-6 mt-30">
       <Chat/>
       {/* Header */}
       <div className="text-center my-12 max-w-4xl px-4">

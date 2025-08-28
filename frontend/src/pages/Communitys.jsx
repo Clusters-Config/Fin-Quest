@@ -4,6 +4,7 @@ import Chat from "../Services/Chat";
 import { FaUserCircle, FaSearch, FaCommentDots, FaLink, FaThumbsUp, FaShareAlt } from 'react-icons/fa';
 import Contatos from "../assets/Tik tok profile picture.jpeg"
 import Footer from "../Services/Footer";
+import Header from "../Services/Header";
 
 const Communities = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -135,9 +136,10 @@ const Communities = () => {
   }, [isModalOpen, selectedPerson, user]);
 
   return (
-    <div className="bg-[#F0F2F5] min-h-screen font-sans text-[#212121]">
+    <div className="bg-white min-h-screen font-sans text-[#212121]">
+      <Header />
       <Chat />
-      <div className="w-full px-8 py-8">
+      <div className="w-full px-8 py-8  mt-40">
         <h1 className="text-5xl font-extrabold text-[#0A66C2] text-center mb-10 pt-5">
           Community Network
         </h1>

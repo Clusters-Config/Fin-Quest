@@ -14,13 +14,14 @@ import {
   Target,
 } from "lucide-react";
 import Footer from "../Services/Footer";
+import Header from "../Services/Header";
 
 export default function FinanceQuest() {
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Header */}
-      <header className="border-b bg-white shadow-sm">
+      {/* <header className="border-b bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-9 h-9 rounded-lg bg-green-600 flex items-center justify-center">
@@ -40,10 +41,11 @@ export default function FinanceQuest() {
             </span>
           </div>
         </div>
-      </header>
+      </header> */}
+      <Header />
 
       {/* Hero Section */}
-      <section className="max-w-4xl mx-auto text-center py-16 px-4">
+      <section className="max-w-4xl mx-auto text-center py-16 px-4 mt-20">
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
           Master Finance Through{" "}
           <span className="text-green-600">Games</span>
