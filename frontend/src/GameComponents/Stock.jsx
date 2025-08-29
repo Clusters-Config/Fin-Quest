@@ -187,12 +187,12 @@ export default function StockPredictionGame() {
     const lastPoint = data[data.length - 1];
     const lastX = width - padding;
     const lastY = height - padding - ((lastPoint.value - minVal) / range) * (height - 2 * padding);
-    
+
     ctx.fillStyle = "#3B82F6";
     ctx.beginPath();
     ctx.arc(lastX, lastY, 5, 0, 2 * Math.PI);
     ctx.fill();
-    
+
     ctx.strokeStyle = "white";
     ctx.lineWidth = 2;
     ctx.stroke();
@@ -203,9 +203,9 @@ export default function StockPredictionGame() {
     const priceText = `$${lastPoint.value.toFixed(2)}`;
     const textWidth = ctx.measureText(priceText).width;
     ctx.fillStyle = "rgba(255, 255, 255, 0.95)";
-    ctx.fillRect(lastX - textWidth/2 - 8, lastY - 25, textWidth + 16, 20);
+    ctx.fillRect(lastX - textWidth / 2 - 8, lastY - 25, textWidth + 16, 20);
     ctx.fillStyle = "#1F2937";
-    ctx.fillText(priceText, lastX - textWidth/2, lastY - 10);
+    ctx.fillText(priceText, lastX - textWidth / 2, lastY - 10);
   }
 
   useEffect(() => {
@@ -273,8 +273,8 @@ export default function StockPredictionGame() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 mt-7">Stock Prediction Challenge</h1>
-          <p className="text-gray-600">Predict market movements and test your trading skills</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Stock Prediction Challenge</h1>
+          <p className="text-gray-600" >Predict market movements and test your trading skills</p>
         </div>
 
         {/* Main Grid */}
@@ -295,25 +295,23 @@ export default function StockPredictionGame() {
             {/* Prediction Controls */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Make Your Prediction</h3>
-              
+
               <div className="grid md:grid-cols-2 gap-4 mb-4">
                 <button
                   onClick={() => setDirection("up")}
-                  className={`p-4 rounded-lg border-2 font-semibold transition-all ${
-                    direction === "up"
+                  className={`p-4 rounded-lg border-2 font-semibold transition-all ${direction === "up"
                       ? "bg-green-50 border-green-500 text-green-700"
                       : "bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300"
-                  }`}
+                    }`}
                 >
                   📈 Price Will Go Up
                 </button>
                 <button
                   onClick={() => setDirection("down")}
-                  className={`p-4 rounded-lg border-2 font-semibold transition-all ${
-                    direction === "down"
+                  className={`p-4 rounded-lg border-2 font-semibold transition-all ${direction === "down"
                       ? "bg-red-50 border-red-500 text-red-700"
                       : "bg-gray-50 border-gray-200 text-gray-600 hover:border-gray-300"
-                  }`}
+                    }`}
                 >
                   📉 Price Will Go Down
                 </button>
@@ -377,17 +375,17 @@ export default function StockPredictionGame() {
                     />
                   </div>
                 </div>
-                
+
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Score</span>
                   <span className="font-bold text-lg text-green-600">{score}</span>
                 </div>
-                
+
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Accuracy</span>
                   <span className="font-medium">{accuracy}%</span>
                 </div>
-                
+
                 <div className="flex justify-between">
                   <span className="text-sm text-gray-600">Streak</span>
                   <span className="font-medium">{streak}</span>
@@ -450,9 +448,8 @@ export default function StockPredictionGame() {
             </p>
             <button
               onClick={() => setShowResult(false)}
-              className={`w-full py-2 px-4 rounded-lg text-white font-semibold ${
-                lastResult.correct ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'
-              }`}
+              className={`w-full py-2 px-4 rounded-lg text-white font-semibold ${lastResult.correct ? 'bg-green-600 hover:bg-green-700' : 'bg-red-600 hover:bg-red-700'
+                }`}
             >
               Continue
             </button>
