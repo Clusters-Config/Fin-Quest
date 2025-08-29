@@ -23,6 +23,7 @@ import {marked} from 'marked';
 import Chat from "../Services/Chat";
 import Footer from "../Services/Footer";
 import Header from "../Services/Header";
+import { useLocation } from "react-router-dom";
 
 // New functional Rule Calculator component with AI
 const RuleCalculator = () => {
@@ -33,6 +34,7 @@ const RuleCalculator = () => {
   const [explanation, setExplanation] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const pathname = useLocation()
 
   // Function to fetch the AI-generated explanation for the selected rule
   const getExplanation = async (ruleName) => {
@@ -108,6 +110,7 @@ const RuleCalculator = () => {
       });
     }
   };
+  
 
   return (
     <div className="flex flex-col gap-6">
@@ -478,6 +481,11 @@ const PlanRecommender = () => {
 
 // Main component
 const FinancialDashboard = () => {
+ const pathname = useLocation()
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
   const [activeTab, setActiveTab] = useState(null);
 
   const toolData = [

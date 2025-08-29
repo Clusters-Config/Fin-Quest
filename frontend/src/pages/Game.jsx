@@ -1,5 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   TrendingUp,
   Bitcoin,
@@ -17,6 +19,11 @@ import Footer from "../Services/Footer";
 import Header from "../Services/Header";
 
 export default function FinanceQuest() {
+   const pathname = useLocation()
+      useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [pathname]);
+  
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">

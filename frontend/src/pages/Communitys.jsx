@@ -197,7 +197,7 @@ const Communities = () => {
               <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 overflow-y-scroll max-h-screen ">
               {filteredData.length > 0 ? (
                 filteredData.map((person) => (
                   <div

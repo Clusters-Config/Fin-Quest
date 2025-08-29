@@ -5,6 +5,8 @@ import { SparklesIcon, FilePieChart, Lightbulb, TrendingUp } from 'lucide-react'
 import Chat from "../Services/Chat";
 import Footer from "../Services/Footer";
 import Header from "../Services/Header";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 // Reusable Modal Component with consistent styling
 const Modal = ({ isOpen, onClose, title, children }) => {
   if (!isOpen) return null;
@@ -62,6 +64,11 @@ const MessageBox = ({ message, onClose, isOpen }) => {
 };
 
 const Simulations = () => {
+   const pathname = useLocation()
+      useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [pathname]);
+  
   // All states for various features
   const [income, setIncome] = useState("");
   const [expenses, setExpenses] = useState("");
