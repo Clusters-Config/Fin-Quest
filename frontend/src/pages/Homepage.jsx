@@ -202,7 +202,7 @@ function Homepage() {
             { path: "/FinFlux", label: "FinFlux", desc: "Stay updated with market trends and analysis", icon: <Newspaper className="text-orange-500 w-8 h-8" /> },
             { path: "/SideHustleFinder", label: "Side Hustle", desc: "Discover and manage additional income streams", icon: <Briefcase className="text-teal-500 w-8 h-8" /> },
             { path: "/Financial_Assistant", label: "Financial Assistant", desc: "Uncover and grow multiple income sources", icon: <WandSparkles className="text-teal-500 w-8 h-8" /> },
-            // { path: "/StressTracker", label: "Personalized Financial Roadmap", desc: "Interactive tool for financial stress.", icon: <MapPinned className="text-blue-500 w-8 h-8" /> },
+            { path: "/Stories", label: "Financial Stories", desc: "Learn through real-world financial adventures.", icon: <BookOpen className="text-indigo-500 w-8 h-8" /> },
           ].map((feature, index) => (
             <Link key={index} to={feature.path} className="block bg-white text-black py-6 px-8 rounded-lg shadow-lg hover:shadow-xl transition duration-300 text-center border border-gray-300">
               <div className="flex flex-col items-center">
