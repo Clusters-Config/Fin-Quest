@@ -120,7 +120,7 @@ function Homepage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-40 px-8 sm:px-16 md:px-32 overflow-hidden">
+      <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-40 px-8 sm:px-16 md:px-32 overflow-hidden" >
         <div className="max-w-3xl z-10">
           <h1 className="text-5xl font-bold leading-snug mb-6">
             Master Your <br />
@@ -196,7 +196,7 @@ function Homepage() {
             { path: "/Game", label: "Gamification", desc: "Learn while earning points and badges", icon: <Gamepad2 className="text-purple-500 w-8 h-8" /> },
             { path: "/Simulations", label: "Real World Simulation", desc: "Practice with real market scenarios", icon: <TrendingUp className="text-green-500 w-8 h-8" /> },
             // { path: "/Chat", label: "AI Driven", desc: "Get personalized financial insights powered by AI", icon: <Brain className="text-red-500 w-8 h-8" /> },
-            { path: "/Communitys", label: "Community", desc: "Connect with fellow finance enthusiasts", icon: <Users className="text-yellow-500 w-8 h-8" /> },
+            { path: "/Communitys/", label: "Community", desc: "Connect with fellow finance enthusiasts", icon: <Users className="text-yellow-500 w-8 h-8" /> },
             // { path: "/TaxPage", label: "Taxes", desc: "Understand and optimize your tax planning", icon: <Calculator className="text-pink-500 w-8 h-8" /> },
             { path: "/ForumPage", label: "Finance Forum", desc: "Professional peer-to-peer collaboration platform for finance enthusiasts", icon: <Route className="text-blue-500 w-8 h-8" /> },
             { path: "/FinFlux", label: "FinFlux", desc: "Stay updated with market trends and analysis", icon: <Newspaper className="text-orange-500 w-8 h-8" /> },
@@ -306,7 +306,7 @@ function Homepage() {
         </div>
       </section>
 
-      <FAQ />
+      <p id="faq"><FAQ /></p>
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-gray-300 py-12 px-6">
@@ -336,10 +336,10 @@ function Homepage() {
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Learning Paths</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Games</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Simulations</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">FinFlux</a></li>
+              <li><a href="/learning_paths" className="hover:text-white transition-colors">Learning Paths</a></li>
+              <li><a href="/Game" className="hover:text-white transition-colors">Games</a></li>
+              <li><a href="/simulations" className="hover:text-white transition-colors">Simulations</a></li>
+              <li><a href="/FinFlux" className="hover:text-white transition-colors">FinFlux</a></li>
             </ul>
           </div>
 
@@ -347,7 +347,7 @@ function Homepage() {
           <div>
             <h3 className="text-white text-lg font-semibold mb-4">Support</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+              <li><a href="#faq" className="hover:text-white transition-colors">FAQ</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
