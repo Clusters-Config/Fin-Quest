@@ -6,7 +6,7 @@ import Login from './pages/Login-signup';
 import Simulations from './pages/Simulations';
 import Features from './pages/Features';
 //import TaxPage from './pages/TaxPage';
-//import Stories from './pages/Stories';
+import Stories from './pages/Stories';
 import FinFlux from './pages/FinFlux';
 import SideHustleFinder from './pages/SideHustleFinder';
 import Communitys from './pages/Communitys';
@@ -91,9 +91,9 @@ const App = () => {
             <Route path="/ForumPage" element={<ForumPage />} />
             <Route path="/Profile" element={<Profile />} />
             <Route path="/Quiz" element={< Quiz />} />
-
             <Route path="/CryptoTrade" element={<CryptoTrade />} />
-            <Route path="/Stock" element={<Stock />} />
+            <Route path="/CryptoTrade" element={<CryptoTrade />} />
+            <Route path="/Stories" element={<Stories />} />
             <Route path="/WordSearch" element={<WordSearch />} />
             <Route path="/DailyChallenges" element={<DailyChallenges />} />
             <Route path="/ProfilePage" element={<ProfilePage />} />
