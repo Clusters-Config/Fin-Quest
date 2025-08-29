@@ -44,7 +44,7 @@ const testimonialsData = [
 ];
 
 const Testimonials = () => (
-  <section style={{ padding: "3rem 1rem", background: "#f9f9f9" }}>
+  <section style={{ padding: "3rem 1rem", background: "green" }}>
     <h2
       style={{
         textAlign: "center",
