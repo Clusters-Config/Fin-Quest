@@ -12,7 +12,7 @@ import logo from '../assets/fin-logo.jpg';
 const Footer = () => {
   return (
     <div>
-        <footer className="bg-[#002147] text-gray-300 py-12 px-6">
+        <footer className="bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-gray-300 py-12 px-6">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
 
           <div>
