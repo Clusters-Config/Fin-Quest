@@ -67,7 +67,7 @@ const App = () => {
             <Route path="/Group" element={< Group />} />
             <Route path="/FinFlux" element={< FinFlux />} />
             <Route path="/SideHustleFinder" element={<  SideHustleFinder />} />
-            <Route path="/communitys" element={<Communitys />} />
+            <Route path="/Communitys/" element={<Communitys />} />
             <Route path='/chat' element={<Chat />} />
             <Route path="/Financial_Assistant" element={<Financial_Assistant />} />
             <Route path="/Experts" element={<Experts />} />
