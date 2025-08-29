@@ -347,8 +347,8 @@ function FinancialStorybook() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 mt-20">
       {/* Header */}
       
-      <div className="text-center mb-8">
-        <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="text-center mb-8 ">
+        <div className="flex items-center justify-center gap-3 mb-4 ">
           <BookOpen className="w-8 h-8 text-indigo-600" />
           <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
             Financial Storybook
@@ -359,7 +359,7 @@ function FinancialStorybook() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex justify-center mb-8">
+      <div className="flex justify-center mb-8 ">
         <div className="bg-white rounded-full p-1 shadow-lg border-2 border-indigo-200">
           <button
             onClick={() => {
@@ -391,7 +391,7 @@ function FinancialStorybook() {
       </div>
 
       {/* Book Container */}
-      <div className="max-w-4xl mx-auto relative">
+      <div className="max-w-4xl mx-auto relative ">
         {/* Page Counter */}
         <div className="text-center mb-4">
           <span className="bg-white px-4 py-2 rounded-full shadow-md text-indigo-700 font-semibold border-2 border-indigo-200">
@@ -400,7 +400,7 @@ function FinancialStorybook() {
         </div>
 
         {/* Book */}
-        <div className="relative bg-gradient-to-r from-slate-100 to-blue-100 rounded-3xl shadow-2xl p-8 border-4 border-indigo-200">
+          <div className="relative bg-gradient-to-r from-slate-100 to-blue-100 rounded-3xl shadow-2xl p-8 border-4 border-indigo-200 pl-10">
           {/* Book Spine Effect */}
           <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-b from-indigo-300 to-blue-400 rounded-l-3xl border-r-2 border-indigo-400"></div>
           
