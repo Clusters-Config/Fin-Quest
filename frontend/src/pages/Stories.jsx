@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, BookOpen, Star, TrendingUp, TrendingDown, DollarSign, Lightbulb } from 'lucide-react';
+import Header from '../Services/Header.jsx';
+import Footer from '../Services/Footer.jsx';
 
 // Financial Stories with enhanced data
 const stories = [
@@ -334,8 +336,10 @@ function FinancialStorybook() {
   const IconComponent = currentStory?.icon || BookOpen;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4">
+    <div><Header />
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 mt-20">
       {/* Header */}
+      
       <div className="text-center mb-8">
         <div className="flex items-center justify-center gap-3 mb-4">
           <BookOpen className="w-8 h-8 text-indigo-600" />
@@ -493,10 +497,10 @@ function FinancialStorybook() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="text-center mt-12 text-indigo-600">
-        <p className="font-medium">© 2025 Financial Storybook - Learn, Grow, Succeed! ✨</p>
-      </footer>
+      
+    </div>
+          <Footer />
+
     </div>
   );
 }
