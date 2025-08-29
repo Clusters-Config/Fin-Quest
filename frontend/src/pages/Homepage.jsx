@@ -217,18 +217,18 @@ function Homepage() {
                <Testimonials />
 
       <section className="py-20 px-6 bg-gray-50">
-        <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
+        {/* <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
           👥 Learning Paths for Everyone
         </h2>
         <p className="text-lg text-center text-gray-600 mb-10">
           Tailored content and experiences designed for different life stages and financial goals
-        </p>
+        </p> */}
 
 
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto z-10">
 
           {/* School Students (Blue Theme) */}
-          <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+          {/* <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#002147] to-[#1a3a75] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
             <div className="relative">
               <div className="flex items-center mb-4">
@@ -250,12 +250,12 @@ function Homepage() {
                 Start Learning Path →
               </button>
             </div>
-          </div>
+          </div> */}
 
         
 
           {/* College Students (Green to Gold Theme) */}
-          <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+          {/* <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
             <div className="relative">
               <div className="flex items-center mb-4">
@@ -277,10 +277,10 @@ function Homepage() {
                 Start Learning Path →
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Working Professionals (Gold to Green Theme) */}
-          <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
+          {/* <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
             <div className="relative">
               <div className="flex items-center mb-4">
@@ -302,7 +302,7 @@ function Homepage() {
                 Start Learning Path →
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
