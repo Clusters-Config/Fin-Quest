@@ -2,89 +2,71 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast  ,Bounce} from 'react-toastify';
-// import { useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast, Bounce } from "react-toastify";
 
 function ProfilePage() {
-  const [ufirstname, setufirstname] = useState();  
-  const [ulastname, setulastname] = useState("");
-  const [udob, setudob] = useState("");
-  const [uphone, setuphonenumber] = useState();
-  const [uhobbies, setuhobbies] = useState("");
-
-  useEffect(()=>{
-    axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify")
-    .then(res=>{
-      setufirstname(res.data.firstname)
-      setulastname(res.data.lastname)
-      setudob(res.data.dob)
-      setuphonenumber(res.data.phone)
-      setuhobbies(res.data.hobbies) 
-    }
-      
-   )  
-  })
- 
-  useEffect(() => {
-    setFirstname(ufirstname),
-    setLastname(ulastname)
-    setDob(udob) 
-    setPhonenumber(uphone)
-    setHobbies(uhobbies)
-  },[ufirstname,ulastname,udob,uphone,uhobbies]);    
-
-  
-
-
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [dob, setDob] = useState("");
   const [phone, setPhonenumber] = useState("");
   const [hobbies, setHobbies] = useState("");
+  const [role, setRole] = useState("Student");
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
-  const {useremail} = useAuth(); 
-  const naviage = useNavigate()// State to manage terms modal visibility
-  // let naviage = useNavigate()
-  
-  const handleSubmit = async() => {
-     const user =  axios.post("http://127.0.0.1:4047/profile", {
+
+  const { useremail } = useAuth();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios
+      .get("http://localhost:4047/verify")
+      .then((res) => {
+        setFirstname(res.data.firstname || "");
+        setLastname(res.data.lastname || "");
+        setDob(res.data.dob || "");
+        setPhonenumber(res.data.phone || "");
+        setHobbies(res.data.hobbies || "");
+        setRole(res.data.role || "Student");
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // prevent reload
+
+    try {
+      await axios.post("http://127.0.0.1:4047/profile", {
         useremail,
         firstname,
         lastname,
         dob,
         phone,
         hobbies,
-      })
-      .then(
-        await naviage("/profile"),
-        naviage("/")
-      )
-      .catch((err) => console.log(err));
+        role,
+      });
+
+      toast.success("Profile updated successfully!", { transition: Bounce });
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      toast.error("Error updating profile!", { transition: Bounce });
+    }
   };
 
-  const handleTermsClick = () => {
-    setShowTermsModal(true); // Show the terms and conditions modal
-  };
-
-  const handleCloseModal = () => {
-    setShowTermsModal(false); // Close the terms modal
-  };
+  const handleTermsClick = () => setShowTermsModal(true);
+  const handleCloseModal = () => setShowTermsModal(false);
 
   return (
-    
     <div className="min-h-screen bg-[#F8FAFC] p-6 text-[#6C757D]">
-       
       <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-3xl font-bold text-[#002147] mb-8 text-center">
           Your Profile
         </h1>
 
         <form onSubmit={handleSubmit}>
-          {/* Form Section */}
           <div className="space-y-6">
             {/* First Name */}
             <div className="flex items-center">
@@ -151,7 +133,7 @@ function ProfilePage() {
               </div>
             </div>
 
-            {/* Hobbies of Interest */}
+            {/* Hobbies */}
             <div className="flex flex-col">
               <label className="block text-[#6C757D] font-medium mb-2">
                 Hobbies of Interest
@@ -165,7 +147,25 @@ function ProfilePage() {
               ></textarea>
             </div>
 
-            {/* Terms and Conditions */}
+            {/* Role Select */}
+            <select
+              className="w-full py-3 px-4 rounded-xl text-gray-800 text-base border border-gray-300 focus:border-[#F39C12] bg-white/80 shadow-sm outline-none transition"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+            >
+              <option value="Student">Student</option>
+              <option value="Financial-Analyst">Financial Analyst</option>
+              <option value="Investment-Banker">Investment Banker</option>
+              <option value="Risk-Manager">Risk Manager</option>
+              <option value="Financial-Software-Developer">
+                Financial Software Developer
+              </option>
+              <option value="Quantitative-Analyst">Quantitative Analyst</option>
+              <option value="Accountant">Accountant</option>
+              <option value="Other">Other</option>
+            </select>
+
+            {/* Terms */}
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -186,16 +186,15 @@ function ProfilePage() {
             </div>
           </div>
 
-          {/* Submit Button */}
+          {/* Submit */}
           <div className="text-center mt-8">
             <button
               type="submit"
               disabled={!isTermsChecked}
-              className={`px-6 py-3 font-semibold rounded-md ${
-                isTermsChecked
+              className={`px-6 py-3 font-semibold rounded-md ${isTermsChecked
                   ? "bg-[#F39C12] text-white hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
                   : "bg-[#B0BEC5] text-[#6C757D] cursor-not-allowed"
-              }`}
+                }`}
             >
               Save Changes
             </button>
@@ -203,26 +202,27 @@ function ProfilePage() {
         </form>
       </div>
 
-       {/* Terms Modal */}
-        {showTermsModal && (
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg shadow-md w-96 h-86">
-              <h3 className="text-xl font-bold mb-4">Terms and Conditions</h3>
-              <p className="text-[#6C757D] mb-4">
-                By using this website, you agree to our terms and conditions.
-                These include user privacy, data handling, and acceptable usage of
-                our services. Please read these terms carefully before proceeding.
-              </p>
-              <button
-                onClick={handleCloseModal}
-                className="bg-[#F39C12] text-white py-2 px-4 rounded-lg shadow-md hover:bg-[#e68912] transition duration-300 mt-4"
-              >
-                Close
-              </button>
-            </div>
+      {/* Terms Modal */}
+      {showTermsModal && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-md w-96 h-86">
+            <h3 className="text-xl font-bold mb-4">Terms and Conditions</h3>
+            <p className="text-[#6C757D] mb-4">
+              By using this website, you agree to our terms and conditions.
+              These include user privacy, data handling, and acceptable usage of
+              our services. Please read these terms carefully before proceeding.
+            </p>
+            <button
+              onClick={handleCloseModal}
+              className="bg-[#F39C12] text-white py-2 px-4 rounded-lg shadow-md hover:bg-[#e68912] transition duration-300 mt-4"
+            >
+              Close
+            </button>
           </div>
-        )}
+        </div>
+      )}
 
+      <ToastContainer />
     </div>
   );
 }

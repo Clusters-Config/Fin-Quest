@@ -6,6 +6,7 @@
     const refreshToken = req.cookies?.refreshToken;
     if (!accessToken) {
         if (refreshToken) {
+            const data = jwt.decode(refreshToken)
         const email = jwt.decode(refreshToken).email;
         const password = jwt.decode(refreshToken).password;
         const username = jwt.decode(refreshToken).username;
@@ -15,8 +16,10 @@
         const phone = jwt.decode(refreshToken).phone;
         const hobbies = jwt.decode(refreshToken).hobbies;
             const id = jwt.decode(refreshToken).id;
+            const role = jwt.decode(refreshToken).role;
+
             
-            // console.log(id)
+            console.log(role)
         const accessToken = jwt.sign(
             {
             firstname: firstname,
@@ -27,7 +30,8 @@
             email: email,
             password: password,
             hobbies: hobbies,
-            id : id
+            id: id,
+            role:role
             },
             "json-access-token",
             {
@@ -56,6 +60,7 @@
     try {
         const decoded = jwt.verify(accessToken, "json-access-token");
         // console.log(decoded)
+        // console.log(decoded)
         res
         .status(202)
         .json({
@@ -68,7 +73,8 @@
             dob: decoded.dob,
             phone: decoded.phone,
             hobbies: decoded.hobbies,
-            id : decoded.id
+            id: decoded.id,
+            role : decoded.role
         });
     } catch (error) {
         res.status(401).json({ error: "Invalid or expired token" });
