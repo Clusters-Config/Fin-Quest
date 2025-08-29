@@ -4,7 +4,7 @@ import { SignupSchema } from "../models/signup.js";
 
 const profile_user = AsyncHandler(async (req, res) => {
     
-    const { useremail, firstname, lastname, dob, phone, hobbies } = req.body;
+    const { useremail, firstname, lastname, dob, phone, hobbies, role } = req.body;
 
     if ([useremail ,firstname, lastname, dob, phone, hobbies].some((exist) => String(exist).trim() === "")){
         return res.status(401).send("Something went wrong")
@@ -13,7 +13,13 @@ const profile_user = AsyncHandler(async (req, res) => {
         
 
     const user = await SignupSchema.findOne({ 
-      email: useremail });
+        email: useremail
+    });
+    // let urole = await SignupSchema.findOne({
+    //     email: useremail
+    // });
+    // console.log(urole)
+
 
  
     user.profile = {
@@ -22,8 +28,14 @@ const profile_user = AsyncHandler(async (req, res) => {
         dob,
         phone,
         hobbies,
-    };
+        
+    }
 
+    // console.log(urole)
+
+    user.role = role
+
+    
     await user.save();
 
     console.log(useremail + " Profile Updated Successfully");

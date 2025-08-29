@@ -86,7 +86,7 @@ function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
-  const[role, setrole] = useState('')
+  const[role, setrole] = useState('Student')
 
   const handleSubmit = (e) => {
     e.preventDefault();

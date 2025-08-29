@@ -30,7 +30,7 @@ const Communities = () => {
 
   const filteredData = uniqueNetworkData.filter((person) => {
     const matchesRole = selectedRole === "All" || person.role === selectedRole;
-    const matchesSearch = person.username.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = person?.profile[0]?.firstname.toLowerCase().includes(searchQuery.toLowerCase()) || person?.username.toLowerCase().includes(searchQuery.toLowerCase());
     const isNotLoggedInUser = person.email !== wholeuser;
     return matchesRole && matchesSearch && isNotLoggedInUser;
   });
@@ -139,7 +139,7 @@ const Communities = () => {
     <div className="bg-white min-h-screen font-sans text-[#212121]">
       <Header />
       <Chat />
-      <div className="w-full px-8 py-8  mt-40">
+      <div className="w-full px-8 py-8  mt-16">
         <h1 className="text-5xl font-extrabold text-[#0A66C2] text-center mb-10 pt-5">
           Community Network
         </h1>
@@ -206,7 +206,7 @@ const Communities = () => {
                         className="rounded-full w-28 h-28 object-cover border-4 border-gray-100"
                       />
                     </div>
-                    <h3 className="text-2xl font-bold text-[#0A66C2] mb-1">{person.username}</h3>
+                    <h3 className="text-2xl font-bold text-[#0A66C2] mb-1">{ person?.profile[0]?.firstname  || person.username}</h3>
                     <p className="text-md text-gray-500 mb-4">{person.role}</p>
                     <div className="flex flex-col gap-3">
                       <button
