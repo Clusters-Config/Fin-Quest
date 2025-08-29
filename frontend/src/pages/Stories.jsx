@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, BookOpen, Star, TrendingUp, TrendingDown, DollarSign, Lightbulb } from 'lucide-react';
 import Header from '../Services/Header.jsx';
 import Footer from '../Services/Footer.jsx';
+import { useLocation } from 'react-router-dom';
 
 // Financial Stories with enhanced data
 const stories = [
@@ -167,6 +168,7 @@ const stories = [
   }
 ];
 
+
 const caseStudies = [
   {
     id: 17,
@@ -314,6 +316,11 @@ function FinancialStorybook() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isFlipping, setIsFlipping] = useState(false);
   const [activeTab, setActiveTab] = useState('stories');
+   const pathname = useLocation()
+      useEffect(() => {
+        window.scrollTo(0, 0);
+      }, [pathname]);
+  
   
   const allContent = activeTab === 'stories' ? stories : caseStudies;
   const totalPages = allContent.length;
