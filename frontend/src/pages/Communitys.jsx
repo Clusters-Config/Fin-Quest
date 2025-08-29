@@ -5,6 +5,7 @@ import { FaUserCircle, FaSearch, FaCommentDots, FaLink, FaThumbsUp, FaShareAlt }
 import Contatos from "../assets/Tik tok profile picture.jpeg"
 import Footer from "../Services/Footer";
 import Header from "../Services/Header";
+import { useLocation } from "react-router-dom";
 
 const Communities = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,6 +22,12 @@ const Communities = () => {
   const [wholeuser, setwholeuser] = useState('');
   const [message, setmessage] = useState("");
   let BASE_URL = "http://localhost:4047";
+  const { pathname } = useLocation();
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const uniqueNetworkData = Array.from(
     new Set(users.map((item) => JSON.stringify(item)))
@@ -137,6 +144,7 @@ const Communities = () => {
 
   return (
     <div className="bg-white min-h-screen font-sans text-[#212121]">
+      <h1 id="#"></h1>
       <Header />
       <Chat />
       <div className="w-full px-8 py-8  mt-16">

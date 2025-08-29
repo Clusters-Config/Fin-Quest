@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   MessageCircle, 
   Users, 
@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import Header from '../Services/Header.jsx';
 import Footer from '../Services/Footer.jsx';
+import { useLocation } from 'react-router-dom';
 
 function FinanceForum() {
   const [activeTab, setActiveTab] = useState('webinars');
@@ -52,6 +53,8 @@ function FinanceForum() {
     experience: '',
     interests: []
   });
+
+  const pathname = useLocation()
 
   // Handle sending new message
   const sendMessage = () => {
@@ -82,6 +85,10 @@ function FinanceForum() {
       interests: []
     });
   };
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [pathname])
 
   // Handle interest selection
   const toggleInterest = (interest) => {
