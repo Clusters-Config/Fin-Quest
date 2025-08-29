@@ -274,7 +274,7 @@ export default function StockPredictionGame() {
         {/* Header */}
         <div className="text-center mb-6">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Stock Prediction Challenge</h1>
-          <p className="text-gray-600">Predict market movements and test your trading skills</p>
+          <p className="text-gray-600" >Predict market movements and test your trading skills</p>
         </div>
 
         {/* Main Grid */}
