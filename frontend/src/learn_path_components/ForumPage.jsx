@@ -30,6 +30,8 @@ import {
   Target,
   Globe
 } from 'lucide-react';
+import Header from '../Services/Header.jsx';
+import Footer from '../Services/Footer.jsx';
 
 function FinanceForum() {
   const [activeTab, setActiveTab] = useState('webinars');
@@ -154,7 +156,10 @@ function FinanceForum() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-100 relative">
+    <div>
+            <Header/>
+
+    <div className="min-h-screen bg-slate-100 relative mt-20">
       {/* Professional Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-200 via-gray-100 to-slate-300"></div>
       
@@ -903,6 +908,9 @@ function FinanceForum() {
           </div>
         )}
       </div>
+      
+    </div>
+    <Footer />
     </div>
   );
 }
