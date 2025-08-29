@@ -99,6 +99,7 @@ const App = () => {
             <Route path="/ProfilePage" element={<ProfilePage />} />
             <Route path="/GameProfile" element={<GameProfile />} />
             <Route path="/service/chat" element={<Index />} />
+            <Route path="/Stock" element={<Stock />} />
 
 
 
