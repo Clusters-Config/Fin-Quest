@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chat from "../Services/Chat";
 import Footer from "../Services/Footer";
 import Header from "../Services/Header";
+import { useLocation } from 'react-router-dom';
 
 const SideHustleFinder = () => {
+
+  const pathname = useLocation()
   const financeRoles = {
   Commerce: [
       {
@@ -272,6 +275,11 @@ const SideHustleFinder = () => {
       role.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
       role.skills.some((skill) => skill.toLowerCase().includes(searchQuery.toLowerCase()))
   );
+
+
+  useEffect(() => {
+    window.scrollTo(0,0)
+  }, [pathname])
 
   return (
 <div>
