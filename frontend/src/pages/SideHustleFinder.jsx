@@ -277,7 +277,7 @@ const SideHustleFinder = () => {
 <div>
         <Header/>
 
-    <div className="min-h-screen bg-gradient-to-r from-white via-purple-100 to-pink-100 px-6 py-10 text-[#2d1b69] font-sans mt-40">
+    <div className="min-h-screen bg-gradient-to-r from-white via-purple-100 to-pink-100 px-6 py-10 text-[#2d1b69] font-sans mt-20">
       <Chat/>
 
 
