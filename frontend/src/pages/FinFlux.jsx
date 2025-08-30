@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Chat from "../Services/Chat";
+import Footer from "../Services/Footer";
 
 export default function FinFlux() {
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || "NO_API_KEY";
@@ -173,7 +175,7 @@ export default function FinFlux() {
           }
         }
       `}</style>
-
+<div>
       <div
         style={{
           backgroundColor: "#0b0f19",
@@ -183,6 +185,7 @@ export default function FinFlux() {
           fontFamily: "Arial, sans-serif",
         }}
       >
+        <Chat/>
         {/* Featured Section */}
         {featuredVideo && (
           <div
@@ -428,6 +431,9 @@ export default function FinFlux() {
             </div>
           )}
         </div>
+        
+      </div>
+      <Footer/>
       </div>
     </>
   );

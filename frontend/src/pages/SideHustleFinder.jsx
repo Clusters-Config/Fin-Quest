@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Chat from "../Services/Chat";
+import Footer from "../Services/Footer";
+import Header from "../Services/Header";
 
 const SideHustleFinder = () => {
   const financeRoles = {
@@ -271,8 +274,11 @@ const SideHustleFinder = () => {
   );
 
   return (
+<div>
+        <Header/>
 
-    <div className="min-h-screen bg-gradient-to-r from-white via-purple-100 to-pink-100 px-6 py-10 text-[#2d1b69] font-sans">
+    <div className="min-h-screen bg-gradient-to-r from-white via-purple-100 to-pink-100 px-6 py-10 text-[#2d1b69] font-sans mt-40">
+      <Chat/>
 
 
       <h1 className="text-4xl md:text-5xl font-bold text-center mb-12">
@@ -376,9 +382,9 @@ const SideHustleFinder = () => {
 )}
 
 
-      <footer className="mt-16 text-center text-sm text-gray-500">
-        © 2025 Fin-Quest. Learn. Grow. Succeed. 💸
-      </footer>
+      
+    </div>
+    <Footer/>
     </div>
   );
 };

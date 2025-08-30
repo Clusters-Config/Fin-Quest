@@ -16,6 +16,10 @@ const signupSchema = new Schema({
         type: String,
         required: [true, "Password required"]
     },
+
+    role: {
+        type:String
+    },
     
     profile: [
         {
