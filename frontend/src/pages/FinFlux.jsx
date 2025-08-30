@@ -1,440 +1,247 @@
-import React, { useState, useEffect } from "react";
-import Chat from "../Services/Chat";
-import Footer from "../Services/Footer";
+import React, { useEffect, useState } from "react";
+import { PlayCircle, Video, Scissors } from "lucide-react";
+import { Typewriter } from "react-simple-typewriter";
+import { Search, Filter } from "lucide-react";
 
-export default function FinFlux() {
+export default function VideoGallery() {
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || "NO_API_KEY";
   const CHANNEL_ID = import.meta.env.VITE_YOUTUBE_CHANNEL_ID || "NO_CHANNEL_ID";
 
-  useEffect(() => {
-    console.log("API_KEY:", API_KEY);
-    console.log("CHANNEL_ID:", CHANNEL_ID);
-  }, []);
-
-  // ✨ Change these three lines to whatever you want
-  const line1 = "💰 Your Money, Your Power — Use It ⚡";
-  const line2 = "🛒 Turn Everyday Spending Into Lasting Wealth";
-  const line3 = "🎯 Watch Now, Change Your Future Forever 🚀";
-
   const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [typedText, setTypedText] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("ALL");
-  const fullHeading = "Recommended Videos";
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("all");
+  const [showDropdown, setShowDropdown] = useState(false);
 
-  const categories = ["ALL", "VIDEOS", "SHORTS"];
-
-  // Helper to decode HTML entities
-  function decodeHtmlEntities(text) {
-    const textarea = document.createElement("textarea");
-    textarea.innerHTML = text;
-    return textarea.value;
-  }
-
-  // Helper: parse ISO 8601 duration to seconds
-  function parseDuration(isoDuration) {
-    if (!isoDuration) return 0;
-    const match = isoDuration.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
-    const minutes = parseInt(match?.[1] || 0);
-    const seconds = parseInt(match?.[2] || 0);
-    return minutes * 60 + seconds;
-  }
+  // ✅ Decode HTML entities like &quot; into real characters
+  const decodeHtml = (html) => {
+    const txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  };
 
   useEffect(() => {
-    async function fetchVideos() {
+    const fetchVideos = async () => {
       try {
-        if (
-          !API_KEY ||
-          !CHANNEL_ID ||
-          API_KEY === "NO_API_KEY" ||
-          CHANNEL_ID === "NO_CHANNEL_ID"
-        ) {
-          throw new Error("API_KEY or CHANNEL_ID is missing or invalid.");
-        }
-
         const res = await fetch(
           `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=12`
         );
-
-        if (!res.ok) {
-          const errorData = await res.json();
-          throw new Error(errorData.error.message || "Failed to fetch videos");
-        }
-
         const data = await res.json();
 
-        if (data.items) {
-          const onlyVideos = data.items.filter(
-            (item) => item.id.kind === "youtube#video"
-          );
-          const videoIds = onlyVideos.map((v) => v.id.videoId).join(",");
+        const videoItems = data.items.filter(
+          (item) => item.id.kind === "youtube#video"
+        );
+        const videoIds = videoItems.map((v) => v.id.videoId).join(",");
 
-          // fetch details for durations
-          const detailsRes = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=contentDetails`
-          );
-          const detailsData = await detailsRes.json();
+        const detailsRes = await fetch(
+          `https://www.googleapis.com/youtube/v3/videos?key=${API_KEY}&id=${videoIds}&part=contentDetails`
+        );
+        const detailsData = await detailsRes.json();
 
-          const withDurations = onlyVideos.map((video) => {
-            const details = detailsData.items.find(
-              (d) => d.id === video.id.videoId
-            );
-            let duration = details?.contentDetails?.duration || "PT0M0S";
-            return { ...video, duration };
-          });
+        const merged = videoItems.map((v, i) => ({
+          id: v.id.videoId,
+          title: decodeHtml(v.snippet.title), // ✅ decode applied here
+          thumbnail: v.snippet.thumbnails.high.url,
+          duration: detailsData.items[i]?.contentDetails?.duration || "N/A",
+        }));
 
-          setVideos(withDurations);
-        }
+        setVideos(merged);
       } catch (err) {
-        console.error("Error fetching videos:", err.message);
-      } finally {
-        setLoading(false);
+        console.error("Error fetching videos:", err);
       }
-    }
-    fetchVideos();
-  }, [API_KEY, CHANNEL_ID]);
+    };
 
-  // Typewriter effect for the heading
-  useEffect(() => {
-    let index = 0;
-    const interval = setInterval(() => {
-      setTypedText(fullHeading.slice(0, index + 1));
-      index++;
-      if (index === fullHeading.length) clearInterval(interval);
-    }, 100); // typing speed
-    return () => clearInterval(interval);
+    fetchVideos();
   }, []);
 
-  if (loading)
-    return (
-      <p style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
-        Loading videos...
-      </p>
-    );
-  if (videos.length === 0)
-    return (
-      <p style={{ textAlign: "center", fontFamily: "Arial, sans-serif" }}>
-        No videos found.
-      </p>
-    );
+  const parseDuration = (iso) => {
+    if (!iso) return 0;
+    const match = iso.match(/PT(?:(\d+)M)?(?:(\d+)S)?/);
+    const minutes = match?.[1] ? parseInt(match[1]) : 0;
+    const seconds = match?.[2] ? parseInt(match[2]) : 0;
+    return minutes * 60 + seconds;
+  };
 
-  // Filtering logic (SHORTS based on duration <= 60s)
-  const filteredVideos = videos.filter((video) => {
-    const text = `${video.snippet.title} ${video.snippet.description}`.toLowerCase();
-    const matchesSearch = text.includes(searchTerm.toLowerCase());
+  const formatDuration = (iso) => {
+    const total = parseDuration(iso);
+    const minutes = Math.floor(total / 60);
+    const seconds = total % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
 
-    const durationInSec = parseDuration(video.duration);
-    const isShort = durationInSec > 0 && durationInSec <= 60;
+  const filteredVideos = videos.filter((v) => {
+    const matchesSearch = v.title.toLowerCase().includes(search.toLowerCase());
+    const duration = parseDuration(v.duration);
 
-    if (selectedCategory === "ALL") return matchesSearch;
-    if (selectedCategory === "VIDEOS") return matchesSearch && !isShort;
-    if (selectedCategory === "SHORTS") return matchesSearch && isShort;
-
+    if (filter === "videos") return matchesSearch && duration >= 60;
+    if (filter === "shorts") return matchesSearch && duration < 60;
     return matchesSearch;
   });
 
-  const featuredVideo = filteredVideos[0];
-  const otherVideos = filteredVideos.slice(1);
-
   return (
-    <>
-      <style>{`
-        @media (max-width: 768px) {
-          .featured-container {
-            flex-direction: column !important;
-            padding: 15px !important;
-          }
-          .featured-text {
-            padding-right: 0 !important;
-            margin-bottom: 20px;
-          }
-          .featured-image {
-            margin-left: 0 !important;
-            width: 100% !important;
-          }
-          .video-grid {
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)) !important;
-          }
-          input.search-input {
-            width: 90% !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .featured-text h1 {
-            font-size: 22px !important;
-          }
-          .featured-text p {
-            font-size: 13px !important;
-          }
-          .video-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .video-card iframe {
-            height: 150px !important;
-          }
-        }
-      `}</style>
-<div>
-      <div
-        style={{
-          backgroundColor: "#0b0f19",
-          color: "#fff",
-          minHeight: "100vh",
-          padding: "20px",
-          fontFamily: "Arial, sans-serif",
-        }}
-      >
-        <Chat/>
-        {/* Featured Section */}
-        {featuredVideo && (
-          <div
-            className="featured-container"
-            style={{
-              display: "flex",
-              padding: "20px",
-              background: "#1a1f2e",
-              borderRadius: "12px",
-              marginBottom: "20px",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-            }}
-          >
-            <div
-              className="featured-text"
-              style={{ flex: 1, paddingRight: "20px" }}
-            >
-              <h2 style={{ fontSize: "14px", opacity: 0.8 }}>FinQuest</h2>
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-gradient-to-r from-pink-100 to-pink py-12 text-center">
+  <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+    FinQuest VideoHub
+  </h1>
+  <p className="mt-4 text-lg text-gray-600">
+    <Typewriter
+      words={[
+        "Welcome to explore financial insights, strategies, and market trends through videos.",
+        "Stay updated with the latest financial knowledge.",
+        "Learn, grow, and achieve your financial goals with us!"
+      ]}
+      loop={true}       // keeps typing infinitely
+      cursor
+      cursorStyle="|"
+      typeSpeed={50}
+      deleteSpeed={30}
+      delaySpeed={2000}
+    />
+  </p>
+</header>
 
-              <h1
-                style={{
-                  fontSize: "28px",
-                  margin: "10px 0",
-                  whiteSpace: "pre-line",
-                }}
-              >
-                {line1}
-                {"\n"}
-                {line2}
-                {"\n"}
-                {line3}
-              </h1>
-
-              <p style={{ fontSize: "14px" }}>
-                {decodeHtmlEntities(featuredVideo.snippet.description)}
-              </p>
-              <a
-                href={`https://www.youtube.com/watch?v=${featuredVideo.id.videoId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-block",
-                  marginTop: "10px",
-                  padding: "10px 20px",
-                  backgroundColor: "#d63384",
-                  borderRadius: "6px",
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontWeight: "bold",
-                }}
-              >
-                ▶ Watch Now
-              </a>
-            </div>
-
-            {/* Image container */}
-            <div
-              className="featured-image"
-              style={{
-                flex: 1,
-                marginLeft: "40px",
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <img
-                src="https://mtr-cdn.com/images/financial_literacy.width-648.jpg"
-                alt={`${line1} ${line2} ${line3}`}
-                style={{
-                  width: "70%",
-                  borderRadius: "20px",
-                  objectFit: "cover",
-                }}
-              />
-            </div>
-          </div>
-        )}
-
-        {/* Search + Categories */}
-        <div style={{ textAlign: "center", margin: "20px" }}>
-          {/* Search bar */}
+      {/* Search + Filters */}
+      <div className="max-w-4xl mx-auto mt-6 px-4">
+        <div className="flex items-center bg-white shadow-md rounded-xl p-1 border border-pink-300">
+          <Search className="text-gray-400 w-6 h-6 mr-2" />
           <input
-            className="search-input"
             type="text"
             placeholder="Search videos..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={{
-              padding: "10px",
-              width: "60%",
-              maxWidth: "300px",
-              borderRadius: "20px",
-              border: "none",
-              outline: "none",
-              fontSize: "14px",
-              color: "black",
-              backgroundColor: "white",
-              transition: "width 0.3s ease",
-              marginRight: "10px",
-              fontFamily: "Arial, sans-serif",
-            }}
+            className="flex-1 outline-none text-gray-700 text-sm py-1"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
-          {/* Category Buttons */}
-          {categories.map((cat) => (
+          {/* Filter Dropdown */}
+          <div className="relative">
             <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
-              style={{
-                padding: "8px 16px",
-                margin: "5px",
-                borderRadius: "20px",
-                border: "none",
-                cursor: "pointer",
-                fontSize: "14px",
-                backgroundColor: selectedCategory === cat ? "#d63384" : "#444",
-                color: "white",
-                transition: "background 0.2s ease",
-                fontFamily: "Arial, sans-serif",
-              }}
+              onClick={() => setShowDropdown(!showDropdown)}
+              className="flex items-center gap-2 px-4 py-2 bg-pink-100 rounded-lg hover:bg-pink-200"
             >
-              {cat}
+              <Filter className="w-5 h-5 text-gray-600" />
+              Filter
             </button>
+
+            {showDropdown && (
+              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg border border-gray-200 z-20">
+                <ul className="py-2 text-sm text-gray-700">
+                  <li
+                    className="px-4 py-2 hover:bg-pink-100 cursor-pointer"
+                    onClick={() => {
+                      setFilter("all");
+                      setShowDropdown(false);
+                    }}
+                  >
+                    All
+                  </li>
+                  <li
+                    className="px-4 py-2 hover:bg-pink-100 cursor-pointer"
+                    onClick={() => {
+                      setFilter("videos");
+                      setShowDropdown(false);
+                    }}
+                  >
+                    Videos
+                  </li>
+                  <li
+                    className="px-4 py-2 hover:bg-pink-100 cursor-pointer"
+                    onClick={() => {
+                      setFilter("shorts");
+                      setShowDropdown(false);
+                    }}
+                  >
+                    Shorts
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Points instead of buttons */}
+        <div className="flex gap-6 mt-4 text-gray-700 font-medium justify-center">
+          <div
+            className={`flex items-center gap-1 cursor-pointer ${filter === "all" ? "text-pink-600" : ""}`}
+            onClick={() => setFilter("all")}
+          >
+            <PlayCircle className="w-4 h-4" /> All
+          </div>
+          <div
+            className={`flex items-center gap-1 cursor-pointer ${filter === "videos" ? "text-pink-600" : ""}`}
+            onClick={() => setFilter("videos")}
+          >
+            <Video className="w-4 h-4" /> Videos
+          </div>
+          <div
+            className={`flex items-center gap-1 cursor-pointer ${filter === "shorts" ? "text-pink-600" : ""}`}
+            onClick={() => setFilter("shorts")}
+          >
+            <Scissors className="w-4 h-4" /> Shorts
+          </div>
+        </div>
+      </div>
+
+      {/* Video Display */}
+      {filter === "shorts" ? (
+        // Shorts Reel View
+        <div className="max-w-md mx-auto mt-8 px-4 flex flex-col gap-6">
+          {filteredVideos.map((video) => (
+            <div
+              key={video.id}
+              className="relative bg-black rounded-xl overflow-hidden shadow-lg h-[80vh] flex items-center justify-center"
+            >
+              <a
+                href={`https://www.youtube.com/watch?v=${video.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                  className="w-full h-full object-cover"
+                />
+                <span className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+                  {formatDuration(video.duration)}
+                </span>
+                <div className="absolute bottom-12 left-4 text-white">
+                  <h3 className="text-lg font-semibold line-clamp-2">
+                    {video.title}
+                  </h3>
+                </div>
+              </a>
+            </div>
           ))}
         </div>
-
-        {/* Recommended Videos */}
-        <div>
-          <h2
-            style={{
-              marginBottom: "15px",
-              fontSize: "24px",
-              borderRight: "2px solid #d63384",
-              display: "inline-block",
-              paddingRight: "5px",
-              animation: "blink 0.7s steps(2, start) infinite",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {typedText}
-          </h2>
-
-          {selectedCategory === "SHORTS" ? (
-            // 🔥 Shorts Mode (Reels Style)
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: "20px",
-              }}
+      ) : (
+        // Normal Grid View
+        <div className="max-w-6xl mx-auto mt-8 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {filteredVideos.map((video) => (
+            <a
+              key={video.id}
+              href={`https://www.youtube.com/watch?v=${video.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white rounded-xl overflow-hidden shadow hover:shadow-xl hover:scale-105 transition transform"
             >
-              {otherVideos.length > 0 ? (
-                otherVideos.map((video) => (
-                  <div
-                    key={video.id.videoId}
-                    style={{
-                      width: "100%",
-                      maxWidth: "400px",
-                      height: "80vh",
-                      background: "#000",
-                      borderRadius: "12px",
-                      overflow: "hidden",
-                      boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src={`https://www.youtube.com/embed/${video.id.videoId}`}
-                      title={video.snippet.title}
-                      frameBorder="0"
-                      allowFullScreen
-                      loading="lazy"
-                      style={{ objectFit: "cover" }}
-                    ></iframe>
-                  </div>
-                ))
-              ) : (
-                <p style={{ color: "#ccc" }}>No shorts match your search.</p>
-              )}
-            </div>
-          ) : (
-            // 🎥 Normal Grid for Videos
-            <div
-              className="video-grid"
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-                gap: "20px",
-              }}
-            >
-              {otherVideos.length > 0 ? (
-                otherVideos.map((video) => (
-                  <div
-                    key={video.id.videoId}
-                    className="video-card"
-                    style={{
-                      background: "#1a1f2e",
-                      borderRadius: "10px",
-                      overflow: "hidden",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-                      transition: "transform 0.2s ease",
-                      cursor: "pointer",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.transform = "scale(1.03)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.transform = "scale(1)")
-                    }
-                  >
-                    <iframe
-                      width="100%"
-                      height="180"
-                      src={`https://www.youtube.com/embed/${video.id.videoId}`}
-                      title={video.snippet.title}
-                      frameBorder="0"
-                      allowFullScreen
-                      loading="lazy"
-                    ></iframe>
-                    <div style={{ padding: "10px" }}>
-                      <h3 style={{ fontSize: "16px", margin: 0 }}>
-                        {decodeHtmlEntities(video.snippet.title)}
-                      </h3>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p
-                  style={{
-                    color: "#ccc",
-                    gridColumn: "1 / -1",
-                    textAlign: "center",
-                  }}
-                >
-                  No videos match your search.
-                </p>
-              )}
-            </div>
-          )}
+              <div className="relative">
+                <img
+                  src={video.thumbnail}
+                  alt={video.title}
+                  className="w-full h-48 object-cover"
+                />
+                <span className="absolute bottom-2 right-2 bg-black text-white text-xs px-2 py-1 rounded">
+                  {formatDuration(video.duration)}
+                </span>
+              </div>
+              <div className="p-3">
+                <h3 className="text-sm font-semibold text-gray-800 line-clamp-2">
+                  {video.title}
+                </h3>
+              </div>
+            </a>
+          ))}
         </div>
-        
-      </div>
-      <Footer/>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
