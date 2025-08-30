@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { PlayCircle, Video, Scissors } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
 import { Search, Filter } from "lucide-react";
@@ -11,8 +11,9 @@ export default function VideoGallery() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [showDropdown, setShowDropdown] = useState(false);
+  const videoRefs = useRef([]);
 
-  // ✅ Decode HTML entities like &quot; into real characters
+
   const decodeHtml = (html) => {
     const txt = document.createElement("textarea");
     txt.innerHTML = html;
@@ -39,7 +40,7 @@ export default function VideoGallery() {
 
         const merged = videoItems.map((v, i) => ({
           id: v.id.videoId,
-          title: decodeHtml(v.snippet.title), // ✅ decode applied here
+          title: decodeHtml(v.snippet.title),
           thumbnail: v.snippet.thumbnails.high.url,
           duration: detailsData.items[i]?.contentDetails?.duration || "N/A",
         }));
@@ -77,28 +78,65 @@ export default function VideoGallery() {
     return matchesSearch;
   });
 
+
+  useEffect(() => {
+    if (filter !== "shorts") return;
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.7
+    };
+
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        const iframe = entry.target;
+        if (entry.isIntersecting) {
+        
+          iframe.contentWindow?.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        } else {
+        
+          iframe.contentWindow?.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all iframe elements
+    videoRefs.current.forEach((iframe) => {
+      if (iframe) observer.observe(iframe);
+    });
+
+    return () => {
+      videoRefs.current.forEach((iframe) => {
+        if (iframe) observer.unobserve(iframe);
+      });
+    };
+  }, [filter, filteredVideos]);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-gradient-to-r from-pink-100 to-pink py-12 text-center">
-  <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
-    FinQuest VideoHub
-  </h1>
-  <p className="mt-4 text-lg text-gray-600">
-    <Typewriter
-      words={[
-        "Welcome to explore financial insights, strategies, and market trends through videos.",
-        "Stay updated with the latest financial knowledge.",
-        "Learn, grow, and achieve your financial goals with us!"
-      ]}
-      loop={true}       // keeps typing infinitely
-      cursor
-      cursorStyle="|"
-      typeSpeed={50}
-      deleteSpeed={30}
-      delaySpeed={2000}
-    />
-  </p>
-</header>
+        <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+          FinQuest VideoHub
+        </h1>
+        <p className="mt-4 text-lg text-gray-600">
+          <Typewriter
+            words={[
+              "Welcome to explore financial insights, strategies, and market trends through videos.",
+              "Stay updated with the latest financial knowledge.",
+              "Learn, grow, and achieve your financial goals with us!"
+            ]}
+            loop={true}      
+            cursor
+            cursorStyle="|"
+            typeSpeed={50}
+            deleteSpeed={30}
+            delaySpeed={2000}
+          />
+        </p>
+      </header>
 
       {/* Search + Filters */}
       <div className="max-w-4xl mx-auto mt-6 px-4">
@@ -158,7 +196,7 @@ export default function VideoGallery() {
           </div>
         </div>
 
-        {/* Points instead of buttons */}
+      
         <div className="flex gap-6 mt-4 text-gray-700 font-medium justify-center">
           <div
             className={`flex items-center gap-1 cursor-pointer ${filter === "all" ? "text-pink-600" : ""}`}
@@ -181,39 +219,38 @@ export default function VideoGallery() {
         </div>
       </div>
 
-      {/* Video Display */}
+     
       {filter === "shorts" ? (
-        // Shorts Reel View
+    
         <div className="max-w-md mx-auto mt-8 px-4 flex flex-col gap-6">
-          {filteredVideos.map((video) => (
+          {filteredVideos.map((video, index) => (
             <div
               key={video.id}
               className="relative bg-black rounded-xl overflow-hidden shadow-lg h-[80vh] flex items-center justify-center"
             >
-              <a
-                href={`https://www.youtube.com/watch?v=${video.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-full object-cover"
-                />
-                <span className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
+              <iframe
+                ref={(el) => (videoRefs.current[index] = el)}
+                src={`https://www.youtube.com/embed/${video.id}?autoplay=1&controls=1&loop=1&playlist=${video.id}&enablejsapi=1`}
+                title={video.title}
+                className="w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+              />
+              <div className="absolute bottom-4 left-4 right-4 text-white bg-gradient-to-t from-black/70 to-transparent p-4 rounded-lg">
+                <h3 className="text-lg font-semibold line-clamp-2">
+                  {video.title}
+                </h3>
+                <span className="text-sm opacity-75">
                   {formatDuration(video.duration)}
                 </span>
-                <div className="absolute bottom-12 left-4 text-white">
-                  <h3 className="text-lg font-semibold line-clamp-2">
-                    {video.title}
-                  </h3>
-                </div>
-              </a>
+              </div>
             </div>
           ))}
         </div>
       ) : (
-        // Normal Grid View
+      
         <div className="max-w-6xl mx-auto mt-8 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filteredVideos.map((video) => (
             <a
