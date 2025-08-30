@@ -20,6 +20,12 @@ import {
   Twitter,
   Youtube,
   Bot,
+  Play,
+  Target,
+  Zap,
+  Shield,
+  Clock,
+  Globe
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -32,9 +38,219 @@ import Testimonials from "../components/testimonials";
 import FAQ from "../components/FAQ";
 import Testi from "../components/Testi";
 
+// ---------------- DEMO VIDEO SECTION ----------------
+const DemoVideoSection = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
 
+  return (
+    <section
+  id="demo-video"
+  className="py-20  bg-gradient-to-r from-[#006400] to-[#008080]
+ relative overflow-hidden"
+>
 
+      {/* Background Pattern */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-48 h-48 bg-green-500/10 rounded-full blur-2xl animate-pulse"></div>
+      </div>
 
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-4xl font-bold text-white mb-4">
+            🎬 See FinQuest in Action
+          </h2>
+          <p className="text-lg text-gray-200 max-w-2xl mx-auto">
+            Watch how our platform transforms financial learning through interactive experiences
+          </p>
+        </motion.div>
+
+        <div className="relative max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="relative bg-black rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20"
+          >
+            {/* Video Container */}
+            <div className="aspect-video bg-gradient-to-br from-gray-900 to-gray-800 flex items-center justify-center relative">
+              {!isPlaying ? (
+                <>
+                  {/* Video Thumbnail */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#002147]/80 to-green-600/80 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="w-24 h-24 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mb-4 mx-auto border-2 border-white/30">
+                        <Video className="w-12 h-12 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        FinQuest Platform Demo
+                      </h3>
+                      <p className="text-gray-200 mb-4">
+                        Discover the future of financial education
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Play Button */}
+                  <button
+                    onClick={() => setIsPlaying(true)}
+                    className="group relative z-20 flex items-center justify-center w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full border-2 border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-110"
+                  >
+                    <Play className="w-8 h-8 text-white ml-1" fill="white" />
+                  </button>
+                </>
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-white bg-black">
+                  <div className="text-center">
+                    <Video className="w-16 h-16 mx-auto mb-4 text-red-500" />
+                    <p className="text-xl mb-2">Demo Video Playing...</p>
+                    <p className="text-sm text-gray-300 mb-4">
+                      Your actual video content would be embedded here
+                    </p>
+                    <button
+                      onClick={() => setIsPlaying(false)}
+                      className="px-4 py-2 bg-white/20 rounded-lg hover:bg-white/30 transition-colors"
+                    >
+                      Stop Demo
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Video Info Overlay */}
+              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center text-white text-sm bg-black/50 rounded-lg p-3">
+                <span className="flex items-center space-x-2">
+                  <Target className="w-4 h-4" />
+                  <span>FinQuest Platform Walkthrough</span>
+                </span>
+                <span className="flex items-center space-x-2">
+                  <Clock className="w-4 h-4" />
+                  <span>5:30</span>
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Video Features */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            {[
+              {
+                icon: <Target className="w-6 h-6" />,
+                title: "Interactive Learning",
+                desc: "See how gamification makes finance fun and engaging"
+              },
+              {
+                icon: <TrendingUp className="w-6 h-6" />,
+                title: "Live Simulations",
+                desc: "Watch real market scenario training in action"
+              },
+              {
+                icon: <Users className="w-6 h-6" />,
+                title: "Community Features",
+                desc: "Explore collaborative learning and networking tools"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                className="text-center text-white bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20"
+              >
+                <div className="flex justify-center mb-3 text-green-400">
+                  {feature.icon}
+                </div>
+                <h3 className="font-semibold mb-2 text-lg">{feature.title}</h3>
+                <p className="text-gray-200 text-sm leading-relaxed">
+                  {feature.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ---------------- WHY CHOOSE SECTION ----------------
+const WhyChooseSection = () => {
+  const features = [
+    {
+      icon: <Zap className="w-12 h-12 text-yellow-500" />,
+      title: "Instant Learning",
+      description:
+        "Get immediate feedback and progress tracking as you learn financial concepts in real-time."
+    },
+    {
+      icon: <Shield className="w-12 h-12 text-green-500" />,
+      title: "Trusted Platform",
+      description:
+        "Used by top universities and financial institutions worldwide for professional training."
+    },
+    {
+      icon: <Clock className="w-12 h-12 text-blue-500" />,
+      title: "Learn Anytime",
+      description:
+        "Access your personalized learning dashboard 24/7 from any device, anywhere."
+    },
+    {
+      icon: <Globe className="w-12 h-12 text-purple-500" />,
+      title: "Global Community",
+      description:
+        "Connect with finance professionals and students from around the world."
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl font-bold text-[#002147] mb-4">
+            🌟 Why Choose FinQuest?
+          </h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            We're revolutionizing financial education with cutting-edge technology and proven methodologies
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="text-center p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#002147]/20 group"
+            >
+              <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                {feature.icon}
+              </div>
+              <h3 className="text-xl font-semibold text-[#002147] mb-3">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">
+                {feature.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ---------------- HOMEPAGE ----------------
 function Homepage() {
   const location = useLocation();
   const [login, setlogin] = useState(location.state || false);
@@ -65,30 +281,14 @@ function Homepage() {
 
   useEffect(() => {
     if (email) {
-      axios.post("http://localhost:4047/login", { email, password }).then((res) => {
-
-//         axios.get("http://localhost:4047/verify")
-//     .then(res=>{
-//       if(!res.data.lastname)
-//       {
-//         navigate('/Profile')
-//       }
-      
-//       else{
-// if (res.data.valid) {
-//           navigate("/");
-//         }
-//         if (!showtoast) {
-//           setshowtoast(true);
-//         }
-//       }
-//       } ) 
-      });
+      axios
+        .post("http://localhost:4047/login", { email, password })
+        .then((res) => {});
     }
   }, [email, password, navigate, showtoast]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white ">
+     <div className="min-h-screen flex flex-col bg-white ">
       <Chat />
       <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
         <div className="flex items-center space-x-2 text-[#002147]">
@@ -99,13 +299,6 @@ function Homepage() {
           />
           <span className="text-2xl font-bold sm:hidden">FinQuest</span>
         </div>
-        {/* <ul className="flex justify-center items-center space-x-6 text-[#002147] text-sm font-medium">
-          <li><Link to="/Learning_Paths" className="flex items-center gap-1 hover:text-[#28A745]"><Book /> Learn</Link></li>
-          <li><Link to="/Quiz" className="flex items-center gap-1 hover:text-[#28A745]"><HelpCircle /> Quiz</Link></li>
-          <li><Link to="/Game" className="flex items-center gap-1 hover:text-[#28A745]"><Gamepad2 /> Games</Link></li>
-          <li><Link to="/FinFlux" className="flex items-center gap-1 hover:text-[#28A745]"><Video /> Reels</Link></li>
-          <li><Link to="/Simulations" className="flex items-center gap-1 hover:text-[#28A745]"><Calculator /> Simulator</Link></li>
-        </ul> */}
         <div className="flex items-center gap-4">
           {useremail ? (
             <Link to="/ProfilePage" className="text-[#002147] hover:text-[#F39C12]">{username}</Link>
@@ -214,99 +407,12 @@ function Homepage() {
           ))}
         </div>
       </section>
-               <Testimonials />
 
-      <section className="py-20 px-6 bg-gray-50">
-        {/* <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
-          👥 Learning Paths for Everyone
-        </h2>
-        <p className="text-lg text-center text-gray-600 mb-10">
-          Tailored content and experiences designed for different life stages and financial goals
-        </p> */}
-
-
-        <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto z-10">
-
-          {/* School Students (Blue Theme) */}
-          {/* <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#002147] to-[#1a3a75] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
-            <div className="relative">
-              <div className="flex items-center mb-4">
-                <div className="bg-gradient-to-br from-[#002147] to-[#1a3a75] text-white p-3 rounded-full">
-                  📘
-                </div>
-                <h3 className="ml-4 text-xl font-semibold text-[#002147]">School Students</h3>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Build a strong foundation in financial literacy with age-appropriate content and interactive learning modules.
-              </p>
-              <ul className="text-sm text-gray-700 space-y-2 mb-4">
-                <li>📌 Basic Money Management</li>
-                <li>📌 Savings & Budgeting</li>
-                <li>📌 Investment Basics</li>
-                <li>📌 Financial Goal Setting</li>
-              </ul>
-              <button className="mt-2 w-full bg-[#002147] text-white py-2 rounded-lg hover:bg-[#001533]">
-                Start Learning Path →
-              </button>
-            </div>
-          </div> */}
-
-        
-
-          {/* College Students (Green to Gold Theme) */}
-          {/* <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
-            <div className="relative">
-              <div className="flex items-center mb-4">
-                <div className="bg-gradient-to-br from-[#1e7d4d] to-[#ffcc00] text-white p-3 rounded-full">
-                  🎓
-                </div>
-                <h3 className="ml-4 text-xl font-semibold text-[#1e7d4d]">College Students</h3>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Prepare for financial independence with advanced concepts, real-world scenarios, and career-focused learning.
-              </p>
-              <ul className="text-sm text-gray-700 space-y-2 mb-4">
-                <li>📌 Student Loans</li>
-                <li>📌 Credit Management</li>
-                <li>📌 Career Planning</li>
-                <li>📌 Advanced Investing</li>
-              </ul>
-              <button className="mt-2 w-full bg-[#1e7d4d] text-white py-2 rounded-lg hover:bg-[#15663e]">
-                Start Learning Path →
-              </button>
-            </div>
-          </div> */}
-
-          {/* Working Professionals (Gold to Green Theme) */}
-          {/* <div className="relative bg-white shadow-lg border border-gray-200 rounded-xl p-6 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] opacity-5 hover:opacity-10 transition-opacity duration-300 rounded-xl" />
-            <div className="relative">
-              <div className="flex items-center mb-4">
-                <div className="bg-gradient-to-br from-[#ffcc00] to-[#1e7d4d] text-white p-3 rounded-full">
-                  💼
-                </div>
-                <h3 className="ml-4 text-xl font-semibold text-[#ffcc00]">Working Professionals</h3>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Enhance your financial expertise with sophisticated tools, market analysis, and wealth-building strategies.
-              </p>
-              <ul className="text-sm text-gray-700 space-y-2 mb-4">
-                <li>📌 Portfolio Management</li>
-                <li>📌 Tax Optimization</li>
-                <li>📌 Retirement Planning</li>
-                <li>📌 Risk Assessment</li>
-              </ul>
-              <button className="mt-2 w-full bg-[#ffcc00] text-black py-2 rounded-lg hover:bg-[#e6b800]">
-                Start Learning Path →
-              </button>
-            </div>
-          </div> */}
-        </div>
-      </section>
-
+      {/* <DemoVideoSection /> */}
+      <Testimonials />
+      <WhyChooseSection />
       <p id="faq"><FAQ /></p>
+      
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-gray-300 py-12 px-6">
@@ -370,10 +476,9 @@ function Homepage() {
 
         </div>
       </footer>
-
-
     </div>
   );
 }
 
 export default Homepage;
+
