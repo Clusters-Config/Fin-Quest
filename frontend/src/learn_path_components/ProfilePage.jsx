@@ -5,19 +5,15 @@ import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from '@mui/material/Button';
 
+// ProfilePage component with a new UI design
 const ProfilePage = () => {
   const [email, setemail] = useState();
   const [udob, setudob] = useState();
-  const [dob, setdob] = useState();
   const [phone, setphone] = useState();
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
-  const [uemail, setuemail] = useState("");
+  const [role, setrole] = useState("Student");
   const [progresss, setprogress] = useState();
-
-  // const[Acounting1 , setAccounting1] = useState()
-  // const[Acounting2 , setAccounting2] = useState()
-  // const[Acounting , setAccounting] = useState()
 
   const [Terminologies, setTerminologies] = useState();
   const [Accounting1, setAccounting1] = useState();
@@ -39,6 +35,7 @@ const ProfilePage = () => {
   const [Investment2, setInvestment2] = useState();
   const [Investment3, setInvestment3] = useState();
   const [Investment, setInvestment] = useState();
+  const [modules, setModules] = useState([]);
 
   const navigate = useNavigate();
 
@@ -55,21 +52,22 @@ const ProfilePage = () => {
       navigate("/", { state: { login: true } });
     });
   };
-  useEffect(() => {
-    axios.post("http://localhost:4047/finduser", { email }).then((res) => {
-      setudob(res?.data?.user?.profile[0]?.dob);
-      setphone(res?.data?.user?.profile[0]?.phone);
-      setfirstname(res?.data?.user?.profile[0]?.firstname || "");
-      setlastname(res?.data?.user?.profile[0]?.lastname || "");
-    });
-  });
+
+  const handleUpdate = () => {
+    navigate("/profile");
+  };
 
   useEffect(() => {
-    axios.defaults.withCredentials = true;
-    axios
-      .post("http://localhost:4047/finduserlearning", { email })
-      .then((res) => {
-  
+    if (email) {
+      axios.post("http://localhost:4047/finduser", { email }).then((res) => {
+        setudob(res?.data?.user?.profile[0]?.dob);
+        setphone(res?.data?.user?.profile[0]?.phone);
+        setfirstname(res?.data?.user?.profile[0]?.firstname || "");
+        setlastname(res?.data?.user?.profile[0]?.lastname || "");
+        setrole(res?.data?.user?.profile[0]?.role || "Student");
+      });
+
+      axios.post("http://localhost:4047/finduserlearning", { email }).then((res) => {
         setAccounting1(res?.data?.accouting[0]?.mod1.path1);
         setAccounting2(res?.data?.accouting[0]?.mod1.path2);
         setFAccounting1(res?.data?.accouting[0]?.mod2.path1);
@@ -84,8 +82,8 @@ const ProfilePage = () => {
         setInvestment2(res?.data?.finance[0]?.mod4.path2);
         setInvestment3(res?.data?.finance[0]?.mod4.path3);
       });
-  });
-
+    }
+  }, [email]);
 
   useEffect(() => {
     if (Accounting1 >= 70 && Accounting2 >= 70) {
@@ -141,7 +139,7 @@ const ProfilePage = () => {
     } else {
       setInvestment(0);
     }
-  });
+  }, [Accounting1, Accounting2, FAccounting1, FAccounting2, Financial1, Financial2, Saving1, Saving2, Interest1, Interest2, Investment1, Investment2, Investment3]);
 
   useEffect(() => {
     setModules([
@@ -151,7 +149,7 @@ const ProfilePage = () => {
       { name: "Module 4: Saving & Budgeting", progress: Saving },
       { name: "Module 5: Understanding Interest Rates", progress: Interest },
       { name: "Module 6: Investment Basics", progress: Investment },
-    ]);
+    ].filter(module => module.progress !== undefined));
   }, [Accounting, FAccounting, Financial, Saving, Interest, Investment]);
 
   const student = {
@@ -161,142 +159,120 @@ const ProfilePage = () => {
     dob: udob,
     phone: phone,
     email: email,
+    role: role,
     achievements: [
-      "Achieved 95% Progress in Module 2: Fundamentals of Accounting",
+      `Achieved ${FAccounting}% Progress in Module 2: Fundamentals of Accounting`,
       "Won 'Student of the Month' award for December 2024",
     ],
   };
 
-  // Learning modules progress
-  const [modules, setModules] = useState([
-    { name: "Module 1: Basic Terminologies", progress: Terminologies },
-    { name: "Module 2: Fundamentals of Accounting", progress: 95 },
-    { name: "Module 3: Basic Financial Concepts", progress: 30 },
-    { name: "Module 4: Understanding Interest Rates", progress: 10 },
-    { name: "Module 5: Investment Basics", progress: 0 },
-  ]);
-
   return (
     <>
-    <nav className="bg-[#002147] text-white p-4 text-center text-xl font-semibold">
+      <nav className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-4 text-center text-xl font-semibold shadow-lg">
         My Learning Path
       </nav>
-    {udob ? <div className="bg-[#F4F4F4] min-h-screen">
-      {/* Navbar */}
-      
-      {/* {email ? (
-          <div className="flex justify-end p-4">
-            <button
-          onClick={handleLogOut}
-          className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all mt-10"
-            >
-          Logout
-            </button>
-          </div>
-        ) : (
-          ""
-        )} */}
-      {/* Profile Container */}
-      <div className="max-w-4xl mx-auto my-8 p-6 bg-white shadow-lg rounded-lg">
-        {/* Profile Header */}
-        <div className="grid grid-cols-2 items-center mb-6">
-          <h1 className="text-[#002147] text-2xl font-bold">Student Profile</h1>
-          {email ? (
-            <div className="flex justify-end">
-              <button
-                onClick={handleLogOut}
-                className="border border-black p-2 rounded-sm hover:bg-gray-300 transition-all"
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-
-        {/* Student Info */}
-        <div className="flex flex-col sm:flex-row gap-6 mb-6">
-          {/* Left Section - Student Photo */}
-          <div className="w-full sm:w-1/3 flex justify-center items-center">
-            <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
-              <img
-                src={student.photo}
-                alt="Student"
-                className="w-24 h-24 rounded-full mx-auto"
-              />
-            </div>
-          </div>
-
-          {/* Right Section - Student Details */}
-          <div className="w-full sm:w-2/3">
-            <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
-              <p className="text-lg font-semibold text-[#002147] mb-4">
-                {student.name}
-              </p>
-              <p className="text-[#6C757D] mb-2">
-                Date of Birth: {student.dob}
-              </p>
-              <p className="text-[#6C757D] mb-2">Phone: {student.phone}</p>
-              <p className="text-[#6C757D]">Email: {student.email}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Learning Path Progress */}
-        <div className="mb-6">
-          <h3 className="text-xl font-semibold text-[#002147] mb-4">
-            Learning Progress
-          </h3>
-          {modules.map((module, index) => (
-            <div key={index} className="mb-4">
-              <p className="text-[#6C757D] font-medium">{module.name}</p>
-              <div className="w-full bg-gray-200 rounded-full h-4">
-                <div
-                  className="h-4 bg-[#F39C12] rounded-full"
-                  style={{ width: `${module.progress}%` }}
-                ></div>
+      {udob ? (
+        <div className="bg-gray-100 min-h-screen p-8">
+          <div className="max-w-6xl mx-auto space-y-8">
+            {/* Header and Action Buttons */}
+            <div className="flex justify-between items-center mb-6">
+              <h1 className="text-3xl font-bold text-gray-800">Student Profile</h1>
+              <div className="flex space-x-4">
+                <Button variant="outlined" onClick={handleUpdate} className="text-gray-700 border-gray-700 hover:bg-gray-200 transition-colors">
+                  Update Profile
+                </Button>
+                <Button variant="contained" onClick={handleLogOut} className="bg-red-500 hover:bg-red-600 text-white transition-colors">
+                  Logout
+                </Button>
               </div>
-              <p className="text-sm text-[#002147]">
-                {module.progress}% Completed
-              </p>
             </div>
-          ))}
-        </div>
 
-        {/* Achievements Section */}
-        <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md mb-6">
-          <h3 className="text-[#002147] text-xl font-bold mb-4">
-            Achievements
-          </h3>
-          <ul className="list-disc pl-6 space-y-2">
-            {student.achievements.map((achievement, index) => (
-              <li key={index} className="text-[#6C757D]">
-                {achievement}
-              </li>
-            ))}
-          </ul>
-        </div>
+            {/* Main Content Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Profile Card */}
+              <div className="lg:col-span-1 bg-white p-6 rounded-xl shadow-lg flex flex-col items-center text-center">
+                <img
+                  src={student.photo}
+                  alt="Student"
+                  className="w-32 h-32 rounded-full ring-4 ring-blue-500 mb-4"
+                />
+                <h2 className="text-2xl font-bold text-gray-900">{student.name}</h2>
+                <p className="text-gray-500 mt-2 text-sm">{student.email}</p>
+                <div className="w-full mt-6 text-left space-y-2 text-gray-600">
+                  <p className="flex items-center">
+                    <span className="font-semibold w-24">D.O.B:</span> {student.dob}
+                  </p>
+                  <p className="flex items-center">
+                    <span className="font-semibold w-24">Phone:</span> {student.phone}
+                  </p>
 
-        {/* Learning Path Overview */}
-        <div className="bg-[#F8FAFC] p-6 rounded-lg shadow-md">
-          <h3 className="text-[#002147] text-xl font-bold mb-4">
-            Learning Path Overview
-          </h3>
-          <p className="text-[#6C757D]">
-            This learning path consists of three modules, guiding students from
-            basics to advanced topics. Keep progressing and complete all modules
-            to achieve mastery!
-          </p>
+                  <p className="flex items-center">
+                    <span className="font-semibold w-24">Role: </span> {student.role}
+                  </p>
+                </div>
+              </div>
+
+              {/* Learning Progress Card */}
+              <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold text-gray-800 mb-6">Learning Progress</h3>
+                <div className="space-y-6">
+                  {modules.map((module, index) => (
+                    <div key={index} className="flex flex-col sm:flex-row items-center justify-between">
+                      <p className="text-gray-700 font-medium mb-2 sm:mb-0 sm:w-2/5">
+                        {module.name}
+                      </p>
+                      <div className="w-full sm:w-3/5">
+                        <div className="bg-gray-200 rounded-full h-2.5">
+                          <div
+                            className="h-2.5 rounded-full transition-all duration-500 ease-in-out"
+                            style={{
+                              width: `${module.progress}%`,
+                              background: `linear-gradient(to right, #4CAF50, #8BC34A)`
+                            }}
+                          ></div>
+                        </div>
+                        <p className="text-sm text-right text-gray-500 mt-1">
+                          {module.progress}% Completed
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Achievements Card */}
+              <div className="lg:col-span-2 bg-white p-8 rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+                  Achievements
+                </h3>
+                <ul className="list-disc pl-6 space-y-4">
+                  {student.achievements.map((achievement, index) => (
+                    <li key={index} className="text-gray-600 leading-relaxed">
+                      {achievement}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Learning Path Overview Card */}
+              <div className="lg:col-span-1 bg-white p-8 rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+                  Learning Path
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  This learning path consists of a series of modules designed to guide you from foundational knowledge to advanced topics in finance. Keep up the great work to achieve mastery!
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div> : <Backdrop
-  sx={(theme) => ({ color: '#fff', zIndex: theme.zIndex.drawer + 1 })}
-  open
->
-  <CircularProgress color="inherit" />
-  <h1>Please wait or Update your profile</h1>
-</Backdrop>}</>
+      ) : (
+        <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+          <CircularProgress color="inherit" />
+          <p className="ml-4 text-xl">Loading profile...</p>
+        </Backdrop>
+      )}
+    </>
   );
 };
 

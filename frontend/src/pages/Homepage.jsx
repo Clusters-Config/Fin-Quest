@@ -321,7 +321,7 @@ function Homepage() {
   return (
      <div className="min-h-screen flex flex-col bg-white ">
       <Chat />
-      <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
+      {/* <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
         <div className="flex items-center space-x-2 text-[#002147]">
           <img
             src={logo}
@@ -341,7 +341,44 @@ function Homepage() {
             <button className="bg-[#002147] text-white px-4 py-2 rounded-lg hover:bg-[#001533]">Sign Up</button>
           </Link>
         </div>
-      </nav>
+      </nav> */}
+
+      <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
+  <div className="flex items-center space-x-2 text-[#002147]">
+    <img
+      src={logo}
+      alt="FinQuest Logo"
+      className="w-12 h-12 rounded-full drop-shadow-lg"
+    />
+    <span className="text-2xl font-bold sm:hidden">FinQuest</span>
+  </div>
+  <div className="flex items-center gap-4">
+    {useremail ? (
+      <>
+        <Link to="/ProfilePage" className="text-[#002147] text-2xl font-bold hover:text-[#006400]">
+          {username}
+        </Link>
+        <Link to="/Profile" className="text-[#002147] hover:text-[#006400]">
+          <UserCircle size={22} />
+        </Link>
+      </>
+    ) : (
+      <>
+        {/* <Link to="/login" className="text-[#002147] hover:text-[#006400]">
+          {username ? username : "Login"}
+        </Link> */}
+        {/* <Link to="/Profile" className="text-[#002147] hover:text-[#006400]">
+          <UserCircle size={22} />
+        </Link> */}
+        <Link to="/login">
+          <button className="bg-[#002147] text-white px-4 py-2 rounded-lg hover:bg-[#001533]">
+            Login
+          </button>
+        </Link>
+      </>
+    )}
+  </div>
+</nav>
 
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-40 px-8 sm:px-16 md:px-32 overflow-hidden" >
