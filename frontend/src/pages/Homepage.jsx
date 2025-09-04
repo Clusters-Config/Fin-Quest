@@ -554,8 +554,8 @@ function Homepage() {
 
         {/* Copyright */}
         <div className="text-center text-sm text-gray-500 mt-8 pt-6 border-t border-gray-700">
-          <p className="italic">"Empowering financial literacy through gamification."</p>
-          <p className="mt-2">&copy; 2025 FinQuest. All Rights Reserved.</p>
+          <p className="italic text-white">"Empowering financial literacy through gamification."</p>
+          <p className="mt-2 text-white">&copy; 2025 FinQuest. All Rights Reserved.</p>
 
         </div>
       </footer>
