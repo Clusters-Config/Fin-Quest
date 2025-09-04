@@ -224,7 +224,7 @@ const WhyChooseSection = () => {
   </div>
 
   {/* Main section */}
-  <section className="py-20 bg-white relative mt-8 mb-8">
+  <section className=" sm:mt-4 sm:mb-4py-20 bg-white relative mt-8 mb-8">
     <div className="max-w-6xl mx-auto px-6">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
