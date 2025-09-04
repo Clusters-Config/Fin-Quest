@@ -208,45 +208,76 @@ const WhyChooseSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-[#002147] mb-4">
-            🌟 Why Choose FinQuest?
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            We're revolutionizing financial education with cutting-edge technology and proven methodologies
-          </p>
-        </motion.div>
+    <div className="relative">
+  {/* Curved top section */}
+  <div className="relative bg-[#f9f9f9] h-24">
+    <svg 
+      className="absolute bottom-0 w-full h-24" 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none"
+    >
+      <path 
+        d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" 
+        fill="#fff"
+      />
+    </svg>
+  </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="text-center p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#002147]/20 group"
-            >
-              <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-[#002147] mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {feature.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+  {/* Main section */}
+  <section className="py-20 bg-white relative mt-8 mb-8">
+    <div className="max-w-6xl mx-auto px-6">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-4xl font-bold text-[#002147] mb-4">
+          🌟 Why Choose FinQuest?
+        </h2>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          We're revolutionizing financial education with cutting-edge technology and proven methodologies
+        </p>
+      </motion.div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {features.map((feature, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="text-center p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#002147]/20 group"
+          >
+            <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              {feature.icon}
+            </div>
+            <h3 className="text-xl font-semibold text-[#002147] mb-3">
+              {feature.title}
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              {feature.description}
+            </p>
+          </motion.div>
+        ))}
       </div>
-    </section>
+    </div>
+  </section>
+
+  {/* Wave bottom section */}
+  <div className="relative bg-[#f9f9f9] h-32">
+    <svg 
+      className="absolute top-0 w-full h-32" 
+      viewBox="0 0 1200 120" 
+      preserveAspectRatio="none"
+    >
+      <path 
+        d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,0 L0,0 Z" 
+        fill="#ffffff"
+      />
+    </svg>
+  </div>
+</div>
   );
 };
 
@@ -374,8 +405,23 @@ function Homepage() {
         </div>
       </div>
 
+      {/* Animation Component - Wave Effect */}
+      <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] h-20">
+  <svg 
+    className="absolute bottom-0 w-full h-20" 
+    viewBox="0 0 1200 120" 
+    preserveAspectRatio="none"
+  >
+    <path 
+      d="M0,60 C150,100 350,20 600,60 C850,100 1050,20 1200,60 L1200,120 L0,120 Z" 
+      fill="#fff"
+    />
+  </svg>
+</div>
+
       {/* Powerful Learning Features Section */}
       <section className="py-16 px-6 bg-white">
+        
         <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
           🎯 Powerful Learning Features
         </h2>
