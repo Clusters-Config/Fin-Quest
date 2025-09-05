@@ -17,7 +17,8 @@ app.use(
  cors({    
    origin: ["http://localhost:5173", "https://fin-quest-frontend.onrender.com"],
     credentials: true,
-  }),
+ }),
+  
 );
 
 const upload = multer();
