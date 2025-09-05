@@ -17,7 +17,7 @@
        
 //         e.preventDefault()
         
-//          await axios.post("http://localhost:4047/login",{email,password})
+//          await axios.post("https://fin-quest-y9ub.onrender.com/login",{email,password})
 //         .then(res=>{
 //           valid = res.data.valid
 //           if(valid){
@@ -28,7 +28,7 @@
 //             // alert("Email or password incorrect")
 //           }   
 //         })
-//         await axios.post("http://localhost:4047/finduser", { email : email } )
+//         await axios.post("https://fin-quest-y9ub.onrender.com/finduser", { email : email } )
 //         .then(user=>{
 //           let mail = user.data.user.email
 //           setuseremail(mail)
@@ -113,11 +113,11 @@ function Login_signup() {
     e.preventDefault();
 
     await axios
-      .post("http://localhost:4047/login", { email, password })
+      .post("https://fin-quest-y9ub.onrender.com/login", { email, password })
       .then((res) => {
         console.log(res)
         valid = res.data.valid;
-        axios.get("http://localhost:4047/verify")
+        axios.get("https://fin-quest-y9ub.onrender.com/verify")
     .then(res=>{
       if(!res.data.lastname)
       {
@@ -130,7 +130,7 @@ function Login_signup() {
       });
 
     await axios
-      .post("http://localhost:4047/finduser", { email: email })
+      .post("https://fin-quest-y9ub.onrender.com/finduser", { email: email })
       .then((user) => {
         let mail = user.data.user.email;
         setuseremail(mail);
