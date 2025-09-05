@@ -43,7 +43,7 @@
 
         res.cookie("accessToken", accessToken, {
             maxAge: 1800000,
-            
+            httpOnly:true,
             secure: true,
             sameSite: "none",
         });
