@@ -45,7 +45,7 @@
             maxAge: 1800000,
             httpOnly:true,
             secure: true,
-            sameSite: "none",
+            sameSite: 'lax'
         });
 
         res.status(200).send("Done");
