@@ -38,15 +38,15 @@ const ChatInterface = () => {
   })
   
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 ">
-      <div className="w-full max-w-md  bg-white shadow-lg rounded-lg">
+    <div className="flex flex-col items-center justify-center h-64 bg-gray-100 mt-28">
+      <div className="w-full max-w-3xl  bg-white shadow-lg rounded-lg">
         {/* Header */}
-        <div className="bg-blue-600 text-white p-4 rounded-t-lg text-center">
+        {/* <div className="bg-blue-600 text-white p-4 rounded-t-lg text-center">
           <h1 className="text-lg font-bold">Global Chat</h1>
-        </div>
+        </div> */}
 
         {/* Chat Messages */}
-        <div className="h-[70vh] overflow-y-auto p-4 bg-gray-50">
+        <div className="h-80 overflow-y-auto p-4 bg-gray-50">
           {messages.map((msg, idx) => (
             <div
               key={idx}

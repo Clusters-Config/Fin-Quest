@@ -169,12 +169,12 @@ function FinanceForum() {
 
     <div className="min-h-screen bg-slate-100 relative mt-20">
       {/* Professional Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-200 via-gray-100 to-slate-300"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-200 via-gray-100 "></div>
       
       {/* Group Chat Modal */}
       {showChat && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl w-full max-w-4xl h-[80vh] flex flex-col shadow-xl border border-slate-300">
+          <div className="bg-white rounded-2xl w-full max-w-4xl h-[80vh] flex flex-col shadow-xl border ">
             
             {/* Chat Header */}
             <div className="flex items-center justify-between p-5 border-b border-slate-200 bg-slate-50">
@@ -199,7 +199,7 @@ function FinanceForum() {
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-3 bg-slate-50">
+            {/* <div className="flex-1 overflow-y-auto p-5 space-y-3 bg-slate-50">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
@@ -228,10 +228,12 @@ function FinanceForum() {
                   </div>
                 </div>
               ))}
-            </div>
+                
+            </div> */}
+            <ChatInterface />
 
             {/* Message Input */}
-            <div className="p-5 border-t border-slate-200 bg-white">
+            {/* <div className="p-5 border-t border-slate-200 bg-white">
               <div className="flex gap-3">
                 <input
                   type="text"
@@ -249,7 +251,7 @@ function FinanceForum() {
                   Send
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       )}
@@ -918,7 +920,6 @@ function FinanceForum() {
       </div>
       
     </div>
-    <ChatInterface />
     <Footer />
     </div>
   );
