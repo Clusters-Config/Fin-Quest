@@ -33,6 +33,7 @@ import {
 import Header from '../Services/Header.jsx';
 import Footer from '../Services/Footer.jsx';
 import { useLocation } from 'react-router-dom';
+import ChatInterface from './forum_components/GlobalChat.jsx';
 
 function FinanceForum() {
   const [activeTab, setActiveTab] = useState('webinars');
@@ -917,6 +918,7 @@ function FinanceForum() {
       </div>
       
     </div>
+    <ChatInterface />
     <Footer />
     </div>
   );
