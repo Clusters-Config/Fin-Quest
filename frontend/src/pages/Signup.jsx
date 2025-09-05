@@ -91,7 +91,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:4047/signup", { username, email, password , role})
+      .post("https://fin-quest-y9ub.onrender.com/signup", { username, email, password , role})
       .then((res) => {
         if (res.status === 200) {
           navigate("/login");
