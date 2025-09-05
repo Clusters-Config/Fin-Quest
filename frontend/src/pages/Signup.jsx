@@ -12,7 +12,7 @@
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
 //     axios
-//       .post("http://localhost:4047/signup", { username, email, password })
+//       .post("https://fin-quest-y9ub.onrender.com/signup", { username, email, password })
 //       .then((res) => {
 //         if (res.status === 200) {
 //           navigate("/login");
@@ -86,12 +86,12 @@ function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
-  const[role, setrole] = useState('Student')
+  const [role, setrole] = useState('Student')
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://fin-quest-y9ub.onrender.com/signup", { username, email, password , role})
+      .post("https://fin-quest-y9ub.onrender.com/signup", { username, email, password, role })
       .then((res) => {
         if (res.status === 200) {
           navigate("/login");
@@ -106,10 +106,10 @@ function Signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#043927] via-[#064f38] to-[#022d1f] px-6">
-      
+
       {/* Grid Layout */}
       <div className="grid md:grid-cols-2 w-full max-w-5xl bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden">
-        
+
         {/* Left Side - Branding */}
         <div className="flex flex-col items-center justify-center p-10 bg-gradient-to-b from-[#024d36] to-[#013322] text-white">
           <img
@@ -121,7 +121,7 @@ function Signup() {
             Welcome to <span className="text-[#F39C12]">FinQuest</span>
           </h2>
           <p className="text-gray-200 text-center max-w-sm leading-relaxed">
-            Master finance with engaging <span className="font-semibold">quizzes, games & simulations</span>. 
+            Master finance with engaging <span className="font-semibold">quizzes, games & simulations</span>.
             Your journey to becoming a financial pro starts here.
           </p>
         </div>
@@ -165,7 +165,7 @@ function Signup() {
               defaultValue="Student"
               value={role}
 
-              onChange={(e)=>setrole(e.target.value)}
+              onChange={(e) => setrole(e.target.value)}
             >
               <option value="Student">Student</option>
               <option value="Financial-Analyst">Financial Analyst</option>

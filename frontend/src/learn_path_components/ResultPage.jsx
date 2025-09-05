@@ -4,22 +4,22 @@ import axios from "axios";
 
 const ResultPage = () => {
   const location = useLocation();
-  const { score, total ,mod ,page,path,mods,type} = location.state || { score: 0, total: 0 };
-  const [email,setemail] = useState("")
-  let userscore = score*10
+  const { score, total, mod, page, path, mods, type } = location.state || { score: 0, total: 0 };
+  const [email, setemail] = useState("")
+  let userscore = score * 10
 
-  useEffect(()=>{
+  useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify")
-    .then(res=>{
-      setemail(res.data.email)
-    })
+    axios.get("https://fin-quest-y9ub.onrender.com/verify")
+      .then(res => {
+        setemail(res.data.email)
+      })
   })
-  useEffect(()=>{
+  useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.post(`http://localhost:4047/${page}`,{userscore ,email,mod,path,mods,type})
+    axios.post(`https://fin-quest-y9ub.onrender.com/${page}`, { userscore, email, mod, path, mods, type })
   })
-  
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#F4F4F4] to-[#F8FAFC] p-6 flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-lg p-8 w-80 text-center animate__animated animate__fadeIn">

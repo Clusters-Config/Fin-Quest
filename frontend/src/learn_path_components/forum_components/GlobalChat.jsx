@@ -4,39 +4,39 @@ import axios from "axios";
 const ChatInterface = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [username,setusername] = useState()
-  const [text,settext] = useState("")
+  const [username, setusername] = useState()
+  const [text, settext] = useState("")
   const [user, setuser] = useState([])
 
-  useState(()=>{
+  useState(() => {
     axios.defaults.withCredentials = true
-    axios.get("http://localhost:4047/verify")
-    .then(res=>{
-      setusername(res.data.username)
-    })
-   
-  },[username])
+    axios.get("https://fin-quest-y9ub.onrender.com/verify")
+      .then(res => {
+        setusername(res.data.username)
+      })
 
-  
+  }, [username])
+
+
   const handleSendMessage = (e) => {
     e.preventDefault();
-    axios.post(" http://localhost:4047/globalchat",{username,text})
-    .then()
+    axios.post(" https://fin-quest-y9ub.onrender.com/globalchat", { username, text })
+      .then()
     settext("")
   };
 
-  useEffect(()=>{
-    axios.get(" http://localhost:4047/findglobalchat")
-    .then(res=>{
-      setMessages(res.data)
-      let user = messages.map((element)=>{
-        return element.username
+  useEffect(() => {
+    axios.get(" https://fin-quest-y9ub.onrender.com/findglobalchat")
+      .then(res => {
+        setMessages(res.data)
+        let user = messages.map((element) => {
+          return element.username
+        })
+        setuser(user)
+
       })
-      setuser(user)
-  
-    })
   })
-  
+
   return (
     <div className="flex flex-col items-center justify-center h-64 bg-gray-100 mt-28">
       <div className="w-full max-w-3xl  bg-white shadow-lg rounded-lg">
@@ -50,11 +50,10 @@ const ChatInterface = () => {
           {messages.map((msg, idx) => (
             <div
               key={idx}
-              className={`mb-3 p-2 rounded-lg ${
-                msg?.username === `${username}`
-                  ? "bg-blue-100 text-blue-800 ml-auto max-w-[80%]"
-                  : "bg-gray-200 text-gray-800 max-w-[80%]"
-              }`}
+              className={`mb-3 p-2 rounded-lg ${msg?.username === `${username}`
+                ? "bg-blue-100 text-blue-800 ml-auto max-w-[80%]"
+                : "bg-gray-200 text-gray-800 max-w-[80%]"
+                }`}
             >
               <p className="text-sm">
                 <strong>{msg?.username}:</strong> {msg?.text}

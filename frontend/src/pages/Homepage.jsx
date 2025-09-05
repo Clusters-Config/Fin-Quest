@@ -44,10 +44,10 @@ const DemoVideoSection = () => {
 
   return (
     <section
-  id="demo-video"
-  className="py-20  bg-gradient-to-r from-[#006400] to-[#008080]
+      id="demo-video"
+      className="py-20  bg-gradient-to-r from-[#006400] to-[#008080]
  relative overflow-hidden"
->
+    >
 
       {/* Background Pattern */}
       <div className="absolute inset-0">
@@ -209,75 +209,75 @@ const WhyChooseSection = () => {
 
   return (
     <div className="relative">
-  {/* Curved top section */}
-  <div className="relative bg-[#f9f9f9] h-24">
-    <svg 
-      className="absolute bottom-0 w-full h-24" 
-      viewBox="0 0 1200 120" 
-      preserveAspectRatio="none"
-    >
-      <path 
-        d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z" 
-        fill="#fff"
-      />
-    </svg>
-  </div>
+      {/* Curved top section */}
+      <div className="relative bg-[#f9f9f9] h-24">
+        <svg
+          className="absolute bottom-0 w-full h-24"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0 C300,120 900,120 1200,0 L1200,120 L0,120 Z"
+            fill="#fff"
+          />
+        </svg>
+      </div>
 
-  {/* Main section */}
-  <section className=" sm:mt-4 sm:mb-4py-20 bg-white relative mt-8 mb-8">
-    <div className="max-w-6xl mx-auto px-6">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-16"
-      >
-        <h2 className="text-4xl font-bold text-[#002147] mb-4">
-          🌟 Why Choose FinQuest?
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          We're revolutionizing financial education with cutting-edge technology and proven methodologies
-        </p>
-      </motion.div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {features.map((feature, index) => (
+      {/* Main section */}
+      <section className=" sm:mt-4 sm:mb-4py-20 bg-white relative mt-8 mb-8">
+        <div className="max-w-6xl mx-auto px-6">
           <motion.div
-            key={index}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="text-center p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#002147]/20 group"
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
-            <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              {feature.icon}
-            </div>
-            <h3 className="text-xl font-semibold text-[#002147] mb-3">
-              {feature.title}
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              {feature.description}
+            <h2 className="text-4xl font-bold text-[#002147] mb-4">
+              🌟 Why Choose FinQuest?
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              We're revolutionizing financial education with cutting-edge technology and proven methodologies
             </p>
           </motion.div>
-        ))}
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center p-6 rounded-xl bg-gradient-to-br from-gray-50 to-white shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-[#002147]/20 group"
+              >
+                <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-[#002147] mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Wave bottom section */}
+      <div className="relative bg-[#f9f9f9] h-32">
+        <svg
+          className="absolute top-0 w-full h-32"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,0 L0,0 Z"
+            fill="#ffffff"
+          />
+        </svg>
       </div>
     </div>
-  </section>
-
-  {/* Wave bottom section */}
-  <div className="relative bg-[#f9f9f9] h-32">
-    <svg 
-      className="absolute top-0 w-full h-32" 
-      viewBox="0 0 1200 120" 
-      preserveAspectRatio="none"
-    >
-      <path 
-        d="M0,60 C150,20 350,100 600,60 C850,20 1050,100 1200,60 L1200,0 L0,0 Z" 
-        fill="#ffffff"
-      />
-    </svg>
-  </div>
-</div>
   );
 };
 
@@ -302,7 +302,7 @@ function Homepage() {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
+    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
       setEmail(res.data?.email);
       setpassword(res.data?.password);
       setuseremail(res.data?.email);
@@ -313,13 +313,13 @@ function Homepage() {
   useEffect(() => {
     if (email) {
       axios
-        .post("http://localhost:4047/login", { email, password })
-        .then((res) => {});
+        .post("https://fin-quest-y9ub.onrender.com/login", { email, password })
+        .then((res) => { });
     }
   }, [email, password, navigate, showtoast]);
 
   return (
-     <div className="min-h-screen flex flex-col bg-white ">
+    <div className="min-h-screen flex flex-col bg-white ">
       <Chat />
       {/* <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
         <div className="flex items-center space-x-2 text-[#002147]">
@@ -344,41 +344,41 @@ function Homepage() {
       </nav> */}
 
       <nav className="bg-white px-6 py-4 shadow-md flex justify-between items-center">
-  <div className="flex items-center space-x-2 text-[#002147]">
-    <img
-      src={logo}
-      alt="FinQuest Logo"
-      className="w-12 h-12 rounded-full drop-shadow-lg"
-    />
-    <span className="text-2xl font-bold sm:hidden">FinQuest</span>
-  </div>
-  <div className="flex items-center gap-4">
-    {useremail ? (
-      <>
-        <Link to="/ProfilePage" className="text-[#002147] text-2xl font-bold hover:text-[#006400]">
-          {username}
-        </Link>
-        <Link to="/Profile" className="text-[#002147] hover:text-[#006400]">
-          <UserCircle size={22} />
-        </Link>
-      </>
-    ) : (
-      <>
-        {/* <Link to="/login" className="text-[#002147] hover:text-[#006400]">
+        <div className="flex items-center space-x-2 text-[#002147]">
+          <img
+            src={logo}
+            alt="FinQuest Logo"
+            className="w-12 h-12 rounded-full drop-shadow-lg"
+          />
+          <span className="text-2xl font-bold sm:hidden">FinQuest</span>
+        </div>
+        <div className="flex items-center gap-4">
+          {useremail ? (
+            <>
+              <Link to="/ProfilePage" className="text-[#002147] text-2xl font-bold hover:text-[#006400]">
+                {username}
+              </Link>
+              <Link to="/Profile" className="text-[#002147] hover:text-[#006400]">
+                <UserCircle size={22} />
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* <Link to="/login" className="text-[#002147] hover:text-[#006400]">
           {username ? username : "Login"}
         </Link> */}
-        {/* <Link to="/Profile" className="text-[#002147] hover:text-[#006400]">
+              {/* <Link to="/Profile" className="text-[#002147] hover:text-[#006400]">
           <UserCircle size={22} />
         </Link> */}
-        <Link to="/login">
-          <button className="bg-[#002147] text-white px-4 py-2 rounded-lg hover:bg-[#001533]">
-            Login
-          </button>
-        </Link>
-      </>
-    )}
-  </div>
-</nav>
+              <Link to="/login">
+                <button className="bg-[#002147] text-white px-4 py-2 rounded-lg hover:bg-[#001533]">
+                  Login
+                </button>
+              </Link>
+            </>
+          )}
+        </div>
+      </nav>
 
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-40 px-8 sm:px-16 md:px-32 overflow-hidden" >
@@ -387,18 +387,18 @@ function Homepage() {
             Master Your <br />
             {/* <span className="text-yellow-400">Financial Future</span> */}
             <motion.span
-      className="text-yellow-400 font-bold"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.8,
-        ease: "easeOut",
-        repeat: Infinity,
-        repeatType: "reverse",
-      }}
-    >
-      Financial Future
-    </motion.span>
+              className="text-yellow-400 font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.8,
+                ease: "easeOut",
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            >
+              Financial Future
+            </motion.span>
           </h1>
           <p className="text-lg mb-6">
             Interactive learning platform for students and professionals. Learn financial concepts through quizzes, games, and real-world simulators.
@@ -444,21 +444,21 @@ function Homepage() {
 
       {/* Animation Component - Wave Effect */}
       <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] h-20">
-  <svg 
-    className="absolute bottom-0 w-full h-20" 
-    viewBox="0 0 1200 120" 
-    preserveAspectRatio="none"
-  >
-    <path 
-      d="M0,60 C150,100 350,20 600,60 C850,100 1050,20 1200,60 L1200,120 L0,120 Z" 
-      fill="#fff"
-    />
-  </svg>
-</div>
+        <svg
+          className="absolute bottom-0 w-full h-20"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,60 C150,100 350,20 600,60 C850,100 1050,20 1200,60 L1200,120 L0,120 Z"
+            fill="#fff"
+          />
+        </svg>
+      </div>
 
       {/* Powerful Learning Features Section */}
       <section className="py-16 px-6 bg-white">
-        
+
         <h2 className="text-3xl font-bold text-center text-[#002147] mb-2">
           🎯 Powerful Learning Features
         </h2>
@@ -495,7 +495,7 @@ function Homepage() {
       <Testimonials />
       <WhyChooseSection />
       <p id="faq"><FAQ /></p>
-      
+
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 text-gray-300 py-12 px-6">

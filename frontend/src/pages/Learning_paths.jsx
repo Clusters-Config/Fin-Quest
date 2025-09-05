@@ -56,7 +56,7 @@
 //   const [data, setdata] = useState([]);
 //   useEffect(() => {
 //     axios.defaults.withCredentials = true;
-//     axios.post("http://localhost:4047/finduserlearning").then((res) => { });
+//     axios.post("https://fin-quest-y9ub.onrender.com/finduserlearning").then((res) => { });
 //   });
 
 //   const navigate = useNavigate();
@@ -74,7 +74,7 @@
 
 //   useEffect(() => {
 //     axios.defaults.withCredentials = true;
-//     axios.get("http://localhost:4047/verify").then((res) => {
+//     axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
 //       setuusername(res.data.username);
 //     });
 //   });
@@ -85,14 +85,14 @@
 
 //   useEffect(() => {
 //     axios.defaults.withCredentials = true;
-//     axios.get("http://localhost:4047/verify").then((res) => {
+//     axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
 //       setemail(res.data.email);
 //     });
 //   });
 
 //   useEffect(() => {
 //     axios
-//       .post("http://localhost:4047/finduserlearning", { email })
+//       .post("https://fin-quest-y9ub.onrender.com/finduserlearning", { email })
 //       .then((res) => {
 //         setAccounting1(res?.data?.accouting[0]?.mod1.path1);
 //         setAccounting2(res?.data?.accouting[0]?.mod1.path2);
@@ -187,7 +187,7 @@
 //   // }, [progress])
 
 //   useEffect(() => {
-//     axios.get("http://localhost:4047/finddiscussion")
+//     axios.get("https://fin-quest-y9ub.onrender.com/finddiscussion")
 //       .then(res => {
 //         let path = res.data
 //         let data = path.map((element) => {
@@ -301,7 +301,7 @@
 
 
 //   const handlePostDiscussion = () => {
-//     axios.post("http://localhost:4047/discussion", { email, discussion, username })
+//     axios.post("https://fin-quest-y9ub.onrender.com/discussion", { email, discussion, username })
 //       .then()
 //       .catch((err) => {
 //         console.log(err)
@@ -581,7 +581,7 @@
 //                 </div>
 // */}
 //                 {/* Discussion Board */}
-                
+
 //                 {/* <div className="bg-white rounded-xl shadow p-6 border">
 //                   <h2 className="text-lg font-semibold text-[#002147] mb-4">Discussion Board</h2>
 //                   <textarea
@@ -621,10 +621,10 @@
 //             <h1>{`${" Please wait or login again"}`}</h1>
 //           </Backdrop>}
 //       </>
-       
+
 //        <Footer />
 //     </div>
-    
+
 //   );
 // };
 
@@ -676,7 +676,7 @@ const Learning_paths = () => {
   // Your existing useEffects - keeping all backend logic intact
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.post("http://localhost:4047/finduserlearning").then((res) => {});
+    axios.post("https://fin-quest-y9ub.onrender.com/finduserlearning").then((res) => { });
   });
 
   const navigate = useNavigate();
@@ -694,7 +694,7 @@ const Learning_paths = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
+    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
       setuusername(res.data.username);
     });
   });
@@ -705,14 +705,14 @@ const Learning_paths = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
+    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
       setemail(res.data.email);
     });
   });
 
   useEffect(() => {
     axios
-      .post("http://localhost:4047/finduserlearning", { email })
+      .post("https://fin-quest-y9ub.onrender.com/finduserlearning", { email })
       .then((res) => {
         setAccounting1(res?.data?.accouting[0]?.mod1.path1);
         setAccounting2(res?.data?.accouting[0]?.mod1.path2);
@@ -802,7 +802,7 @@ const Learning_paths = () => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:4047/finddiscussion")
+    axios.get("https://fin-quest-y9ub.onrender.com/finddiscussion")
       .then(res => {
         let path = res.data
         let data = path.map((element) => {
@@ -906,7 +906,7 @@ const Learning_paths = () => {
 
   // Your existing discussion handler
   const handlePostDiscussion = () => {
-    axios.post("http://localhost:4047/discussion", { email, discussion, username })
+    axios.post("https://fin-quest-y9ub.onrender.com/discussion", { email, discussion, username })
       .then()
       .catch((err) => {
         console.log(err)
@@ -931,7 +931,7 @@ const Learning_paths = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {username  ? (
+      {username ? (
         <>
           {/* Enhanced Header */}
           <div className="relative overflow-hidden bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900">
@@ -940,7 +940,7 @@ const Learning_paths = () => {
               <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
               <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
             </div>
-            
+
             <div className="relative px-6 py-16">
               {/* Profile Button - Your original functionality */}
               <div className="absolute top-4 right-6 z-10">
@@ -961,7 +961,7 @@ const Learning_paths = () => {
                 <p className="text-xl opacity-70 max-w-3xl mx-auto mb-8">
                   Comprehensive financial education through engaging content, real-world examples, and personalized learning paths
                 </p>
-                
+
                 <div className="flex flex-wrap justify-center gap-4">
                   <div className="bg-white/20 backdrop-blur-lg rounded-xl px-6 py-4">
                     <div className="text-2xl font-bold text-white">{progress}%</div>
@@ -992,10 +992,10 @@ const Learning_paths = () => {
                   <span>Updated today</span>
                 </div>
               </div>
-              
+
               <div className="relative mb-6">
                 <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-[#F39C12] via-blue-500 to-purple-500 rounded-full transition-all duration-1000 ease-out relative"
                     style={{ width: `${progress}%` }}
                   >
@@ -1014,7 +1014,7 @@ const Learning_paths = () => {
               {/* Main Learning Timeline */}
               <div className="lg:col-span-2 space-y-6">
                 <h3 className="text-2xl font-bold text-[#002147] mb-6">Learning Timeline</h3>
-                
+
                 {timelineData.map((category) => (
                   <div key={category.category} className="bg-white/80 backdrop-blur-lg rounded-xl shadow-lg border border-white/20 overflow-hidden">
                     <div className={`bg-gradient-to-r ${category.color} p-6`}>
@@ -1027,7 +1027,7 @@ const Learning_paths = () => {
                         <span>{category.modules.reduce((acc, module) => acc + module.duration, 0)} hours total</span>
                       </div>
                     </div>
-                    
+
                     <div className="p-6 space-y-4">
                       {category.modules.map((section) => (
                         <div key={section.id} className="bg-gradient-to-r from-gray-50 to-white rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-all duration-300">
@@ -1035,10 +1035,9 @@ const Learning_paths = () => {
                             <div className="flex-1">
                               <h4 className="text-lg font-semibold text-[#002147] mb-2">{section.title}</h4>
                               <div className="flex flex-wrap items-center gap-3 text-sm">
-                                <span className={`px-3 py-1 rounded-full text-white ${
-                                  section.level === 'Beginner' ? 'bg-green-500' :
+                                <span className={`px-3 py-1 rounded-full text-white ${section.level === 'Beginner' ? 'bg-green-500' :
                                   section.level === 'Intermediate' ? 'bg-blue-500' : 'bg-purple-500'
-                                }`}>
+                                  }`}>
                                   {section.level}
                                 </span>
                                 <div className="flex items-center text-gray-600">
@@ -1055,31 +1054,31 @@ const Learning_paths = () => {
                                 </div>
                               </div>
                             </div>
-                            
+
                             <button
                               onClick={() => handleToggle(category.category, section.id)}
                               className="ml-4 p-2 rounded-lg bg-[#002147] hover:bg-[#001530] text-white transition-colors"
                             >
-                              {openSection[category.category] === section.id ? 
-                                <ChevronDown className="w-5 h-5" /> : 
+                              {openSection[category.category] === section.id ?
+                                <ChevronDown className="w-5 h-5" /> :
                                 <ChevronRight className="w-5 h-5" />
                               }
                             </button>
                           </div>
-                          
+
                           <div className="mb-4">
                             <div className="flex justify-between items-center mb-2">
                               <span className="text-sm font-medium text-gray-700">Progress</span>
                               <span className="text-sm font-medium text-gray-900">{section.progress}%</span>
                             </div>
                             <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
-                              <div 
+                              <div
                                 className={`h-full bg-gradient-to-r ${category.color} transition-all duration-500`}
                                 style={{ width: `${section.progress}%` }}
                               ></div>
                             </div>
                           </div>
-                          
+
                           {openSection[category.category] === section.id && (
                             <div className="border-t pt-4 space-y-3">
                               {section.topics.map((topic, idx) => (
@@ -1096,7 +1095,7 @@ const Learning_paths = () => {
                                       </p>
                                     </div>
                                   </div>
-                                  <button 
+                                  <button
                                     onClick={() => handleTopicClick(topic.route)}
                                     className="px-4 py-2 bg-[#002147] hover:bg-[#001530] text-white rounded-lg text-sm transition-colors"
                                   >
@@ -1171,8 +1170,8 @@ const Learning_paths = () => {
               </div>
             </div>
 
-            
-            </div> 
+
+          </div>
         </>
       ) : (
         <Backdrop

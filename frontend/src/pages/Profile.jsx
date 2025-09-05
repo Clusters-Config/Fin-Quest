@@ -21,7 +21,7 @@ function ProfilePage() {
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios
-      .get("http://localhost:4047/verify")
+      .get("https://fin-quest-y9ub.onrender.com/verify")
       .then((res) => {
         setFirstname(res.data.firstname || "");
         setLastname(res.data.lastname || "");
@@ -192,8 +192,8 @@ function ProfilePage() {
               type="submit"
               disabled={!isTermsChecked}
               className={`px-6 py-3 font-semibold rounded-md ${isTermsChecked
-                  ? "bg-[#F39C12] text-white hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
-                  : "bg-[#B0BEC5] text-[#6C757D] cursor-not-allowed"
+                ? "bg-[#F39C12] text-white hover:bg-[#e68912] focus:ring focus:ring-[#F39C12]"
+                : "bg-[#B0BEC5] text-[#6C757D] cursor-not-allowed"
                 }`}
             >
               Save Changes

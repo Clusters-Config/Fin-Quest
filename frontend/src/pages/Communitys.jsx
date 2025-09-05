@@ -21,7 +21,7 @@ const Communities = () => {
   const [user, setuser] = useState("");
   const [wholeuser, setwholeuser] = useState('');
   const [message, setmessage] = useState("");
-  let BASE_URL = "http://localhost:4047";
+  let BASE_URL = "https://fin-quest-y9ub.onrender.com";
   const { pathname } = useLocation();
 
 
@@ -50,7 +50,7 @@ const Communities = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
+    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
       setwholeuser(res.data.email);
       setuser(res.data.email);
     });
@@ -208,13 +208,13 @@ const Communities = () => {
                       <img
                         src={
                           person.image || Contatos
-                          
+
                         }
                         alt={`${person.username}'s profile`}
                         className="rounded-full w-28 h-28 object-cover border-4 border-gray-100"
                       />
                     </div>
-                    <h3 className="text-2xl font-bold text-[#0A66C2] mb-1">{ person?.profile[0]?.firstname  || person.username}</h3>
+                    <h3 className="text-2xl font-bold text-[#0A66C2] mb-1">{person?.profile[0]?.firstname || person.username}</h3>
                     <p className="text-md text-gray-500 mb-4">{person.role}</p>
                     <div className="flex flex-col gap-3">
                       <button
