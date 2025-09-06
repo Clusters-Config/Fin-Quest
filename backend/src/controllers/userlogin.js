@@ -56,15 +56,15 @@ const userlogin = AsyncHandler(async (req, res) => {
 
   res.cookie("accessToken", accessToken, {
     maxAge: 1800000,
-    httpOnly: false,
+    httpOnly: true,
     secure: true,
-    sameSite: "strict",
+    sameSite: "none",
   });
   res.cookie("refreshToken", refreshToken, {
     maxAge: 3600000,
     secure: true,
-    httpOnly: false,
-    sameSite: "strict",
+    httpOnly: true,
+    sameSite: "none",
   });
 
   const verifytoken = (req, res, next) => {
@@ -102,8 +102,8 @@ const userlogin = AsyncHandler(async (req, res) => {
           res.cookie("accessToken", accessToken, {
             maxAge: 180000,
             httpOnly: true,
-            secure: false,
-            sameSite: "strict",
+            secure: true,
+            sameSite: "none",
           });
           exist = true;
           res.json({ valid: true, message: "Token Renewed" });
