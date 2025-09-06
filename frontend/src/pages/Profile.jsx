@@ -46,7 +46,7 @@ function ProfilePage() {
         phone,
         hobbies,
         role,
-      });
+      }, {withCredentials:true});
 
       toast.success("Profile updated successfully!", { transition: Bounce });
       navigate("/");
