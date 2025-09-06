@@ -302,7 +302,7 @@ function Homepage() {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
+    axios.get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true }).then((res) => {
       setEmail(res.data?.email);
       setpassword(res.data?.password);
       setuseremail(res.data?.email);

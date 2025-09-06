@@ -10,7 +10,7 @@ const ChatInterface = () => {
 
   useState(() => {
     axios.defaults.withCredentials = true
-    axios.get("https://fin-quest-y9ub.onrender.com/verify")
+    axios.get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true })
       .then(res => {
         setusername(res.data.username)
       })
