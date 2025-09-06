@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Send, MessageCircle } from "lucide-react";
 
 function Chat() {
-  const API_KEY = "AIzaSyBW0NRxqvRNvgSylLPbR4J3jAaJZlb-U2k"; // ⚠️ keep API keys in .env for safety!
+  const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY; // ⚠️ keep API keys in .env for safety!
   const genAI = new GoogleGenerativeAI(API_KEY);
 
   const [chat, setChat] = useState(false);
