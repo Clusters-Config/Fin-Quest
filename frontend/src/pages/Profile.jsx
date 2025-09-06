@@ -21,7 +21,7 @@ function ProfilePage() {
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios
-      .get("https://fin-quest-y9ub.onrender.com/verify",{withCredentials:true})
+      .get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true })
       .then((res) => {
         setFirstname(res.data.firstname || "");
         setLastname(res.data.lastname || "");
@@ -38,7 +38,7 @@ function ProfilePage() {
     e.preventDefault(); // prevent reload
 
     try {
-      await axios.post("http://127.0.0.1:4047/profile", {
+      await axios.post("http://https://fin-quest-frontend.onrender.com/profile", {
         useremail,
         firstname,
         lastname,
