@@ -302,7 +302,7 @@ function Homepage() {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
+    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
       setEmail(res.data?.email);
       setpassword(res.data?.password);
       setuseremail(res.data?.email);
@@ -313,7 +313,7 @@ function Homepage() {
   useEffect(() => {
     if (email) {
       axios
-        .post("http://localhost:4047/login", { email, password })
+        .post("https://fin-quest-y9ub.onrender.com/login", { email, password })
         .then((res) => { });
     }
   }, [email, password, navigate, showtoast]);

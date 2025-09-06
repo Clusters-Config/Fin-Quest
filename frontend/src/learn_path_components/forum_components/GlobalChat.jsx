@@ -10,7 +10,7 @@ const ChatInterface = () => {
 
   useState(() => {
     axios.defaults.withCredentials = true
-    axios.get("http://localhost:4047/verify")
+    axios.get("https://fin-quest-y9ub.onrender.com/verify")
       .then(res => {
         setusername(res.data.username)
       })
@@ -20,13 +20,13 @@ const ChatInterface = () => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    axios.post(" http://localhost:4047/globalchat", { username, text })
+    axios.post(" https://fin-quest-y9ub.onrender.com/globalchat", { username, text })
       .then()
     settext("")
   };
 
   useEffect(() => {
-    axios.get(" http://localhost:4047/findglobalchat")
+    axios.get(" https://fin-quest-y9ub.onrender.com/findglobalchat")
       .then(res => {
         setMessages(res.data)
         let user = messages.map((element) => {

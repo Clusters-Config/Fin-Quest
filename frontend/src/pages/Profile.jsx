@@ -23,7 +23,7 @@ function ProfilePage() {
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios
-      .get("http://localhost:4047/verify", { withCredentials: true })
+      .get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true })
       .then((res) => {
         // console.log(res)
         setuseremail(res.data.email || "");
@@ -42,7 +42,7 @@ function ProfilePage() {
     e.preventDefault(); // prevent reload
 
     try {
-      await axios.post("http://localhost:4047/profile", {
+      await axios.post("https://fin-quest-y9ub.onrender.com/profile", {
         useremail,
         firstname,
         lastname,

@@ -21,7 +21,7 @@ const Communities = () => {
   const [user, setuser] = useState("");
   const [wholeuser, setwholeuser] = useState('');
   const [message, setmessage] = useState("");
-  let BASE_URL = "http://localhost:4047";
+  let BASE_URL = "https://fin-quest-y9ub.onrender.com";
   const { pathname } = useLocation();
 
 
@@ -50,7 +50,7 @@ const Communities = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("http://localhost:4047/verify").then((res) => {
+    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
       setwholeuser(res.data.email);
       setuser(res.data.email);
     });
