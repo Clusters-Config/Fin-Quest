@@ -38,7 +38,7 @@ function ProfilePage() {
     e.preventDefault(); // prevent reload
 
     try {
-      await axios.post("http://https://fin-quest-frontend.onrender.com/profile", {
+      await axios.post("https://fin-quest-frontend.onrender.com/profile", {
         useremail,
         firstname,
         lastname,
