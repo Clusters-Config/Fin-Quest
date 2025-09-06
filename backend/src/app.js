@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use("/", router);
  
  router.route("/").get((req, res) => {
-   res.send("/user/login \n /user/create");
+   res.send("Backend for finquest");
  });
  
 export { app };

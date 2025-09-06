@@ -56,7 +56,7 @@
 //   const [data, setdata] = useState([]);
 //   useEffect(() => {
 //     axios.defaults.withCredentials = true;
-//     axios.post("https://fin-quest-y9ub.onrender.com/finduserlearning").then((res) => { });
+//     axios.post("http://localhost:4047/finduserlearning").then((res) => { });
 //   });
 
 //   const navigate = useNavigate();
@@ -74,7 +74,7 @@
 
 //   useEffect(() => {
 //     axios.defaults.withCredentials = true;
-//     axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
+//     axios.get("http://localhost:4047/verify").then((res) => {
 //       setuusername(res.data.username);
 //     });
 //   });
@@ -85,14 +85,14 @@
 
 //   useEffect(() => {
 //     axios.defaults.withCredentials = true;
-//     axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
+//     axios.get("http://localhost:4047/verify").then((res) => {
 //       setemail(res.data.email);
 //     });
 //   });
 
 //   useEffect(() => {
 //     axios
-//       .post("https://fin-quest-y9ub.onrender.com/finduserlearning", { email })
+//       .post("http://localhost:4047/finduserlearning", { email })
 //       .then((res) => {
 //         setAccounting1(res?.data?.accouting[0]?.mod1.path1);
 //         setAccounting2(res?.data?.accouting[0]?.mod1.path2);
@@ -187,7 +187,7 @@
 //   // }, [progress])
 
 //   useEffect(() => {
-//     axios.get("https://fin-quest-y9ub.onrender.com/finddiscussion")
+//     axios.get("http://localhost:4047/finddiscussion")
 //       .then(res => {
 //         let path = res.data
 //         let data = path.map((element) => {
@@ -301,7 +301,7 @@
 
 
 //   const handlePostDiscussion = () => {
-//     axios.post("https://fin-quest-y9ub.onrender.com/discussion", { email, discussion, username })
+//     axios.post("http://localhost:4047/discussion", { email, discussion, username })
 //       .then()
 //       .catch((err) => {
 //         console.log(err)
@@ -676,7 +676,7 @@ const Learning_paths = () => {
   // Your existing useEffects - keeping all backend logic intact
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.post("https://fin-quest-y9ub.onrender.com/finduserlearning").then((res) => { });
+    axios.post("http://localhost:4047/finduserlearning").then((res) => { });
   });
 
   const navigate = useNavigate();
@@ -694,7 +694,7 @@ const Learning_paths = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
+    axios.get("http://localhost:4047/verify").then((res) => {
       setuusername(res.data.username);
     });
   });
@@ -705,14 +705,14 @@ const Learning_paths = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("https://fin-quest-y9ub.onrender.com/verify").then((res) => {
+    axios.get("http://localhost:4047/verify").then((res) => {
       setemail(res.data.email);
     });
   });
 
   useEffect(() => {
     axios
-      .post("https://fin-quest-y9ub.onrender.com/finduserlearning", { email })
+      .post("http://localhost:4047/finduserlearning", { email })
       .then((res) => {
         setAccounting1(res?.data?.accouting[0]?.mod1.path1);
         setAccounting2(res?.data?.accouting[0]?.mod1.path2);
@@ -802,7 +802,7 @@ const Learning_paths = () => {
   });
 
   useEffect(() => {
-    axios.get("https://fin-quest-y9ub.onrender.com/finddiscussion")
+    axios.get("http://localhost:4047/finddiscussion")
       .then(res => {
         let path = res.data
         let data = path.map((element) => {
@@ -906,7 +906,7 @@ const Learning_paths = () => {
 
   // Your existing discussion handler
   const handlePostDiscussion = () => {
-    axios.post("https://fin-quest-y9ub.onrender.com/discussion", { email, discussion, username })
+    axios.post("http://localhost:4047/discussion", { email, discussion, username })
       .then()
       .catch((err) => {
         console.log(err)

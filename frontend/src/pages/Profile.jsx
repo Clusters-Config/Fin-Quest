@@ -13,16 +13,20 @@ function ProfilePage() {
   const [role, setRole] = useState("Student");
   const [isTermsChecked, setIsTermsChecked] = useState(false);
   const [showTermsModal, setShowTermsModal] = useState(false);
+  const [useremail, setuseremail] = useState("");
 
-  const { useremail } = useAuth();
+
+  // const { useremail } = useAuth();
   const navigate = useNavigate();
 
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios
-      .get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true })
+      .get("http://localhost:4047/verify", { withCredentials: true })
       .then((res) => {
+        // console.log(res)
+        setuseremail(res.data.email || "");
         setFirstname(res.data.firstname || "");
         setLastname(res.data.lastname || "");
         setDob(res.data.dob || "");
@@ -38,7 +42,7 @@ function ProfilePage() {
     e.preventDefault(); // prevent reload
 
     try {
-      await axios.post("https://fin-quest-frontend.onrender.com/profile", {
+      await axios.post("http://localhost:4047/profile", {
         useremail,
         firstname,
         lastname,
@@ -46,7 +50,7 @@ function ProfilePage() {
         phone,
         hobbies,
         role,
-      }, {withCredentials:true});
+      }, { withCredentials: true });
 
       toast.success("Profile updated successfully!", { transition: Bounce });
       navigate("/");

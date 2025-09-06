@@ -12,7 +12,7 @@
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
 //     axios
-//       .post("https://fin-quest-y9ub.onrender.com/signup", { username, email, password })
+//       .post("http://localhost:4047/signup", { username, email, password })
 //       .then((res) => {
 //         if (res.status === 200) {
 //           navigate("/login");
@@ -91,7 +91,7 @@ function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://fin-quest-y9ub.onrender.com/signup", { username, email, password, role })
+      .post("http://localhost:4047/signup", { username, email, password, role })
       .then((res) => {
         if (res.status === 200) {
           navigate("/login");

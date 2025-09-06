@@ -41,14 +41,14 @@ const ProfilePage = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true }).then((res) => {
+    axios.get("http://localhost:4047/verify", { withCredentials: true }).then((res) => {
       setemail(res.data.email);
     });
   }, []);
 
   const handleLogOut = () => {
     axios.defaults.withCredentials = true;
-    axios.get("https://fin-quest-y9ub.onrender.com/clearcookies", { withCredentials: true }).then(() => {
+    axios.get("http://localhost:4047/clearcookies", { withCredentials: true }).then(() => {
       navigate("/", { state: { login: true } });
     });
   };
@@ -59,7 +59,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (email) {
-      axios.post("https://fin-quest-y9ub.onrender.com/finduser", { email }).then((res) => {
+      axios.post("http://localhost:4047/finduser", { email }).then((res) => {
         setudob(res?.data?.user?.profile[0]?.dob);
         setphone(res?.data?.user?.profile[0]?.phone);
         setfirstname(res?.data?.user?.profile[0]?.firstname || "");
@@ -67,7 +67,7 @@ const ProfilePage = () => {
         setrole(res?.data?.user?.profile[0]?.role || "Student");
       });
 
-      axios.post("https://fin-quest-y9ub.onrender.com/finduserlearning", { email }).then((res) => {
+      axios.post("http://localhost:4047/finduserlearning", { email }).then((res) => {
         setAccounting1(res?.data?.accouting[0]?.mod1.path1);
         setAccounting2(res?.data?.accouting[0]?.mod1.path2);
         setFAccounting1(res?.data?.accouting[0]?.mod2.path1);
