@@ -12,12 +12,12 @@
 //       axios.defaults.withCredentials = true;
 //       let valid = false;
 //       let navi = true;
-      
+
 //       const handleSubmit = async(e) =>{
-       
+
 //         e.preventDefault()
-        
-//          await axios.post("https://fin-quest-y9ub.onrender.com/login",{email,password})
+
+//          await axios.post("http://localhost:4047/login",{email,password})
 //         .then(res=>{
 //           valid = res.data.valid
 //           if(valid){
@@ -28,7 +28,7 @@
 //             // alert("Email or password incorrect")
 //           }   
 //         })
-//         await axios.post("https://fin-quest-y9ub.onrender.com/finduser", { email : email } )
+//         await axios.post("http://localhost:4047/finduser", { email : email } )
 //         .then(user=>{
 //           let mail = user.data.user.email
 //           setuseremail(mail)
@@ -38,7 +38,7 @@
 //           navigate("/") 
 //         }
 //       }
- 
+
 //   return (
 //     <div className="min-h-screen flex justify-center items-center bg-[#F8FAFC]">
 //       <div className="w-[400px] bg-white rounded-xl shadow-lg p-8 flex flex-col items-center">
@@ -113,24 +113,23 @@ function Login_signup() {
     e.preventDefault();
 
     await axios
-      .post("https://fin-quest-y9ub.onrender.com/login", { email, password })
+      .post("http://localhost:4047/login", { email, password })
       .then((res) => {
         console.log(res)
         valid = res.data.valid;
-        axios.get("https://fin-quest-y9ub.onrender.com/verify")
-    .then(res=>{
-      if(!res.data.lastname)
-      {
-        navigate('/Profile')
-      }
-     
+        axios.get("http://localhost:4047/verify")
+          .then(res => {
+            if (!res.data.lastname) {
+              navigate('/Profile')
+            }
 
-    })
-        
+
+          })
+
       });
 
     await axios
-      .post("https://fin-quest-y9ub.onrender.com/finduser", { email: email })
+      .post("http://localhost:4047/finduser", { email: email })
       .then((user) => {
         let mail = user.data.user.email;
         setuseremail(mail);
@@ -145,7 +144,7 @@ function Login_signup() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#043927] via-[#064f38] to-[#022d1f] px-6">
       {/* Grid Layout */}
       <div className="grid md:grid-cols-2 w-full max-w-5xl bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden">
-        
+
         {/* Left Side - Branding */}
         <div className="flex flex-col items-center justify-center p-10 bg-gradient-to-b from-[#024d36] to-[#013322] text-white">
           <img

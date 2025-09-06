@@ -21,7 +21,7 @@ function ProfilePage() {
   useEffect(() => {
     axios.defaults.withCredentials = true;
     axios
-      .get("https://fin-quest-y9ub.onrender.com/verify")
+      .get("http://localhost:4047/verify")
       .then((res) => {
         setFirstname(res.data.firstname || "");
         setLastname(res.data.lastname || "");

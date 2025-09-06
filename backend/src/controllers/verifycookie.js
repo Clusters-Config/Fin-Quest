@@ -49,6 +49,7 @@
         });
 
         res.status(200).send("Done");
+            
         } else {
         return res.json({
             error: "Access and Refresh token missing please login",

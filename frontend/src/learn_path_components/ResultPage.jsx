@@ -10,14 +10,14 @@ const ResultPage = () => {
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.get("https://fin-quest-y9ub.onrender.com/verify")
+    axios.get("http://localhost:4047/verify")
       .then(res => {
         setemail(res.data.email)
       })
   })
   useEffect(() => {
     axios.defaults.withCredentials = true;
-    axios.post(`https://fin-quest-y9ub.onrender.com/${page}`, { userscore, email, mod, path, mods, type })
+    axios.post(`http://localhost:4047/${page}`, { userscore, email, mod, path, mods, type })
   })
 
   return (
