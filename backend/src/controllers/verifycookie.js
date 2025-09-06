@@ -82,10 +82,17 @@
     }
     });
 
-    const clearcookies = async (req, res) => {
-    res.clearCookie("accessToken");
-    res.clearCookie("refreshToken");
-    res.json({ message: "Done" });
+const clearcookies = async (req, res) => {
+    const cookieOptions = {
+        httpOnly: true,
+        secure: true, // true on Render
+        sameSite: "none"
     };
+
+    res.clearCookie("accessToken", cookieOptions);
+    res.clearCookie("refreshToken", cookieOptions);
+
+    res.json({ message: "Done" });
+};
 
     export { VerifyUser, clearcookies };
