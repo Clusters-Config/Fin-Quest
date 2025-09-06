@@ -48,7 +48,8 @@ const ProfilePage = () => {
 
   const handleLogOut = () => {
     axios.defaults.withCredentials = true;
-    axios.get("https://fin-quest-y9ub.onrender.com/clearcookies", { withCredentials: true }).then(() => {
+    axios.get("https://fin-quest-y9ub.onrender.com/clearcookies", { withCredentials: true }).then((res) => {
+      console.log(res)
       navigate("/", { state: { login: true } });
     });
   };

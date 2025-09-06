@@ -56,14 +56,14 @@ const userlogin = AsyncHandler(async (req, res) => {
 
   res.cookie("accessToken", accessToken, {
     maxAge: 1800000,
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: "none",
   });
   res.cookie("refreshToken", refreshToken, {
     maxAge: 3600000,
     secure: true,
-    httpOnly: true,
+    httpOnly: false,
     sameSite: "none",
   });
 
