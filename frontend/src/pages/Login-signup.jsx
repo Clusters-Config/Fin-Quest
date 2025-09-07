@@ -96,7 +96,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { ToastContainer, toast, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
 
 function Login_signup() {
@@ -121,6 +121,9 @@ function Login_signup() {
         valid = res.data.valid;
         axios.get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true })
           .then(res => {
+            toast.success('Login Successful', {
+              position: "top-right",
+              autoClose: 2000,});
             if (!res.data.lastname) {
               navigate('/Profile')
             }

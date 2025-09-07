@@ -95,11 +95,17 @@ function Signup() {
       .then((res) => {
         if (res.status === 200) {
           navigate("/login");
-          toast.success("Signup Successful 🎉");
+          toast.success("Signup Successful", {
+            position: "top-right",
+            autoClose: 2000,
+          });
         }
       })
       .catch((err) => {
-        toast.error("User already exists ❌");
+        toast.error("User already exists ❌",{
+          position: "top-right",
+          autoClose: 2000,
+        });
         console.log(err);
       });
   };
