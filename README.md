@@ -188,3 +188,12 @@ npx kill-port 5173
 
 This detailed breakdown should give you a solid foundation for building your FinQuest. Remember to break down the project into smaller, manageable tasks and test your code thoroughly throughout the development process.
 
+
+## VI. Contributors
+
+- **Badri Narayanan**
+- **Damodara Prakash**
+- **Gowri**
+- **Gopika**
+- **Atshaya**
+- **III Year CSE - Knowledge Institute of Technology , Salem**
