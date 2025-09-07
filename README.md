@@ -196,4 +196,4 @@ This detailed breakdown should give you a solid foundation for building your Fin
 - **Gowri**
 - **Gopika**
 - **Atshaya**
-- **III Year CSE - Knowledge Institute of Technology , Salem**
+**III Year CSE - Knowledge Institute of Technology , Salem**
