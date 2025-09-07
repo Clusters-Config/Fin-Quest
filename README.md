@@ -34,15 +34,16 @@ npx kill-port 5173
      - **jsonwebtoken:** For authentication (JWT).
      - **bcryptjs:** For password hashing.
      - **node** For the runtime
+     - **nodemon** For Continous Running
 
 3. **Frontend (React):**
    - Create React app: 
      ```
-     npx create-react-app client
+     npx create-react-app frontend
      ```
    - Navigate into the client directory: 
      ```
-     cd client
+     cd frontend
      ```
    - Install dependencies:
      ```
@@ -55,7 +56,7 @@ npx kill-port 5173
 
    ``` bash
    Fin-quest/
-   ├── client/ # React frontend
+   ├── frontend/ # React frontend
    │ ├── public/
    │ └── src/
    │ ├── components/
@@ -63,7 +64,7 @@ npx kill-port 5173
    │ ├── service/
    │ ├── App.js
    │ └── ...
-   ├── server/ # Node.js/Express backend
+   ├── backend/ # Node.js/Express backend
    │ ├── models/
    │ ├── routes/
    │ ├── config/
@@ -87,35 +88,11 @@ npx kill-port 5173
 - Create Mongoose models for users data and details
 
  ```
- // models/User.js
- const mongoose = require('mongoose');
- const userSchema = new mongoose.Schema({
-     userType: { type: String, enum: ['SMB', 'Freelancer'], required: true },
-     email: { type: String, required: true, unique: true },
-     password: { type: String, required: true },
-     // ... other fields (name, skills, profile, etc.)
-     skills: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Skill' }],
- });
-
- // models/Skill.js
- const skillSchema = new mongoose.Schema({
-     name: { type: String, required: true, unique: true },
- });
-
- // models/Module.js
- const moduleSchema = new mongoose.Schema({
-     name: {type: String, required: true},
-     description: {type: String},
-     content: {type: String} // could store video links, text content, etc.
- });
-
- module.exports = mongoose.model('Module', moduleSchema);
- module.exports = mongoose.model('User', userSchema);
- module.exports = mongoose.model('Skill', skillSchema);
+ Create Schemas as per the models required
  ```
 
 3. **Routes (routes/):**
-- Create routes for user authentication (register, login), profile management, skill management, matching, and training modules.
+- Create routes for user authentication (register, login), profile, learning path.
 - Use JWT for authentication.
 - Example (routes/auth.js):
 
@@ -167,7 +144,10 @@ npx kill-port 5173
    * Real World Simulation
    * AI - Driven Insights
    * Community Engagement
-   * Facilitator
+   * Finflux
+   * Finance Forums
+   * Financial Assistant
+   * Side Hustlers
 
 
 2. **Routing:**
@@ -203,7 +183,7 @@ npx kill-port 5173
 
 ## V. Deployment
 
-- **Backend:** Deploying Node.js/Express.js backend to a platform AWS.
+- **Backend:** Deploying Node.js/Express.js backend to a Render.
 - **Frontend:** Build the React app (`npm run build` in the client directory) and deploy the static files to a platform Render.
 
 This detailed breakdown should give you a solid foundation for building your FinQuest. Remember to break down the project into smaller, manageable tasks and test your code thoroughly throughout the development process.
