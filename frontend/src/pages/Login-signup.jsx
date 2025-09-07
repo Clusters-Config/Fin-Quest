@@ -147,6 +147,8 @@ function Login_signup() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#043927] via-[#064f38] to-[#022d1f] px-6">
+      <ToastContainer transition={Bounce} />
+
       {/* Grid Layout */}
       <div className="grid md:grid-cols-2 w-full max-w-5xl bg-white/95 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden">
 
@@ -212,7 +214,6 @@ function Login_signup() {
               Login
             </button>
 
-            <ToastContainer transition={Bounce} />
 
             {/* Secondary Link */}
             <p className="mt-6 text-sm text-gray-700 text-center">
