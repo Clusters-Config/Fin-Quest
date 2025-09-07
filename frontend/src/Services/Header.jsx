@@ -9,9 +9,9 @@ const Header = () => {
           <img
             src={logo}
             alt="FinQuest Logo"
-            className="w-12 h-12 rounded-full drop-shadow-lg"
+            className="w-12 h-12 rounded-full drop-shadow-lg sm:w-10 sm:h-10"
           />
-          <span className="text-2xl font-bold sm:hidden text-white">FinQuest</span>
+          <span className="text-2xl font-bold sm:text-2xl text-white">FinQuest</span>
         </div>
         
         
