@@ -352,7 +352,7 @@ const Simulations = () => {
                 className="w-full sm:w-1/2 bg-[#002147] text-white font-bold py-5 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#003366] transition-all transform hover:scale-105 shadow-md hover:shadow-lg"
             >
                 <FaUserFriends className="text-3xl" />
-                <span>Suggest a Simulator</span>
+                <span>Do you want us to add a new simulator?</span>
             </button>
         </div>
           

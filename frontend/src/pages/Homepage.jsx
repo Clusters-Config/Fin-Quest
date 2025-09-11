@@ -187,12 +187,12 @@ const WhyChooseSection = () => {
       description:
         "Get immediate feedback and progress tracking as you learn financial concepts in real-time."
     },
-    {
-      icon: <Shield className="w-12 h-12 text-green-500" />,
-      title: "Trusted Platform",
-      description:
-        "Used by top universities and financial institutions worldwide for professional training."
-    },
+    // {
+    //   icon: <Shield className="w-12 h-12 text-green-500" />,
+    //   title: "Trusted Platform",
+    //   description:
+    //     "Used by top universities and financial institutions worldwide for professional training."
+    // },
     {
       icon: <Clock className="w-12 h-12 text-blue-500" />,
       title: "Learn Anytime",
@@ -240,7 +240,7 @@ const WhyChooseSection = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -383,7 +383,7 @@ function Homepage() {
       {/* Hero Section */}
       <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-40 px-8 sm:px-16 md:px-32 overflow-hidden" >
         <div className="max-w-3xl z-10">
-          <h1 className="text-5xl font-bold leading-snug mb-6">
+          <h1 className="text-5xl font-bold leading-snug mb-6 mt-0">
             Master Your <br />
             {/* <span className="text-yellow-400">Financial Future</span> */}
             <motion.span
@@ -417,7 +417,7 @@ function Homepage() {
         </div>
 
         {/* Portfolio Growth Chart */}
-        <div className="absolute top-32 right-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-8 shadow-xl w-[500px] text-white sm:hidden ">
+        <div className="absolute top-32 right-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-8 shadow-xl w-[500px] text-white sm:hidden md:hidden">
           <h3 className="text-xl font-semibold mb-5">📈 Portfolio Growth</h3>
           <div className="h-40 flex items-end gap-3">
             {[40, 80, 50, 60, 90, 70].map((h, i) => (
