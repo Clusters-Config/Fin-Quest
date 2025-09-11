@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
+import logo from "../assets/fin-logo-2.jpg"; // FinQuest Logo
 
 const Header = () => {
   return (

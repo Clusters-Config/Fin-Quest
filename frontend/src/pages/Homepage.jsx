@@ -30,7 +30,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
-import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
+import logo from "../assets/fin-logo-2.jpg"; // FinQuest Logo
 import Index from "../Services/Chat";
 import Chat from "../Services/Chat";
 import { motion } from "framer-motion";

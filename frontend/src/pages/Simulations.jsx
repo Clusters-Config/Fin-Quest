@@ -311,7 +311,7 @@ const Simulations = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-    <div className="bg-white min-h-screen flex items-start justify-center p-4 sm:p-6 font-inter text-gray-800 mt-40 mb-40">
+    <div className="bg-white min-h-screen flex items-start justify-center p-4 sm:p-6 font-inter text-gray-800 mt-40 mb-40  sm:mt-8">
       <div className="bg-[#F8FAFC] shadow-2xl rounded-2xl w-full max-w-6xl p-6 sm:p-10">
         <header className="text-center py-8 mb-8">
           <animated.h1 style={headerSpring} className="text-4xl sm:text-5xl font-extrabold text-[#002147]">
