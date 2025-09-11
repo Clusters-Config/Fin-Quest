@@ -2,6 +2,9 @@
 import { PlayCircle, Video, Scissors, Heart, Share2, MessageCircle, Bookmark, ChevronUp, ChevronDown, X, Pause, Play, Volume2, VolumeX } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
 import { Search, Filter } from "lucide-react";
+import Header from "../Services/Header";
+import Footer from "../Services/Footer.jsx";
+
 
 export default function VideoGallery() {
   const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY || "NO_API_KEY";
@@ -279,8 +282,9 @@ export default function VideoGallery() {
   return (
     <>
       <div className="min-h-screen bg-gray-50">
-        <header className="bg-gradient-to-r from-pink-100 to-pink-200 py-12 text-center">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+        <Header />
+        <header className=" py-12 text-center mt-16">
+          <h1 className="text-4xl font-bold  bg-clip-text text-blue-600 ">
             FinQuest VideoHub
           </h1>
           <p className="mt-4 text-lg text-gray-600">

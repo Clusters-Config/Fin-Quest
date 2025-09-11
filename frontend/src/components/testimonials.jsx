@@ -25,22 +25,7 @@ const testimonialsData = [
     name: "Atshaya",
     feedback: "The personalized learning path is just brilliant for beginners like me!",
     category: "PG Student",
-  },
-  {
-    name: "Hari",
-    feedback: "Simple, reliable, and very supportive team. Highly recommended!",
-    category: "Student",
-  },
-  {
-    name: "Dinesh",
-    feedback: "Thanks to FinQuest, I finally feel in control of my finances.",
-    category: "Employee",
-  },
-  {
-    name: "Aditya",
-    feedback: "The gamified learning modules make finance actually fun!",
-    category: "Student",
-  },
+  }
 ];
 
 const Testimonials = () => (
