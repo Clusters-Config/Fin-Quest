@@ -417,7 +417,7 @@ function Homepage() {
         </div>
 
         {/* Portfolio Growth Chart */}
-        <div className="absolute top-32 right-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-8 shadow-xl w-[500px] text-white sm:hidden md:hidden">
+        <div className="absolute top-32 right-12 bg-white/10 backdrop-blur-md border border-white/30 rounded-xl p-8 shadow-xl w-[500px] text-white sm:hidden ">
           <h3 className="text-xl font-semibold mb-5">📈 Portfolio Growth</h3>
           <div className="h-40 flex items-end gap-3">
             {[40, 80, 50, 60, 90, 70].map((h, i) => (
