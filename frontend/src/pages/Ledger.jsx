@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, Plus, Edit2, Trash2, FileText, BarChart3, ChevronLeft, ChevronRight } from 'lucide-react';
-
+import Footer from '../Services/Footer';
+import Header from '../Services/Header';
 const LedgerBuilder = () => {
   const [transactions, setTransactions] = useState([
     {
@@ -527,6 +528,7 @@ const LedgerBuilder = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
