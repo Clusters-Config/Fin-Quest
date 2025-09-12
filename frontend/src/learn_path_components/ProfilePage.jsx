@@ -270,7 +270,7 @@ const ProfilePage = () => {
       ) : (
         <Backdrop sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
           <CircularProgress color="inherit" />
-          <p className="ml-4 text-xl">Loading profile...</p>
+          <p className="ml-4 text-xl"> Update your profile or login again</p>
         </Backdrop>
       )}
     </>

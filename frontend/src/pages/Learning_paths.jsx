@@ -1180,7 +1180,7 @@ const Learning_paths = () => {
         >
           <div className="text-center">
             <CircularProgress color="inherit" size={60} />
-            <h1 className="mt-4 text-lg">Please wait or login again</h1>
+            <h1 className="mt-4 text-lg">Please wait or update profile</h1>
           </div>
         </Backdrop>
       )}
