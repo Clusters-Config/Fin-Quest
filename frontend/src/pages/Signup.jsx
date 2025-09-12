@@ -79,7 +79,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import logo from "../assets/fin-logo.jpg"; // FinQuest Logo
+import logo from "../assets/fin-logo-2.jpg"; // FinQuest Logo
 
 function Signup() {
   const [username, setusername] = useState("");
