@@ -75,7 +75,7 @@ export default function FinanceQuest() {
       </section>
 
       {/* Game Cards */}
-      <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 pb-16">
+      <section className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 px-6 pb-16">
         {/* Stock Prediction */}
         <div className="bg-white shadow rounded-lg p-6 border-t-4 border-green-600">
           <div className="flex items-center justify-between mb-3">
@@ -157,7 +157,7 @@ export default function FinanceQuest() {
         </div>
 
         {/* Coming Soon */}
-        <div className="bg-gray-100 text-gray-400 shadow rounded-lg p-6 border-t-4 border-gray-300">
+        {/* <div className="bg-gray-100 text-gray-400 shadow rounded-lg p-6 border-t-4 border-gray-300">
           <div className="flex items-center justify-between mb-3">
             <LineChart className="w-6 h-6" />
             <span className="text-xs bg-gray-200 text-gray-600 px-2 py-1 rounded-full">Coming Soon</span>
@@ -174,7 +174,7 @@ export default function FinanceQuest() {
           <button disabled className="w-full bg-gray-300 text-gray-600 py-2 rounded-md font-medium cursor-not-allowed">
             Coming Soon
           </button>
-        </div>
+        </div> */}
       </section>
       <Footer />
     </div>
