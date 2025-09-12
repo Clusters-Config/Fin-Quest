@@ -60,6 +60,7 @@ const FinancialGame = () => {
   const [selectedWord, setSelectedWord] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
   const [retryStars, setRetryStars] = useState(3);
   const [score, setScore] = useState(0);
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -68,6 +69,8 @@ const FinancialGame = () => {
   const [showToast, setShowToast] = useState(false);
 
   const handleWordClick = (word) => {
+    if (showAnswer) return; // Prevent clicking when answer is shown
+    
     setSelectedWord(word);
     setTotalAttempts(prev => prev + 1);
     
@@ -84,9 +87,8 @@ const FinancialGame = () => {
       setRetryStars(prev => {
         const newStars = prev - 1;
         if (newStars === 0) {
-          setTimeout(() => {
-            nextQuestion();
-          }, 1500);
+          // Show the correct answer when all attempts are used
+          setShowAnswer(true);
         }
         return newStars;
       });
@@ -97,6 +99,7 @@ const FinancialGame = () => {
   const nextQuestion = () => {
     setShowFeedback(false);
     setIsCorrect(false);
+    setShowAnswer(false);
     setRetryStars(3);
     setSelectedWord("");
     
@@ -113,6 +116,7 @@ const FinancialGame = () => {
     setSelectedWord("");
     setIsCorrect(false);
     setShowFeedback(false);
+    setShowAnswer(false);
     setRetryStars(3);
     setScore(0);
     setCorrectAnswers(0);
@@ -130,12 +134,34 @@ const FinancialGame = () => {
   };
 
   const generateGrid = () => {
-    const allWords = [...questions[currentQuestionIndex].options];
-    const gridSize = 4;
-    const gridWords = [...allWords, "Income", "Profit", "Revenue", "Assets", "Liabilities"];
-    while (gridWords.length < gridSize * gridSize) {
-      gridWords.push("Empty");
+    const currentQuestion = questions[currentQuestionIndex];
+    const allWords = [...currentQuestion.options];
+    
+    // Add some additional financial terms to fill the grid
+    const additionalWords = [
+      "Assets", "Liability", "Equity", "Revenue", "Expenses", "Profit", 
+      "Loss", "Dividend", "Capital", "Investment", "ROI", "NPV"
+    ];
+    
+    // Filter out words that are already in options to avoid duplicates
+    const filteredAdditional = additionalWords.filter(word => 
+      !allWords.some(option => option.toLowerCase() === word.toLowerCase())
+    );
+    
+    // Add additional words until we have 16 total (4x4 grid)
+    const gridWords = [...allWords];
+    let additionalIndex = 0;
+    
+    while (gridWords.length < 16 && additionalIndex < filteredAdditional.length) {
+      gridWords.push(filteredAdditional[additionalIndex]);
+      additionalIndex++;
     }
+    
+    // If still not enough words, add some generic ones
+    while (gridWords.length < 16) {
+      gridWords.push(`Term${gridWords.length}`);
+    }
+    
     return shuffle(gridWords);
   };
 
@@ -168,6 +194,7 @@ const FinancialGame = () => {
           <div className="space-y-4 text-lg text-gray-600 mb-8">
             <p>🎯 Test your financial knowledge by identifying the correct terms</p>
             <p>⭐ You get 3 tries per question - more stars = more points!</p>
+            <p>💡 After 3 incorrect attempts, we'll show you the correct answer</p>
             <p>🏆 Answer all {questions.length} questions to see your final results</p>
           </div>
           <button
@@ -341,18 +368,49 @@ const FinancialGame = () => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
-        {generateGrid().map((word, index) => (
-          <motion.button
-            key={index}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-white text-blue-500 font-semibold p-4 rounded-md shadow-lg hover:bg-blue-200 transition-colors"
-            onClick={() => handleWordClick(word)}
+      {/* Show correct answer when all attempts are used */}
+      <AnimatePresence>
+        {showAnswer && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="bg-gradient-to-r from-orange-400 to-red-500 text-white p-6 rounded-2xl mb-6 shadow-xl text-center"
           >
-            {word}
-          </motion.button>
-        ))}
+            <div className="text-2xl mb-2">💡</div>
+            <h3 className="text-xl font-bold mb-2">The Correct Answer Is:</h3>
+            <div className="text-2xl font-bold bg-white/20 rounded-lg px-4 py-2 inline-block">
+              {questions[currentQuestionIndex].correctAnswer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="grid grid-cols-4 gap-4 mb-6">
+        {generateGrid().map((word, index) => {
+          const isCorrectAnswer = word === questions[currentQuestionIndex].correctAnswer;
+          const isHighlighted = showAnswer && isCorrectAnswer;
+          const isSelected = selectedWord === word;
+          
+          return (
+            <motion.button
+              key={index}
+              whileHover={!showAnswer ? { scale: 1.05 } : {}}
+              whileTap={!showAnswer ? { scale: 0.95 } : {}}
+              className={`font-semibold p-4 rounded-md shadow-lg transition-all duration-300 ${
+                isHighlighted 
+                  ? 'bg-gradient-to-r from-green-400 to-green-600 text-white ring-4 ring-green-300' 
+                  : isSelected && !isCorrect && showFeedback
+                  ? 'bg-red-200 text-red-700 border-2 border-red-400'
+                  : 'bg-white text-blue-500 hover:bg-blue-200'
+              } ${showAnswer ? 'cursor-default' : 'cursor-pointer'}`}
+              onClick={() => handleWordClick(word)}
+              disabled={showAnswer}
+            >
+              {word}
+            </motion.button>
+          );
+        })}
       </div>
 
       <AnimatePresence>
@@ -398,14 +456,21 @@ const FinancialGame = () => {
               >
                 <div className="text-4xl mb-4">😢</div>
                 <h3 className="text-2xl font-bold text-red-600 mb-2">
-                  Try Again! ({retryStars} {retryStars === 1 ? 'try' : 'tries'} left)
+                  {retryStars > 0 ? `Try Again! (${retryStars} ${retryStars === 1 ? 'try' : 'tries'} left)` : 'All attempts used!'}
                 </h3>
-                {retryStars > 0 && (
+                {retryStars > 0 ? (
                   <button
                     onClick={() => setShowFeedback(false)}
                     className="bg-gray-500 text-white px-6 py-2 rounded-full hover:bg-gray-600 transition-colors"
                   >
                     Continue
+                  </button>
+                ) : (
+                  <button
+                    onClick={nextQuestion}
+                    className="bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors"
+                  >
+                    {currentQuestionIndex === questions.length - 1 ? "See Results!" : "Next Question"}
                   </button>
                 )}
               </motion.div>
