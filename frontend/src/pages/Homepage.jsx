@@ -381,7 +381,7 @@ function Homepage() {
       </nav>
 
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-40 px-8 sm:px-16 md:px-32 overflow-hidden" >
+      <div className="relative bg-gradient-to-r from-[#002147] to-[#006400] text-white py-24 px-8 sm:px-16 md:px-32 overflow-hidden" >
         <div className="max-w-3xl z-10">
           <h1 className="text-5xl font-bold leading-snug mb-6 mt-0">
             Master Your <br />
