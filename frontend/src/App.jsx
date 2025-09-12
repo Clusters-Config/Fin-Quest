@@ -5,7 +5,7 @@ import Game from './pages/Game';
 import Login from './pages/Login-signup';
 import Simulations from './pages/Simulations';
 import Features from './pages/Features';
-//import TaxPage from './pages/TaxPage';
+import Ledger from './pages/Ledger';
 import Stories from './pages/Stories';
 import FinFlux from './pages/FinFlux';
 import SideHustleFinder from './pages/SideHustleFinder';
@@ -69,6 +69,7 @@ const App = () => {
             <Route path="/SideHustleFinder" element={<  SideHustleFinder />} />
             <Route path="/Communitys/" element={<Communitys />} />
             <Route path='/chat' element={<Chat />} />
+            <Route path='/Ledger' element={<Ledger />} />
             <Route path="/Financial_Assistant" element={<Financial_Assistant />} />
             <Route path="/Experts" element={<Experts />} />
             <Route path="/Tools" element={<Tools />} />
