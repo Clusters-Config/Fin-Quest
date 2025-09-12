@@ -569,7 +569,7 @@ const Communities = () => {
               <div className="text-slate-600 text-sm font-medium mt-1">Members</div>
             </div>
             <div className="text-center bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl px-6 py-4 border border-purple-200 shadow-md hover:shadow-lg transition-all duration-200">
-              <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">{connections.size}</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">{connections.size-1}</div>
               <div className="text-slate-600 text-sm font-medium mt-1">Connections</div>
             </div>
             <div className="text-center bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl px-6 py-4 border border-indigo-200 shadow-md hover:shadow-lg transition-all duration-200">
