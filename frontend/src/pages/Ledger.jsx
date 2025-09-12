@@ -1,37 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Filter, Plus, Edit2, Trash2, FileText, BarChart3, ChevronLeft, ChevronRight } from 'lucide-react';
 import Footer from '../Services/Footer';
 import Header from '../Services/Header';
+import axios from 'axios';
+
 const LedgerBuilder = () => {
   const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      date: '2025-09-12',
-      account: 'Cash',
-      debit: 2000,
-      credit: 0,
-      balance: 2000,
-      description: 'Opening Balance'
-    },
-    {
-      id: 2,
-      date: '2025-09-12',
-      account: 'Purchase',
-      debit: 0,
-      credit: 500,
-      balance: 1500,
-      description: 'Office Supplies'
-    },
-    {
-      id: 3,
-      date: '2025-09-12',
-      account: 'Sales',
-      debit: 1200,
-      credit: 0,
-      balance: 2700,
-      description: 'Product Sale'
-    }
   ]);
+
+
 
   const [formData, setFormData] = useState({
     date: new Date().toISOString().split('T')[0],
@@ -40,6 +17,17 @@ const LedgerBuilder = () => {
     credit: '',
     description: ''
   });
+
+  const [email, setemail] = useState();
+
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+    axios.get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true })
+      .then(res => {
+        setemail(res.data.email)
+      })
+  })
+
 
   const [filters, setFilters] = useState({
     search: '',
@@ -67,11 +55,11 @@ const LedgerBuilder = () => {
   // Filter transactions
   const filteredTransactions = transactions.filter(transaction => {
     const matchesSearch = transaction.account.toLowerCase().includes(filters.search.toLowerCase()) ||
-                         transaction.description.toLowerCase().includes(filters.search.toLowerCase());
+      transaction.description.toLowerCase().includes(filters.search.toLowerCase());
     const matchesAccount = !filters.account || transaction.account === filters.account;
     const matchesDateFrom = !filters.dateFrom || transaction.date >= filters.dateFrom;
     const matchesDateTo = !filters.dateTo || transaction.date <= filters.dateTo;
-    
+
     return matchesSearch && matchesAccount && matchesDateFrom && matchesDateTo;
   });
 
@@ -89,11 +77,20 @@ const LedgerBuilder = () => {
       account: formData.account,
       debit: parseFloat(formData.debit) || 0,
       credit: parseFloat(formData.credit) || 0,
-      description: formData.description
+
     };
 
+    // console.log("hello");
+
+    if (!email) {
+      window.alert("You are not logged in")
+    }
+
+
+    axios.post("https://fin-quest-y9ub.onrender.com/ledger", { data: newTransaction, email: email })
+
     if (editingId) {
-      setTransactions(prev => 
+      setTransactions(prev =>
         calculateBalance(prev.map(t => t.id === editingId ? newTransaction : t))
       );
       setEditingId(null);
@@ -116,10 +113,14 @@ const LedgerBuilder = () => {
       account: transaction.account,
       debit: transaction.debit || '',
       credit: transaction.credit || '',
-      description: transaction.description
+
     });
     setEditingId(transaction.id);
   };
+  useEffect(() => {
+    axios.post("https://fin-quest-y9ub.onrender.com/getledger", { email: email })
+      .then(res => setTransactions(res.data))
+  })
 
   const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this transaction?')) {
@@ -129,6 +130,9 @@ const LedgerBuilder = () => {
 
   const totalDebit = filteredTransactions.reduce((sum, t) => sum + t.debit, 0);
   const totalCredit = filteredTransactions.reduce((sum, t) => sum + t.credit, 0);
+
+  // console.log(transactions)
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
@@ -141,23 +145,20 @@ const LedgerBuilder = () => {
                 💼 Ledger Pro
               </h1>
               <div className="hidden md:flex space-x-6">
-                <button 
+                <button
                   onClick={() => setActiveTab('ledger')}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    activeTab === 'ledger' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg transform scale-105' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${activeTab === 'ledger' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg transform scale-105' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                    }`}
                 >
                   <FileText size={16} />
                   <span>Ledger</span>
                 </button>
-                <button 
+                <button
                   onClick={() => setActiveTab('reports')}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                    activeTab === 'reports' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg transform scale-105' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
-                  }`}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${activeTab === 'reports' ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg transform scale-105' : 'text-gray-600 hover:text-blue-600 hover:bg-blue-50'
+                    }`}
                 >
-                  <BarChart3 size={16} />
-                  <span>Reports</span>
+
                 </button>
               </div>
             </div>
@@ -201,7 +202,7 @@ const LedgerBuilder = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="space-y-3">
                 <h3 className="font-bold text-gray-900 flex items-center">
                   <FileText size={16} className="mr-2" />
@@ -211,7 +212,7 @@ const LedgerBuilder = () => {
                   const accountTotal = transactions
                     .filter(t => t.account === account)
                     .reduce((sum, t) => sum + t.debit - t.credit, 0);
-                  
+
                   return (
                     <div key={account} className="flex justify-between text-sm">
                       <span className="text-gray-600">{account}:</span>
@@ -237,7 +238,7 @@ const LedgerBuilder = () => {
                   {editingId ? '✏️ Edit Transaction' : '➕ Add New Transaction'}
                 </h2>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
@@ -249,7 +250,7 @@ const LedgerBuilder = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Account</label>
                   <select
@@ -264,7 +265,7 @@ const LedgerBuilder = () => {
                     ))}
                   </select>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Debit (₹)</label>
                   <input
@@ -276,7 +277,7 @@ const LedgerBuilder = () => {
                     placeholder="0.00"
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Credit (₹)</label>
                   <input
@@ -288,8 +289,8 @@ const LedgerBuilder = () => {
                     placeholder="0.00"
                   />
                 </div>
-                
-                <div>
+
+                {/* <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                   <input
                     type="text"
@@ -298,15 +299,15 @@ const LedgerBuilder = () => {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-3 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-200 hover:border-blue-400"
                     placeholder="Transaction description"
                   />
-                </div>
-                
+                </div> */}
+
                 <div className="md:col-span-5 flex gap-2">
                   <button
                     type="button"
                     onClick={handleSubmit}
                     className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
                   >
-                    {editingId ? '✅ Update Transaction' : '➕ Add Transaction'}
+                    {editingId ? '✅ Update Transaction' : ' Add Transaction'}
                   </button>
                   {editingId && (
                     <button
@@ -330,55 +331,7 @@ const LedgerBuilder = () => {
               </div>
             </div>
 
-            {/* Filters */}
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="p-2 bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg">
-                  <Filter size={20} className="text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">🔍 Filters & Search</h3>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="relative">
-                  <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Search transactions..."
-                    value={filters.search}
-                    onChange={(e) => setFilters(prev => ({ ...prev, search: e.target.value }))}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-3 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-200 hover:border-purple-400"
-                  />
-                </div>
-                
-                <select
-                  value={filters.account}
-                  onChange={(e) => setFilters(prev => ({ ...prev, account: e.target.value }))}
-                  className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-3 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-200 hover:border-purple-400"
-                >
-                  <option value="">All Accounts</option>
-                  {accounts.map(account => (
-                    <option key={account} value={account}>{account}</option>
-                  ))}
-                </select>
-                
-                <input
-                  type="date"
-                  value={filters.dateFrom}
-                  onChange={(e) => setFilters(prev => ({ ...prev, dateFrom: e.target.value }))}
-                  className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-3 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-200 hover:border-purple-400"
-                  placeholder="From Date"
-                />
-                
-                <input
-                  type="date"
-                  value={filters.dateTo}
-                  onChange={(e) => setFilters(prev => ({ ...prev, dateTo: e.target.value }))}
-                  className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-3 focus:ring-purple-500/20 focus:border-purple-500 transition-all duration-200 hover:border-purple-400"
-                  placeholder="To Date"
-                />
-              </div>
-            </div>
+
 
             {/* Ledger Table */}
             <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
@@ -390,7 +343,7 @@ const LedgerBuilder = () => {
                   📈 Showing {paginatedTransactions.length} of {filteredTransactions.length} transactions
                 </p>
               </div>
-              
+
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gradient-to-r from-gray-100 to-blue-100 sticky top-0">
@@ -400,7 +353,7 @@ const LedgerBuilder = () => {
                       <th className="px-6 py-4 text-right text-xs font-bold text-gray-700 uppercase tracking-wider">📤 Debit (₹)</th>
                       <th className="px-6 py-4 text-right text-xs font-bold text-gray-700 uppercase tracking-wider">📥 Credit (₹)</th>
                       <th className="px-6 py-4 text-right text-xs font-bold text-gray-700 uppercase tracking-wider">💰 Balance (₹)</th>
-                      <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">📝 Description</th>
+                      {/* <th className="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">📝 Description</th> */}
                       <th className="px-6 py-4 text-center text-xs font-bold text-gray-700 uppercase tracking-wider">⚡ Actions</th>
                     </tr>
                   </thead>
@@ -434,9 +387,7 @@ const LedgerBuilder = () => {
                             ₹{Math.abs(transaction.balance).toLocaleString()}
                           </span>
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-900 max-w-xs truncate">
-                          {transaction.description || '—'}
-                        </td>
+
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           <div className="flex items-center justify-center space-x-3">
                             <button
@@ -446,13 +397,7 @@ const LedgerBuilder = () => {
                             >
                               <Edit2 size={16} />
                             </button>
-                            <button
-                              onClick={() => handleDelete(transaction.id)}
-                              className="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-100 transition-all duration-200 transform hover:scale-110"
-                              title="Delete Transaction"
-                            >
-                              <Trash2 size={16} />
-                            </button>
+
                           </div>
                         </td>
                       </tr>
@@ -503,11 +448,10 @@ const LedgerBuilder = () => {
                           <button
                             key={i + 1}
                             onClick={() => setCurrentPage(i + 1)}
-                            className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
-                              currentPage === i + 1
+                            className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${currentPage === i + 1
                                 ? 'z-10 bg-blue-50 border-blue-500 text-blue-600'
                                 : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                            }`}
+                              }`}
                           >
                             {i + 1}
                           </button>

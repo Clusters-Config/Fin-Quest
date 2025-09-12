@@ -2,13 +2,13 @@ import React from 'react'
 import logo from "../assets/fin-logo-2.jpg"; // FinQuest Logo
 import { Link } from "react-router-dom";
 // import { UserCircle } from "phosphor-react";
-import { useState , useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Header = () => {
-    const [username, setusername] = useState();
-const [useremail, setuseremail] = useState();
-    useEffect(() => {
+  const [username, setusername] = useState();
+  const [useremail, setuseremail] = useState();
+  useEffect(() => {
     axios.defaults.withCredentials = true;
     axios.get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true }).then((res) => {
 
@@ -17,10 +17,10 @@ const [useremail, setuseremail] = useState();
     });
   }, []);
 
-  
+
   return (
     <div>
-        <nav className="bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 px-6 py-4 shadow-md flex justify-between items-center fixed w-full top-0 z-50 ">
+      <nav className="bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 px-6 py-4 shadow-md flex justify-between items-center fixed w-full top-0 z-50 ">
         <div className="flex items-center space-x-2 text-[#002147] ">
           <img
             src={logo}
@@ -36,15 +36,15 @@ const [useremail, setuseremail] = useState();
               <p className="text-white text-2xl font-bold ">
                 {username.charAt(0).toUpperCase() + username.slice(1)}
               </p>
-              
+
             </>
           ) : (
             <>
-             
+
             </>
           )}
         </div>
-        
+
       </nav>
     </div>
   )

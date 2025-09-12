@@ -102,7 +102,7 @@ function Signup() {
         }
       })
       .catch((err) => {
-        toast.error("User already exists ❌",{
+        toast.error("User already exists ❌", {
           position: "top-right",
           autoClose: 2000,
         });

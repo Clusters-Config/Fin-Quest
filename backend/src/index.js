@@ -1,6 +1,7 @@
 import { app } from "./app.js";
 import DbConnect from "./db/index.js";
 import dotenv from "dotenv";
+import Supabase from "./db/supabase.js";
 
 
 dotenv.config({

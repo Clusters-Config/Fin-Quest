@@ -16,6 +16,8 @@ import { globalchat } from "../controllers/suggesstion.js";
 import { findglobalchat } from "../controllers/suggesstion.js";
 import {streak} from "../controllers/streak.js";
 import { addconnection, getconnections, getmessages, getusers, sendmessage } from "../controllers/Community.js";
+import { addledger, getledger } from "../controllers/Ledger.js";
+// import { getuserpoint, userpoint } from "../controllers/PointControllers.js";
 const router = Router();
 
 router.route("/login").post(userlogin);
@@ -39,6 +41,9 @@ router.route("/communitychat/getmessages").post(getmessages)
 router.route("/communitychat/getuser").get(getusers)
 router.route("/communitychat/addconnection").post(addconnection)
 router.route("/communitychat/getconnections").post(getconnections)
-
+// router.route("/getuserpoint").get(getuserpoint)
+// router.route("/getuserpoint").post(userpoint)   
+router.route("/ledger").post(addledger)
+router.route("/getledger").post(getledger)
 
 export {router};

@@ -519,8 +519,8 @@ const Communities = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit'
@@ -536,11 +536,11 @@ const Communities = () => {
       <h1 id="#"></h1>
       <Header />
       <Chat />
-      
+
       {/* Hero Section - Compact */}
       <div className="relative overflow-hidden bg-white pt-20 border-b border-slate-200">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/20"></div>
-        
+
         {/* Subtle geometric patterns */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 left-10 w-32 h-32 border border-blue-200 rounded-full"></div>
@@ -548,7 +548,7 @@ const Communities = () => {
           <div className="absolute bottom-10 left-1/4 w-16 h-16 border border-blue-300 rounded-full"></div>
           <div className="absolute bottom-20 right-1/3 w-20 h-20 border border-purple-300 rounded-full"></div>
         </div>
-        
+
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-8 text-center">
           <div className="flex items-center justify-center mb-3">
             <div className="relative">
@@ -569,7 +569,7 @@ const Communities = () => {
               <div className="text-slate-600 text-sm font-medium mt-1">Members</div>
             </div>
             <div className="text-center bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl px-6 py-4 border border-purple-200 shadow-md hover:shadow-lg transition-all duration-200">
-              <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">{connections.size-1}</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-purple-700 bg-clip-text text-transparent">{connections.size - 1}</div>
               <div className="text-slate-600 text-sm font-medium mt-1">Connections</div>
             </div>
             <div className="text-center bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl px-6 py-4 border border-indigo-200 shadow-md hover:shadow-lg transition-all duration-200">
@@ -603,7 +603,7 @@ const Communities = () => {
               Filter by Role
             </button>
           </div>
-          
+
           {/* Mobile Filter Dropdown */}
           {isFilterOpen && (
             <div className="mt-4 p-4 bg-slate-50 rounded-xl">
@@ -615,11 +615,10 @@ const Communities = () => {
                       setSelectedRole(role);
                       setIsFilterOpen(false);
                     }}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                      selectedRole === role
-                        ? "bg-blue-600 text-white shadow-lg"
-                        : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-300"
-                    }`}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${selectedRole === role
+                      ? "bg-blue-600 text-white shadow-lg"
+                      : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-300"
+                      }`}
                   >
                     {role}
                   </button>
@@ -643,11 +642,10 @@ const Communities = () => {
                   <button
                     key={role}
                     onClick={() => setSelectedRole(role)}
-                    className={`w-full flex items-center gap-2 p-3 rounded-xl transition-all duration-200 text-left text-sm ${
-                      selectedRole === role
-                        ? "bg-blue-600 text-white shadow-lg transform scale-105"
-                        : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
-                    }`}
+                    className={`w-full flex items-center gap-2 p-3 rounded-xl transition-all duration-200 text-left text-sm ${selectedRole === role
+                      ? "bg-blue-600 text-white shadow-lg transform scale-105"
+                      : "bg-slate-50 text-slate-700 hover:bg-slate-100 border border-slate-200"
+                      }`}
                   >
                     <FaUserCircle className="text-base" />
                     <span className="font-medium truncate">{role}</span>
@@ -669,10 +667,10 @@ const Communities = () => {
                   >
                     {/* Gradient overlay */}
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-transparent to-purple-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    
+
                     {/* Animated background pattern */}
                     <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full -translate-y-10 translate-x-10 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                    
+
                     <div className="relative p-6 z-10">
                       {/* Enhanced Status indicator */}
                       <div className="absolute top-4 right-4 flex items-center gap-2">
@@ -681,7 +679,7 @@ const Communities = () => {
                           <span className="text-xs font-medium text-green-600 bg-green-100 px-2 py-1 rounded-full">Connected</span>
                         )}
                       </div>
-                      
+
                       <div className="flex flex-col items-center text-center">
                         <div className="relative mb-6">
                           {/* Profile image with enhanced styling */}
@@ -697,17 +695,17 @@ const Communities = () => {
                             </div>
                           </div>
                         </div>
-                        
+
                         <h3 className="text-xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-2 group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300">
                           {person?.profile?.[0]?.firstname || person.username}
                         </h3>
-                        
+
                         <div className="relative mb-6">
                           <p className="text-sm font-semibold bg-gradient-to-r from-slate-100 to-blue-50 text-slate-600 px-4 py-2 rounded-full border border-slate-200 group-hover:from-blue-100 group-hover:to-purple-100 group-hover:border-blue-300 transition-all duration-300">
                             {person.role}
                           </p>
                         </div>
-                        
+
                         <div className="flex flex-col gap-3 w-full">
                           <button
                             onClick={() => openModal(person)}
@@ -719,14 +717,13 @@ const Communities = () => {
                               Message
                             </div>
                           </button>
-                          
+
                           <button
                             onClick={() => handleConnect(person)}
-                            className={`group/btn relative overflow-hidden py-3 px-6 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${
-                              connections.has(person.email)
-                                ? "bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 cursor-not-allowed border-2 border-green-200"
-                                : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white"
-                            }`}
+                            className={`group/btn relative overflow-hidden py-3 px-6 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 ${connections.has(person.email)
+                              ? "bg-gradient-to-r from-green-100 to-emerald-100 text-green-700 cursor-not-allowed border-2 border-green-200"
+                              : "bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white"
+                              }`}
                           >
                             {!connections.has(person.email) && (
                               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700"></div>
@@ -767,7 +764,7 @@ const Communities = () => {
                 </div>
                 <p className="text-sm text-slate-600">Latest financial news and updates</p>
               </div>
-              
+
               <div className="max-h-[600px] overflow-y-auto custom-scrollbar">
                 {financialUpdates.map((update, index) => (
                   <div
@@ -785,12 +782,12 @@ const Communities = () => {
                         </div>
                         <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex-shrink-0 mt-2"></div>
                       </div>
-                      
+
                       {/* Article Description */}
                       <p className="text-sm text-slate-600 leading-relaxed">
                         {truncateText(update.description, 120)}
                       </p>
-                      
+
                       {/* Article Meta */}
                       <div className="flex items-center justify-between text-xs text-slate-500">
                         <div className="flex items-center gap-2">
@@ -802,21 +799,20 @@ const Communities = () => {
                           <span>{formatDate(update.pubDate)}</span>
                         </div>
                       </div>
-                      
+
                       {/* Action Buttons */}
                       <div className="flex items-center gap-3 pt-2">
                         <button
                           onClick={() => handleLike(index)}
-                          className={`group/btn flex items-center gap-2 py-2 px-3 rounded-full text-xs font-semibold transition-all duration-300 transform hover:scale-105 ${
-                            likes[index]
-                              ? "bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-md"
-                              : "bg-white text-slate-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-500 border border-slate-200 hover:border-red-300"
-                          }`}
+                          className={`group/btn flex items-center gap-2 py-2 px-3 rounded-full text-xs font-semibold transition-all duration-300 transform hover:scale-105 ${likes[index]
+                            ? "bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-md"
+                            : "bg-white text-slate-600 hover:bg-gradient-to-r hover:from-red-50 hover:to-pink-50 hover:text-red-500 border border-slate-200 hover:border-red-300"
+                            }`}
                         >
                           <FaThumbsUp className={`text-xs ${likes[index] ? 'animate-bounce' : ''}`} />
                           <span>{likes[index] ? "Liked" : "Like"}</span>
                         </button>
-                        
+
                         <button
                           onClick={() => handleShare(update)}
                           className="group/btn flex items-center gap-2 py-2 px-3 rounded-full text-xs font-semibold bg-white text-slate-600 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:text-blue-600 border border-slate-200 hover:border-blue-300 transition-all duration-300 transform hover:scale-105"
@@ -824,7 +820,7 @@ const Communities = () => {
                           <FaShareAlt className="text-xs" />
                           <span>Share</span>
                         </button>
-                        
+
                         {update.url !== "#" && (
                           <a
                             href={update.url}
@@ -883,11 +879,10 @@ const Communities = () => {
                       className={`flex ${mess.sender === user ? "justify-end" : "justify-start"}`}
                     >
                       <div
-                        className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-sm ${
-                          mess.sender === user
-                            ? "bg-blue-600 text-white rounded-br-md"
-                            : "bg-white text-slate-800 border border-slate-200 rounded-bl-md"
-                        }`}
+                        className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-sm ${mess.sender === user
+                          ? "bg-blue-600 text-white rounded-br-md"
+                          : "bg-white text-slate-800 border border-slate-200 rounded-bl-md"
+                          }`}
                       >
                         <p className="text-sm leading-relaxed">{mess.message}</p>
                       </div>

@@ -117,13 +117,14 @@ function Login_signup() {
         withCredentials: true
       })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         valid = res.data.valid;
         axios.get("https://fin-quest-y9ub.onrender.com/verify", { withCredentials: true })
           .then(res => {
             toast.success('Login Successful', {
               position: "top-right",
-              autoClose: 2000,});
+              autoClose: 2000,
+            });
             if (!res.data.lastname) {
               navigate('/Profile')
             }
