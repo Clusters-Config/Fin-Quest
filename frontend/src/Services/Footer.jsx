@@ -6,7 +6,7 @@ import {
   Youtube,
   
 } from "lucide-react";
-import logo from '../assets/fin-logo-2.jpg';
+import logo from '../assets/fin-logo-3.jpg';
 
 
 const Footer = () => {

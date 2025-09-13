@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from "../assets/fin-logo-2.jpg"; // FinQuest Logo
+import logo from "../assets/fin-logo-3.jpg"; // FinQuest Logo
 import { Link } from "react-router-dom";
 // import { UserCircle } from "phosphor-react";
 import { useState, useEffect } from 'react';

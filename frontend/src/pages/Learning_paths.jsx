@@ -494,7 +494,7 @@ const Learning_paths = () => {
                 </div>
 
                 {/* Ledger Guide Box */}
-                <div className="bg-gradient-to-br from-green-400 to-teal-500 rounded-xl shadow-lg p-6 text-white">
+                <div className="bg-gradient-to-br from-green-400 to-teal-500 rounded-xl shadow-lg p-6 text-white sm:mb-4 ">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold">Build Your Ledger</h3>
                   </div>
