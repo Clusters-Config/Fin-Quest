@@ -97,7 +97,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
-import logo from "../assets/fin-logo-2.jpg"; // FinQuest Logo
+import logo from "../assets/fin-logo-3.jpg"; // FinQuest Logo
 
 function Login_signup() {
   const [email, setemail] = useState();
